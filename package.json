@@ -1,0 +1,39 @@
+{
+  "name": "pilot-js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "webpack": "node_modules/.bin/webpack",
+    "webpack:watch": "webpack -w",
+    "server:watch": "node_modules/.bin/nodemon server/server.js --ignore client",
+    "start:dev": "npm run webpack:watch & npm run server:watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pilot-js/pilot-js.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pilot-js/pilot-js/issues"
+  },
+  "homepage": "https://github.com/pilot-js/pilot-js#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "express": "^4.17.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.6",
+    "jest": "^24.8.0",
+    "nodemon": "^1.19.0",
+    "webpack": "^4.31.0",
+    "webpack-cli": "^3.3.2"
+  }
+}
