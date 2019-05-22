@@ -1,3 +1,5 @@
-dist/bundle.js
 .idea
+.vscode
+package-lock.json
+dist/bundle.js
 node_modules

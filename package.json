@@ -1,39 +1,54 @@
 {
-	"name": "seedo",
-	"version": "1.0.0",
-	"description": "",
-	"main": "index.js",
-	"scripts": {
-		"webpack": "node_modules/.bin/webpack",
-		"webpack:watch": "webpack -w",
-		"server:watch": "node_modules/.bin/nodemon server/server.js --ignore client",
-		"start:dev": "npm run webpack:watch & npm run server:watch"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/pilot-js/seedo.git"
-	},
-	"keywords": [],
-	"author": "",
-	"license": "ISC",
-	"bugs": {
-		"url": "https://github.com/pilot-js/seedo/issues"
-	},
-	"homepage": "https://github.com/pilot-js/seedo#readme",
-	"dependencies": {
-		"axios": "^0.18.0",
-		"express": "^4.17.0",
-		"react": "^16.8.6",
-		"react-dom": "^16.8.6"
-	},
-	"devDependencies": {
-		"@babel/core": "^7.4.4",
-		"@babel/preset-env": "^7.4.4",
-		"@babel/preset-react": "^7.0.0",
-		"babel-loader": "^8.0.6",
-		"jest": "^24.8.0",
-		"nodemon": "^1.19.0",
-		"webpack": "^4.31.0",
-		"webpack-cli": "^3.3.2"
-	}
+  "name": "seedo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "webpack": "node_modules/.bin/webpack",
+    "webpack:watch": "webpack -w",
+    "server:watch": "node_modules/.bin/nodemon server/server.js --ignore client",
+    "start:dev": "npm run webpack:watch & npm run server:watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pilot-js/seedo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pilot-js/seedo/issues"
+  },
+  "homepage": "https://github.com/pilot-js/seedo#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "express": "^4.17.0",
+    "pg": "^7.11.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "sequelize": "^5.8.6"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.4",
+    "babel-eslint": "^10.0.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "@babel/preset-env": "^7.4.4",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.6",
+    "jest": "^24.8.0",
+    "morgan": "^1.9.1",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^4.2.0",
+    "eslint-plugin-import": "^2.17.2",
+    "eslint-plugin-jest": "^22.5.1",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-prettier": "^3.0.1",
+    "eslint-plugin-react": "^7.12.4",
+    "husky": "^2.2.0",
+    "nodemon": "^1.19.0",
+    "prettier": "^1.17.0",
+    "webpack": "^4.31.0",
+    "webpack-cli": "^3.3.2"
+  }
 }
