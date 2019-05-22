@@ -1,5 +1,5 @@
 .idea
 .vscode
-package-lock.json
 dist/bundle.js
 node_modules
+package-lock.json
