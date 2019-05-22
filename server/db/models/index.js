@@ -7,13 +7,16 @@ const UserChallenge = require('./UserChallenge');
 // Associations
 
 User.hasMany(UserChallenge);
-UserChallenge.belongsTo(User);
-
 Challenge.hasMany(UserChallenge);
 
-Image.hasOne(Challenge);
+UserChallenge.belongsTo(Challenge);
+UserChallenge.belongsTo(User);
 
-Challenge.hasOne(Solution);
+Challenge.hasMany(Image);
+Image.belongsTo(Challenge);
+
+Challenge.hasMany(Solution);
+Solution.belongsTo(Challenge);
 
 module.exports = {
   Challenge,
