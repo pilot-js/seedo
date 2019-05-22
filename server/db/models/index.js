@@ -16,9 +16,9 @@ Image.hasOne(Challenge);
 Challenge.hasOne(Solution);
 
 module.exports = {
-	Challenge,
-	Image,
-	Solution,
-	User,
-	UserChallenge,
+  Challenge,
+  Image,
+  Solution,
+  User,
+  UserChallenge,
 };

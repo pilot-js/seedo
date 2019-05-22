@@ -7,7 +7,8 @@
     "webpack": "node_modules/.bin/webpack",
     "webpack:watch": "webpack -w",
     "server:watch": "node_modules/.bin/nodemon server/server.js --ignore client",
-    "start:dev": "npm run webpack:watch & npm run server:watch"
+    "start:dev": "npm run webpack:watch & DATABASE_URL=postgres://localhost/seedo npm run server:watch",
+    "lint": "make lint"
   },
   "repository": {
     "type": "git",
