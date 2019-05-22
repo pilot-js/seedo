@@ -7,7 +7,7 @@ module.exports = conn.define('challenge', {
     type: Sequelize.STRING,
   },
   description: {
-    type: Sequelize.name,
+    type: Sequelize.STRING,
   },
   difficulty: {
     type: Sequelize.RANGE(Sequelize.INTEGER),

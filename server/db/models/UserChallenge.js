@@ -4,13 +4,13 @@ const { Sequelize } = conn;
 module.exports = conn.define('userChallenge', {
   // from associations: userId, challengeId
   html: {
-    type: Sequelize.STRING,
+    type: Sequelize.TEXT,
   },
   css: {
-    type: Sequelize.STRING,
+    type: Sequelize.TEXT,
   },
   js: {
-    type: Sequelize.STRING,
+    type: Sequelize.TEXT,
   },
   submitted: {
     type: Sequelize.BOOLEAN,
