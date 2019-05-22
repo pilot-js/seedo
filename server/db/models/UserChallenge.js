@@ -13,7 +13,7 @@ module.exports = conn.define('userChallenge', {
     type: Sequelize.STRING,
   },
   submitted: {
-    type: Sequelize.BOOlEAN,
+    type: Sequelize.BOOLEAN,
   },
   grade: {
     type: Sequelize.INTEGER,
