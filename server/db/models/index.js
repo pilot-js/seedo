@@ -22,9 +22,9 @@ Challenge.hasMany(Solution);
 Solution.belongsTo(Challenge);
 
 module.exports = {
-	Challenge,
-	Image,
-	Solution,
-	User,
-	Userchallenge,
+  Challenge,
+  Image,
+  Solution,
+  User,
+  Userchallenge,
 };
