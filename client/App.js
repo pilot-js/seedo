@@ -6,6 +6,7 @@ class App extends Component {
     return (
       <div>
         <h1>Heres the app!</h1>
+        <Challenges />
       </div>
     );
   }
