@@ -12,6 +12,7 @@ module.exports = conn.define('user', {
   },
   password: {
     type: Sequelize.STRING,
+    allowNull: false,
     validate: {
       notEmpty: false,
     },
