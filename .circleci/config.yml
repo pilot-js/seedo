@@ -16,6 +16,9 @@ jobs:
 
     working_directory: ~/repo
 
+    environment:
+      DATABASE_URL: postgres://localhost:5432/seedo_test
+
     steps:
       - checkout
 
