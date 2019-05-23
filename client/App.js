@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Challenges from './Challenges';
 
 class App extends Component {
   render() {
