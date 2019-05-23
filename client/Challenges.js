@@ -11,7 +11,11 @@ class Challenges extends Component {
       <div>
         <ul>
           {ChallengesToRender.map((challenge, idx) => {
-            return <li key={`${challenge.name}${idx}`}>{`${challenge.name}: ${challenge.description}`}</li>;
+            return (
+              <li key={challenge.name}>{`${challenge.name}: ${
+                challenge.description
+              }`}</li>
+            );
           })}
         </ul>
       </div>
