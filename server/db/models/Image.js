@@ -1,15 +1,12 @@
 const conn = require('../conn');
 const { Sequelize } = conn;
 
+// used to store images for both challenges and userchallenges
+// storing images as base64 data
+
 module.exports = conn.define('image', {
   // from associations: challengeId, userchallengeId
-  // TODO delete type
-  type: {
-    type: Sequelize.ENUM('challenge', 'userchallenge'),
-  },
-  // TODO change to data: - store base64
-  // Sequelize.text
-  url: {
-    type: Sequelize.STRING,
+  data: {
+    type: Sequelize.TEXT,
   },
 });
