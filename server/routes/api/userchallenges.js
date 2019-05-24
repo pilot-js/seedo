@@ -8,7 +8,7 @@ const Userchallenge = require('../../db');
 // get user answer for a challenge
 router.get('/challenge/:challengeId', (req, res, next) => {
 	Userchallenge.findAll({
-		where: { challengeId: req.params.challengeId }
+		where: { challengeId: req.params.challengeId },
 	})
 		.then(userchall => res.send(userchall))
 		.catch(next);
@@ -19,6 +19,7 @@ router.get('/challenge/:challengeId', (req, res, next) => {
 
 // create answer for a challenge
 router.post('/challenge/:challengeId', (req, res, next) => {
+	const { challengeId } = req.params;
 	const { html, css, js, submitted } = req.body;
 	Userchallenge.create({
 		where: { challengeId },
@@ -37,7 +38,7 @@ router.put('/:userchallengeId/challenge/:challengeId', (req, res, next) => {
 		where: {
 			challengeId: req.params.challengeId,
 			id: req.params.userchallengeId,
-		}
+		},
 	})
 		.then(userchall => userchall.update(req.body))
 		.then(updatedChall => res.send(updatedChall))

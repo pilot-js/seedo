@@ -5,14 +5,14 @@ const Solution = require('../../db');
 
 // get single challenge solution
 router.get('/:id', (req, res, next) => {
-	console.log('params.id: ', req.params.id)
-	Solution.findByPk(req.params.id)
-		.then(solution => res.send(solution))
-		.catch(next);
+  console.log('params.id: ', req.params.id);
+  Solution.findByPk(req.params.id)
+    .then(solution => res.send(solution))
+    .catch(next);
 });
 
 // TODO later for admin
-// post 
+// post
 // update
 // delete
 
