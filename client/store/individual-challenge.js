@@ -1,4 +1,6 @@
-import { GET_CHALLENGE } from './individual-challenge.actions';
+export const GET_CHALLENGE = Symbol('get challenge');
+
+export const getChallenge = challenge => ({ type: GET_CHALLENGE, challenge });
 
 export const individualChallenge = (state = {}, action) => {
   switch (action.type) {
