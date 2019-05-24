@@ -19,7 +19,7 @@ const challengesSeed = [
   },
 ];
 
-// for js - console.log()
+// TODO for js - console.log()
 
 // from associations: userId, challengeId, imageId
 const userchallengeSeed = [
