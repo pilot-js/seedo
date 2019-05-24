@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class Challenges extends Component {
+export class Challenges extends Component {
   render() {
     // fake some data to render
     const ChallengesToRender = [
@@ -18,5 +18,3 @@ class Challenges extends Component {
     );
   }
 }
-
-export default Challenges;

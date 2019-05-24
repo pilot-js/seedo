@@ -1,12 +1,21 @@
 import React, { Component } from 'react';
-import Challenges from './Challenges';
+import { Route, Switch } from 'react-router-dom';
+import { Challenges, IndividualChallenge, Nav, Footer } from './components';
 
 class App extends Component {
   render() {
     return (
       <div>
-        <h1>Heres the app!</h1>
-        <Challenges />
+        <Nav />
+        <Switch>
+          <Route to="/" exact component={Challenges} />
+          <Route
+            to="/challenges/:id"
+            exact
+            render={({ match }) => <IndividualChallenge id={match.params.id} />}
+          />
+        </Switch>
+        <Footer />
       </div>
     );
   }
