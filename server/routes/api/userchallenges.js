@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const Userchallenge = require('../../db');
+const { Userchallenge } = require('../../db');
 
 /**     /api/userchallenges     **/
 
@@ -47,7 +47,7 @@ router.put('/:userchallengeId/challenge/:challengeId', (req, res, next) => {
 
 // delete answer for a challenge
 router.delete('/challenge/:challengeId', (req, res, next) => {
-  Userchallenge.findByPk(req.params.challengeId)
+  Userchallenge.findByPk(Number(req.params.challengeId))
     .then(userchall => userchall.destroy())
     .then(() => res.sendStatus(204))
     .catch(next);

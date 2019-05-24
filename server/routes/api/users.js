@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const User = require('../../db');
+const { User } = require('../../db');
 
 /**     /api/users     **/
 
@@ -24,8 +24,20 @@ router.get('/:id', (req, res, next) => {
     .catch(next);
 });
 
-// TODO later
-// delete
-// update
+// update user
+router.put('/:id', (req, res, next) => {
+  User.findByPk(req.params.id)
+    .then(user => user.update(req.body))
+    .then(updatedUser => res.send(updatedUser))
+    .catch(next);
+});
+
+// delete user
+router.delete('/:id', (req, res, next) => {
+  User.findByPk(req.params.id)
+    .then(user => user.destroy())
+    .then(() => res.sendStatus(204))
+    .catch(next);
+});
 
 module.exports = router;
