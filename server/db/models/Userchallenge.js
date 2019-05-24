@@ -1,8 +1,8 @@
 const conn = require('../conn');
 const { Sequelize } = conn;
 
-module.exports = conn.define('userChallenge', {
-  // from associations: userId, challengeId
+module.exports = conn.define('userchallenge', {
+  // from associations: userId, challengeId, imageId
   html: {
     type: Sequelize.TEXT,
   },
@@ -18,7 +18,8 @@ module.exports = conn.define('userChallenge', {
   grade: {
     type: Sequelize.INTEGER,
   },
-  image: {
-    type: Sequelize.STRING,
-  },
+  // TODO use Image model instead ?
+  // image: {
+  //   type: Sequelize.STRING,
+  // },
 });
