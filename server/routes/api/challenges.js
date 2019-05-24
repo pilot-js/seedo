@@ -11,16 +11,16 @@ router.get('/', (req, res, next) => {
 		.catch(next);
 });
 
-// get a single challenge
-router.get('/:id', (req, res, next) => {
-	Challenge.findByPk(req.params.id)
+// create a single challenge
+router.post('/', (req, res, next) => {
+	Challenge.create(req.body)
 		.then(challenge => res.send(challenge))
 		.catch(next);
 });
 
-// create a single challenge
-router.post('/', (req, res, next) => {
-	Challenge.create(req.body)
+// get a single challenge
+router.get('/:id', (req, res, next) => {
+	Challenge.findByPk(req.params.id)
 		.then(challenge => res.send(challenge))
 		.catch(next);
 });
