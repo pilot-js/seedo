@@ -1,11 +1,12 @@
 // require polyfill for async functions in tests
 require('@babel/polyfill');
 const { Challenge } = require('../../server/db/models');
+const { deleteAllRecordsFromModel } = require('../utils');
 const db = require('../../server/db/conn');
 
 describe('testing challenge model', () => {
   beforeAll(async () => {
-    await db.sync({ force: true });
+    await deleteAllRecordsFromModel(Challenge);
     await Challenge.create({
       name: 'Basic html page',
       description: 'easy html page to do',

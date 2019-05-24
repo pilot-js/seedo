@@ -1,14 +1,11 @@
 require('@babel/polyfill');
 const { Solution } = require('../../server/db/models');
+const { deleteAllRecordsFromModel } = require('../utils');
 const db = require('../../server/db/conn');
 
 describe('testing solution model', () => {
   beforeAll(async () => {
-    const solutions = await Solution.findAll();
-    await solutions.forEach(async solution => {
-      solution.destroy();
-      await solution.save();
-    });
+    await deleteAllRecordsFromModel(Solution);
     await Solution.create({
       html: 'html TEXT',
       css: 'css TEXT',
