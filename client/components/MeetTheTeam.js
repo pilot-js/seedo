@@ -1,14 +1,12 @@
 import React from 'react';
 
-const MeetTheTeam = () => {
+export const MeetTheTeam = () => {
   const names = ['Grant', 'Theo', 'Kristy', 'Haoyu'];
   return (
     <div>
       {names.map(name => (
-        <span>{name}</span>
+        <div>{name}</div>
       ))}
     </div>
   );
 };
-
-export default MeetTheTeam;

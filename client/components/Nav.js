@@ -1,15 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Nav = () => {
+export const Nav = () => {
   const navLinks = [
     {
-      label: 'Name',
-      to: '/home',
+      label: 'WebName',
+      to: '/',
     },
     {
       label: 'AboutUs',
-      to: '/home',
+      to: '/',
     },
     {
       label: 'MeetTheTeam',
@@ -25,14 +25,14 @@ const Nav = () => {
     },
   ];
   return (
-    <div>
-      <ul className="nav nav-pills">
-        {navLinks.map(link => (
-          <li key={link.to}>
-            <Link to={link.to}>{link.label}</Link>
-          </li>
-        ))}
-      </ul>
+    <div className="nav nav-pills" style={{ marginBottom: '20px', marginTop: '10px' }}>
+      {navLinks.map(link => (
+        <div key={link.to} className="nav-item">
+          <Link to={link.to} className="nav-link">
+            {link.label}
+          </Link>
+        </div>
+      ))}
     </div>
   );
 };
