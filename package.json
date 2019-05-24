@@ -6,7 +6,7 @@
   "scripts": {
     "webpack": "node_modules/.bin/webpack",
     "webpack:watch": "webpack -w",
-    "server:watch": "node_modules/.bin/nodemon server/server.js --ignore client",
+    "server:watch": "node_modules/.bin/nodemon server/server.js --ignore client --ignore dist",
     "start:dev": "npm run webpack:watch & DATABASE_URL=postgres://localhost/seedo npm run server:watch",
     "lint": "make lint",
     "test:dev": "DATABASE_URL=postgresql://localhost/seedo_test jest -i",
@@ -34,6 +34,7 @@
     "react-redux": "^7.0.3",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
+    "react-router-dom": "^5.0.0",
     "sequelize": "^5.8.6"
   },
   "devDependencies": {
