@@ -9,7 +9,7 @@
     "server:watch": "node_modules/.bin/nodemon server/server.js --ignore client --ignore dist",
     "start:dev": "npm run webpack:watch & DATABASE_URL=postgres://localhost/seedo npm run server:watch",
     "lint": "make lint",
-    "test:dev": "DATABASE_URL=postgresql://localhost/seedo_test jest",
+    "test:dev": "DATABASE_URL=postgresql://localhost/seedo_test node test/db/init-test-db.js && jest",
     "test": "jest"
   },
   "repository": {
