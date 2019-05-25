@@ -25,39 +25,39 @@ const challengesSeed = [
 const userchallengeSeed = [
   {
     html: `<!DOCTYPE html>
-		<html>
-		<head>
-			<title>Circle</title>
-		</head>
-		<body>
-			<div id='circle'></div>
-		</body>
-		</html>`,
+    <html>
+    <head>
+      <title>Circle</title>
+    </head>
+    <body>
+      <div id='circle'></div>
+    </body>
+    </html>`,
     css: `#circle {
-			width: 100px;
-			height: 100px;
-			background-color: red;
-			border-radius: 50%;
-		}`,
+      width: 100px;
+      height: 100px;
+      background-color: red;
+      border-radius: 50%;
+    }`,
     js: '',
     submitted: true,
     grade: 5,
   },
   {
     html: `<!DOCTYPE html>
-		<html>
-		<head>
-			<title>Square</title>
-		</head>
-		<body>
-			<div id='square'></div>
-		</body>
-		</html>`,
+    <html>
+    <head>
+      <title>Square</title>
+    </head>
+    <body>
+      <div id='square'></div>
+    </body>
+    </html>`,
     css: `#square {
-			width: 50px;
-			height: 50px;
-			background-color: blue;
-		}`,
+      width: 50px;
+      height: 50px;
+      background-color: blue;
+    }`,
     js: '',
     submitted: true,
     grade: 4,
@@ -68,37 +68,37 @@ const userchallengeSeed = [
 const solutionsSeed = [
   {
     html: `<!DOCTYPE html>
-		<html>
-		<head>
-			<title>Circle</title>
-		</head>
-		<body>
-			<div id='circle'></div>
-		</body>
-		</html>`,
+    <html>
+    <head>
+      <title>Circle</title>
+    </head>
+    <body>
+      <div id='circle'></div>
+    </body>
+    </html>`,
     css: `#circle {
-			width: 100px;
-			height: 100px;
-			background-color: red;
-			border-radius: 50%;
-		}`,
+      width: 100px;
+      height: 100px;
+      background-color: red;
+      border-radius: 50%;
+    }`,
     js: '',
   },
   {
     html: `<!DOCTYPE html>
-		<html>
-		<head>
-			<title>Circle</title>
-		</head>
-		<body>
-			<div id='square'></div>
-		</body>
-		</html>`,
+    <html>
+    <head>
+      <title>Circle</title>
+    </head>
+    <body>
+      <div id='square'></div>
+    </body>
+    </html>`,
     css: `#square {
-			width: 100px;
-			height: 100px;
-			background-color: blue;
-		}`,
+      width: 100px;
+      height: 100px;
+      background-color: blue;
+    }`,
     js: '',
   },
 ];
