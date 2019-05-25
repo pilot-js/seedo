@@ -9,7 +9,7 @@ export const Nav = () => {
     },
     {
       label: 'AboutUs',
-      to: '/',
+      to: '/aboutUs',
     },
     {
       label: 'MeetTheTeam',
