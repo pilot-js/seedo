@@ -5,7 +5,6 @@ const { Challenge } = require('../../db');
 
 // get all challenges
 router.get('/', (req, res, next) => {
-  console.log('get all challenges route');
   Challenge.findAll()
     .then(challenges => res.send(challenges))
     .catch(next);

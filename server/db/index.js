@@ -22,8 +22,6 @@ const syncAndSeed = () => {
       ]);
     })
     .then(([users, challenges, userchallenges, solutions, images]) => {
-      // const chal = userchallenges.find(chal => chal.css.includes('circle'))
-      // console.log(chal.get())
       return Promise.all([
         userchallenges
           .find(chal => chal.css.includes('circle'))
