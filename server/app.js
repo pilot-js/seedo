@@ -7,4 +7,6 @@ app.use(express.static(path.join(__dirname, '../dist')));
 
 app.use(morgan('dev'));
 
+app.use('/api', require('./routes/api'));
+
 module.exports = app;
