@@ -1,22 +1,18 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 export const Nav = () => {
   const navLinks = [
     {
-      label: 'WebName',
+      label: 'Web Name',
       to: '/',
     },
     {
-      label: 'AboutUs',
-      to: '/aboutUs',
-    },
-    {
-      label: 'MeetTheTeam',
+      label: 'Meet The Team',
       to: '/meetTheTeam',
     },
     {
-      label: 'ChallengesList',
+      label: 'Challenges List',
       to: '/challengesList',
     },
     {
@@ -25,13 +21,14 @@ export const Nav = () => {
     },
   ];
   return (
-    <div className="nav nav-pills" style={{ marginBottom: '20px', marginTop: '10px' }}>
+    <div
+      className="d-flex justify-content-center nav nav-pills"
+      style={{ marginBottom: '20px', marginTop: '10px' }}
+    >
       {navLinks.map(link => (
-        <div key={link.to} className="nav-item">
-          <Link to={link.to} className="nav-link">
-            {link.label}
-          </Link>
-        </div>
+        <NavLink exact key={link.to} to={link.to} className="nav-link nav-item">
+          {link.label}
+        </NavLink>
       ))}
     </div>
   );
