@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { Challenges, IndividualChallenge, Nav, Footer } from './components';
+import {
+  IndividualChallenge,
+  Nav,
+  Footer,
+  Home,
+  MeetTheTeam,
+  ChallengesList,
+  Login,
+} from './components';
 
 class App extends Component {
   render() {
@@ -8,7 +16,10 @@ class App extends Component {
       <div>
         <Nav />
         <Switch>
-          <Route to="/" exact component={Challenges} />
+          <Route exact path="/" component={Home} />
+          <Route exact path="/meetTheTeam" component={MeetTheTeam} />
+          <Route exact path="/challengesList" component={ChallengesList} />
+          <Route exact path="/login" component={Login} />
           <Route
             to="/challenges/:id"
             exact
