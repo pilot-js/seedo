@@ -18,8 +18,4 @@ module.exports = conn.define('userchallenge', {
   grade: {
     type: Sequelize.INTEGER,
   },
-  // TODO use Image model instead ?
-  // image: {
-  //   type: Sequelize.STRING,
-  // },
 });

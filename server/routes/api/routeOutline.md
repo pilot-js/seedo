@@ -1,7 +1,7 @@
 
 // routes
 
-// /api/challenge
+// /api/challenges
 
 get / - get all challenges
 
@@ -14,7 +14,7 @@ update /:id - updating challenge
 
 delete /:id - delete challenge
 
-// /api/solution
+// /api/solutions
 
 get /challenge/:challengeId - get single challenge solution
 
@@ -23,7 +23,8 @@ post
 update
 delete
 
-// /api/user
+// /api/users
+
 get / - all users
 
 get /:userId - get one user by id
@@ -34,7 +35,7 @@ post / - create user (at sign up)
 delete
 update
 
-// /api/userchallenge
+// /api/userchallenges
 get /challenge/:challengeId - get user answer for a challenge
 
 post /challenge/:challengeId - create answer for a challenge
@@ -45,6 +46,6 @@ delete /challenge/:challengeId - delete answer for a challenge
 	- create deleteAnswerImage instance fnc - deletes image associated with their answer
 
 
-// /api/image
+// /api/images
 
 get /challenge/:challengeId - get image for a challenge
