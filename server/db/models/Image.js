@@ -2,7 +2,7 @@ const conn = require('../conn');
 const { Sequelize } = conn;
 
 // used to store images for both challenges and userchallenges
-// storing images as base64 data
+// storing images as BLOB data
 
 module.exports = conn.define('image', {
   // from associations: challengeId, userchallengeId

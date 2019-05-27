@@ -9,6 +9,11 @@ const {
 
 const { Challenge, Image, Solution, User, Userchallenge } = require('./models');
 
+function getRandom(type, max) {
+  const randInt = Math.floor(Math.random() * Math.floor(max));
+  return type[randInt].get().id;
+}
+
 const syncAndSeed = () => {
   return conn
     .sync({ force: true })
@@ -27,10 +32,10 @@ const syncAndSeed = () => {
       return Promise.all([
         userchallenges
           .find(chal => chal.css.includes('circle'))
-          .update({ userId: 2, challengeId: 1 }),
+          .update({ userId: getRandom(users, 3), challengeId: 1 }),
         userchallenges
           .find(chal => chal.css.includes('square'))
-          .update({ userId: 3, challengeId: 2 }),
+          .update({ userId: getRandom(users, 3), challengeId: 2 }),
         solutions.find(sol => sol.css.includes('circle')).update({ challengeId: 1 }),
         solutions.find(sol => sol.css.includes('square')).update({ challengeId: 2 }),
 
