@@ -40,4 +40,15 @@ router.delete('/:id', (req, res, next) => {
     .catch(next);
 });
 
+router.put('/auth/login', (req, res, next) => {
+  console.log('logging in route', req.body)
+  User.findOne({where: {
+    email: req.body.email,
+    password: req.body.password,
+    },
+  })
+    .then(user => res.send(user))
+    .catch(next);
+});
+
 module.exports = router;
