@@ -21,8 +21,8 @@ class App extends Component {
           <Route exact path="/challengesList" component={ChallengesList} />
           <Route exact path="/login" component={Login} />
           <Route
-            to="/challenges/:id"
             exact
+            path="/challenges/:id"
             render={({ match }) => <IndividualChallenge id={match.params.id} />}
           />
         </Switch>
