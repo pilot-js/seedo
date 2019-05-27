@@ -12,21 +12,32 @@ router.get('/', (req, res, next) => {
 
 // create a single challenge
 router.post('/', (req, res, next) => {
-  Challenge.create(req.body)
+  const { name, description, difficulty } = req.body;
+  Challenge.create({
+    name,
+    description,
+    difficulty
+  })
     .then(challenge => res.send(challenge))
     .catch(next);
 });
 
 // get a single challenge
 router.get('/:id', (req, res, next) => {
-  Challenge.findByPk(req.params.id)
+  // TODO how to handle req.params.id === NaN ?
+  // if (typeof req.params.id === NaN) {
+  //   const err = new Error('Not a number.  Challenge Id must be a number.');
+  //   next(err);
+  // }
+  Challenge.findByPk(Number(req.params.id))
     .then(challenge => res.send(challenge))
     .catch(next);
 });
 
 // update a single challenge
 router.put('/:id', (req, res, next) => {
-  Challenge.findByPk(req.params.id)
+  // TODO how to handle req.params.id === NaN ?
+  Challenge.findByPk(Number(req.params.id))
     .then(challenge => challenge.update(req.body))
     .then(updatedChallenge => res.send(updatedChallenge))
     .catch(next);
@@ -34,7 +45,8 @@ router.put('/:id', (req, res, next) => {
 
 // delete a single challenge
 router.delete('/:id', (req, res, next) => {
-  Challenge.findByPk(req.params.id)
+  // TODO how to handle req.params.id === NaN ?
+  Challenge.findByPk(Number(req.params.id))
     .then(challenge => challenge.destroy())
     .then(() => res.sendStatus(204))
     .catch(next);
