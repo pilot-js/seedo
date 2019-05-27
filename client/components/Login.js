@@ -19,8 +19,7 @@ class LoginClass extends Component {
 
   saveHandler(ev) {
     ev.preventDefault();
-    this.props.getUser(this.state)
-      .then(() => console.log('We loggeed in a user.'));
+    this.props.getUser(this.state).then(() => console.log('We loggeed in a user.'));
   }
 
   render() {
