@@ -1,4 +1,4 @@
-import Axios from "axios";
+import axios from 'axios';
 
 export const SET_USER = Symbol('set user');
 
@@ -13,8 +13,8 @@ export const user = (state = [], action) => {
   }
 };
 
-export const getUser = userId => dispatch => {
-  return Axios.get(`/api/users/${userId}`)
-    .then(user => dispatch(setUser(user)));
+export const getUser = aUser => dispatch => {
+  console.log('loggingin store', aUser);
+  return axios.put('/api/users/login', aUser)
+  .then(user => dispatch(setUser(user)));
 };
-
