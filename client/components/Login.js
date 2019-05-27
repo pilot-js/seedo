@@ -21,7 +21,7 @@ class LoginClass extends Component {
     ev.preventDefault();
     this.props
       .getUser(this.state)
-      .then(() => console.log('We have a uer logged in.'))
+      .then(() => console.log('We have a user logged in.'))
       .then(() => this.props.history.push('/'));
   }
 

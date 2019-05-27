@@ -41,7 +41,6 @@ router.delete('/:id', (req, res, next) => {
 });
 
 router.put('/auth/login', (req, res, next) => {
-  console.log('logging in route', req.body);
   User.findOne({
     where: {
       email: req.body.email,
