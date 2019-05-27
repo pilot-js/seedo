@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 const usersSeed = [
   { email: 'grant@geezemail.com', password: '1234' },
   { email: 'kristy@geezemail.com', password: '1234' },
@@ -26,12 +28,12 @@ const userchallengeSeed = [
   {
     html: `<!DOCTYPE html>
     <html>
-    <head>
-      <title>Circle</title>
-    </head>
-    <body>
-      <div id='circle'></div>
-    </body>
+      <head>
+        <title>Circle</title>
+      </head>
+      <body>
+        <div id='circle'></div>
+      </body>
     </html>`,
     css: `#circle {
       width: 100px;
@@ -46,12 +48,12 @@ const userchallengeSeed = [
   {
     html: `<!DOCTYPE html>
     <html>
-    <head>
-      <title>Square</title>
-    </head>
-    <body>
-      <div id='square'></div>
-    </body>
+      <head>
+        <title>Square</title>
+      </head>
+      <body>
+        <div id='square'></div>
+      </body>
     </html>`,
     css: `#square {
       width: 50px;
@@ -69,12 +71,12 @@ const solutionsSeed = [
   {
     html: `<!DOCTYPE html>
     <html>
-    <head>
-      <title>Circle</title>
-    </head>
-    <body>
-      <div id='circle'></div>
-    </body>
+      <head>
+        <title>Circle</title>
+      </head>
+      <body>
+        <div id='circle'></div>
+      </body>
     </html>`,
     css: `#circle {
       width: 100px;
@@ -87,12 +89,12 @@ const solutionsSeed = [
   {
     html: `<!DOCTYPE html>
     <html>
-    <head>
-      <title>Circle</title>
-    </head>
-    <body>
-      <div id='square'></div>
-    </body>
+      <head>
+        <title>Circle</title>
+      </head>
+      <body>
+        <div id='square'></div>
+      </body>
     </html>`,
     css: `#square {
       width: 100px;
@@ -104,12 +106,17 @@ const solutionsSeed = [
 ];
 
 // from associations: challengeId, userchallengeId
-const imagesSeed = [
+const images = [
   { type: 'challenge', url: 'challenge-1-red-circle.png' },
   { type: 'challenge', url: 'challenge-2-blue-square.png' },
   { type: 'userchallenge', url: 'userchallenge-1.png' },
   { type: 'userchallenge', url: 'userchallenge-2.png' },
 ];
+
+const currDir = process.cwd();
+const imagesSeed = images.map(image => {
+  return fs.readFileSync(`${currDir}/dist/images/${image.type}/${image.url}`);
+});
 
 module.exports = {
   usersSeed,

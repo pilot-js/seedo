@@ -7,6 +7,6 @@ const { Sequelize } = conn;
 module.exports = conn.define('image', {
   // from associations: challengeId, userchallengeId
   data: {
-    type: Sequelize.TEXT,
+    type: Sequelize.BLOB('long'),
   },
 });
