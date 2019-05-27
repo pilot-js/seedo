@@ -6,7 +6,6 @@ const { Sequelize } = conn;
 
 module.exports = conn.define('image', {
   // from associations: challengeId, userchallengeId
-  data: {
-    type: Sequelize.BLOB('long'),
-  },
+  connector: Sequelize.STRING,  // only need for seeding ?
+  data: Sequelize.BLOB('long'),
 });

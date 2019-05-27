@@ -107,10 +107,10 @@ const solutionsSeed = [
 
 // from associations: challengeId, userchallengeId
 const images = [
-  { type: 'challenge', url: 'challenge-1-red-circle.png' },
-  { type: 'challenge', url: 'challenge-2-blue-square.png' },
-  { type: 'userchallenge', url: 'userchallenge-1.png' },
-  { type: 'userchallenge', url: 'userchallenge-2.png' },
+  { type: 'challenge', url: 'challenge-1-red-circle.png', connector: 'challenge-1' },
+  { type: 'challenge', url: 'challenge-2-blue-square.png', connector: 'challenge-2' },
+  { type: 'userchallenge', url: 'userchallenge-1.png', connector: 'userchallenge-1' },
+  { type: 'userchallenge', url: 'userchallenge-2.png', connector: 'userchallenge-2' },
 ];
 
 const currDir = process.cwd();
