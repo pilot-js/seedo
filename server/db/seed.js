@@ -115,7 +115,8 @@ const images = [
 
 const currDir = process.cwd();
 const imagesSeed = images.map(image => {
-  return fs.readFileSync(`${currDir}/dist/images/${image.type}/${image.url}`);
+  image.data = fs.readFileSync(`${currDir}/dist/images/${image.type}/${image.url}`);
+  return image;
 });
 
 module.exports = {
