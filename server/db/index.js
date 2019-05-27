@@ -18,14 +18,10 @@ const syncAndSeed = () => {
         Promise.all(challengesSeed.map(chal => Challenge.create(chal))),
         Promise.all(userchallengeSeed.map(chal => Userchallenge.create(chal))),
         Promise.all(solutionsSeed.map(sol => Solution.create(sol))),
-        // TODO update img seed data to blob, which will affect this
-
-        Promise.all(imagesSeed.map(img => Image.create({ data: img }))),
+        Promise.all(imagesSeed.map(img => Image.create({ connector: img.connector, data: img.data }))),
       ]);
     })
     .then(([users, challenges, userchallenges, solutions, images]) => {
-      const imagesArr = images.map(image => image.get())
-      console.log(imagesArr)
       return Promise.all([
         userchallenges
           .find(chal => chal.css.includes('circle'))
@@ -36,12 +32,10 @@ const syncAndSeed = () => {
         solutions.find(sol => sol.css.includes('circle')).update({ challengeId: 1 }),
         solutions.find(sol => sol.css.includes('square')).update({ challengeId: 2 }),
 
-        // TODO update img seed data to blob, which will affect this
-
-        // images.find(img => img.url.includes('challenge-1')).update({ challengeId: 1 }),
-        // images.find(img => img.url.includes('userchallenge-1')).update({ userchallengeId: 1 }),
-        // images.find(img => img.url.includes('challenge-2')).update({ challengeId: 2 }),
-        // images.find(img => img.url.includes('userchallenge-2')).update({ userchallengeId: 2 }),
+        images.find(img => img.connector === 'challenge-1').update({ challengeId: 1 }),
+        images.find(img => img.connector === 'userchallenge-1').update({ userchallengeId: 1 }),
+        images.find(img => img.connector === 'challenge-2').update({ challengeId: 2 }),
+        images.find(img => img.connector === 'userchallenge-2').update({ userchallengeId: 2 }),
       ]);
     })
     .catch(err => console.log(err));
