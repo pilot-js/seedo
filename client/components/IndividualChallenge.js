@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unused-state */
 import React, { Component } from 'react';
 import CodeMirror from 'react-codemirror';
 
@@ -22,7 +23,8 @@ export class IndividualChallenge extends Component {
 
   changeValue(ev) {
     // deal with the code:
-    this.setState({ [ev.target.name]: this.state.code });
+    /* eslint-disable-next-line react/no-access-state-in-setstate */
+    this.setState({ [ev.target.name]: this.state.code }, () => console.log(this.state));
   }
 
   render() {
@@ -43,33 +45,21 @@ export class IndividualChallenge extends Component {
           <div className="row">
             <div className="col">
               <h4>HTML Editor</h4>
-              <CodeMirror
-                value={this.state.code}
-                onChange={this.updateCode}
-                options={options}
-              />
+              <CodeMirror value={this.state.code} onChange={this.updateCode} options={options} />
               <button name="codeHTML" type="button" onClick={this.changeValue}>
                 run
               </button>
             </div>
             <div className="col">
               <h4>CSS Editor</h4>
-              <CodeMirror
-                value={this.state.code}
-                onChange={this.updateCode}
-                options={options}
-              />
+              <CodeMirror value={this.state.code} onChange={this.updateCode} options={options} />
               <button name="codeCSS" type="button" onClick={this.changeValue}>
                 run
               </button>
             </div>
             <div className="col">
               <h4>JS Editor</h4>
-              <CodeMirror
-                value={this.state.code}
-                onChange={this.updateCode}
-                options={options}
-              />
+              <CodeMirror value={this.state.code} onChange={this.updateCode} options={options} />
               <button name="codeJS" type="button" onClick={this.changeValue}>
                 run
               </button>
