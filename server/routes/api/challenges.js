@@ -16,7 +16,7 @@ router.post('/', (req, res, next) => {
   Challenge.create({
     name,
     description,
-    difficulty
+    difficulty,
   })
     .then(challenge => res.send(challenge))
     .catch(next);

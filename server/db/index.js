@@ -18,7 +18,9 @@ const syncAndSeed = () => {
         Promise.all(challengesSeed.map(chal => Challenge.create(chal))),
         Promise.all(userchallengeSeed.map(chal => Userchallenge.create(chal))),
         Promise.all(solutionsSeed.map(sol => Solution.create(sol))),
-        Promise.all(imagesSeed.map(img => Image.create({ connector: img.connector, data: img.data }))),
+        Promise.all(
+          imagesSeed.map(img => Image.create({ connector: img.connector, data: img.data })),
+        ),
       ]);
     })
     .then(([users, challenges, userchallenges, solutions, images]) => {
