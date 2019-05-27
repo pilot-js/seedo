@@ -1,37 +1,37 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import CodeMirror from 'react-codemirror';
 
-export class IndividualChallenge extends Component{
-  constructor(){
-    super()
+export class IndividualChallenge extends Component {
+  constructor() {
+    super();
     this.state = {
       name: 'CodeMirror',
       code: '',
       codeHTML: '',
       codeCSS: '',
-      codeJS: ''
-    }
-    this.updateCode = this.updateCode.bind(this)
-    this.changeValue = this.changeValue.bind(this)
+      codeJS: '',
+    };
+    this.updateCode = this.updateCode.bind(this);
+    this.changeValue = this.changeValue.bind(this);
   }
 
-  updateCode(newCode){
+  updateCode(newCode) {
     this.setState({
-      code: newCode
-    })
+      code: newCode,
+    });
   }
 
-  changeValue(ev){
+  changeValue(ev) {
     // deal with the code:
-    this.setState({[ev.target.name]: this.state.code}, ()=>console.log(this.state))
+    this.setState({ [ev.target.name]: this.state.code });
   }
 
-  render(){
+  render() {
     const challenge = { name: 'challenge1', description: 'draw a circle', difficulty: 1 };
-    let options = {
+    const options = {
       lineNumbers: true,
-      mode: 'javascript'
-    }
+      mode: 'javascript',
+    };
     return (
       <div className="d-flex flex-column align-items-center">
         <h1>{challenge.name}</h1>
@@ -44,23 +44,43 @@ export class IndividualChallenge extends Component{
           <div className="row">
             <div className="col">
               <h4>HTML Editor</h4>
-              <CodeMirror name='codeHTML' value={this.state.code} onChange={this.updateCode} options={options}/>
-              <button name="codeHTML" type="button" onClick={this.changeValue}>run</button>
+              <CodeMirror
+                name="codeHTML"
+                value={this.state.code}
+                onChange={this.updateCode}
+                options={options}
+              />
+              <button name="codeHTML" type="button" onClick={this.changeValue}>
+                run
+              </button>
             </div>
             <div className="col">
               <h4>CSS Editor</h4>
-              <CodeMirror name='codeCSS' value={this.state.code} onChange={this.updateCode} options={options}/>
-              <button name="codeCSS" type="button" onClick={this.changeValue}>run</button>
+              <CodeMirror
+                name="codeCSS"
+                value={this.state.code}
+                onChange={this.updateCode}
+                options={options}
+              />
+              <button name="codeCSS" type="button" onClick={this.changeValue}>
+                run
+              </button>
             </div>
             <div className="col">
               <h4>JS Editor</h4>
-              <CodeMirror name='codeJS' value={this.state.code} onChange={this.updateCode} options={options}/>
-              <button name="codeJS" type="button" onClick={this.changeValue}>run</button>
-            </div>   
+              <CodeMirror
+                name="codeJS"
+                value={this.state.code}
+                onChange={this.updateCode}
+                options={options}
+              />
+              <button name="codeJS" type="button" onClick={this.changeValue}>
+                run
+              </button>
+            </div>
           </div>
         </div>
       </div>
     );
   }
 }
-
