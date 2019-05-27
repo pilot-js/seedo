@@ -5,7 +5,6 @@ export class IndividualChallenge extends Component {
   constructor() {
     super();
     this.state = {
-      name: 'CodeMirror',
       code: '',
       codeHTML: '',
       codeCSS: '',
@@ -45,7 +44,6 @@ export class IndividualChallenge extends Component {
             <div className="col">
               <h4>HTML Editor</h4>
               <CodeMirror
-                name="codeHTML"
                 value={this.state.code}
                 onChange={this.updateCode}
                 options={options}
@@ -57,7 +55,6 @@ export class IndividualChallenge extends Component {
             <div className="col">
               <h4>CSS Editor</h4>
               <CodeMirror
-                name="codeCSS"
                 value={this.state.code}
                 onChange={this.updateCode}
                 options={options}
@@ -69,7 +66,6 @@ export class IndividualChallenge extends Component {
             <div className="col">
               <h4>JS Editor</h4>
               <CodeMirror
-                name="codeJS"
                 value={this.state.code}
                 onChange={this.updateCode}
                 options={options}
