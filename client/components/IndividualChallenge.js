@@ -6,25 +6,37 @@ export class IndividualChallenge extends Component {
   constructor() {
     super();
     this.state = {
-      code: '',
       codeHTML: '',
       codeCSS: '',
       codeJS: '',
     };
-    this.updateCode = this.updateCode.bind(this);
+    this.updateCodeHTML = this.updateCodeHTML.bind(this);
+    this.updateCodeCSS = this.updateCodeCSS.bind(this);
+    this.updateCodeJS = this.updateCodeJS.bind(this);
     this.changeValue = this.changeValue.bind(this);
   }
 
-  updateCode(newCode) {
+  updateCodeHTML(newCode) {
     this.setState({
-      code: newCode,
+      codeHTML: newCode,
     });
   }
 
-  changeValue(ev) {
-    // deal with the code:
-    /* eslint-disable-next-line react/no-access-state-in-setstate */
-    this.setState({ [ev.target.name]: this.state.code }, () => console.log(this.state));
+  updateCodeCSS(newCode) {
+    this.setState({
+      codeCSS: newCode,
+    });
+  }
+
+  updateCodeJS(newCode) {
+    this.setState({
+      codeJS: newCode,
+    });
+  }
+
+  changeValue() {
+    // TODO: axios post call to the backend
+    console.log(this.state);
   }
 
   render() {
@@ -45,23 +57,27 @@ export class IndividualChallenge extends Component {
           <div className="row">
             <div className="col">
               <h4>HTML Editor</h4>
-              <CodeMirror value={this.state.code} onChange={this.updateCode} options={options} />
+              <CodeMirror
+                value={this.state.code}
+                onChange={this.updateCodeHTML}
+                options={options}
+              />
               <button name="codeHTML" type="button" onClick={this.changeValue}>
-                run
+                save
               </button>
             </div>
             <div className="col">
               <h4>CSS Editor</h4>
-              <CodeMirror value={this.state.code} onChange={this.updateCode} options={options} />
+              <CodeMirror value={this.state.code} onChange={this.updateCodeCSS} options={options} />
               <button name="codeCSS" type="button" onClick={this.changeValue}>
-                run
+                save
               </button>
             </div>
             <div className="col">
               <h4>JS Editor</h4>
-              <CodeMirror value={this.state.code} onChange={this.updateCode} options={options} />
+              <CodeMirror value={this.state.code} onChange={this.updateCodeJS} options={options} />
               <button name="codeJS" type="button" onClick={this.changeValue}>
-                run
+                save
               </button>
             </div>
           </div>
