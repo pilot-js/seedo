@@ -6,8 +6,8 @@ const db = require('../../server/db/conn');
 describe('testing Userchallenge model', () => {
   beforeAll(async () => {
     await db.sync({ force: true });
-    await Image.create({ type: 'userchallenge', url: 'myUrl' });
-    const image1 = Image.findOne({ where: { url: 'myUrl' } });
+    await Image.create({ connector: 'userchallenge1' });
+    const image1 = Image.findOne({ where: { connector: 'userchallenge1' } });
     await Userchallenge.create({
       html: 'TEXT',
       css: 'TEXT',
@@ -25,8 +25,8 @@ describe('testing Userchallenge model', () => {
     return expect(userchallenges.length).toBe(1);
   });
   it('can create a userChallenge', async () => {
-    await Image.create({ type: 'userchallenge', url: 'myUrl2' });
-    const image2 = Image.findOne({ where: { url: 'myUrl2' } });
+    await Image.create({ connector: 'userchallenge2' });
+    const image2 = Image.findOne({ where: { connector: 'userchallenge2' } });
     await Userchallenge.create({
       html: 'TEXT1',
       css: 'TEXT1',
