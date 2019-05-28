@@ -1,11 +1,11 @@
 const router = require('express').Router();
-const { Challenge } = require('../../db');
+const { Challenge, Image } = require('../../db');
 
 /**  /api/challenges **/
 
 // get all challenges
 router.get('/', (req, res, next) => {
-  Challenge.findAll()
+  Challenge.findAll({ include: [Image] })
     .then(challenges => res.send(challenges))
     .catch(next);
 });
