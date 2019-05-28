@@ -9,6 +9,11 @@ const {
 
 const { Challenge, Image, Solution, User, Userchallenge } = require('./models');
 
+function getRandom(type, max) {
+  const randInt = Math.floor(Math.random() * Math.floor(max));
+  return type[randInt].get().id;
+}
+
 const syncAndSeed = () => {
   return conn
     .sync({ force: true })
@@ -18,25 +23,26 @@ const syncAndSeed = () => {
         Promise.all(challengesSeed.map(chal => Challenge.create(chal))),
         Promise.all(userchallengeSeed.map(chal => Userchallenge.create(chal))),
         Promise.all(solutionsSeed.map(sol => Solution.create(sol))),
-        Promise.all(imagesSeed.map(img => Image.create(img))),
+        Promise.all(
+          imagesSeed.map(img => Image.create({ connector: img.connector, data: img.data })),
+        ),
       ]);
     })
     .then(([users, challenges, userchallenges, solutions, images]) => {
-      // const chal = userchallenges.find(chal => chal.css.includes('circle'))
-      // console.log(chal.get())
       return Promise.all([
         userchallenges
           .find(chal => chal.css.includes('circle'))
-          .update({ userId: 2, challengeId: 1 }),
+          .update({ userId: getRandom(users, 3), challengeId: 1 }),
         userchallenges
           .find(chal => chal.css.includes('square'))
-          .update({ userId: 3, challengeId: 2 }),
+          .update({ userId: getRandom(users, 3), challengeId: 2 }),
         solutions.find(sol => sol.css.includes('circle')).update({ challengeId: 1 }),
         solutions.find(sol => sol.css.includes('square')).update({ challengeId: 2 }),
-        images.find(img => img.url.includes('challenge-1')).update({ challengeId: 1 }),
-        images.find(img => img.url.includes('userchallenge-1')).update({ userchallengeId: 1 }),
-        images.find(img => img.url.includes('challenge-2')).update({ challengeId: 2 }),
-        images.find(img => img.url.includes('userchallenge-2')).update({ userchallengeId: 2 }),
+
+        images.find(img => img.connector === 'challenge-1').update({ challengeId: 1 }),
+        images.find(img => img.connector === 'userchallenge-1').update({ userchallengeId: 1 }),
+        images.find(img => img.connector === 'challenge-2').update({ challengeId: 2 }),
+        images.find(img => img.connector === 'userchallenge-2').update({ userchallengeId: 2 }),
       ]);
     })
     .catch(err => console.log(err));

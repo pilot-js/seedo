@@ -47,6 +47,7 @@ router.put('/:userchallengeId/challenge/:challengeId', (req, res, next) => {
 
 // delete answer for a challenge
 router.delete('/challenge/:challengeId', (req, res, next) => {
+  // TODO how to handle req.params.id === NaN ?
   Userchallenge.findByPk(Number(req.params.challengeId))
     .then(userchall => userchall.destroy())
     .then(() => res.sendStatus(204))
