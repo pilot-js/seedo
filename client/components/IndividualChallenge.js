@@ -56,7 +56,7 @@ export class IndividualChallenge extends Component {
           </div>
           <div className="row">
             <div className="col">
-              <h4>HTML Editor</h4>
+              <h2>HTML Editor</h2>
               <CodeMirror
                 value={this.state.code}
                 onChange={this.updateCodeHTML}
@@ -67,14 +67,14 @@ export class IndividualChallenge extends Component {
               </button>
             </div>
             <div className="col">
-              <h4>CSS Editor</h4>
+              <h2>CSS Editor</h2>
               <CodeMirror value={this.state.code} onChange={this.updateCodeCSS} options={options} />
               <button name="codeCSS" type="button" onClick={this.changeValue}>
                 save
               </button>
             </div>
             <div className="col">
-              <h4>JS Editor</h4>
+              <h2>JS Editor</h2>
               <CodeMirror value={this.state.code} onChange={this.updateCodeJS} options={options} />
               <button name="codeJS" type="button" onClick={this.changeValue}>
                 save
