@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { getUser } from '../store';
 
-const LoginClass = () => {
+const LoginClass = props => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const saveHandler = ev => {
     ev.preventDefault();
-    props.getUser({ email, password })
+    props
+      .getUser({ email, password })
       .then(() => console.log('We have a user logged in.'))
       .then(() => this.props.history.push('/'));
   };
@@ -17,9 +18,19 @@ const LoginClass = () => {
     <div>
       <form onSubmit={saveHandler}>
         <label htmlFor="email">Email</label>
-        <input className="form-control" name="email" value="email" onChange={setEmail} />
+        <input
+          className="form-control"
+          name="email"
+          value="email"
+          onChange={e => setEmail(e.target.value)}
+        />
         <label htmlFor="password">Password</label>
-        <input className="form-control" name="password" value="password" onChange={setPassword} />
+        <input
+          className="form-control"
+          name="password"
+          value="password"
+          onChange={e => setPassword(e.target.value)}
+        />
         <button type="submit">Login</button>
       </form>
     </div>
