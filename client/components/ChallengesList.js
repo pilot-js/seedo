@@ -1,41 +1,51 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { fetchChallenges } from '../store';
 
-const challengesSeed = [
-  {
-    id: 1,
-    name: 'Make circle',
-    description: 'Make a red circle with radius 100px',
-    difficulty: 1,
-  },
-  {
-    id: 2,
-    name: 'Make square',
-    description: 'Make a blue square that is 100px wide and high',
-    difficulty: 1,
-  },
-];
+const mapDispatchToProps = dispatch => ({
+  fetchChallenges: () => dispatch(fetchChallenges()),
+});
 
-export const ChallengesList = () => {
+const mapStateToProps = ({ challenges }) => ({ challenges });
+
+const component = ({ challenges, fetchChallenges }) => {
+  useEffect(() => {
+    fetchChallenges();
+  }, []);
   return (
     <div>
       <div className="d-flex justify-content-center">
         <h1>Our Challenges</h1>
       </div>
       <div className="d-flex justify-content-around">
-        {challengesSeed.map(challenge => (
-          <div className="card" style={{ width: '20rem' }} key={challenge.id}>
-            <img src="" alt="" className="card-image-top" />
-            <div className="card-body">
-              <h5 className="card-title">{challenge.name}</h5>
-              <p className="card-text">{challenge.description}</p>
-              <Link to={`/challenges/${challenge.id}`} className="btn btn-primary">
-                Go to Challenge
-              </Link>
+        {challenges.map(challenge => {
+          const base64String = btoa(
+            String.fromCharCode(...new Uint8Array(challenge.images[0].data.data)),
+          );
+          return (
+            <div className="card" style={{ width: '20rem' }} key={challenge.id}>
+              <img
+                src={`data:image/png;base64,${base64String}`}
+                alt=""
+                className="card-image-top"
+              />
+              <div className="card-body">
+                <h5 className="card-title">{challenge.name}</h5>
+                <p className="card-text">{challenge.description}</p>
+                <Link to={`/challenges/${challenge.id}`} className="btn btn-primary">
+                  Go to Challenge
+                </Link>
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );
 };
+
+export const ChallengesList = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(component);
