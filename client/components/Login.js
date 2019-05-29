@@ -11,7 +11,7 @@ const LoginClass = props => {
     props
       .getUser({ email, password })
       .then(() => console.log('We have a user logged in.'))
-      .then(() => this.props.history.push('/'));
+      .then(() => props.history.push('/'));
   };
 
   return (
@@ -21,14 +21,14 @@ const LoginClass = props => {
         <input
           className="form-control"
           name="email"
-          value="email"
+          value={email}
           onChange={e => setEmail(e.target.value)}
         />
         <label htmlFor="password">Password</label>
         <input
           className="form-control"
           name="password"
-          value="password"
+          value={password}
           onChange={e => setPassword(e.target.value)}
         />
         <button type="submit">Login</button>
