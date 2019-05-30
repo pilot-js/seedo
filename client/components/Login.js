@@ -5,8 +5,6 @@ import { getUser } from '../store';
 const LoginClass = props => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [CLIENT_ID, setClientId] = useState('712a1372abccbaf43bfc');
-  const [CLIENT_SECRET, setSecret] = useState('1b9a5bbf6e46b74a52faf3c108f7acee671c82ae');
 
   const saveHandler = ev => {
     ev.preventDefault();
@@ -17,7 +15,7 @@ const LoginClass = props => {
   };
 
   const GithubOauth = () => {
-    window.location.href=`https://github.com/login/oauth/authorize?client_id${CLIENT_ID}`
+    window.location.href = 'http://localhost:3000/github/login'
   };
 
   return (
