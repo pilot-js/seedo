@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { getUser } from '../store';
+import { getUser, getGithubUser } from '../store';
 
 const LoginClass = props => {
   const [email, setEmail] = useState('');
@@ -15,7 +15,7 @@ const LoginClass = props => {
   };
 
   const GithubOauth = () => {
-    window.location.href = 'http://localhost:3000/github/login';
+    window.location.href = 'http://localhost:3000/github/login'
   };
 
   return (
@@ -51,6 +51,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   getUser: aUser => dispatch(getUser(aUser)),
+  getGithubUser: () => dispatch(getGithubUser)
 });
 
 export const Login = connect(

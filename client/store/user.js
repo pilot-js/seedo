@@ -19,6 +19,5 @@ export const getUser = aUser => dispatch => {
 };
 
 export const getGithubUser = () => dispatch => {
-  return axios.get('/api/users/github/callback')
-    .then(user => dispatch(setUser(user)))
-}
+  return axios.get('/api/users/github/callback').then(user => dispatch(setUser(user)));
+};
