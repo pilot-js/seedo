@@ -27,6 +27,7 @@
     "@babel/polyfill": "^7.4.4",
     "@uiw/react-codemirror": "^1.0.19",
     "axios": "^0.18.0",
+    "ejs": "^2.6.1",
     "express": "^4.17.0",
     "morgan": "^1.9.1",
     "pg": "^7.11.0",
