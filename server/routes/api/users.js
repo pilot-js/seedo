@@ -55,22 +55,23 @@ router.put('/auth/login', (req, res, next) => {
 
 //get github User info
 router.get('/github/callback', (req, res, next) => {
-  axios.post('https://github.com/login/oauth/access_token', {
-    client_id: process.env.CLIENT_ID,
-    client_secret: process.env.CLIENT_SECRET,
-    code: req.query.code
-  })
-  .then(response => response.data)
-  .then(data => {
-    const { access_token } = qs.parse(data);
-    return axios.get('https://api.github.com/user', {
-      headers: {
-        authorization: `token ${access_token}`
-      }
+  axios
+    .post('https://github.com/login/oauth/access_token', {
+      client_id: process.env.CLIENT_ID,
+      client_secret: process.env.CLIENT_SECRET,
+      code: req.query.code,
     })
-  })
-  .then(response => res.send(response.data))
-  .catch(next)
+    .then(response => response.data)
+    .then(data => {
+      const { access_token } = qs.parse(data);
+      return axios.get('https://api.github.com/user', {
+        headers: {
+          authorization: `token ${access_token}`,
+        },
+      });
+    })
+    .then(response => res.send(response.data))
+    .catch(next);
 });
 
 module.exports = router;

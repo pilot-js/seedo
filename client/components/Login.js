@@ -15,7 +15,7 @@ const LoginClass = props => {
   };
 
   const GithubOauth = () => {
-    window.location.href = 'http://localhost:3000/github/login'
+    window.location.href = 'http://localhost:3000/github/login';
   };
 
   return (
