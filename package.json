@@ -28,6 +28,7 @@
     "@uiw/react-codemirror": "^1.0.19",
     "axios": "^0.18.0",
     "express": "^4.17.0",
+    "gitstar-components": "^1.0.5",
     "morgan": "^1.9.1",
     "pg": "^7.11.0",
     "react": "^16.8.6",
