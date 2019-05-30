@@ -63,10 +63,10 @@ router.get('/github/callback', (req, res, next) => {
     })
     .then(response => response.data)
     .then(data => {
-      const { access_token } = qs.parse(data);
+      const accessToken = qs.parse(data).access_token;
       return axios.get('https://api.github.com/user', {
         headers: {
-          authorization: `token ${access_token}`,
+          authorization: `token ${accessToken}`,
         },
       });
     })

@@ -37,7 +37,10 @@ const LoginClass = props => {
         />
         <button type="submit">Login</button>
       </form>
-      <button type="button" onClick={GithubOauth}> Login With Github </button>
+      <button type="button" onClick={GithubOauth}>
+        {' '}
+        Login With Github{' '}
+      </button>
     </div>
   );
 };
