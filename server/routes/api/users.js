@@ -1,7 +1,7 @@
 const router = require('express').Router();
-const { User } = require('../../db');
 const qs = require('querystring');
 const axios = require('axios');
+const { User } = require('../../db');
 
 /**     /api/users     **/
 
@@ -70,7 +70,22 @@ router.get('/github/callback', (req, res, next) => {
         },
       });
     })
-    .then(response => res.send(response.data))
+    .then(response => response.data)
+    .then(githubUser => {
+      User.findOne({where:{githubId: githubUser.id}})
+      .then(user => {
+        if(user){res.send(user)} else {
+          User.create({
+            email: `${githubUser.login}@geezemail.com`,
+            password: '1234',
+            githubId: githubUser.id,
+          })
+          .then(_user => {
+            console.log(_user)
+            res.send(_user.dataValues)})
+        }
+      })
+    })
     .catch(next);
 });
 
