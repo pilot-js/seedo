@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { getUser, getGithubUser } from '../store';
+import { getUser } from '../store';
 
 const LoginClass = props => {
   const [email, setEmail] = useState('');
@@ -51,7 +51,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   getUser: aUser => dispatch(getUser(aUser)),
-  getGithubUser: () => dispatch(getGithubUser)
 });
 
 export const Login = connect(
