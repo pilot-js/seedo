@@ -72,19 +72,19 @@ router.get('/github/callback', (req, res, next) => {
     })
     .then(response => response.data)
     .then(githubUser => {
-      User.findOne({where:{githubId: githubUser.id}})
-      .then(user => {
-        if(user){res.send(user)} else {
+      User.findOne({ where: { githubId: githubUser.id } }).then(user => {
+        if (user) {
+          res.send(user);
+        } else {
           User.create({
             email: `${githubUser.login}@geezemail.com`,
             password: '1234',
             githubId: githubUser.id,
-          })
-          .then(_user => {
-            console.log(_user)
-            res.send(_user.dataValues)})
+          }).then(user => {
+            res.send(user);
+          });
         }
-      })
+      });
     })
     .catch(next);
 });
