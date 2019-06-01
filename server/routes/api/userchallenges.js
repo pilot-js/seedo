@@ -19,8 +19,8 @@ router.get('users/:userId/challenges/:challengeId', (req, res, next) => {
 
 // create answer for a challenge
 router.put('/:userchallengeId', (req, res, next) => {
+  res.sendStatus(200)
   const { userchallengeId } = req.params;
-  // const { html, css, js, submitted } = req.body.userAnswer;
   const { isSubmit } = req.body;
   Userchallenge.findByPk(userchallengeId)
     .then(userchall => userchall.update(req.body.userAnswer))
@@ -32,7 +32,7 @@ router.put('/:userchallengeId', (req, res, next) => {
         // compare images
         console.log('isSubmit: ', isSubmit);
       }
-      res.status(200);
+      res.statusCode(200);
       res.send(userchall);
     })
     .catch(next);
