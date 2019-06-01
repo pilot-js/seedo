@@ -23,16 +23,14 @@ router.put('/:userchallengeId', (req, res, next) => {
   const { isSubmit } = req.body;
   Userchallenge.findByPk(userchallengeId)
     .then(userchall => userchall.update(req.body.userAnswer))
-    .then(() => res.sendStatus(200))
     .then(async userchall => {
-      console.log('userId: ', userchall.get());
       await createFiles(userchall.html, userchall.css, userchall.userId);
+      res.sendStatus(200)
       await createImage(userchall.userId);
       if (isSubmit) {
         // compare images
         console.log('isSubmit: ', isSubmit);
       }
-      res.statusCode(200);
       res.send(userchall);
     })
     .catch(next);
