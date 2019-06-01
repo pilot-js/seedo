@@ -4,13 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "webpack": "node_modules/.bin/webpack",
-    "webpack:watch": "webpack -w",
+    "lint": "make lint",
+    "seed": "DATABASE_URL=postgres://localhost/seedo node server/db/seed.js",
     "server:watch": "node_modules/.bin/nodemon server/server.js --ignore client --ignore dist",
     "start:dev": "npm run webpack:watch & DATABASE_URL=postgres://localhost/seedo npm run server:watch",
-    "lint": "make lint",
-    "test:dev": "DATABASE_URL=postgresql://localhost/seedo_test jest -i",
-    "test": "jest -i"
+    "test:dev": "npm run test:dev:models && npm run test:dev:routes",
+    "test:dev:models": "DATABASE_URL=postgresql://localhost/seedo_test jest test/db -i",
+    "test:dev:routes": "DATABASE_URL=postgresql://localhost/seedo_test jest test/routes -i",
+    "test": "jest -i",
+    "webpack": "node_modules/.bin/webpack",
+    "webpack:watch": "webpack -w"
   },
   "repository": {
     "type": "git",
@@ -59,6 +62,7 @@
     "jest": "^24.8.0",
     "nodemon": "^1.19.0",
     "prettier": "^1.17.0",
+    "supertest": "^4.0.2",
     "typescript": "^3.4.5",
     "webpack": "^4.32.1",
     "webpack-cli": "^3.3.2"
