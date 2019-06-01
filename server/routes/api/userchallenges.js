@@ -21,8 +21,8 @@ router.get('users/:userId/challenges/:challengeId', (req, res, next) => {
 router.put('/:userchallengeId', (req, res, next) => {
   const { userchallengeId } = req.params;
   const { isSubmit } = req.body;
-  res.sendStatus(200);
   Userchallenge.findByPk(userchallengeId)
+    .then(()=>  res.sendStatus(200))
     .then(userchall => userchall.update(req.body.userAnswer))
     .then(async userchall => {
       console.log('userId: ', userchall.get());
