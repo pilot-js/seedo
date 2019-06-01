@@ -101,7 +101,8 @@ class _IndividualChallenge extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  putValue: (userAnswer, userchallengeId) => dispatch(putUserchallenge(userAnswer, userchallengeId)),
+  putValue: (userAnswer, userchallengeId) =>
+    dispatch(putUserchallenge(userAnswer, userchallengeId)),
 });
 
 export const IndividualChallenge = connect(
