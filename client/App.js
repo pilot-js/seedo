@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
+import { connect } from 'react-redux'
 import {
   IndividualChallenge,
   Nav,
@@ -9,8 +10,12 @@ import {
   ChallengesList,
   Login,
 } from './components';
+import { getGithubUser } from './store';
 
 class App extends Component {
+  componentDidMount() {
+    this.props.getGithubUser()
+  }
   render() {
     return (
       <div>
@@ -32,4 +37,17 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getGithubUser: () => dispatch(getGithubUser())
+  }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
