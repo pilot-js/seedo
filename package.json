@@ -4,6 +4,7 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
+		"start": "node server/db/seed.js && node server/server.js",
 		"lint": "make lint",
 		"seed": "DATABASE_URL=postgres://localhost/seedo node server/db/seed.js",
 		"server:watch": "node_modules/.bin/nodemon server/server.js --ignore client --ignore dist",
