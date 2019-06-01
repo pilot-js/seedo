@@ -4,7 +4,10 @@ import { logoutUser } from '../store';
 
 const _Logout = props => {
   const logout = () => {
-    props.logoutUser().then(() => props.history.push('/'));
+    props
+      .logoutUser()
+      .then(() => props.history.push('/'))
+      .catch(error => console.log(error));
   };
 
   return (
