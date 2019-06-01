@@ -9,12 +9,26 @@ import {
   MeetTheTeam,
   ChallengesList,
   Login,
+  Logout,
+  UserPage,
 } from './components';
 import { getGithubUser } from './store';
 
 class App extends Component {
   componentDidMount() {
-    this.props.getGithubUser();
+    this.props
+      .getGithubUser()
+      .then(() => console.log('this is the redux user in APP', this.props.user))
+      .catch(error => console.log(error));
+  }
+
+  componentDidUpdate(prevProps) {
+    if (JSON.stringify(prevProps.user) !== JSON.stringify(this.props.user)) {
+      this.props
+        .getGithubUser()
+        .then(() => console.log('User updated', this.props.user))
+        .catch(error => console.log(error));
+    }
   }
 
   render() {
@@ -26,6 +40,8 @@ class App extends Component {
           <Route exact path="/team" component={MeetTheTeam} />
           <Route exact path="/challenges" component={ChallengesList} />
           <Route exact path="/login" component={Login} />
+          <Route exact path="/logout" component={Logout} />
+          <Route exact path="/userpage" component={UserPage} />
           <Route
             exact
             path="/challenges/:id"

@@ -1,8 +1,9 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-export const Nav = () => {
-  const TopNavLinks = [
+const _Nav = props => {
+  const navLinks = [
     {
       label: 'About Us',
       to: '/',
@@ -11,17 +12,29 @@ export const Nav = () => {
       label: 'Challenges List',
       to: '/challenges',
     },
-  ];
-  const BottomNavLinks = [
     {
       label: 'Meet The Team',
       to: '/team',
     },
-    {
+  ];
+  if (props.user.id) {
+    navLinks.push(
+      {
+        label: 'Logout',
+        to: '/logout',
+      },
+      {
+        label: 'User Page',
+        to: '/userpage',
+      },
+    );
+  } else {
+    navLinks.push({
       label: 'Login/SignUp',
       to: '/login',
-    },
-  ];
+    });
+  }
+
   return (
     <div className="d-flex flex-row">
       <div style={{ flex: 2, textAlign: 'center', alignItems: 'center' }}>image Here</div>
@@ -30,14 +43,7 @@ export const Nav = () => {
         style={{ flex: 3, marginBottom: '20px', marginTop: '10px' }}
       >
         <div className="flex-row nav nav-pills">
-          {TopNavLinks.map(link => (
-            <NavLink exact key={link.to} to={link.to} className="nav-link nav-item">
-              {link.label}
-            </NavLink>
-          ))}
-        </div>
-        <div className="flex-row nav nav-pills">
-          {BottomNavLinks.map(link => (
+          {navLinks.map(link => (
             <NavLink exact key={link.to} to={link.to} className="nav-link nav-item">
               {link.label}
             </NavLink>
@@ -47,3 +53,11 @@ export const Nav = () => {
     </div>
   );
 };
+
+const mapStateToProps = state => {
+  return {
+    user: state.user,
+  };
+};
+
+export const Nav = connect(mapStateToProps)(_Nav);
