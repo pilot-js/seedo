@@ -32,9 +32,6 @@ describe('Userchallenge routes', () => {
     await conn.close();
   });
   it('it can take a request', () => {
-    return client.get(`${url}1`).expect(200);
-  });
-  it('will return a new userchallenge if none exists', () => {
-    return client.get(`${url}users/1/challenges/1`).expect(200);
+    return client.get(`${url}challenge/1`).expect(200);
   });
 });
