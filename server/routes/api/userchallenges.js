@@ -25,8 +25,8 @@ router.put('/:userchallengeId', (req, res, next) => {
     .then(userchall => userchall.update(req.body.userAnswer))
     .then(async userchall => {
       await createFiles(userchall.html, userchall.css, userchall.userId);
-      res.sendStatus(200)
       await createImage(userchall.userId);
+      res.sendStatus(200);
       if (isSubmit) {
         // compare images
         console.log('isSubmit: ', isSubmit);
