@@ -13,9 +13,10 @@ export const userchallenge = (state = [], action) => {
   }
 };
 
-export const postUserchallenge = (userAnswer, challengeId) => dispatch => {
+export const putUserchallenge = (userAnswer, userchallengeId) => dispatch => {
   console.log('userAnswer in store', userAnswer);
   return axios
-    .post(`/api/userchallenges/challenge/${challengeId}`, userAnswer)
+    .put(`/api/userchallenges/${userchallengeId}`, userAnswer)
+    .then(res => res.data)
     .then(userAnswer => dispatch(setUserchallenge(userAnswer)));
 };

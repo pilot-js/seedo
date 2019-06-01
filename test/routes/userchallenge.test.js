@@ -32,6 +32,6 @@ describe('Userchallenge routes', () => {
     await conn.close();
   });
   it('it can take a request', () => {
-    return client.get(`${url}challenge/1`).expect(200);
+    return client.put(`${url}1`).expect(200);
   });
 });
