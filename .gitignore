@@ -7,3 +7,4 @@ package-lock.json
 server/.env.js
 server/routes/api/userchallengesTodo.js
 server/tmp/all_promise.js
+server/tmp/
