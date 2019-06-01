@@ -2,15 +2,18 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const morgan = require('morgan');
+const session = require('express-session');
 const api = require('./routes/api');
 
 try {
-  Object.assign(process.env, require('./.env.js'));
+  Object.assign(process.env, require('./.env'));
 } catch (error) {
   console.log(error);
 }
 
 app.use(express.json());
+
+app.use(session);
 
 app.use(express.static(path.join(__dirname, '../dist')));
 

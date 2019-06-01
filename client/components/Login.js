@@ -14,8 +14,8 @@ const LoginClass = props => {
       .then(() => props.history.push('/'));
   };
 
-  const GithubOauth = () => {
-    window.location.href = 'http://localhost:3000/github/login'
+  const githubOauth = () => {
+    window.location.href = 'http://localhost:3000/github/login';
   };
 
   return (
@@ -37,7 +37,7 @@ const LoginClass = props => {
         />
         <button type="submit">Login</button>
       </form>
-      <button type="button" onClick={GithubOauth}>
+      <button type="button" onClick={githubOauth}>
         {' '}
         Login With Github{' '}
       </button>
