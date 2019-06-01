@@ -24,8 +24,8 @@ router.put('/:userchallengeId', (req, res, next) => {
   Userchallenge.findByPk(userchallengeId)
     .then(userchall => userchall.update(req.body))
     .then(async userchall => {
-      await createFiles(userchall.html, userchall.css, 'tmp');
-      await createImage('tmp');
+      await createFiles(userchall.html, userchall.css, userchall.userId);
+      await createImage(userchall.userId);
       res.send(userchall);
     })
     .catch(next);
