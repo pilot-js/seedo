@@ -18,12 +18,16 @@ class App extends Component {
   componentDidMount() {
     this.props
       .getGithubUser()
-      .then(() => console.log('this is the redux user in APP', this.props.user));
+      .then(() => console.log('this is the redux user in APP', this.props.user))
+      .catch(error => console.log(error))
   }
 
   componentDidUpdate(prevProps) {
     if (JSON.stringify(prevProps.user) !== JSON.stringify(this.props.user)) {
-      this.props.getGithubUser().then(() => console.log('User updated', this.props.user));
+      this.props
+        .getGithubUser()
+        .then(() => console.log('User updated', this.props.user))
+        .catch(error => console.log(error));
     }
   }
 
