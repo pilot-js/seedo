@@ -38,11 +38,15 @@ const syncAndSeed = () => {
           .update({ userId: getRandom(users, 3), challengeId: 2 }),
         solutions.find(sol => sol.css.includes('circle')).update({ challengeId: 1 }),
         solutions.find(sol => sol.css.includes('square')).update({ challengeId: 2 }),
+        solutions.find(sol => sol.css.includes('yellow')).update({ challengeId: 3 }),
+        solutions.find(sol => sol.css.includes('orange')).update({ challengeId: 4 }),
 
         images.find(img => img.connector === 'challenge-1').update({ challengeId: 1 }),
         images.find(img => img.connector === 'userchallenge-1').update({ userchallengeId: 1 }),
         images.find(img => img.connector === 'challenge-2').update({ challengeId: 2 }),
         images.find(img => img.connector === 'userchallenge-2').update({ userchallengeId: 2 }),
+        images.find(img => img.connector === 'challenge-3').update({ challengeId: 3 }),
+        images.find(img => img.connector === 'challenge-4').update({ challengeId: 4 }),
       ]);
     })
     .catch(err => console.log(err));
