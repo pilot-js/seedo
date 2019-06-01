@@ -29,7 +29,7 @@ const challengesSeed = [
     name: 'Make rectangle',
     description: 'Make an orange rectangle that is 100px wide and 200px high',
     difficulty: 2,
-  },
+  }
 ];
 
 // TODO for js - console.log()
