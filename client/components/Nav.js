@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 const _Nav = props => {
-  const TopNavLinks = [
+  let navLinks = [
     {
       label: 'About Us',
       to: '/',
@@ -12,31 +12,29 @@ const _Nav = props => {
       label: 'Challenges List',
       to: '/challengesList',
     },
+    {
+      label: 'Meet The Team',
+      to: '/meetTheTeam',
+    },
   ];
-  let BottomNavLinks = [];
   if (props.user.id) {
-    BottomNavLinks = [
-      {
-        label: 'Meet The Team',
-        to: '/meetTheTeam',
-      },
+    navLinks.push(
       {
         label: 'Logout',
         to: '/logout',
       },
-    ];
+      {
+        label: 'User Page',
+        to: '/userpage',
+      },
+    );
   } else {
-    BottomNavLinks = [
-      {
-        label: 'Meet The Team',
-        to: '/meetTheTeam',
-      },
-      {
-        label: 'Login/SignUp',
-        to: '/login',
-      },
-    ];
+    navLinks.push({
+      label: 'Login/SignUp',
+      to: '/login',
+    });
   }
+
   return (
     <div className="d-flex flex-row">
       <div style={{ flex: 2, textAlign: 'center', alignItems: 'center' }}>image Here</div>
@@ -45,14 +43,7 @@ const _Nav = props => {
         style={{ flex: 3, marginBottom: '20px', marginTop: '10px' }}
       >
         <div className="flex-row nav nav-pills">
-          {TopNavLinks.map(link => (
-            <NavLink exact key={link.to} to={link.to} className="nav-link nav-item">
-              {link.label}
-            </NavLink>
-          ))}
-        </div>
-        <div className="flex-row nav nav-pills">
-          {BottomNavLinks.map(link => (
+          {navLinks.map(link => (
             <NavLink exact key={link.to} to={link.to} className="nav-link nav-item">
               {link.label}
             </NavLink>
