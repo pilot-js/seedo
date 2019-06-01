@@ -19,7 +19,6 @@ const challengesSeed = [
     description: 'Make a blue square that is 100px wide and high',
     difficulty: 1,
   },
-  ,
   {
     name: 'Make rectangle',
     description: 'Make a yellow rectangle that is 200px wide and 100px high',
@@ -29,7 +28,7 @@ const challengesSeed = [
     name: 'Make rectangle',
     description: 'Make an orange rectangle that is 100px wide and 200px high',
     difficulty: 2,
-  }
+  },
 ];
 
 // TODO for js - console.log()
