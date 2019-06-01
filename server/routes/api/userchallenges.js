@@ -32,6 +32,7 @@ router.put('/:userchallengeId', (req, res, next) => {
         // compare images
         console.log('isSubmit: ', isSubmit);
       }
+      res.status(200)
       res.send(userchall);
     })
     .catch(next);

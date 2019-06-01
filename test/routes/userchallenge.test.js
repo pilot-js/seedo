@@ -34,8 +34,9 @@ describe('Userchallenge routes', () => {
     await conn.close();
   });
   it('it can take a request', () => {
-    return client.put(`${url}1`)
-    .send({ userAnswer: {} })
-    .expect(200);
+    return client
+      .put(`${url}1`)
+      .send({ userAnswer: {} })
+      .expect(200);
   });
 });
