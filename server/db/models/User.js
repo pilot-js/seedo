@@ -17,4 +17,8 @@ module.exports = conn.define('user', {
       notEmpty: false,
     },
   },
+  githubId: {
+    type: Sequelize.INTEGER,
+    allowNull: true,
+  },
 });
