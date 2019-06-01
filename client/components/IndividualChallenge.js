@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import CodeMirror from 'react-codemirror';
 import { connect } from 'react-redux';
-import { postUserchallenge } from '../store/userchallenge';
+import { putUserchallenge } from '../store/userchallenge';
 
 class _IndividualChallenge extends Component {
   constructor() {
@@ -15,7 +15,7 @@ class _IndividualChallenge extends Component {
     this.updateCodeCSS = this.updateCodeCSS.bind(this);
     this.updateCodeJS = this.updateCodeJS.bind(this);
     this.changeValue = this.changeValue.bind(this);
-    this.postValue = this.postValue.bind(this);
+    this.putValue = this.putValue.bind(this);
   }
 
   updateCodeHTML(newCode) {
@@ -41,10 +41,10 @@ class _IndividualChallenge extends Component {
     console.log(this.state);
   }
 
-  postValue() {
+  putValue(isSubmit) {
     const userAnswer = { ...this.state, submitted: true, challengeId: this.props.id };
     this.props
-      .postValue(userAnswer, this.props.id)
+      .putValue(userAnswer, this.props.id, isSubmit)
       .then(userchallenge => console.log(userchallenge))
       .catch(ex => console.log(ex));
   }
@@ -91,7 +91,10 @@ class _IndividualChallenge extends Component {
               </button>
             </div>
           </div>
-          <button type="button" onClick={() => this.postValue()}>
+          <button type="button" onClick={() => this.putValue(false)}>
+            Run
+          </button>
+          <button type="button" onClick={() => this.putValue(true)}>
             Submit
           </button>
         </div>
@@ -101,7 +104,8 @@ class _IndividualChallenge extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  postValue: (userAnswer, challengeId) => dispatch(postUserchallenge(userAnswer, challengeId)),
+  putValue: (userAnswer, userchallengeId, isSubmit) =>
+    dispatch(putUserchallenge(userAnswer, userchallengeId, isSubmit)),
 });
 
 export const IndividualChallenge = connect(
