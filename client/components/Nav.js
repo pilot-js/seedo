@@ -9,13 +9,13 @@ export const Nav = () => {
     },
     {
       label: 'Challenges List',
-      to: '/challengesList',
+      to: '/challenges',
     },
   ];
   const BottomNavLinks = [
     {
       label: 'Meet The Team',
-      to: '/meetTheTeam',
+      to: '/team',
     },
     {
       label: 'Login/SignUp',
