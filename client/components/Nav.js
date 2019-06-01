@@ -10,11 +10,11 @@ const _Nav = props => {
     },
     {
       label: 'Challenges List',
-      to: '/challengesList',
+      to: '/challenges',
     },
     {
       label: 'Meet The Team',
-      to: '/meetTheTeam',
+      to: '/team',
     },
   ];
   if (props.user.id) {

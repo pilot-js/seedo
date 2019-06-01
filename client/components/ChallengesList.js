@@ -25,12 +25,12 @@ const component = ({ challenges, fetchChallenges }) => {
           );
           return (
             <div className="card" style={{ width: '20rem' }} key={challenge.id}>
-              <img
-                src={`data:image/png;base64,${base64String}`}
-                alt=""
-                className="card-image-top"
-              />
               <div className="card-body">
+                <img
+                  src={`data:image/png;base64,${base64String}`}
+                  alt=""
+                  className="card-image-top"
+                />
                 <h5 className="card-title">{challenge.name}</h5>
                 <p className="card-text">{challenge.description}</p>
                 <Link to={`/challenges/${challenge.id}`} className="btn btn-primary">

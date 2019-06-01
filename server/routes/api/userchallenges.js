@@ -1,5 +1,7 @@
 const router = require('express').Router();
+
 const { Userchallenge } = require('../../db');
+const { createFiles, createImage } = require('../../puppeteer-utils');
 
 /**     /api/userchallenges     **/
 
@@ -28,7 +30,11 @@ router.post('/challenge/:challengeId', (req, res, next) => {
     js,
     submitted,
   })
-    .then(userchall => res.send(userchall))
+    .then(async userchall => {
+      await createFiles(userchall.html, userchall.css, 'tmp');
+      await createImage('tmp');
+      res.send(userchall);
+    })
     .catch(next);
 });
 

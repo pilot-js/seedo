@@ -18,7 +18,7 @@ describe('testing challenge model', () => {
 
   it('can retrieve data', async () => {
     const challenges = await Challenge.findAll();
-    expect(challenges.length).toBe(1);
+    return expect(challenges.length).toBe(1);
   });
 
   it('requires that name is not empty or null', async () => {
