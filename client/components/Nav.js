@@ -69,4 +69,4 @@ const mapStateToProps = state => {
   };
 };
 
-export const Nav = connect(mapStateToProps)(_Nav)
+export const Nav = connect(mapStateToProps)(_Nav);

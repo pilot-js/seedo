@@ -10,13 +10,15 @@ const _Logout = props => {
   return (
     <div>
       <p>Do you want to log out?</p>
-      <button type="button" onClick={logout}>Yes!</button>
+      <button type="button" onClick={logout}>
+        Yes!
+      </button>
     </div>
   );
 };
 
 const mapDispatchToProps = dispatch => ({
-  logoutUser: () => dispatch(logoutUser())
+  logoutUser: () => dispatch(logoutUser()),
 });
 
 export const Logout = connect(
