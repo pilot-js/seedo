@@ -18,6 +18,8 @@ describe('Userchallenge routes', () => {
       grade: 90,
       submitted: true,
     });
+    const ucs = await Userchallenge.findAll()
+    console.log('Our user challenges', ucs)
     await User.create({
       email: 'email@email.com',
       password: 'hello',
