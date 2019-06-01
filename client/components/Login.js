@@ -15,9 +15,9 @@ const LoginClass = props => {
   };
 
   const githubOauth = () => {
-    window.location.href = 'http://localhost:3000/github/login'
-      // .then(()=> props.getGithubUser())
-      // .then(() => console.log('this is the state after getgithubuser', props.user))
+    window.location.href = 'http://localhost:3000/github/login';
+    // .then(()=> props.getGithubUser())
+    // .then(() => console.log('this is the state after getgithubuser', props.user))
   };
 
   return (
@@ -52,7 +52,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   getUser: aUser => dispatch(getUser(aUser)),
-  getGithubUser: () => dispatch(getGithubUser())
+  getGithubUser: () => dispatch(getGithubUser()),
 });
 
 export const Login = connect(

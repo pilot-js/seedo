@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import {
   IndividualChallenge,
   Nav,
@@ -14,8 +14,9 @@ import { getGithubUser } from './store';
 
 class App extends Component {
   componentDidMount() {
-    this.props.getGithubUser()
+    this.props.getGithubUser();
   }
+
   render() {
     return (
       <div>
@@ -39,15 +40,17 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    user: state.user
-  }
-}
+    user: state.user,
+  };
+};
 
 const mapDispatchToProps = dispatch => {
   return {
-    getGithubUser: () => dispatch(getGithubUser())
-  }
-}
+    getGithubUser: () => dispatch(getGithubUser()),
+  };
+};
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(App);

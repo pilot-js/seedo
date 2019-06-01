@@ -19,7 +19,8 @@ export const getUser = aUser => dispatch => {
 };
 
 export const getGithubUser = () => dispatch => {
-  return axios.get('/api/users/auth/login/github_user')
-  .then(res => res.data)
-  .then(user => dispatch(setUser(user)))
-}
+  return axios
+    .get('/api/users/auth/login/github_user')
+    .then(res => res.data)
+    .then(user => dispatch(setUser(user)));
+};

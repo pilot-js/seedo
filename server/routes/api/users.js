@@ -96,9 +96,9 @@ router.get('/github/callback', (req, res, next) => {
 
 router.get('/auth/login/github_user', (req, res) => {
   if (req.session.user) {
-    res.send(req.session.user)
+    res.send(req.session.user);
   } else {
-    res.send({})
+    res.send({});
   }
 });
 
