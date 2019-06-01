@@ -2,10 +2,11 @@ const conn = require('../conn');
 const { Sequelize } = conn;
 
 module.exports = conn.define('user', {
-  id: {
-    type: Sequelize.UUID,
-    defaultValue: Sequelize.UUIDV4,
+  id:{
+    allowNull: false,
     primaryKey: true,
+    type: Sequelize.UUID,
+    defaultValue: Sequelize.UUIDV4
   },
   email: {
     type: Sequelize.STRING,
