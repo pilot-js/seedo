@@ -49,7 +49,10 @@ router.put('/auth/login', (req, res, next) => {
       password: req.body.password,
     },
   })
-    .then(user => res.send(user))
+    .then(user => {
+      req.session.user = user;
+      res.send(user);
+    })
     .catch(next);
 });
 
@@ -73,14 +76,18 @@ router.get('/github/callback', (req, res, next) => {
     .then(response => response.data)
     .then(githubUser => {
       User.findOne({ where: { githubId: githubUser.id } }).then(user => {
-        if (user) {
+        if (user !== null) {
+          req.session.user = user;
           res.redirect('/');
         } else {
           User.create({
             email: `${githubUser.login}@geezemail.com`,
             password: '1234',
             githubId: githubUser.id,
-          }).then(() => res.redirect('/'));
+          }).then(user => {
+            req.session.user = user;
+            res.redirect('/');
+          });
         }
       });
     })
