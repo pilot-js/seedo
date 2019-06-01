@@ -22,8 +22,8 @@ router.put('/:userchallengeId', (req, res, next) => {
   const { userchallengeId } = req.params;
   const { isSubmit } = req.body;
   Userchallenge.findByPk(userchallengeId)
-    .then(()=>  res.sendStatus(200))
     .then(userchall => userchall.update(req.body.userAnswer))
+    .then(() => res.sendStatus(200))
     .then(async userchall => {
       console.log('userId: ', userchall.get());
       await createFiles(userchall.html, userchall.css, userchall.userId);
