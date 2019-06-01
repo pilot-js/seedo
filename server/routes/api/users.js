@@ -1,4 +1,6 @@
 const router = require('express').Router();
+const qs = require('querystring');
+const axios = require('axios');
 const { User } = require('../../db');
 
 /**     /api/users     **/
@@ -47,8 +49,57 @@ router.put('/auth/login', (req, res, next) => {
       password: req.body.password,
     },
   })
-    .then(user => res.send(user))
+    .then(user => {
+      req.session.user = user;
+      res.send(user);
+    })
     .catch(next);
+});
+
+//get github User info
+router.get('/github/callback', (req, res, next) => {
+  axios
+    .post('https://github.com/login/oauth/access_token', {
+      client_id: process.env.CLIENT_ID,
+      client_secret: process.env.CLIENT_SECRET,
+      code: req.query.code,
+    })
+    .then(response => response.data)
+    .then(data => {
+      const accessToken = qs.parse(data).access_token;
+      return axios.get('https://api.github.com/user', {
+        headers: {
+          authorization: `token ${accessToken}`,
+        },
+      });
+    })
+    .then(response => response.data)
+    .then(githubUser => {
+      User.findOne({ where: { githubId: githubUser.id } }).then(user => {
+        if (user !== null) {
+          req.session.user = user;
+          res.redirect('/');
+        } else {
+          User.create({
+            email: `${githubUser.login}@geezemail.com`,
+            password: '1234',
+            githubId: githubUser.id,
+          }).then(user => {
+            req.session.user = user;
+            res.redirect('/');
+          });
+        }
+      });
+    })
+    .catch(next);
+});
+
+router.get('/auth/login/github_user', (req, res) => {
+  if (req.session.user) {
+    res.send(req.session.user);
+  } else {
+    res.send({});
+  }
 });
 
 module.exports = router;

@@ -21,6 +21,30 @@ Image.belongsTo(Userchallenge);
 Challenge.hasMany(Solution);
 Solution.belongsTo(Challenge);
 
+Userchallenge.getActiveAnswer = (userId, challengeId) => {
+  return Userchallenge.findOne({
+    where: { userId, challengeId, submitted: false },
+    include: [Image],
+  }).then(async entity => {
+    let activeSolution;
+    // if an unsubmitted answer was found, return it
+    if (entity) {
+      activeSolution = entity;
+      // otherwise, create a new userchallenge and return it
+    } else {
+      activeSolution = Userchallenge.create({
+        userId,
+        challengeId,
+        html: '',
+        css: '',
+        js: '',
+        submitted: false,
+      });
+    }
+    return activeSolution;
+  });
+};
+
 module.exports = {
   Challenge,
   Image,

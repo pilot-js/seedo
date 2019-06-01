@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { getUser } from '../store';
+import { getUser, getGithubUser } from '../store';
 
 const LoginClass = props => {
   const [email, setEmail] = useState('');
@@ -12,6 +12,12 @@ const LoginClass = props => {
       .getUser({ email, password })
       .then(() => console.log('We have a user logged in.'))
       .then(() => props.history.push('/'));
+  };
+
+  const githubOauth = () => {
+    window.location.href = 'http://localhost:3000/github/login';
+    // .then(()=> props.getGithubUser())
+    // .then(() => console.log('this is the state after getgithubuser', props.user))
   };
 
   return (
@@ -33,6 +39,9 @@ const LoginClass = props => {
         />
         <button type="submit">Login</button>
       </form>
+      <button type="button" onClick={githubOauth}>
+        Login With Github
+      </button>
     </div>
   );
 };
@@ -43,6 +52,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   getUser: aUser => dispatch(getUser(aUser)),
+  getGithubUser: () => dispatch(getGithubUser()),
 });
 
 export const Login = connect(

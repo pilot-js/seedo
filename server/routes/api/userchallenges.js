@@ -1,4 +1,8 @@
 const router = require('express').Router();
+const fs = require('fs');
+const puppeteer = require('puppeteer');
+const path = require('path');
+
 const { Userchallenge } = require('../../db');
 
 /**     /api/userchallenges     **/
@@ -28,7 +32,29 @@ router.post('/challenge/:challengeId', (req, res, next) => {
     js,
     submitted,
   })
-    .then(userchall => res.send(userchall))
+    .then(userchall => {
+      fs.mkdir('./server/tmp', { recursive: true }, err => {
+        if (err) throw err;
+        console.log('create dir');
+      });
+      fs.writeFile('./server/tmp/tmp.html', userchall.html, err => {
+        if (err) throw err;
+        console.log('The html has been saved!');
+      });
+      fs.writeFile('./server/tmp/tmp.css', userchall.css, err => {
+        if (err) throw err;
+        console.log('The css has been saved!');
+      });
+      (async () => {
+        const browser = await puppeteer.launch();
+        const page = await browser.newPage();
+        await page.goto(`file://${path.join(process.cwd(), 'server/tmp/tmp.html')}`);
+        await page.setViewport({ width: 100, height: 100 });
+        await page.screenshot({ path: './server/tmp/tmp.png' });
+        await browser.close();
+      })();
+      res.send(userchall);
+    })
     .catch(next);
 });
 
