@@ -18,8 +18,8 @@ describe('Userchallenge routes', () => {
       grade: 90,
       submitted: true,
     });
-    const ucs = await Userchallenge.findAll()
-    console.log('Our user challenges', ucs)
+    const ucs = await Userchallenge.findAll();
+    console.log('Our user challenges', ucs);
     await User.create({
       email: 'email@email.com',
       password: 'hello',
@@ -34,6 +34,8 @@ describe('Userchallenge routes', () => {
     await conn.close();
   });
   it('it can take a request', () => {
-    return client.put(`${url}1`).expect(200);
+    return client.put(`${url}1`)
+    .send({ userAnswer: {} })
+    .expect(200);
   });
 });
