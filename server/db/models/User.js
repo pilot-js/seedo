@@ -10,7 +10,7 @@ module.exports = conn.define('user', {
   },
   email: {
     type: Sequelize.STRING,
-    allowNull: false,
+    allowNull: true,
     validate: {
       isEmail: true,
       notEmpty: false,
