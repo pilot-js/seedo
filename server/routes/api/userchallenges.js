@@ -29,22 +29,21 @@ router.put('/:userchallengeId', (req, res, next) => {
       console.log('userId: ', userchall.get());
       await createFiles(userchall.html, userchall.css, userchall.userId);
       let retPath = await createImage(userchall.userId);
-      console.log('retPath: ', retPath)
+      console.log('retPath: ', retPath);
       retPath = retPath.replace('file://', '').replace('.html', '.png');
 
-      console.log('retPath2: ', retPath)
+      console.log('retPath2: ', retPath);
       // parse path so remove extra /
       if (isSubmit) {
         // compare images
         // grab challengeImg from db
-        // change 
-        Image.findOne({ where: { challengeId: userchall.challengeId } })
-          .then(image => {
-            // const base64String = btoa(
-            //   String.fromCharCode(...new Uint8Array(image.data.data)),
-            // );
-            console.log('base64String: ', image.data)
-          })
+        // change
+        Image.findOne({ where: { challengeId: userchall.challengeId } }).then(image => {
+          // const base64String = btoa(
+          //   String.fromCharCode(...new Uint8Array(image.data.data)),
+          // );
+          console.log('base64String: ', image.data);
+        });
 
         // compareImages(userchallengePath, challengeImg)
       }
