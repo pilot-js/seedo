@@ -7,7 +7,7 @@ const { Userchallenge, conn, User, Challenge } = require('../../server/db');
 const client = supertest(app);
 
 const url = '/api/userchallenges/';
-
+const uuid = '0d5e2df8-3ebd-4139-b752-da1dc4157b77'
 describe('Userchallenge routes', () => {
   beforeAll(async () => {
     await conn.sync({ force: true });
@@ -17,7 +17,7 @@ describe('Userchallenge routes', () => {
       js: 'TEXT',
       grade: 90,
       submitted: true,
-      userId: 1
+      userId: uuid,
     });
     const ucs = await Userchallenge.findAll();
     console.log('Our user challenges', ucs);
