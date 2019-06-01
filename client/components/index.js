@@ -7,3 +7,4 @@ export * from './Login';
 export * from './MeetTheTeam';
 export * from './ChallengesList';
 export * from './Logout';
+export * from './UserPage';

@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 const _Nav = props => {
-  let navLinks = [
+  const navLinks = [
     {
       label: 'About Us',
       to: '/',
