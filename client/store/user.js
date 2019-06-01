@@ -13,16 +13,15 @@ export const user = (state = [], action) => {
   }
 };
 
-export const getUser = aUser => dispatch => {
-  console.log('loggingin store', aUser);
-  return axios.put('/api/users/auth/login', aUser).then(user => dispatch(setUser(user)));
-};
-
 export const getGithubUser = () => dispatch => {
   return axios
     .get('/api/users/auth/login/github_user')
     .then(res => res.data)
     .then(user => dispatch(setUser(user)));
+};
+
+export const getUser = aUser => dispatch => {
+  return axios.put('/api/users/auth/login', aUser).then(() => dispatch(getGithubUser()));
 };
 
 export const logoutUser = () => dispatch => {
