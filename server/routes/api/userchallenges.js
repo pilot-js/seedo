@@ -33,10 +33,10 @@ router.post('/challenge/:challengeId', (req, res, next) => {
     submitted,
   })
     .then(userchall => {
-      fs.mkdir('./server/tmp', { recursive: true }, err=>{
+      fs.mkdir('./server/tmp', { recursive: true }, err => {
         if (err) throw err;
-        console.log('create dir')
-      })
+        console.log('create dir');
+      });
       fs.writeFile('./server/tmp/tmp.html', userchall.html, err => {
         if (err) throw err;
         console.log('The html has been saved!');
