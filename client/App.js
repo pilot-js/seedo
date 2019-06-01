@@ -9,12 +9,14 @@ import {
   MeetTheTeam,
   ChallengesList,
   Login,
+  Logout,
 } from './components';
 import { getGithubUser } from './store';
 
 class App extends Component {
   componentDidMount() {
-    this.props.getGithubUser();
+    this.props.getGithubUser()
+     .then(() => console.log('this is the redux user in APP', this.props.user))
   }
 
   render() {
@@ -26,6 +28,7 @@ class App extends Component {
           <Route exact path="/meetTheTeam" component={MeetTheTeam} />
           <Route exact path="/challengesList" component={ChallengesList} />
           <Route exact path="/login" component={Login} />
+          <Route exact path="/logout" component={Logout} />
           <Route
             exact
             path="/challenges/:id"

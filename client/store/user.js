@@ -24,3 +24,8 @@ export const getGithubUser = () => dispatch => {
     .then(res => res.data)
     .then(user => dispatch(setUser(user)));
 };
+
+export const logoutUser = () => dispatch => {
+  return axios.delete('/api/users/auth/logout')
+    .then(() => dispatch(setUser({})));
+};

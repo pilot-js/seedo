@@ -1,7 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-export const Nav = () => {
+const _Nav = props => {
   const TopNavLinks = [
     {
       label: 'About Us',
@@ -12,16 +13,30 @@ export const Nav = () => {
       to: '/challengesList',
     },
   ];
-  const BottomNavLinks = [
-    {
-      label: 'Meet The Team',
-      to: '/meetTheTeam',
-    },
-    {
-      label: 'Login/SignUp',
-      to: '/login',
-    },
-  ];
+  let BottomNavLinks = [];
+  if (props.user.id) {
+    BottomNavLinks = [
+      {
+        label: 'Meet The Team',
+        to: '/meetTheTeam',
+      },
+      {
+        label: 'Logout',
+        to: '/logout',
+      },
+    ];
+  } else {
+    BottomNavLinks = [
+      {
+        label: 'Meet The Team',
+        to: '/meetTheTeam',
+      },
+      {
+        label: 'Login/SignUp',
+        to: '/login',
+      },
+    ];
+  }
   return (
     <div className="d-flex flex-row">
       <div style={{ flex: 2, textAlign: 'center', alignItems: 'center' }}>image Here</div>
@@ -47,3 +62,11 @@ export const Nav = () => {
     </div>
   );
 };
+
+const mapStateToProps = state => {
+  return {
+    user: state.user,
+  };
+};
+
+export const Nav = connect(mapStateToProps)(_Nav)
