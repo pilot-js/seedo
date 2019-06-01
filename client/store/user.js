@@ -17,4 +17,3 @@ export const getUser = aUser => dispatch => {
   console.log('loggingin store', aUser);
   return axios.put('/api/users/auth/login', aUser).then(user => dispatch(setUser(user)));
 };
-

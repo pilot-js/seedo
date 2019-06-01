@@ -5,19 +5,20 @@ const morgan = require('morgan');
 const session = require('express-session');
 const api = require('./routes/api');
 
-
 try {
   Object.assign(process.env, require('./.env'));
 } catch (error) {
   console.log(error);
 }
 
-app.use(session({
+app.use(
+  session({
     secret: process.env.SESSION,
     name: 'seedoUser',
     resave: false,
     saveUninitialized: false,
-}));
+  }),
+);
 
 app.use(express.json());
 
