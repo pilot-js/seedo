@@ -28,7 +28,6 @@ router.put('/:userchallengeId', (req, res, next) => {
       await createImage(userchall.userId);
       res.sendStatus(200);
       if (isSubmit) {
-        // compare images
         console.log('isSubmit: ', isSubmit);
       }
       res.send(userchall);

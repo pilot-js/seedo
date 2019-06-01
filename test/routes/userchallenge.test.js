@@ -17,6 +17,7 @@ describe('Userchallenge routes', () => {
       js: 'TEXT',
       grade: 90,
       submitted: true,
+      userId: 1
     });
     const ucs = await Userchallenge.findAll();
     console.log('Our user challenges', ucs);
