@@ -19,7 +19,7 @@ class App extends Component {
     this.props
       .getGithubUser()
       .then(() => console.log('this is the redux user in APP', this.props.user))
-      .catch(error => console.log(error))
+      .catch(error => console.log(error));
   }
 
   componentDidUpdate(prevProps) {
