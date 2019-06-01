@@ -5,7 +5,7 @@ module.exports = conn.define('user', {
   id: {
     type: Sequelize.UUID,
     defaultValue: Sequelize.UUIDV4,
-    primaryKey: true
+    primaryKey: true,
   },
   email: {
     type: Sequelize.STRING,

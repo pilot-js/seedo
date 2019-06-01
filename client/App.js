@@ -23,8 +23,7 @@ class App extends Component {
 
   componentDidUpdate(prevProps) {
     if (JSON.stringify(prevProps.user) !== JSON.stringify(this.props.user)) {
-      this.props.getGithubUser()
-        .then(() => console.log('User updated', this.props.user));
+      this.props.getGithubUser().then(() => console.log('User updated', this.props.user));
     }
   }
 

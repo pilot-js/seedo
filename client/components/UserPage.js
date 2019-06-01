@@ -10,7 +10,9 @@ const _UserPage = props => {
   return (
     <div>
       <p> User ID: {user.id}</p>
-      <button type="button" onClick={linkGithub}>Link my github</button>
+      <button type="button" onClick={linkGithub}>
+        Link my github
+      </button>
     </div>
   );
 };
