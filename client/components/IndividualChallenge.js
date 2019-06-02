@@ -16,7 +16,7 @@ const _IndividualChallenge = props => {
   const putValue = isSubmit => {
     const userAnswer = { html, css, js, submitted: true, challengeId: props.id };
     props
-      .putValue(userAnswer, props.id, isSubmit)
+      .putUserchallenge(userAnswer, props.id, isSubmit)
       .then(userchallenge => console.log(userchallenge))
       .catch(ex => console.log(ex));
   };
@@ -70,10 +70,10 @@ const _IndividualChallenge = props => {
             </button>
           </div>
         </div>
-        <button type="button" onClick={() => props.putValue(false)}>
+        <button type="button" onClick={() => putValue(false)}>
           Run
         </button>
-        <button type="button" onClick={() => props.putValue(true)}>
+        <button type="button" onClick={() => putValue(true)}>
           Submit
         </button>
       </div>
@@ -82,7 +82,7 @@ const _IndividualChallenge = props => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  putValue: (userAnswer, userchallengeId, isSubmit) =>
+  putUserchallenge: (userAnswer, userchallengeId, isSubmit) =>
     dispatch(putUserchallenge(userAnswer, userchallengeId, isSubmit)),
 });
 
