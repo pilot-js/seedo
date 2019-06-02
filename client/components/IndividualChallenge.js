@@ -3,7 +3,7 @@ import CodeMirror from 'react-codemirror';
 import { connect } from 'react-redux';
 import { putUserchallenge } from '../store/userchallenge';
 
-const _IndividualChallenge = (props) => {
+const _IndividualChallenge = props => {
   const [html, setHTML] = useState('');
   const [css, setCSS] = useState('');
   const [js, setJS] = useState('');
@@ -13,7 +13,7 @@ const _IndividualChallenge = (props) => {
     console.log({ html, css, js });
   };
 
-  const putValue = (isSubmit) => {
+  const putValue = isSubmit => {
     const userAnswer = { html, css, js, submitted: true, challengeId: props.id };
     props
       .putValue(userAnswer, props.id, isSubmit)
@@ -25,8 +25,8 @@ const _IndividualChallenge = (props) => {
   const options = {
     lineNumbers: true,
     mode: 'javascript',
-  }
-  return(
+  };
+  return (
     <div className="d-flex flex-column align-items-center">
       <h1>{challenge.name}</h1>
       <p>{challenge.description}</p>
@@ -49,14 +49,22 @@ const _IndividualChallenge = (props) => {
           </div>
           <div className="col">
             <h2>CSS Editor</h2>
-            <CodeMirror value={css} onChange={(value, eventData) => setCSS(value)} options={options}/>
+            <CodeMirror
+              value={css}
+              onChange={(value, eventData) => setCSS(value)}
+              options={options}
+            />
             <button name="codeCSS" type="button" onClick={changeValue}>
               save
             </button>
           </div>
           <div className="col">
             <h2>JS Editor</h2>
-            <CodeMirror value={js} onChange={(value, eventData) => setJS(value)} options={options}/>
+            <CodeMirror
+              value={js}
+              onChange={(value, eventData) => setJS(value)}
+              options={options}
+            />
             <button name="codeJS" type="button" onClick={changeValue}>
               save
             </button>
@@ -70,7 +78,7 @@ const _IndividualChallenge = (props) => {
         </button>
       </div>
     </div>
-  )
+  );
 };
 
 const mapDispatchToProps = dispatch => ({
