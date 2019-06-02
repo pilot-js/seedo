@@ -8,7 +8,7 @@ const { createFiles, createImage } = require('../../puppeteer-utils');
 // TODO what happens if there is more than one answer ?
 
 // get user answer for a challenge
-router.get('users/:userId/challenges/:challengeId', (req, res, next) => {
+router.get('/users/:userId/challenges/:challengeId', (req, res, next) => {
   Userchallenge.getActiveAnswer(req.params.userId, req.params.challengeId)
     .then(userchall => res.send(userchall))
     .catch(next);
@@ -20,21 +20,25 @@ router.get('users/:userId/challenges/:challengeId', (req, res, next) => {
 // create answer for a challenge
 router.put('/:userchallengeId', (req, res, next) => {
   const { userchallengeId } = req.params;
-  const { html, css, js, submitted } = req.body.userAnswer;
-  const { isSubmit } = req.body;
-  Userchallenge.findByPk(userchallengeId)
-    .then(userchall => userchall.update(req.body))
-    .then(async userchall => {
-      console.log('userId: ', userchall.get())
-      await createFiles(userchall.html, userchall.css, userchall.userId);
-      await createImage(userchall.userId);
-      if (isSubmit) {
-        // compare images
-        console.log('isSubmit: ', isSubmit)
-      }
-      res.send(userchall);
-    })
-    .catch(next);
+  try {
+    const { html, css, js, submitted } = req.body.userAnswer;
+    const { isSubmit } = req.body;
+    Userchallenge.findByPk(userchallengeId)
+      .then(userchall => userchall.update(req.body))
+      .then(async userchall => {
+        console.log('userId: ', userchall.get());
+        await createFiles(userchall.html, userchall.css, userchall.userId);
+        await createImage(userchall.userId);
+        if (isSubmit) {
+          // compare images
+          console.log('isSubmit: ', isSubmit);
+        }
+        res.send(userchall);
+      })
+      .catch(next);
+  } catch {
+    res.sendStatus(404);
+  }
 });
 
 // delete answer for a challenge
