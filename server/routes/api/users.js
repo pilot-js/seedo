@@ -74,22 +74,26 @@ router.get('/github/callback', (req, res, next) => {
       });
     })
     .then(response => response.data)
-    .then(githubUser => {
-      User.findOne({ where: { githubId: githubUser.id } }).then(user => {
+    .then(async githubUser => {
+      if (req.session.user) {
+        await User.update({ githubId: githubUser.id }, { where: { id: req.session.user.id } });
+        req.session.user.githubId = githubUser.id;
+        res.redirect('/');
+      } else {
+        let user = await User.findOne({ where: { githubId: githubUser.id } });
         if (user !== null) {
           req.session.user = user;
-          res.redirect('/');
+          res.redirect('/userpage');
         } else {
-          User.create({
-            email: `${githubUser.login}@geezemail.com`,
+          user = await User.create({
+            email: githubUser.email,
             password: '1234',
             githubId: githubUser.id,
-          }).then(user => {
-            req.session.user = user;
-            res.redirect('/');
           });
+          req.session.user = user;
+          res.redirect('/');
         }
-      });
+      }
     })
     .catch(next);
 });
@@ -100,6 +104,11 @@ router.get('/auth/login/github_user', (req, res) => {
   } else {
     res.send({});
   }
+});
+
+router.delete('/auth/logout', (req, res) => {
+  req.session.destroy();
+  res.status(204).end();
 });
 
 module.exports = router;
