@@ -21,6 +21,7 @@ router.get('/users/:userId/challenges/:challengeId', (req, res, next) => {
 router.put('/:userchallengeId', (req, res, next) => {
   const { userchallengeId } = req.params;
   try {
+    const { html, css, js, submitted } = req.body.userAnswer;
     const { isSubmit } = req.body;
     Userchallenge.findByPk(userchallengeId)
       .then(userchall => userchall.update(req.body.userAnswer))
