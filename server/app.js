@@ -4,6 +4,7 @@ const path = require('path');
 const morgan = require('morgan');
 const session = require('express-session');
 const api = require('./routes/api');
+const auth = require('./routes/auth');
 
 try {
   Object.assign(process.env, require('./.env'));
@@ -27,6 +28,7 @@ app.use(express.static(path.join(__dirname, '../dist')));
 app.use(morgan('dev'));
 
 app.use('/api', api);
+app.use('/auth', auth);
 
 app.get('/github/login', (req, res, next) => {
   const URL = `https://github.com/login/oauth/authorize?client_id=${process.env.CLIENT_ID}`;
