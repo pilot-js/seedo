@@ -3,7 +3,7 @@ const puppeteer = require('puppeteer');
 const path = require('path');
 
 const parseHTML = (html, userId) => {
-  return  (`<html lang="en">
+  return `<html lang="en">
   <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,8 +14,8 @@ const parseHTML = (html, userId) => {
   <body>
       ${html}
   </body>
-  </html>`);
-}
+  </html>`;
+};
 
 const createFiles = async (html, css, userId) => {
   await fs.mkdir('./server/tmp', { recursive: true }, err => {
