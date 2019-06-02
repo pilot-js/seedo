@@ -70,7 +70,7 @@ const _IndividualChallenge = props => {
             </button>
           </div>
         </div>
-        <button type="button" onClick={() => putValue(false)}>
+        <button type="button" onClick={() => props.putValue(false)}>
           Run
         </button>
         <button type="button" onClick={() => props.putValue(true)}>
