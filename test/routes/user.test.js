@@ -40,14 +40,15 @@ describe('User routes', () => {
           .expect(204);
       })
   });
-  it('can get a users submissions', () => {
+  it('can get a users submissions and related challenges', () => {
     return User.findOne({ where: { email: 'email@email.com' } })
       .then(user => {
         return client.get(`/api/users/${user.id}/userchallenges`)
           .expect(200);
       })
       .then(res => {
-        expect(res.body.userchallenges.length).toBe(1);
+        expect(res.body.length).toBe(1);
+        expect(res.body[0].userchallenges).toBeTruthy();
       })
   })
 });

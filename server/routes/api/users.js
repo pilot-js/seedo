@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const qs = require('querystring');
 const axios = require('axios');
-const { User, Userchallenge } = require('../../db');
+const { User, Userchallenge, Challenge } = require('../../db');
 
 /**     /api/users     **/
 
@@ -20,11 +20,15 @@ router.get('/:id', (req, res, next) => {
 });
 
 // get a users userchallenges
-
 router.get('/:id/userchallenges/', (req, res, next) => {
-  User.findByPk(req.params.id, { include: [Userchallenge] })
-    .then(user => {
-      res.send(user)
+  Challenge.findAll({
+    include: [{
+      model: Userchallenge,
+      where: { userId: req.params.id },
+    }]
+  })
+    .then(userChallenges => {
+      res.send(userChallenges)
     })
     .catch(next)
 });
