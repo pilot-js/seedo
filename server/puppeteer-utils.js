@@ -2,12 +2,27 @@ const fs = require('fs');
 const puppeteer = require('puppeteer');
 const path = require('path');
 
+const parseHTML = (html, userId) => {
+  return `<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <title>Document</title>
+      <link rel="stylesheet" href="${userId}.css">
+  </head>
+  <body>
+      ${html}
+  </body>
+  </html>`;
+};
+
 const createFiles = async (html, css, userId) => {
   await fs.mkdir('./server/tmp', { recursive: true }, err => {
     if (err) throw err;
     console.log('create dir');
   });
-  await fs.writeFile(`./server/tmp/${userId}.html`, html, err => {
+  await fs.writeFile(`./server/tmp/${userId}.html`, parseHTML(html, userId), err => {
     if (err) throw err;
     console.log('The html has been saved!');
   });
