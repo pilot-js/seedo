@@ -41,9 +41,7 @@ const _IndividualChallenge = props => {
       <p>{challenge.description}</p>
       <div>
         <div className="row">
-          <div className="col">
-            users page goes here:
-          </div>
+          <div className="col">users page goes here:</div>
           <div className="col">
             our image goes here:
             <img src={`data:image/png;base64,${base64String}`} alt="" className="card-image-top" />
