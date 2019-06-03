@@ -39,11 +39,15 @@ describe('Userchallenge routes', () => {
       User.findOne({ where: { email: 'email@email.com' } }),
       Challenge.findOne({ where: { difficulty: 3 } }),
     ]).then(([user, challenge]) => {
-      console.log(user.id, challenge.id);
-      return client.get(`${url}users/${user.id}/challenges/1`).expect(200);
+      return client.get(`${url}users/${user.id}/challenges/${challenge.id}`).expect(200);
     });
   });
   it('fails to put without a body', () => {
     return client.put(`${url}1`).expect(404);
+  });
+  it('can delete a userchallenge', () => {
+    Challenge.findOne({ where: { name: 'Basic html page' } }).then(challenge => {
+      return client.delete(`${url}challenge/${challenge.id}`).expect(204);
+    });
   });
 });
