@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import CodeMirror from 'react-codemirror';
 import { connect } from 'react-redux';
-import { putUserchallenge } from '../store/userchallenge';
+import { putUserchallenge, fetchChallenges } from '../store';
 
 const _IndividualChallenge = props => {
+  useEffect(() => {
+    props.fetchChallenges();
+  }, []);
+
   const [html, setHTML] = useState('');
   const [css, setCSS] = useState('');
   const [js, setJS] = useState('');
@@ -21,11 +25,16 @@ const _IndividualChallenge = props => {
       .catch(ex => console.log(ex));
   };
 
-  const challenge = { name: 'challenge1', description: 'draw a circle', difficulty: 1 };
+  const challenge = props.challenges.find(challenge => challenge.id === Number(props.id));
+
   const options = {
     lineNumbers: true,
     mode: 'javascript',
   };
+  if (!challenge) {
+    return null;
+  }
+  const base64String = btoa(String.fromCharCode(...new Uint8Array(challenge.images[0].data.data)));
   return (
     <div className="d-flex flex-column align-items-center">
       <h1>{challenge.name}</h1>
@@ -33,7 +42,10 @@ const _IndividualChallenge = props => {
       <div>
         <div className="row">
           <div className="col">users page goes here</div>
-          <div className="col">our image goes here</div>
+          <div className="col">
+            our image goes here:
+            <img src={`data:image/png;base64,${base64String}`} alt="" className="card-image-top" />
+          </div>
         </div>
         <div className="row">
           <div className="col">
@@ -84,9 +96,12 @@ const _IndividualChallenge = props => {
 const mapDispatchToProps = dispatch => ({
   putUserchallenge: (userAnswer, userchallengeId, isSubmit) =>
     dispatch(putUserchallenge(userAnswer, userchallengeId, isSubmit)),
+  fetchChallenges: () => dispatch(fetchChallenges()),
 });
 
+const mapStateToProps = ({ challenges }) => ({ challenges });
+
 export const IndividualChallenge = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps,
 )(_IndividualChallenge);
