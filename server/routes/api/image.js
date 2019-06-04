@@ -5,6 +5,4 @@ const { Userchallenge } = require('../../db');
 
 // update image for a given userchallengeId
 // api/images
-router.put('/:userchallengeId', (req, res, next)=>{
-    
-})
+router.put('/:userchallengeId', (req, res, next) => {});

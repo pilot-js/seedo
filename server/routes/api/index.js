@@ -9,6 +9,6 @@ router.use('/challenges', challenges);
 router.use('/solutions', solutions);
 router.use('/users', users);
 router.use('/userchallenges', userchallenges);
-router.use('/images', images)
+router.use('/images', images);
 
 module.exports = router;
