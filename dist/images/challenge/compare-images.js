@@ -7,9 +7,12 @@ const img1 = fs.createReadStream('challenge-1-red-circle.png')
   .on('parsed', doneReading);
 const img2 = fs.createReadStream('challenge-1-red-circle2.png').pipe(new PNG()).on('parsed', doneReading);
 let filesRead = 0;
+console.log('img1: ', img1.data)
+// console.log('img2: ', img2.height)
 
 function doneReading() {
   if (++filesRead < 2) return;
+  console.log('img1.data: ', img1.data)
   console.log('img1:', img1.width, img1.height)
   var diff = new PNG({ width: img1.width, height: img1.height });
 
