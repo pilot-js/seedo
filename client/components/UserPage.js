@@ -4,7 +4,13 @@ import { fetchUserChallenges } from '../store';
 
 const _UserPage = ({ user, userChallenges, fetchUserChallenges }) => {
   useEffect(() => {
-    fetchUserChallenges(user.id);
+    if (user.id) {
+      fetchUserChallenges(user.id)
+        .then(() => {
+          console.log('Got userChallenges!');
+        })
+        .catch(e => console.error(`Failed to get userChallenges. Here's why:\n${e}`));
+    }
   }, []);
 
   const linkGithub = () => {
@@ -17,6 +23,11 @@ const _UserPage = ({ user, userChallenges, fetchUserChallenges }) => {
       <button type="button" onClick={linkGithub}>
         Link my github
       </button>
+      <ul>
+        {userChallenges.map(uc => (
+          <li>{uc.name}</li>
+        ))}
+      </ul>
     </div>
   );
 };

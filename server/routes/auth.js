@@ -44,7 +44,7 @@ router.get('/github/callback', (req, res, next) => {
         let user = await User.findOne({ where: { githubId: githubUser.id } });
         if (user !== null) {
           req.session.user = user;
-          res.redirect('/userpage');
+          res.redirect('/#/userpage');
         } else {
           user = await User.create({
             email: githubUser.email,

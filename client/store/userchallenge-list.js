@@ -10,12 +10,13 @@ export const setUserChallenges = userChallenges => ({
 export const userChallenges = (state = [], action) => {
   switch (action.type) {
     case SET_USER_CHALLENGES:
-      return action.usechallenges;
+      return action.userChallenges;
     default:
       return state;
   }
 };
 
+// Returns all challenges with user submitted solutions
 export const fetchUserChallenges = userId => dispatch => {
   return axios
     .get(`api/users/${userId}/userchallenges`)
