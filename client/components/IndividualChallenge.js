@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import CodeMirror from 'react-codemirror';
 import { connect } from 'react-redux';
-import { putUserchallenge, fetchChallenges } from '../store';
+import { updateUserchallenge, fetchChallenges } from '../store';
 
 const _IndividualChallenge = props => {
   useEffect(() => {
@@ -20,7 +20,7 @@ const _IndividualChallenge = props => {
   const putValue = isSubmit => {
     const userAnswer = { html, css, js, submitted: true, challengeId: props.id };
     props
-      .putUserchallenge(userAnswer, props.id, isSubmit)
+      .updateUserchallenge(userAnswer, props.id, isSubmit)
       .then(userchallenge => console.log(userchallenge))
       .catch(ex => console.log(ex));
   };
@@ -94,8 +94,8 @@ const _IndividualChallenge = props => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  putUserchallenge: (userAnswer, userchallengeId, isSubmit) =>
-    dispatch(putUserchallenge(userAnswer, userchallengeId, isSubmit)),
+  updateUserchallenge: (userAnswer, userchallengeId, isSubmit) =>
+    dispatch(updateUserchallenge(userAnswer, userchallengeId, isSubmit)),
   fetchChallenges: () => dispatch(fetchChallenges()),
 });
 
