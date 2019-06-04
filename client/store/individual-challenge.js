@@ -13,14 +13,17 @@ export const individualChallenge = (state = {}, action) => {
   }
 };
 
-export const fetchOneChallenge = (challengeId) => {
+export const fetchOneChallenge = challengeId => {
   return dispatch => {
     return axios
       .get(`api/challenges/${challengeId}`)
       .then(res => {
-        console.log('res.data: ', res.data)
-        return res.data
+        console.log('res.data: ', res.data);
+        return res.data;
       })
-      .then(challenge => dispatch(getChallenge(challenge)))
-  }
-}
+      .then(challenge => {
+        console.log('challenge in store: ', challenge)
+        return dispatch(getChallenge(challenge))
+      });
+  };
+};

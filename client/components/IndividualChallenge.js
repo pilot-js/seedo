@@ -26,8 +26,8 @@ const _IndividualChallenge = props => {
   };
 
   // const challenge = props.challenges.find(challenge => challenge.id === Number(props.id));
-  const challenge = props.challenge
-  console.log('challenge from props is: ', challenge)
+  const challenge = props.challenge;
+  // console.log('challenge from props is: ', challenge);
 
   const options = {
     lineNumbers: true,
@@ -35,6 +35,8 @@ const _IndividualChallenge = props => {
   };
   if (!challenge) {
     return null;
+  }else{
+    
   }
   const base64String = btoa(String.fromCharCode(...new Uint8Array(challenge.images[0].data.data)));
   return (
@@ -98,14 +100,16 @@ const _IndividualChallenge = props => {
 const mapDispatchToProps = dispatch => ({
   updateUserchallenge: (userAnswer, userchallengeId, isSubmit) =>
     dispatch(updateUserchallenge(userAnswer, userchallengeId, isSubmit)),
-  fetchOneChallenge: (challengeId) => dispatch(fetchOneChallenge(challengeId)),
+  fetchOneChallenge: challengeId => dispatch(fetchOneChallenge(challengeId)),
 });
 
 // const mapStateToProps = ({ challenges }) => ({ challenges });
 
-const mapStateToProps = state => ({
-  challenge: state.challenge
-})
+const mapStateToProps = state => {
+  console.log('state: ', state)
+  console.log('individualChallenge: ', state.individualChallenge)
+  // return {challenge: state.individualChallenge}
+};
 
 export const IndividualChallenge = connect(
   mapStateToProps,
