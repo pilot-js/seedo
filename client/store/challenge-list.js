@@ -2,7 +2,9 @@ import axios from 'axios';
 
 export const GET_CHALLENGES = Symbol('get challenges');
 
+
 export const getChallenges = challenges => ({ type: GET_CHALLENGES, challenges });
+
 
 export const challenges = (state = [], action) => {
   switch (action.type) {
@@ -21,3 +23,4 @@ export const fetchChallenges = () => {
       .then(challenges => dispatch(getChallenges(challenges)));
   };
 };
+
