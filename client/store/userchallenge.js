@@ -4,7 +4,7 @@ export const SET_USER_CHALLENGE = Symbol('set user challenge');
 
 export const setUserchallenge = userchallenge => ({ type: SET_USER_CHALLENGE, userchallenge });
 
-export const userchallenge = (state = [], action) => {
+export const userchallenge = (state = {}, action) => {
   switch (action.type) {
     case SET_USER_CHALLENGE:
       return action.userchallenge;

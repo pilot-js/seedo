@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import { fetchUserChallenges } from '../store';
 
-const _UserPage = props => {
-  const { user } = props;
+const _UserPage = ({ user, userChallenges, fetchUserChallenges }) => {
+  useEffect(() => {
+    fetchUserChallenges(user.id)
+  },[])
+
   const linkGithub = () => {
     window.location.href = 'http://localhost:3000/github/login';
   };
@@ -17,8 +21,13 @@ const _UserPage = props => {
   );
 };
 
-const mapStateToProps = state => ({
-  user: state.user,
+const mapStateToProps = ({ user, userChallenges }) => ({
+  user, 
+  userChallenges
 });
 
-export const UserPage = connect(mapStateToProps)(_UserPage);
+const mapDispatchToProps = dispatch => ({
+  fetchUserChallenges: (userId) => dispatch(fetchUserChallenges(userId))
+});
+
+export const UserPage = connect(mapStateToProps, mapDispatchToProps)(_UserPage);

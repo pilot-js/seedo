@@ -28,7 +28,11 @@ router.get('/:id/userchallenges/', (req, res, next) => {
     }]
   })
     .then(userChallenges => {
-      res.send(userChallenges)
+      if (userchallenges) {
+        res.send(userChallenges)
+      } else {
+        res.send([])
+      }
     })
     .catch(next)
 });
