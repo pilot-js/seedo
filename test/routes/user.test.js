@@ -36,7 +36,7 @@ describe('User routes', () => {
   });
   it('can delete a user by id', () => {
     return User.findOne({ where: { email: 'email2@email.com' } }).then(user => {
-      client.delete(`/api/users/${user.id}`).expect(204);
+      return client.delete(`/api/users/${user.id}`).expect(204);
     });
   });
   it('can get a users submissions and related challenges', () => {
