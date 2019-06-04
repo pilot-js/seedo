@@ -22,19 +22,21 @@ router.get('/:id', (req, res, next) => {
 // get a users userchallenges
 router.get('/:id/userchallenges/', (req, res, next) => {
   Challenge.findAll({
-    include: [{
-      model: Userchallenge,
-      where: { userId: req.params.id },
-    }]
+    include: [
+      {
+        model: Userchallenge,
+        where: { userId: req.params.id },
+      },
+    ],
   })
     .then(userChallenges => {
-      if (userchallenges) {
-        res.send(userChallenges)
+      if (userChallenges) {
+        res.send(userChallenges);
       } else {
-        res.send([])
+        res.send([]);
       }
     })
-    .catch(next)
+    .catch(next);
 });
 
 // update user

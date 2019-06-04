@@ -4,7 +4,7 @@ export const SET_USER_CHALLENGES = Symbol('set user challenges');
 
 export const setUserChallenges = userChallenges => ({
   type: SET_USER_CHALLENGES,
-  userChallenges
+  userChallenges,
 });
 
 export const userChallenges = (state = [], action) => {
@@ -16,9 +16,9 @@ export const userChallenges = (state = [], action) => {
   }
 };
 
-export const fetchUserChallenges = (userId) => dispatch => {
-  return axios.get(`api/users/${userId}/userchallenges`)
+export const fetchUserChallenges = userId => dispatch => {
+  return axios
+    .get(`api/users/${userId}/userchallenges`)
     .then(res => res.data)
     .then(challenges => dispatch(setUserChallenges(challenges)));
-}
-
+};

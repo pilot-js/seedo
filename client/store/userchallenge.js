@@ -14,7 +14,6 @@ export const userchallenge = (state = {}, action) => {
 };
 
 export const putUserchallenge = (userAnswer, userchallengeId, isSubmit) => dispatch => {
-  console.log('userAnswer in store', userAnswer);
   return axios
     .put(`/api/userchallenges/${userchallengeId}`, { userAnswer, isSubmit })
     .then(res => res.data)

@@ -1,110 +1,88 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import CodeMirror from 'react-codemirror';
 import { connect } from 'react-redux';
 import { putUserchallenge } from '../store/userchallenge';
 
-class _IndividualChallenge extends Component {
-  constructor() {
-    super();
-    this.state = {
-      html: '',
-      css: '',
-      js: '',
-    };
-    this.updateCodeHTML = this.updateCodeHTML.bind(this);
-    this.updateCodeCSS = this.updateCodeCSS.bind(this);
-    this.updateCodeJS = this.updateCodeJS.bind(this);
-    this.changeValue = this.changeValue.bind(this);
-    this.putValue = this.putValue.bind(this);
-  }
+const _IndividualChallenge = props => {
+  const [html, setHTML] = useState('');
+  const [css, setCSS] = useState('');
+  const [js, setJS] = useState('');
 
-  updateCodeHTML(newCode) {
-    this.setState({
-      html: newCode,
-    });
-  }
-
-  updateCodeCSS(newCode) {
-    this.setState({
-      css: newCode,
-    });
-  }
-
-  updateCodeJS(newCode) {
-    this.setState({
-      js: newCode,
-    });
-  }
-
-  changeValue() {
+  const changeValue = () => {
     // TODO: axios post call to the backend
-    console.log(this.state);
-  }
+    console.log({ html, css, js });
+  };
 
-  putValue(isSubmit) {
-    const userAnswer = { ...this.state, submitted: true, challengeId: this.props.id };
-    this.props
-      .putValue(userAnswer, this.props.id, isSubmit)
+  const putValue = isSubmit => {
+    const userAnswer = { html, css, js, submitted: true, challengeId: props.id };
+    props
+      .putUserchallenge(userAnswer, props.id, isSubmit)
       .then(userchallenge => console.log(userchallenge))
       .catch(ex => console.log(ex));
-  }
+  };
 
-  render() {
-    const challenge = { name: 'challenge1', description: 'draw a circle', difficulty: 1 };
-    const options = {
-      lineNumbers: true,
-      mode: 'javascript',
-    };
-    return (
-      <div className="d-flex flex-column align-items-center">
-        <h1>{challenge.name}</h1>
-        <p>{challenge.description}</p>
-        <div>
-          <div className="row">
-            <div className="col">users page goes here</div>
-            <div className="col">our image goes here</div>
-          </div>
-          <div className="row">
-            <div className="col">
-              <h2>HTML Editor</h2>
-              <CodeMirror
-                value={this.state.code}
-                onChange={this.updateCodeHTML}
-                options={options}
-              />
-              <button name="codeHTML" type="button" onClick={this.changeValue}>
-                save
-              </button>
-            </div>
-            <div className="col">
-              <h2>CSS Editor</h2>
-              <CodeMirror value={this.state.code} onChange={this.updateCodeCSS} options={options} />
-              <button name="codeCSS" type="button" onClick={this.changeValue}>
-                save
-              </button>
-            </div>
-            <div className="col">
-              <h2>JS Editor</h2>
-              <CodeMirror value={this.state.code} onChange={this.updateCodeJS} options={options} />
-              <button name="codeJS" type="button" onClick={this.changeValue}>
-                save
-              </button>
-            </div>
-          </div>
-          <button type="button" onClick={() => this.putValue(false)}>
-            Run
-          </button>
-          <button type="button" onClick={() => this.putValue(true)}>
-            Submit
-          </button>
+  const challenge = { name: 'challenge1', description: 'draw a circle', difficulty: 1 };
+  const options = {
+    lineNumbers: true,
+    mode: 'javascript',
+  };
+  return (
+    <div className="d-flex flex-column align-items-center">
+      <h1>{challenge.name}</h1>
+      <p>{challenge.description}</p>
+      <div>
+        <div className="row">
+          <div className="col">users page goes here</div>
+          <div className="col">our image goes here</div>
         </div>
+        <div className="row">
+          <div className="col">
+            <h2>HTML Editor</h2>
+            <CodeMirror
+              value={html}
+              onChange={(value, eventData) => setHTML(value)}
+              options={options}
+            />
+            <button name="codeHTML" type="button" onClick={changeValue}>
+              save
+            </button>
+          </div>
+          <div className="col">
+            <h2>CSS Editor</h2>
+            <CodeMirror
+              value={css}
+              onChange={(value, eventData) => setCSS(value)}
+              options={options}
+            />
+            <button name="codeCSS" type="button" onClick={changeValue}>
+              save
+            </button>
+          </div>
+          <div className="col">
+            <h2>JS Editor</h2>
+            <CodeMirror
+              value={js}
+              onChange={(value, eventData) => setJS(value)}
+              options={options}
+            />
+            <button name="codeJS" type="button" onClick={changeValue}>
+              save
+            </button>
+          </div>
+        </div>
+        <button type="button" onClick={() => putValue(false)}>
+          Run
+        </button>
+        <button type="button" onClick={() => putValue(true)}>
+          Submit
+        </button>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 const mapDispatchToProps = dispatch => ({
-  putValue: (userAnswer, userchallengeId, isSubmit) =>
+  putUserchallenge: (userAnswer, userchallengeId, isSubmit) =>
     dispatch(putUserchallenge(userAnswer, userchallengeId, isSubmit)),
 });
 
