@@ -197,6 +197,8 @@ const images = [
   { type: 'challenge', url: 'challenge-4-orange-rectangle.png', connector: 'challenge-4' },
   { type: 'userchallenge', url: 'userchallenge-1.png', connector: 'userchallenge-1' },
   { type: 'userchallenge', url: 'userchallenge-2.png', connector: 'userchallenge-2' },
+  { type: 'userchallenge', url: 'userchallenge-3.png', connector: 'userchallenge-3' },
+  { type: 'userchallenge', url: 'userchallenge-4.png', connector: 'userchallenge-4' },
 ];
 
 const currDir = process.cwd();
@@ -233,6 +235,12 @@ const syncAndSeed = () => {
           userchallenges
             .find(chal => chal.css.includes('square'))
             .update({ userId: getRandom(users, 3), challengeId: 2 }),
+          userchallenges
+            .find(chal => chal.css.includes('yellow'))
+            .update({ userId: getRandom(users, 3), challengeId: 3 }),
+          userchallenges
+            .find(chal => chal.css.includes('orange'))
+            .update({ userId: getRandom(users, 3), challengeId: 4 }),
           solutions.find(sol => sol.css.includes('circle')).update({ challengeId: 1 }),
           solutions.find(sol => sol.css.includes('square')).update({ challengeId: 2 }),
           solutions.find(sol => sol.css.includes('yellow')).update({ challengeId: 3 }),
@@ -243,7 +251,9 @@ const syncAndSeed = () => {
           images.find(img => img.connector === 'challenge-2').update({ challengeId: 2 }),
           images.find(img => img.connector === 'userchallenge-2').update({ userchallengeId: 2 }),
           images.find(img => img.connector === 'challenge-3').update({ challengeId: 3 }),
+          images.find(img => img.connector === 'userchallenge-3').update({ userchallengeId: 3 }),
           images.find(img => img.connector === 'challenge-4').update({ challengeId: 4 }),
+          images.find(img => img.connector === 'userchallenge-4').update({ userchallengeId: 4 }),
         ]);
       })
       // eslint-disable-next-line no-console
