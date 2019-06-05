@@ -30,8 +30,8 @@ router.put('/:userchallengeId', (req, res, next) => {
         console.log(retPathToUserImage);
         const pathToImage = retPathToUserImage.replace('file://', '').replace('.html', '.png');
         // const retImage = await Image.saveImage(pathToImage, userchallengeId);
-        await Image.saveImage(pathToImage, userchallengeId)
-        const userChallenge = await Userchallenge.findByPk(userchallengeId, {include: [Image]})
+        await Image.saveImage(pathToImage, userchallengeId);
+        const userChallenge = await Userchallenge.findByPk(userchallengeId, { include: [Image] });
         res.send(userChallenge);
         /*
           retPathToUserImage = await createImage(userchall.userId);

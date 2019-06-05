@@ -25,7 +25,7 @@ const _IndividualChallenge = props => {
         // console.log(image.userchallenge.data.data)
         // const base64String2 = btoa(String.fromCharCode(...new Uint8Array(image.userchallenge.data.data)))
         // console.log(base64String2)
-        console.log(userChallenge)
+        console.log(userChallenge);
       })
       .catch(ex => console.log(ex));
   };
