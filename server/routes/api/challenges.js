@@ -29,8 +29,8 @@ router.get('/:id', (req, res, next) => {
   //   const err = new Error('Not a number.  Challenge Id must be a number.');
   //   next(err);
   // }
-  Challenge.findByPk(Number(req.params.id))
-    .then(challenge => res.send(challenge))
+  Challenge.findAll({ where: { id: Number(req.params.id) }, include: [Image] })
+    .then(challenge => res.send(challenge[0]))
     .catch(next);
 });
 

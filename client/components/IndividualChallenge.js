@@ -25,19 +25,16 @@ const _IndividualChallenge = props => {
       .catch(ex => console.log(ex));
   };
 
-  // const challenge = props.challenges.find(challenge => challenge.id === Number(props.id));
-  const challenge = props.challenge;
-  // console.log('challenge from props is: ', challenge);
-
   const options = {
     lineNumbers: true,
     mode: 'javascript',
   };
-  if (!challenge) {
+
+  if (!Object.keys(props.challenge).length) {
     return null;
-  }else{
-    
   }
+  const challenge = props.challenge;
+
   const base64String = btoa(String.fromCharCode(...new Uint8Array(challenge.images[0].data.data)));
   return (
     <div className="d-flex flex-column align-items-center">
@@ -103,12 +100,8 @@ const mapDispatchToProps = dispatch => ({
   fetchOneChallenge: challengeId => dispatch(fetchOneChallenge(challengeId)),
 });
 
-// const mapStateToProps = ({ challenges }) => ({ challenges });
-
 const mapStateToProps = state => {
-  console.log('state: ', state)
-  console.log('individualChallenge: ', state.individualChallenge)
-  // return {challenge: state.individualChallenge}
+  return { challenge: state.individualChallenge };
 };
 
 export const IndividualChallenge = connect(
