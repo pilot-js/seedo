@@ -2,12 +2,18 @@ import React, { useState, useEffect } from 'react';
 import CodeMirror from 'react-codemirror';
 import { connect } from 'react-redux';
 import { updateUserchallenge, fetchOneChallenge } from '../store';
+import { convertBufferToImgSrc } from '../utils';
 
 const _IndividualChallenge = props => {
   useEffect(() => {
-    props.fetchOneChallenge(Number(props.id));
+    // TODO: pull active userchallenge if no id specified
+    // if (props.userchallengeId) {
+    //   fetchUserchallenge(props.userchallenge.Id);
+    // } else {
+    //   fetchActiveUserchallenge(props.challengeId, props.userId);
+    // };
+    props.fetchOneChallenge(Number(props.challengeId));
   }, []);
-
   const [html, setHTML] = useState('');
   const [css, setCSS] = useState('');
   const [js, setJS] = useState('');
@@ -18,9 +24,9 @@ const _IndividualChallenge = props => {
   };
 
   const updateValue = isSubmit => {
-    const userAnswer = { html, css, js, submitted: true, challengeId: props.id };
+    const userAnswer = { html, css, js, submitted: true, challengeId: props.challengeId };
     props
-      .updateUserchallenge(userAnswer, props.id, isSubmit)
+      .updateUserchallenge(userAnswer, props.challengeId, isSubmit)
       .then(userchallenge => console.log(userchallenge))
       .catch(ex => console.log(ex));
   };
@@ -30,22 +36,22 @@ const _IndividualChallenge = props => {
     mode: 'javascript',
   };
 
-  if (Object.keys(props.challenge).length === 0) {
+  if (Object.keys(props.individualChallenge).length === 0) {
     return null;
   }
-  const challenge = props.challenge;
+  const { name, description, images } = props.individualChallenge;
 
-  const base64String = btoa(String.fromCharCode(...new Uint8Array(challenge.images[0].data.data)));
+  const imgSrc = convertBufferToImgSrc(images[0].data);
   return (
     <div className="d-flex flex-column align-items-center">
-      <h1>{challenge.name}</h1>
-      <p>{challenge.description}</p>
+      <h1>{name}</h1>
+      <p>{description}</p>
       <div>
         <div className="row">
           <div className="col">users page goes here</div>
           <div className="col">
             our image goes here:
-            <img src={`data:image/png;base64,${base64String}`} alt="" className="card-image-top" />
+            <img src={imgSrc} alt="" className="card-image-top" />
           </div>
         </div>
         <div className="row">
@@ -94,15 +100,13 @@ const _IndividualChallenge = props => {
   );
 };
 
+const mapStateToProps = ({ user, individualChallenge }) => ({ user, individualChallenge });
+
 const mapDispatchToProps = dispatch => ({
   updateUserchallenge: (userAnswer, userchallengeId, isSubmit) =>
     dispatch(updateUserchallenge(userAnswer, userchallengeId, isSubmit)),
   fetchOneChallenge: challengeId => dispatch(fetchOneChallenge(challengeId)),
 });
-
-const mapStateToProps = state => {
-  return { challenge: state.individualChallenge };
-};
 
 export const IndividualChallenge = connect(
   mapStateToProps,
