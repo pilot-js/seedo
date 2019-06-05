@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 export const GET_CHALLENGE = Symbol('get challenge');
 
 export const getChallenge = challenge => ({ type: GET_CHALLENGE, challenge });
@@ -9,4 +11,13 @@ export const individualChallenge = (state = {}, action) => {
     default:
       return state;
   }
+};
+
+export const fetchOneChallenge = challengeId => {
+  return dispatch => {
+    return axios
+      .get(`api/challenges/${challengeId}`)
+      .then(res => res.data)
+      .then(challenge => dispatch(getChallenge(challenge)));
+  };
 };

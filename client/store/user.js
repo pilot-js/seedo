@@ -15,15 +15,15 @@ export const user = (state = [], action) => {
 
 export const getGithubUser = () => dispatch => {
   return axios
-    .get('/api/users/auth/login/github_user')
+    .get('/auth/login/github_user')
     .then(res => res.data)
     .then(user => dispatch(setUser(user)));
 };
 
 export const getUser = aUser => dispatch => {
-  return axios.put('/api/users/auth/login', aUser).then(() => dispatch(getGithubUser()));
+  return axios.put('/auth/login', aUser).then(() => dispatch(getGithubUser()));
 };
 
 export const logoutUser = () => dispatch => {
-  return axios.delete('/api/users/auth/logout').then(() => dispatch(setUser({})));
+  return axios.delete('/auth/logout').then(() => dispatch(setUser({})));
 };

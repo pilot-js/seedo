@@ -58,7 +58,7 @@ describe('Userchallenge routes', () => {
   //   return client.put(`${url}1`).expect(200);
   // });
   it('can delete a userchallenge', () => {
-    Challenge.findOne({ where: { name: 'Basic html page' } }).then(challenge => {
+    return Challenge.findOne({ where: { name: 'Basic html page' } }).then(challenge => {
       return client.delete(`${url}challenge/${challenge.id}`).expect(204);
     });
   });

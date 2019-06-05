@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import CodeMirror from 'react-codemirror';
 import { connect } from 'react-redux';
-import { updateUserchallenge, fetchChallenges } from '../store';
+import { updateUserchallenge, fetchOneChallenge } from '../store';
 
 const _IndividualChallenge = props => {
   useEffect(() => {
-    props.fetchChallenges();
+    props.fetchOneChallenge(Number(props.id));
   }, []);
 
   const [html, setHTML] = useState('');
@@ -17,7 +17,7 @@ const _IndividualChallenge = props => {
     console.log({ html, css, js });
   };
 
-  const putValue = isSubmit => {
+  const updateValue = isSubmit => {
     const userAnswer = { html, css, js, submitted: true, challengeId: props.id };
     props
       .updateUserchallenge(userAnswer, props.id, isSubmit)
@@ -25,15 +25,16 @@ const _IndividualChallenge = props => {
       .catch(ex => console.log(ex));
   };
 
-  const challenge = props.challenges.find(challenge => challenge.id === Number(props.id));
-
   const options = {
     lineNumbers: true,
     mode: 'javascript',
   };
-  if (!challenge) {
+
+  if (Object.keys(props.challenge).length === 0) {
     return null;
   }
+  const challenge = props.challenge;
+
   const base64String = btoa(String.fromCharCode(...new Uint8Array(challenge.images[0].data.data)));
   return (
     <div className="d-flex flex-column align-items-center">
@@ -82,10 +83,10 @@ const _IndividualChallenge = props => {
             </button>
           </div>
         </div>
-        <button type="button" onClick={() => putValue(false)}>
+        <button type="button" onClick={() => updateValue(false)}>
           Run
         </button>
-        <button type="button" onClick={() => putValue(true)}>
+        <button type="button" onClick={() => updateValue(true)}>
           Submit
         </button>
       </div>
@@ -96,10 +97,12 @@ const _IndividualChallenge = props => {
 const mapDispatchToProps = dispatch => ({
   updateUserchallenge: (userAnswer, userchallengeId, isSubmit) =>
     dispatch(updateUserchallenge(userAnswer, userchallengeId, isSubmit)),
-  fetchChallenges: () => dispatch(fetchChallenges()),
+  fetchOneChallenge: challengeId => dispatch(fetchOneChallenge(challengeId)),
 });
 
-const mapStateToProps = ({ challenges }) => ({ challenges });
+const mapStateToProps = state => {
+  return { challenge: state.individualChallenge };
+};
 
 export const IndividualChallenge = connect(
   mapStateToProps,
