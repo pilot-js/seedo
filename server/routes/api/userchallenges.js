@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-const { Userchallenge } = require('../../db');
+const { Userchallenge, Image } = require('../../db');
 const { createFiles, createImage } = require('../../puppeteer-utils');
 
 /**     /api/userchallenges     **/
@@ -27,7 +27,12 @@ router.put('/:userchallengeId', (req, res, next) => {
       .then(userchall => userchall.update(req.body.userAnswer))
       .then(async userchall => {
         await createFiles(userchall.html, userchall.css, userchall.userId);
-        await createImage(userchall.userId);
+        const retPathToUserImage = await createImage(userchall.userId);
+        console.log(retPathToUserImage)
+        let pathToImage = retPathToUserImage.replace("file://", "").replace(".html",".png")
+        const retImage = await Image.saveImage(pathToImage, userchallengeId)
+        console.log(retImage)
+        return send(retImage)
         /*
           retPathToUserImage = await createImage(userchall.userId);
           Image.saveImage(retPathToUserImage, userchallengeId)-> {
@@ -37,13 +42,11 @@ router.put('/:userchallengeId', (req, res, next) => {
             2. return image
           }
           res.send(image)
-          
         */
         if (isSubmit) {
           // compare images
           console.log('isSubmit: ', isSubmit);
         }
-        res.send(userchall);
       })
       .catch(next);
   } catch {
