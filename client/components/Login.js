@@ -15,6 +15,8 @@ const LoginClass = props => {
   };
 
   const githubOauth = () => {
+    // TODO: Figure out a better way to to do this, as it doesn't work on heroku.
+    // history.push?
     window.location.href = 'http://localhost:3000/github/login';
   };
 
@@ -44,12 +46,10 @@ const LoginClass = props => {
   );
 };
 
-const mapStateToProps = state => ({
-  user: state.user,
-});
+const mapStateToProps = ({ user }) => ({ user });
 
 const mapDispatchToProps = dispatch => ({
-  getUser: aUser => dispatch(getUser(aUser)),
+  getUser: user => dispatch(getUser(user)),
   getGithubUser: () => dispatch(getGithubUser()),
 });
 
