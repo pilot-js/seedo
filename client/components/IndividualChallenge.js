@@ -4,6 +4,16 @@ import { connect } from 'react-redux';
 import { putUserchallenge } from '../store/userchallenge';
 
 const _IndividualChallenge = props => {
+  useEffect(() => {
+    // TODO: pull in related challenge information from prop
+    // fetchChallenge(props.challengeId);
+    // TODO: pull active userchallenge if no id specified
+    // if (props.userchallengeId) {
+    //   fetchUserchallenge(props.userchallenge.Id);
+    // } else {
+    //   fetchActiveUserchallenge(props.challengeId, props.userId);
+    // };
+  }, []);
   const [html, setHTML] = useState('');
   const [css, setCSS] = useState('');
   const [js, setJS] = useState('');
@@ -81,12 +91,14 @@ const _IndividualChallenge = props => {
   );
 };
 
+const mapStateToProps = ({ user }) => ({ user });
+
 const mapDispatchToProps = dispatch => ({
   putUserchallenge: (userAnswer, userchallengeId, isSubmit) =>
     dispatch(putUserchallenge(userAnswer, userchallengeId, isSubmit)),
 });
 
 export const IndividualChallenge = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps,
 )(_IndividualChallenge);
