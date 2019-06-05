@@ -29,22 +29,16 @@ router.put('/:userchallengeId', (req, res, next) => {
       .then(async userchall => {
         await createFiles(userchall.html, userchall.css, userchall.userId);
         const retPath = await createImage(userchall.userId);
-        console.log('retPath: ', retPath);
         const userchallengePath = retPath.replace('file://', '').replace('.html', '.png');
 
-        console.log('userchallengePath: ', userchallengePath);
-        // parse path so remove extra /
         if (isSubmit) {
-          // compare images
-          // grab challengeImg from db
-          // change
-          Image.findOne({ where: { challengeId: userchall.challengeId } }).then(challengeImg => {
-            // const base64String = btoa(
-            //   String.fromCharCode(...new Uint8Array(image.data.data)),
-            // );
-            // console.log('base64String: ', image.data);
-            compareImages(userchallengePath, challengeImg, userchall.userId);
+          const challengeImg = await Image.findOne({
+            where: { challengeId: userchall.challengeId },
           });
+
+          const percentMatch = await compareImages(userchallengePath, challengeImg);
+          console.log('percentMatch from route: ', percentMatch);
+          // TODO save percentMatch to userchallenges.grade
 
           res.send(userchall);
         }
