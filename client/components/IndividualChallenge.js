@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import CodeMirror from 'react-codemirror';
 import { connect } from 'react-redux';
-import { updateUserchallenge, fetchOneChallenge } from '../store';
+import { updateUserchallenge, fetchOneChallenge, userChallenges } from '../store';
 
 const _IndividualChallenge = props => {
   useEffect(() => {
@@ -21,7 +21,12 @@ const _IndividualChallenge = props => {
     const userAnswer = { html, css, js, submitted: true, challengeId: props.id };
     props
       .updateUserchallenge(userAnswer, props.id, isSubmit)
-      .then(userchallenge => console.log(userchallenge))
+      .then(userChallenge => {
+        // console.log(image.userchallenge.data.data)
+        // const base64String2 = btoa(String.fromCharCode(...new Uint8Array(image.userchallenge.data.data)))
+        // console.log(base64String2)
+        console.log(userChallenge)
+      })
       .catch(ex => console.log(ex));
   };
 
@@ -42,7 +47,10 @@ const _IndividualChallenge = props => {
       <p>{challenge.description}</p>
       <div>
         <div className="row">
-          <div className="col">users page goes here:</div>
+          <div className="col">
+            users page goes here:
+            {/* <img src={`data:image/png;base64,${base64String2}`} alt="" className="card-image-top"/> */}
+          </div>
           <div className="col">
             our image goes here:
             <img src={`data:image/png;base64,${base64String}`} alt="" className="card-image-top" />
