@@ -15,13 +15,9 @@ import {
 import { getGithubUser } from './store';
 
 const App = props => {
-  // TODO: See if this is necessary
   useEffect(() => {
     props.getGithubUser().catch(error => console.log(error));
   }, []);
-  useEffect(() => {
-    props.getGithubUser().catch(error => console.log(error));
-  }, [props.user]);
 
   return (
     <div>
