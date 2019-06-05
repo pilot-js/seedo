@@ -21,13 +21,24 @@ router.get('/users/:userId/challenges/:challengeId', (req, res, next) => {
 router.put('/:userchallengeId', (req, res, next) => {
   const { userchallengeId } = req.params;
   try {
-    const { html, css, js, submitted } = req.body.userAnswer;
+    // const { html, css, js, submitted } = req.body.userAnswer;
     const { isSubmit } = req.body;
     Userchallenge.findByPk(userchallengeId)
       .then(userchall => userchall.update(req.body.userAnswer))
       .then(async userchall => {
         await createFiles(userchall.html, userchall.css, userchall.userId);
         await createImage(userchall.userId);
+        /*
+          retPathToUserImage = await createImage(userchall.userId);
+          Image.saveImage(retPathToUserImage, userchallengeId)-> {
+            1. check to see if there is already a image 
+              yes: update image.data to be binary of retPathToUserImage
+              no: create a new recode-> Image.create({})
+            2. return image
+          }
+          res.send(image)
+          
+        */
         if (isSubmit) {
           // compare images
           console.log('isSubmit: ', isSubmit);
