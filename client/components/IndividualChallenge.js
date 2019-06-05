@@ -30,7 +30,7 @@ const _IndividualChallenge = props => {
     mode: 'javascript',
   };
 
-  if (!Object.keys(props.challenge).length) {
+  if (Object.keys(props.challenge).length === 0) {
     return null;
   }
   const challenge = props.challenge;
