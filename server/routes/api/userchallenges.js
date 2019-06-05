@@ -21,18 +21,17 @@ router.get('/users/:userId/challenges/:challengeId', (req, res, next) => {
 router.put('/:userchallengeId', (req, res, next) => {
   const { userchallengeId } = req.params;
   try {
-    // const { html, css, js, submitted } = req.body.userAnswer;
     const { isSubmit } = req.body;
     Userchallenge.findByPk(userchallengeId)
       .then(userchall => userchall.update(req.body.userAnswer))
       .then(async userchall => {
         await createFiles(userchall.html, userchall.css, userchall.userId);
         const retPathToUserImage = await createImage(userchall.userId);
-        console.log(retPathToUserImage)
-        let pathToImage = retPathToUserImage.replace("file://", "").replace(".html",".png")
-        const retImage = await Image.saveImage(pathToImage, userchallengeId)
-        console.log(retImage)
-        return send(retImage)
+        console.log(retPathToUserImage);
+        const pathToImage = retPathToUserImage.replace('file://', '').replace('.html', '.png');
+        const retImage = await Image.saveImage(pathToImage, userchallengeId);
+        console.log(retImage);
+        res.send(retImage);
         /*
           retPathToUserImage = await createImage(userchall.userId);
           Image.saveImage(retPathToUserImage, userchallengeId)-> {
