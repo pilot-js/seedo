@@ -1,0 +1,28 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+__webpack_require__	dist/bundle.js	/^\/******\/ 	function __webpack_require__(moduleId) {$/;"	f
+__webpack_require__.d	dist/bundle.js	/^\/******\/ 	__webpack_require__.d = function(exports, name, getter) {$/;"	f
+__webpack_require__.n	dist/bundle.js	/^\/******\/ 	__webpack_require__.n = function(module) {$/;"	f
+__webpack_require__.o	dist/bundle.js	/^\/******\/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };$/;"	f
+__webpack_require__.r	dist/bundle.js	/^\/******\/ 	__webpack_require__.r = function(exports) {$/;"	f
+__webpack_require__.t	dist/bundle.js	/^\/******\/ 	__webpack_require__.t = function(value, mode) {$/;"	f
+const.challengeId	client/components/IndividualChallenge.js	/^    const userAnswer = { html, css, js, submitted: true, challengeId: props.id };$/;"	p
+const.description	client/components/IndividualChallenge.js	/^  const challenge = { name: 'challenge1', description: 'draw a circle', difficulty: 1 };$/;"	p
+const.difficulty	client/components/IndividualChallenge.js	/^  const challenge = { name: 'challenge1', description: 'draw a circle', difficulty: 1 };$/;"	p
+const.lineNumbers	client/components/IndividualChallenge.js	/^    lineNumbers: true,$/;"	p
+const.mode	client/components/IndividualChallenge.js	/^    mode: 'javascript',$/;"	p
+const.name	client/components/IndividualChallenge.js	/^  const challenge = { name: 'challenge1', description: 'draw a circle', difficulty: 1 };$/;"	p
+const.submitted	client/components/IndividualChallenge.js	/^    const userAnswer = { html, css, js, submitted: true, challengeId: props.id };$/;"	p
+doneReading	dist/images/challenge/compare-images.js	/^function doneReading() {$/;"	f
+fs	dist/images/challenge/compare-images.js	/^var fs = require('fs'),$/;"	v
+getRandom	server/db/seed.js	/^function getRandom(type, max) {$/;"	f
+img1	dist/images/challenge/compare-images.js	/^var img1 = fs.createReadStream('challenge-1-red-circle.png').pipe(new PNG()).on('parsed', doneReading),$/;"	v
+module.exports.CLIENT_ID	server/.env.js	/^  CLIENT_ID: '712a1372abccbaf43bfc',$/;"	p
+module.exports.CLIENT_SECRET	server/.env.js	/^  CLIENT_SECRET: '1b9a5bbf6e46b74a52faf3c108f7acee671c82ae',$/;"	p
+module.exports.SESSION	server/.env.js	/^  SESSION: 'There is no secret.',$/;"	p
+return	dist/bundle.js	/^\/******\/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };$/;"	c
+return.hasOwnProperty	dist/bundle.js	/^\/******\/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };$/;"	m

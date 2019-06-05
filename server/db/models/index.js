@@ -3,6 +3,7 @@ const Image = require('./Image');
 const Solution = require('./Solution');
 const User = require('./User');
 const Userchallenge = require('./Userchallenge');
+const Comment = require('./Comment');
 
 // Associations
 
@@ -20,6 +21,12 @@ Image.belongsTo(Userchallenge);
 
 Challenge.hasMany(Solution);
 Solution.belongsTo(Challenge);
+
+User.hasMany(Comment);
+Challenge.hasMany(Comment);
+
+Comment.belongsTo(User);
+Comment.belongsTo(Challenge);
 
 Userchallenge.getActiveAnswer = (userId, challengeId) => {
   return Userchallenge.findOne({
@@ -51,4 +58,5 @@ module.exports = {
   Solution,
   User,
   Userchallenge,
+  Comment,
 };
