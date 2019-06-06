@@ -48,7 +48,6 @@ function compareImages(userchallengePath, challengeImg) {
         .createReadStream(userchallengePath)
         .pipe(new PNG())
         .on('parsed', doneReading);
-
     } catch (error) {
       reject(error);
     }
