@@ -1,9 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import CodeMirror from 'react-codemirror';
 import { connect } from 'react-redux';
-import { putUserchallenge } from '../store/userchallenge';
+import { updateUserchallenge, fetchOneChallenge } from '../store';
+import { convertBufferToImgSrc } from '../utils';
 
 const _IndividualChallenge = props => {
+  useEffect(() => {
+    // TODO: pull active userchallenge if no id specified
+    // if (props.userchallengeId) {
+    //   fetchUserchallenge(props.userchallenge.Id);
+    // } else {
+    //   fetchActiveUserchallenge(props.challengeId, props.userId);
+    // };
+    props.fetchOneChallenge(Number(props.challengeId));
+  }, []);
   const [html, setHTML] = useState('');
   const [css, setCSS] = useState('');
   const [js, setJS] = useState('');
@@ -13,27 +23,36 @@ const _IndividualChallenge = props => {
     console.log({ html, css, js });
   };
 
-  const putValue = isSubmit => {
-    const userAnswer = { html, css, js, submitted: true, challengeId: props.id };
+  const updateValue = isSubmit => {
+    const userAnswer = { html, css, js, submitted: true, challengeId: props.challengeId };
     props
-      .putUserchallenge(userAnswer, props.id, isSubmit)
+      .updateUserchallenge(userAnswer, props.challengeId, isSubmit)
       .then(userchallenge => console.log(userchallenge))
       .catch(ex => console.log(ex));
   };
 
-  const challenge = { name: 'challenge1', description: 'draw a circle', difficulty: 1 };
   const options = {
     lineNumbers: true,
     mode: 'javascript',
   };
+
+  if (Object.keys(props.individualChallenge).length === 0) {
+    return null;
+  }
+  const { name, description, images } = props.individualChallenge;
+
+  const imgSrc = convertBufferToImgSrc(images[0].data);
   return (
     <div className="d-flex flex-column align-items-center">
-      <h1>{challenge.name}</h1>
-      <p>{challenge.description}</p>
+      <h1>{name}</h1>
+      <p>{description}</p>
       <div>
         <div className="row">
           <div className="col">users page goes here</div>
-          <div className="col">our image goes here</div>
+          <div className="col">
+            our image goes here:
+            <img src={imgSrc} alt="" className="card-image-top" />
+          </div>
         </div>
         <div className="row">
           <div className="col">
@@ -70,10 +89,10 @@ const _IndividualChallenge = props => {
             </button>
           </div>
         </div>
-        <button type="button" onClick={() => putValue(false)}>
+        <button type="button" onClick={() => updateValue(false)}>
           Run
         </button>
-        <button type="button" onClick={() => putValue(true)}>
+        <button type="button" onClick={() => updateValue(true)}>
           Submit
         </button>
       </div>
@@ -81,12 +100,15 @@ const _IndividualChallenge = props => {
   );
 };
 
+const mapStateToProps = ({ user, individualChallenge }) => ({ user, individualChallenge });
+
 const mapDispatchToProps = dispatch => ({
-  putUserchallenge: (userAnswer, userchallengeId, isSubmit) =>
-    dispatch(putUserchallenge(userAnswer, userchallengeId, isSubmit)),
+  updateUserchallenge: (userAnswer, userchallengeId, isSubmit) =>
+    dispatch(updateUserchallenge(userAnswer, userchallengeId, isSubmit)),
+  fetchOneChallenge: challengeId => dispatch(fetchOneChallenge(challengeId)),
 });
 
 export const IndividualChallenge = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps,
 )(_IndividualChallenge);
