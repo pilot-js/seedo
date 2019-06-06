@@ -39,7 +39,7 @@ router.put('/:userchallengeId', (req, res, next) => {
           const percentMatch = await compareImages(userchallengePath, challengeImg);
 
           const updatedUserchall = await userchall.update({
-            grade: percentMatch
+            grade: percentMatch,
           });
 
           res.send(updatedUserchall);
