@@ -2,6 +2,7 @@ const router = require('express').Router();
 
 const { Userchallenge, Image } = require('../../db');
 const { createFiles, createImage } = require('../../puppeteer-utils');
+const { compareImages } = require('../../compare-images');
 
 /**     /api/userchallenges     **/
 
@@ -26,15 +27,23 @@ router.put('/:userchallengeId', (req, res, next) => {
       .then(userchall => userchall.update(req.body.userAnswer))
       .then(async userchall => {
         await createFiles(userchall.html, userchall.css, userchall.userId);
+
         const retPathToUserImage = await createImage(userchall.userId);
-        const pathToImage = retPathToUserImage.replace('file://', '').replace('.html', '.png');
-        await Image.saveImage(pathToImage, userchallengeId);
+        const pathToUserImage = retPathToUserImage.replace('file://', '').replace('.html', '.png');
+        await Image.saveImage(pathToUserImage, userchallengeId);
+
+        if (isSubmit) {
+          const challengeImg = await Image.findOne({
+            where: { challengeId: userchall.challengeId },
+          });
+
+          const percentMatch = await compareImages(pathToUserImage, challengeImg);
+
+          await userchall.update({ grade: percentMatch });
+        }
+
         const userChallenge = await Userchallenge.findByPk(userchallengeId, { include: [Image] });
         res.send(userChallenge);
-        if (isSubmit) {
-          // compare images
-          console.log('isSubmit: ', isSubmit);
-        }
       })
       .catch(next);
   } catch {
