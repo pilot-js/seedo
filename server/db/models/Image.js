@@ -15,7 +15,7 @@ Image.saveImage = (pathToImage, userchallengeId) => {
   return Image.findOne({ where: { userchallengeId } }).then(async maybeImage => {
     const imageData = fs.readFileSync(pathToImage);
     if (maybeImage) {
-      maybeImage.update({ ...maybeImage, data: imageData });
+      await maybeImage.update({ ...maybeImage, data: imageData });
     } else {
       maybeImage = await Image.create({ userchallengeId, data: imageData });
     }
