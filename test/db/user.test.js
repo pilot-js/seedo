@@ -16,7 +16,9 @@ describe('testing user model', () => {
     return expect(users.length).toBe(1);
   });
   it('requires email to be an email', () => {
-    return expect(User.create({ email: 'notanemail', password: 'failing test', type: 'user' })).rejects.toThrow();
+    return expect(
+      User.create({ email: 'notanemail', password: 'failing test', type: 'user' }),
+    ).rejects.toThrow();
   });
   it('requires email, password and type to not be empty', async () => {
     await expect(User.create({ password: '' })).rejects.toThrow();
