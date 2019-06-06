@@ -9,7 +9,11 @@ const client = supertest(app);
 describe('User routes', () => {
   beforeAll(async () => {
     await conn.sync({ force: true });
-    const user = await User.create({ email: 'email@email.com', password: 'password', type: 'user' });
+    const user = await User.create({
+      email: 'email@email.com',
+      password: 'password',
+      type: 'user',
+    });
     const challenge = await Challenge.create({
       name: 'challenge',
       description: 'challenging',
