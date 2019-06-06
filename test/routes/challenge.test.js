@@ -49,8 +49,8 @@ describe('testing the challenges routes', () => {
   });
   it('can get all comments and images for a challenge', async () => {
     const c = await Challenge.findByPk(1, {
-    include: [Image, Comment]
-  })
+      include: [Image, Comment],
+    });
     console.log(c.get());
     return client
       .get(`${url}1`)

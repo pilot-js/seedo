@@ -8,10 +8,7 @@ const LoginClass = props => {
 
   const saveHandler = ev => {
     ev.preventDefault();
-    props
-      .getUser({ email, password })
-      .then(() => console.log('We have a user logged in.'))
-      .then(() => props.history.push('/'));
+    props.getUser({ email, password }).then(() => props.history.push('/'));
   };
 
   const githubOauth = () => {
