@@ -25,7 +25,7 @@ export const fetchUserchallenge = (userId, challengeId) => dispatch => {
     .get(`/api/userchallenges/users/${userId}/challenges/${challengeId}`)
     .then(res => res.data)
     .then(userchallenge => {
-      console.log('store: ', userchallenge)
-      return dispatch(setUserchallenge(userchallenge))
-    })
-}
+      console.log('store: ', userchallenge);
+      return dispatch(setUserchallenge(userchallenge));
+    });
+};

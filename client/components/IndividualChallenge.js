@@ -12,10 +12,10 @@ const _IndividualChallenge = props => {
     // } else {
     //   fetchActiveUserchallenge(props.challengeId, props.userId);
     // };
-    if(props.user.id){
-      props.fetchUserchallenge(Number(props.user.id), Number(props.challengeId))
+    if (props.user.id) {
+      props.fetchUserchallenge(Number(props.user.id), Number(props.challengeId));
     }
-    
+
     props.fetchOneChallenge(Number(props.challengeId));
   }, []);
   const [html, setHTML] = useState('');
@@ -24,7 +24,7 @@ const _IndividualChallenge = props => {
 
   const changeValue = () => {
     // TODO: axios post call to the backend
-    // console.log({ html, css, js });
+    console.log({ html, css, js });
   };
 
   const updateValue = isSubmit => {
@@ -39,19 +39,17 @@ const _IndividualChallenge = props => {
     lineNumbers: true,
     mode: 'javascript',
   };
-  let imgSrc2 
+  let imgSrc2;
   if (Object.keys(props.individualChallenge).length === 0) {
     return null;
   }
-  const { name, description, images } = props.individualChallenge;
-  if (Object.keys(props.userchallenge).length !== 0){
-    const {images} = props.userchallenge;
+  if (Object.keys(props.userchallenge).length !== 0) {
+    const { images } = props.userchallenge;
     imgSrc2 = convertBufferToImgSrc(images[0].data);
   }
-  console.log('html: ', html)
+  const { name, description, images } = props.individualChallenge;
 
   const imgSrc = convertBufferToImgSrc(images[0].data);
-  // const imgSrc2 = convertBufferToImgSrc(images2[0].data);
   return (
     <div className="d-flex flex-column align-items-center">
       <h1>{name}</h1>
@@ -113,13 +111,17 @@ const _IndividualChallenge = props => {
   );
 };
 
-const mapStateToProps = ({ user, individualChallenge, userchallenge }) => ({ user, individualChallenge, userchallenge });
+const mapStateToProps = ({ user, individualChallenge, userchallenge }) => ({
+  user,
+  individualChallenge,
+  userchallenge,
+});
 
 const mapDispatchToProps = dispatch => ({
   updateUserchallenge: (userAnswer, userchallengeId, isSubmit) =>
     dispatch(updateUserchallenge(userAnswer, userchallengeId, isSubmit)),
   fetchOneChallenge: challengeId => dispatch(fetchOneChallenge(challengeId)),
-  fetchUserchallenge: (userId, challengeId) => dispatch(fetchUserchallenge(userId, challengeId))
+  fetchUserchallenge: (userId, challengeId) => dispatch(fetchUserchallenge(userId, challengeId)),
 });
 
 export const IndividualChallenge = connect(
