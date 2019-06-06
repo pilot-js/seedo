@@ -14,6 +14,7 @@ describe('Userchallenge routes', () => {
     const u = await User.create({
       email: 'email@email.com',
       password: 'hello',
+      type: 'user',
     });
     const c = await Challenge.create({
       name: 'Basic html page',

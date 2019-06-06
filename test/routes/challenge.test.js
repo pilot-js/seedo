@@ -19,6 +19,7 @@ describe('testing the challenges routes', () => {
     const user = await User.create({
       email: 'email@email.com',
       password: 'password',
+      type: 'user',
     });
     const comment = await Comment.create({
       userId: user.id,
@@ -51,7 +52,7 @@ describe('testing the challenges routes', () => {
     const c = await Challenge.findByPk(1, {
       include: [Image, Comment],
     });
-    console.log(c.get());
+
     return client
       .get(`${url}1`)
       .expect(200)
