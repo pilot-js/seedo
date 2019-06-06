@@ -37,10 +37,12 @@ router.put('/:userchallengeId', (req, res, next) => {
           });
 
           const percentMatch = await compareImages(userchallengePath, challengeImg);
-          console.log('percentMatch from route: ', percentMatch);
-          // TODO save percentMatch to userchallenges.grade
 
-          res.send(userchall);
+          const updatedUserchall = await userchall.update({
+            grade: percentMatch
+          });
+
+          res.send(updatedUserchall);
         }
       })
       .catch(next);
