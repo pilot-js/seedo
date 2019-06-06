@@ -13,7 +13,7 @@ export const userchallenge = (state = {}, action) => {
   }
 };
 
-export const putUserchallenge = (userAnswer, userchallengeId, isSubmit) => dispatch => {
+export const updateUserchallenge = (userAnswer, userchallengeId, isSubmit) => dispatch => {
   return axios
     .put(`/api/userchallenges/${userchallengeId}`, { userAnswer, isSubmit })
     .then(res => res.data)
