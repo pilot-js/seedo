@@ -1,12 +1,14 @@
 const router = require('express').Router();
-const { Challenge, Image } = require('../../db');
+const { Challenge, Image, Comment } = require('../../db');
 
 /**  /api/challenges **/
 
 // get all challenges
 router.get('/', (req, res, next) => {
   Challenge.findAll({ include: [Image] })
-    .then(challenges => res.send(challenges))
+    .then(challenges => {
+      res.send(challenges);
+    })
     .catch(next);
 });
 
@@ -22,15 +24,14 @@ router.post('/', (req, res, next) => {
     .catch(next);
 });
 
-// get a single challenge
+// get a single challenge with images and comments
 router.get('/:id', (req, res, next) => {
-  // TODO how to handle req.params.id === NaN ?
-  // if (typeof req.params.id === NaN) {
-  //   const err = new Error('Not a number.  Challenge Id must be a number.');
-  //   next(err);
-  // }
-  Challenge.findAll({ where: { id: Number(req.params.id) }, include: [Image] })
-    .then(challenge => res.send(challenge[0]))
+  Challenge.findByPk(req.params.id, {
+    include: [Image, Comment],
+  })
+    .then(challenge => {
+      res.send(challenge);
+    })
     .catch(next);
 });
 

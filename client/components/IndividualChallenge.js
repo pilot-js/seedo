@@ -13,10 +13,10 @@ const _IndividualChallenge = props => {
     //   fetchActiveUserchallenge(props.challengeId, props.userId);
     // };
     if (props.user.id) {
-      props.fetchUserchallenge(Number(props.user.id), Number(props.challengeId));
+      props.fetchUserchallenge(props.user.id, props.challengeId);
     }
 
-    props.fetchOneChallenge(Number(props.challengeId));
+    props.fetchOneChallenge(props.challengeId);
   }, []);
   const [html, setHTML] = useState('');
   const [css, setCSS] = useState('');
@@ -43,11 +43,11 @@ const _IndividualChallenge = props => {
   if (Object.keys(props.individualChallenge).length === 0) {
     return null;
   }
-  if (Object.keys(props.userchallenge).length !== 0) {
+  if (props.userchallenge.images) {
     const { images } = props.userchallenge;
     imgSrc2 = convertBufferToImgSrc(images[0].data);
   }
-  const { name, description, images } = props.individualChallenge;
+  const { name, description, images, comments } = props.individualChallenge;
 
   const imgSrc = convertBufferToImgSrc(images[0].data);
   return (

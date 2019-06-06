@@ -20,8 +20,10 @@ export const getGithubUser = () => dispatch => {
     .then(user => dispatch(setUser(user)));
 };
 
-export const getUser = aUser => dispatch => {
-  return axios.put('/auth/login', aUser).then(() => dispatch(getGithubUser()));
+export const getUser = user => dispatch => {
+  return axios.put('/auth/login', user).then(res => {
+    dispatch(setUser(res.data));
+  });
 };
 
 export const logoutUser = () => dispatch => {

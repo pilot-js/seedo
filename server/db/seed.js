@@ -7,6 +7,7 @@ const usersSeed = [
   { email: 'kristy@geezemail.com', password: '1234' },
   { email: 'haoyu@geezemail.com', password: '1234' },
   { email: 'thee@geezemail.com', password: '1234' },
+  { email: 'a@a.com', password: 'a' },
 ];
 
 // from associations: imageId
