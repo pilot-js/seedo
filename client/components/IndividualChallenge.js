@@ -45,7 +45,7 @@ const _IndividualChallenge = props => {
   }
   if (props.userchallenge.images) {
     const { images } = props.userchallenge;
-    imgSrc2 = convertBufferToImgSrc(images[0].data);
+    imgSrc2 = images.length ? convertBufferToImgSrc(images[0].data) : '';
   }
   const { name, description, images, comments } = props.individualChallenge;
 
