@@ -6,7 +6,9 @@ const { Challenge, Image, Comment } = require('../../db');
 // get all challenges
 router.get('/', (req, res, next) => {
   Challenge.findAll({ include: [Image] })
-    .then(challenges => res.send(challenges))
+    .then(challenges => {
+      res.send(challenges);
+    })
     .catch(next);
 });
 
@@ -24,10 +26,12 @@ router.post('/', (req, res, next) => {
 
 // get a single challenge with images and comments
 router.get('/:id', (req, res, next) => {
-  Challenge.findByPk(Number(req.params.id), {
-    include: [Image, Comment],
+  Challenge.findByPk(req.params.id, {
+    include: [Image, Comment]
   })
-    .then(challenge => res.send(challenge))
+    .then(challenge => {
+      res.send(challenge);
+    })
     .catch(next);
 });
 

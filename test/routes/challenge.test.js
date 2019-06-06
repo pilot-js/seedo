@@ -47,7 +47,11 @@ describe('testing the challenges routes', () => {
         expect(res.body[0].images.length).toBe(1);
       });
   });
-  it('can get all comments and images for a challenge', () => {
+  it('can get all comments and images for a challenge', async () => {
+    const c = await Challenge.findByPk(1, {
+    include: [Image, Comment]
+  })
+    console.log(c.get());
     return client
       .get(`${url}1`)
       .expect(200)

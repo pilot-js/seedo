@@ -1,5 +1,5 @@
 const conn = require('./conn');
-const { Challenge, Image, Solution, User, Userchallenge } = require('./models');
+const { Challenge, Image, Solution, User, Userchallenge, Comment } = require('./models');
 
 module.exports = {
   Challenge,
@@ -7,5 +7,6 @@ module.exports = {
   Solution,
   User,
   Userchallenge,
+  Comment,
   conn,
 };
