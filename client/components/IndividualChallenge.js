@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import CodeMirror from 'react-codemirror';
 import { connect } from 'react-redux';
-import { updateUserchallenge, fetchOneChallenge } from '../store';
+import { updateUserchallenge, fetchOneChallenge, fetchUserchallenge } from '../store';
 import { convertBufferToImgSrc } from '../utils';
 
 const _IndividualChallenge = props => {
@@ -12,6 +12,10 @@ const _IndividualChallenge = props => {
     // } else {
     //   fetchActiveUserchallenge(props.challengeId, props.userId);
     // };
+    if (props.user.id) {
+      props.fetchUserchallenge(Number(props.user.id), Number(props.challengeId));
+    }
+
     props.fetchOneChallenge(Number(props.challengeId));
   }, []);
   const [html, setHTML] = useState('');
@@ -35,9 +39,13 @@ const _IndividualChallenge = props => {
     lineNumbers: true,
     mode: 'javascript',
   };
-
+  let imgSrc2;
   if (Object.keys(props.individualChallenge).length === 0) {
     return null;
+  }
+  if (Object.keys(props.userchallenge).length !== 0) {
+    const { images } = props.userchallenge;
+    imgSrc2 = convertBufferToImgSrc(images[0].data);
   }
   const { name, description, images } = props.individualChallenge;
 
@@ -48,7 +56,10 @@ const _IndividualChallenge = props => {
       <p>{description}</p>
       <div>
         <div className="row">
-          <div className="col">users page goes here</div>
+          <div className="col">
+            users page goes here:
+            <img src={imgSrc2} alt="" className="card-image-top" />
+          </div>
           <div className="col">
             our image goes here:
             <img src={imgSrc} alt="" className="card-image-top" />
@@ -100,12 +111,17 @@ const _IndividualChallenge = props => {
   );
 };
 
-const mapStateToProps = ({ user, individualChallenge }) => ({ user, individualChallenge });
+const mapStateToProps = ({ user, individualChallenge, userchallenge }) => ({
+  user,
+  individualChallenge,
+  userchallenge,
+});
 
 const mapDispatchToProps = dispatch => ({
   updateUserchallenge: (userAnswer, userchallengeId, isSubmit) =>
     dispatch(updateUserchallenge(userAnswer, userchallengeId, isSubmit)),
   fetchOneChallenge: challengeId => dispatch(fetchOneChallenge(challengeId)),
+  fetchUserchallenge: (userId, challengeId) => dispatch(fetchUserchallenge(userId, challengeId)),
 });
 
 export const IndividualChallenge = connect(

@@ -19,3 +19,13 @@ export const updateUserchallenge = (userAnswer, userchallengeId, isSubmit) => di
     .then(res => res.data)
     .then(userAnswer => dispatch(setUserchallenge(userAnswer)));
 };
+
+export const fetchUserchallenge = (userId, challengeId) => dispatch => {
+  return axios
+    .get(`/api/userchallenges/users/${userId}/challenges/${challengeId}`)
+    .then(res => res.data)
+    .then(userchallenge => {
+      console.log('store: ', userchallenge);
+      return dispatch(setUserchallenge(userchallenge));
+    });
+};
