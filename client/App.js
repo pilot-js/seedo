@@ -17,6 +17,7 @@ import { getGithubUser } from './store';
 const App = props => {
   useEffect(() => {
     props.getGithubUser().catch(error => console.log(error));
+    // TODO getUser (if type = admin, allow access to admin components)
   }, []);
 
   return (
@@ -34,6 +35,10 @@ const App = props => {
           path="/challenges/:id"
           render={({ match }) => <IndividualChallenge challengeId={match.params.id} />}
         />
+        {/* TODO admin components */}
+        {/* TODO if user.type = admin, allow access to routes */}
+        {/* <Route exact path="/admin/challenges" component={AdminChallenges} />
+        <Route exact path="/admin/users" component={AdminUsers} /> */}
       </Switch>
       <Footer />
     </div>

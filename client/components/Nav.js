@@ -34,6 +34,21 @@ const _Nav = props => {
       to: '/login',
     });
   }
+  let adminNavLinks = [];
+  if (props.user.type === 'admin') {
+    console.log('type: ', props.user.type);
+    adminNavLinks = [
+      {
+        label: 'Challenges',
+        to: '/admin/challenges',
+      },
+      {
+        label: 'Users',
+        to: '/admin/users',
+      },
+    ];
+    console.log('adminNavLinks: ', adminNavLinks);
+  }
 
   return (
     <div className="d-flex flex-row">
@@ -49,6 +64,18 @@ const _Nav = props => {
             </NavLink>
           ))}
         </div>
+        {props.user.type === 'admin' ? (
+          <div className="flex-row nav">
+            Admin:
+            {adminNavLinks.map(link => (
+              <NavLink exact key={link.to} to={link.to} className="nav-link nav-item">
+                {link.label}
+              </NavLink>
+            ))}
+          </div>
+        ) : (
+          ''
+        )}
       </div>
     </div>
   );
