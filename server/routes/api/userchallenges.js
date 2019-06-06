@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-const { Userchallenge } = require('../../db');
+const { Userchallenge, Image } = require('../../db');
 const { createFiles, createImage } = require('../../puppeteer-utils');
 
 /**     /api/userchallenges     **/
@@ -21,18 +21,20 @@ router.get('/users/:userId/challenges/:challengeId', (req, res, next) => {
 router.put('/:userchallengeId', (req, res, next) => {
   const { userchallengeId } = req.params;
   try {
-    const { html, css, js, submitted } = req.body.userAnswer;
     const { isSubmit } = req.body;
     Userchallenge.findByPk(userchallengeId)
       .then(userchall => userchall.update(req.body.userAnswer))
       .then(async userchall => {
         await createFiles(userchall.html, userchall.css, userchall.userId);
-        await createImage(userchall.userId);
+        const retPathToUserImage = await createImage(userchall.userId);
+        const pathToImage = retPathToUserImage.replace('file://', '').replace('.html', '.png');
+        await Image.saveImage(pathToImage, userchallengeId);
+        const userChallenge = await Userchallenge.findByPk(userchallengeId, { include: [Image] });
+        res.send(userChallenge);
         if (isSubmit) {
           // compare images
           console.log('isSubmit: ', isSubmit);
         }
-        res.send(userchall);
       })
       .catch(next);
   } catch {

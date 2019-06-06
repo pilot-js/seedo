@@ -54,10 +54,6 @@ const _Nav = props => {
   );
 };
 
-const mapStateToProps = state => {
-  return {
-    user: state.user,
-  };
-};
+const mapStateToProps = ({ user }) => ({ user });
 
 export const Nav = connect(mapStateToProps)(_Nav);

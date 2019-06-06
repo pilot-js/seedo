@@ -9,7 +9,7 @@ const auth = require('./routes/auth');
 try {
   Object.assign(process.env, require('./.env'));
 } catch (error) {
-  console.log(error);
+  console.log('Could not find .env file.');
 }
 
 app.use(
