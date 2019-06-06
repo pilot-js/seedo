@@ -3,7 +3,6 @@ const challenges = require('./challenges');
 const solutions = require('./solutions');
 const users = require('./users');
 const userchallenges = require('./userchallenges');
-const images = require('./images');
 
 router.use('/challenges', challenges);
 router.use('/solutions', solutions);
