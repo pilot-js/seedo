@@ -27,4 +27,8 @@ module.exports = conn.define('user', {
     type: Sequelize.INTEGER,
     allowNull: true,
   },
+  type: {
+    type: Sequelize.ENUM('user', 'admin'),
+    allowNull: false,
+  },
 });

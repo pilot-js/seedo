@@ -9,7 +9,7 @@ const client = supertest(app);
 describe('User routes', () => {
   beforeAll(async () => {
     await conn.sync({ force: true });
-    const user = await User.create({ email: 'email@email.com', password: 'password' });
+    const user = await User.create({ email: 'email@email.com', password: 'password', type: 'user' });
     const challenge = await Challenge.create({
       name: 'challenge',
       description: 'challenging',
@@ -31,7 +31,7 @@ describe('User routes', () => {
   it('can create a user', () => {
     return client
       .post('/api/users/')
-      .send({ email: 'email2@email.com', password: 'password' })
+      .send({ email: 'email2@email.com', password: 'password', type: 'user' })
       .expect(200);
   });
   it('can delete a user by id', () => {
