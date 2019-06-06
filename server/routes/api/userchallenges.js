@@ -22,28 +22,28 @@ router.get('/users/:userId/challenges/:challengeId', (req, res, next) => {
 router.put('/:userchallengeId', (req, res, next) => {
   const { userchallengeId } = req.params;
   try {
-    const { html, css, js, submitted } = req.body.userAnswer;
     const { isSubmit } = req.body;
     Userchallenge.findByPk(userchallengeId)
       .then(userchall => userchall.update(req.body.userAnswer))
       .then(async userchall => {
         await createFiles(userchall.html, userchall.css, userchall.userId);
-        const retPath = await createImage(userchall.userId);
-        const userchallengePath = retPath.replace('file://', '').replace('.html', '.png');
+
+        const retPathToUserImage = await createImage(userchall.userId);
+        const pathToUserImage = retPathToUserImage.replace('file://', '').replace('.html', '.png');
+        await Image.saveImage(pathToUserImage, userchallengeId);
 
         if (isSubmit) {
           const challengeImg = await Image.findOne({
             where: { challengeId: userchall.challengeId },
           });
 
-          const percentMatch = await compareImages(userchallengePath, challengeImg);
+          const percentMatch = await compareImages(pathToUserImage, challengeImg);
 
-          const updatedUserchall = await userchall.update({
-            grade: percentMatch,
-          });
-
-          res.send(updatedUserchall);
+          await userchall.update({ grade: percentMatch });
         }
+
+        const userChallenge = await Userchallenge.findByPk(userchallengeId, { include: [Image] });
+        res.send(userChallenge);
       })
       .catch(next);
   } catch {
