@@ -33,7 +33,8 @@ const createFiles = async (html, css, userId) => {
 };
 
 const createImage = async userId => {
-  const browser = await puppeteer.launch();
+  const args = ['-–no-sandbox','-–disable-setuid-sandbox']
+  const browser = await puppeteer.launch({args});
   const page = await browser.newPage();
   const retPath = `file://${path.join(process.cwd(), `server/tmp/${userId}.html`)}`;
   await page.goto(retPath);
