@@ -6,14 +6,14 @@ import { convertBufferToImgSrc } from '../utils';
 
 // two props passed down from route parameters
 // challengeId and userchallengeId
-const _Solution = ({ 
+const _Solution = ({
   user,
   individualChallenge,
   userchallenge,
   challengeId,
   userchallengeId,
   fetchOneChallenge,
-  fetchUserchallengeById
+  fetchUserchallengeById,
 }) => {
   useEffect(() => {
     if (challengeId) {
@@ -31,37 +31,31 @@ const _Solution = ({
   return (
     <div>
       <h2>Our solution</h2>
-      <div className="row">
-        <CodeMirror
-          defaultValue={individualChallenge.html}
-          options={options}
-        />
-        <CodeMirror
-          defaultValue={individualChallenge.css}
-          options={options}
-        />
-        <CodeMirror
-          defaultValue={individualChallenge.js}
-          options={options}
-        />
+      <div className="d-flex justify-content-around row">
+        <div className="col">
+          <CodeMirror defaultValue={individualChallenge.html} options={options} />
+        </div>
+        <div className="col">
+          <CodeMirror defaultValue={individualChallenge.css} options={options} />
+        </div>
+        <div className="col">
+          <CodeMirror defaultValue={individualChallenge.js} options={options} />
+        </div>
       </div>
       <h2>Your solution</h2>
-      <div className="row">
-        <CodeMirror
-          defaultValue={userchallenge.html}
-          options={options}
-        />
-        <CodeMirror
-          defaultValue={userchallenge.css}
-          options={options}
-        />
-        <CodeMirror
-          defaultValue={userchallenge.js}
-          options={options}
-        />
+      <div className="d-flex justify-content-around row">
+        <div className="col">
+          <CodeMirror defaultValue={userchallenge.html} options={options} />
+        </div>
+        <div className="col">
+          <CodeMirror defaultValue={userchallenge.css} options={options} />
+        </div>
+        <div className="col">
+          <CodeMirror defaultValue={userchallenge.js} options={options} />
+        </div>
       </div>
     </div>
-  )
+  );
 };
 
 const mapStateToProps = ({ user, individualChallenge, userchallenge }) => ({
@@ -72,7 +66,8 @@ const mapStateToProps = ({ user, individualChallenge, userchallenge }) => ({
 
 const mapDispatchToProps = dispatch => ({
   fetchOneChallenge: challengeId => dispatch(fetchOneChallenge(challengeId)),
-  fetchUserchallengeById: (userId, challengeId) => dispatch(fetchUserchallengeById(userId, challengeId)),
+  fetchUserchallengeById: (userId, challengeId) =>
+    dispatch(fetchUserchallengeById(userId, challengeId)),
 });
 
 export const Solution = connect(

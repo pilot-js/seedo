@@ -18,7 +18,7 @@ router.get('/users/:userId/challenges/:challengeId', (req, res, next) => {
 router.get('/:userchallengeId', (req, res, next) => {
   const { userchallengeId } = req.params;
   Userchallenge.findByPk(userchallengeId, {
-    include: [Image]
+    include: [Image],
   })
     .then(userchallenge => {
       res.send(userchallenge);
