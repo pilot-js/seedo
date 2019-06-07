@@ -17,12 +17,26 @@ const _UserPage = ({ user, userChallenges, fetchUserChallenges }) => {
     window.location.href = 'http://localhost:3000/github/login';
   };
 
+  const hasGithubId = user => {
+    if (user.githubId) {
+      return true;
+    }
+    return false;
+  };
+
   return (
     <div>
       <p> User ID: {user.id}</p>
-      <button type="button" onClick={linkGithub}>
-        Link my github
-      </button>
+      <p> User githubId: {user.githubId}</p>
+      <div>
+        {hasGithubId(user) ? (
+          <p>Already linked to github</p>
+        ) : (
+          <button type="button" onClick={linkGithub}>
+            Link my github
+          </button>
+        )}
+      </div>
       <ul>
         {userChallenges.map(uc => (
           <li>{uc.name}</li>
