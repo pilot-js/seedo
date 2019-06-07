@@ -9,6 +9,8 @@ const Image = conn.define('image', {
   // from associations: challengeId, userchallengeId
   connector: Sequelize.STRING, // only need for seeding ?
   data: Sequelize.BLOB,
+  height: Sequelize.INTEGER,
+  width: Sequelize.INTEGER,
 });
 
 Image.saveImage = (pathToImage, userchallengeId) => {
