@@ -14,7 +14,7 @@ const _UserPage = ({ user, userChallenges, fetchUserChallenges }) => {
   }, []);
 
   const linkGithub = () => {
-    window.location.href = 'http://localhost:3000/github/login';
+    window.location.href = `${window.location.origin}/github/login`;
   };
 
   const hasGithubId = user => {
