@@ -15,8 +15,16 @@ router.get('/users/:userId/challenges/:challengeId', (req, res, next) => {
     .catch(next);
 });
 
-// TODO need to check if there is an answer first ?
-// bigger question - how to handle multiple answers - Github Issue #31
+router.get('/:userchallengeId', (req, res, next) => {
+  const { userchallengeId } = req.params;
+  Userchallenge.findByPk(userchallengeId, {
+    include: [Image]
+  })
+    .then(userchallenge => {
+      res.send(userchallenge);
+    })
+    .catch(next);
+});
 
 // create answer for a challenge
 router.put('/:userchallengeId', (req, res, next) => {

@@ -32,7 +32,7 @@ const App = props => {
         <Route exact path="/userpage" component={UserPage} />
         <Route
           exact
-          path=":userchallengeId/solution/:id"
+          path="/solutions/:userchallengeId/challenges/:id"
           render={({ match }) => (
             <Solution
               challengeId={match.params.id}

@@ -1,20 +1,67 @@
 import React, { useState, useEffect } from 'react';
 import CodeMirror from 'react-codemirror';
 import { connect } from 'react-redux';
-import { fetchOneChallenge, fetchUserchallenge } from '../store';
+import { fetchOneChallenge, fetchUserchallengeById } from '../store';
 import { convertBufferToImgSrc } from '../utils';
 
 // two props passed down from route parameters
 // challengeId and userchallengeId
-const _Solution = ({ challengeId, userchallengeId, fetchOneChallenge, fetchUserChallenge }) => {
+const _Solution = ({ 
+  user,
+  individualChallenge,
+  userchallenge,
+  challengeId,
+  userchallengeId,
+  fetchOneChallenge,
+  fetchUserchallengeById
+}) => {
   useEffect(() => {
     if (challengeId) {
       fetchOneChallenge(challengeId);
     }
     if (userchallengeId) {
-      fetchUserChallenge(userchallengeId);
+      fetchUserchallengeById(userchallengeId);
     }
   }, []);
+
+  const options = {
+    lineNumbers: true,
+    mode: 'javascript',
+  };
+  return (
+    <div>
+      <h2>Our solution</h2>
+      <div className="row">
+        <CodeMirror
+          defaultValue={individualChallenge.html}
+          options={options}
+        />
+        <CodeMirror
+          defaultValue={individualChallenge.css}
+          options={options}
+        />
+        <CodeMirror
+          defaultValue={individualChallenge.js}
+          options={options}
+        />
+      </div>
+      <h2>Your solution</h2>
+      <div className="row">
+        <CodeMirror
+          defaultValue={userchallenge.html}
+          options={options}
+        />
+        <CodeMirror
+          defaultValue={userchallenge.css}
+          options={options}
+        />
+        <CodeMirror
+          defaultValue={userchallenge.js}
+          options={options}
+        />
+      </div>
+    </div>
+  )
 };
 
 const mapStateToProps = ({ user, individualChallenge, userchallenge }) => ({
@@ -25,7 +72,7 @@ const mapStateToProps = ({ user, individualChallenge, userchallenge }) => ({
 
 const mapDispatchToProps = dispatch => ({
   fetchOneChallenge: challengeId => dispatch(fetchOneChallenge(challengeId)),
-  fetchUserchallenge: (userId, challengeId) => dispatch(fetchUserchallenge(userId, challengeId)),
+  fetchUserchallengeById: (userId, challengeId) => dispatch(fetchUserchallengeById(userId, challengeId)),
 });
 
 export const Solution = connect(
