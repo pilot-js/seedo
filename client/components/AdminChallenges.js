@@ -31,17 +31,17 @@ const _AdminChallenges = props => {
         <tbody>
           {challenges
             ? challenges.map(chall => {
-              const { id, name, description, image } = chall;
-              return (
-                <tr key={id}>
-                  <td />
-                  <td>{id}</td>
-                  <td>{name}</td>
-                  <td>{description}</td>
-                  <td>image goes here</td>
-                </tr>
-              );
-            })
+                const { id, name, description, image } = chall;
+                return (
+                  <tr key={id}>
+                    <td />
+                    <td>{id}</td>
+                    <td>{name}</td>
+                    <td>{description}</td>
+                    <td>image goes here</td>
+                  </tr>
+                );
+              })
             : ''}
         </tbody>
       </table>
