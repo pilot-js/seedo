@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import CodeMirror from 'react-codemirror';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { updateUserchallenge, fetchOneChallenge, fetchUserchallenge } from '../store';
 import { convertBufferToImgSrc } from '../utils';
-import { Link } from 'react-router-dom';
 
-const _IndividualChallenge = ({individualChallenge, userchallenge, updateUserchallenge, user, fetchOneChallenge, challengeId }) => {
+const _IndividualChallenge = ({
+  individualChallenge,
+  userchallenge,
+  updateUserchallenge,
+  user,
+  fetchOneChallenge,
+  challengeId,
+}) => {
   useEffect(() => {
     // TODO: pull active userchallenge if no id specified
     // if (userchallengeId) {
@@ -29,8 +36,8 @@ const _IndividualChallenge = ({individualChallenge, userchallenge, updateUsercha
   };
 
   const updateValue = isSubmit => {
-    const userAnswer = { html, css, js, submitted: true, challengeId: challengeId };
-     updateUserchallenge(userAnswer, challengeId, isSubmit)
+    const userAnswer = { html, css, js, submitted: true, challengeId };
+    updateUserchallenge(userAnswer, challengeId, isSubmit)
       .then(userchallenge => console.log(userchallenge))
       .catch(ex => console.log(ex));
   };
@@ -56,13 +63,11 @@ const _IndividualChallenge = ({individualChallenge, userchallenge, updateUsercha
     <div className="d-flex flex-column align-items-center">
       <h1>{name}</h1>
       <p>{description}</p>
-      <div className="row">
-        <div className="col">
-          users page goes here:
+      <div className="d-flex justify-content-between row" style={{ width: '100%' }}>
+        <div className="d-flex justify-content-center col">
           <img src={imgSrc2} alt="" className="card-image-top" />
         </div>
-        <div className="col">
-          our image goes here:
+        <div className="d-flex justify-content-center col">
           <img src={imgSrc} alt="" className="card-image-top" />
         </div>
       </div>
@@ -74,7 +79,12 @@ const _IndividualChallenge = ({individualChallenge, userchallenge, updateUsercha
             onChange={(value, eventData) => setHTML(value)}
             options={options}
           />
-          <button name="codeHTML" type="button" className="btn btn-success btn-outline btn-sm" onClick={changeValue}>
+          <button
+            name="codeHTML"
+            type="button"
+            className="btn btn-success btn-outline btn-sm"
+            onClick={changeValue}
+          >
             save
           </button>
         </div>
@@ -85,32 +95,46 @@ const _IndividualChallenge = ({individualChallenge, userchallenge, updateUsercha
             onChange={(value, eventData) => setCSS(value)}
             options={options}
           />
-          <button name="codeCSS" type="button" className="btn btn-success btn-outline btn-sm" onClick={changeValue}>
+          <button
+            name="codeCSS"
+            type="button"
+            className="btn btn-success btn-outline btn-sm"
+            onClick={changeValue}
+          >
             save
           </button>
         </div>
         <div className="col">
           <h2>JS</h2>
-          <CodeMirror
-            value={js}
-            onChange={(value, eventData) => setJS(value)}
-            options={options}
-          />
-          <button name="codeJS" type="button" className="btn btn-success btn-outline btn-sm" onClick={changeValue}>
+          <CodeMirror value={js} onChange={(value, eventData) => setJS(value)} options={options} />
+          <button
+            name="codeJS"
+            type="button"
+            className="btn btn-success btn-outline btn-sm"
+            onClick={changeValue}
+          >
             save
           </button>
         </div>
       </div>
       <div className="row btn-group" role="group">
-        <button className="btn btn-info btn-raised" type="button" onClick={() => updateValue(false)}>
+        <button
+          className="btn btn-info btn-raised"
+          type="button"
+          onClick={() => updateValue(false)}
+        >
           Run
         </button>
-        <button className="btn btn-success btn-raised" type="button" onClick={() => updateValue(true)}>
+        <button
+          className="btn btn-success btn-raised"
+          type="button"
+          onClick={() => updateValue(true)}
+        >
           Submit
         </button>
       </div>
       <Link to={`/solutions/${userchallenge.id}/challenges/${individualChallenge.id}`}>
-        <button type="button">
+        <button type="button" className="btn btn-danger">
           Go to Solution
         </button>
       </Link>
