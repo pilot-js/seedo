@@ -10,13 +10,11 @@ const LoginClass = props => {
     ev.preventDefault();
     props
       .getUser({ email, password })
-      .then(() => props.history.push('/'))
+      .then(() => props.history.push('/challenges'))
       .catch(error => console.log(error));
   };
 
   const githubOauth = () => {
-    // TODO: Figure out a better way to to do this, as it doesn't work on heroku.
-    // history.push? should fixed -kristy
     window.location.href = `${window.location.origin}/github/login`;
   };
 
@@ -24,7 +22,7 @@ const LoginClass = props => {
     ev.preventDefault();
     props
       .createUser({ email, password })
-      .then(() => props.history.push('/'))
+      .then(() => props.history.push('/challenges'))
       .catch(error => console.log(error));
   };
 
