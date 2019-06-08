@@ -50,7 +50,6 @@ const _Solution = ({
           <CodeMirror defaultValue={userchallenge.css} options={options} />
         </div>
         <div className="col">
-          <CodeMirror defaultValue={userchallenge.js} options={options} />
         </div>
       </div>
     </div>
