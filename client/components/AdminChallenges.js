@@ -16,7 +16,7 @@ const _AdminChallenges = props => {
     <div>
       <h1>Challenges</h1>
       <Link to="/admin/challenge">
-        <button type='submit'>Add Challenge</button>
+        <button type="submit">Add Challenge</button>
       </Link>
       <table className="table table-striped table-hover">
         <thead>
