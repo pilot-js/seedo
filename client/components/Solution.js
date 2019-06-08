@@ -39,7 +39,6 @@ const _Solution = ({
           <CodeMirror defaultValue={individualChallenge.css} options={options} />
         </div>
         <div className="col">
-          <CodeMirror defaultValue={individualChallenge.js} options={options} />
         </div>
       </div>
       <h2>Your solution</h2>
