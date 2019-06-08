@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 const _Nav = props => {
   const navLinks = [
     {
-      label: 'About Us',
+      label: 'About',
       to: '/',
     },
     {
@@ -13,7 +13,7 @@ const _Nav = props => {
       to: '/challenges',
     },
     {
-      label: 'Meet The Team',
+      label: 'Team',
       to: '/team',
     },
   ];
@@ -36,7 +36,6 @@ const _Nav = props => {
   }
   let adminNavLinks = [];
   if (props.user.type === 'admin') {
-    console.log('type: ', props.user.type);
     adminNavLinks = [
       {
         label: 'Challenges',
@@ -47,7 +46,6 @@ const _Nav = props => {
         to: '/admin/users',
       },
     ];
-    console.log('adminNavLinks: ', adminNavLinks);
   }
 
   return (

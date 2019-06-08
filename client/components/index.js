@@ -7,3 +7,6 @@ export * from './MeetTheTeam';
 export * from './ChallengesList';
 export * from './Logout';
 export * from './UserPage';
+export * from './AdminChallenges';
+export * from './AdminChallengeEdit';
+// export * from './AdminUsers';
