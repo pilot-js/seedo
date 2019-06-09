@@ -29,3 +29,7 @@ export const getUser = user => dispatch => {
 export const logoutUser = () => dispatch => {
   return axios.delete('/auth/logout').then(() => dispatch(setUser({})));
 };
+
+export const createUser = user => dispatch => {
+  return axios.post('/api/users', user).then(res => dispatch(setUser(res.data)));
+};

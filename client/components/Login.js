@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { getUser, getGithubUser } from '../store';
+import { getUser, getGithubUser, createUser } from '../store';
 
 const LoginClass = props => {
   const [email, setEmail] = useState('');
@@ -8,13 +8,22 @@ const LoginClass = props => {
 
   const saveHandler = ev => {
     ev.preventDefault();
-    props.getUser({ email, password }).then(() => props.history.push('/'));
+    props
+      .getUser({ email, password })
+      .then(() => props.history.push('/challenges'))
+      .catch(error => console.log(error));
   };
 
   const githubOauth = () => {
-    // TODO: Figure out a better way to to do this, as it doesn't work on heroku.
-    // history.push?
-    window.location.href = 'http://localhost:3000/github/login';
+    window.location.href = `${window.location.origin}/github/login`;
+  };
+
+  const userSignUp = ev => {
+    ev.preventDefault();
+    props
+      .createUser({ email, password })
+      .then(() => props.history.push('/challenges'))
+      .catch(error => console.log(error));
   };
 
   return (
@@ -36,6 +45,9 @@ const LoginClass = props => {
         />
         <button type="submit">Login</button>
       </form>
+      <button type="button" onClick={userSignUp}>
+        Sign Up!
+      </button>
       <button type="button" onClick={githubOauth}>
         Login With Github
       </button>
@@ -48,6 +60,7 @@ const mapStateToProps = ({ user }) => ({ user });
 const mapDispatchToProps = dispatch => ({
   getUser: user => dispatch(getUser(user)),
   getGithubUser: () => dispatch(getGithubUser()),
+  createUser: user => dispatch(createUser(user)),
 });
 
 export const Login = connect(
