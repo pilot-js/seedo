@@ -11,6 +11,7 @@ import {
   Login,
   Logout,
   UserPage,
+  Solution,
 } from './components';
 import { getGithubUser } from './store';
 
@@ -29,6 +30,16 @@ const App = props => {
         <Route exact path="/login" component={Login} />
         <Route exact path="/logout" component={Logout} />
         <Route exact path="/userpage" component={UserPage} />
+        <Route
+          exact
+          path="/solutions/:userchallengeId/challenges/:id"
+          render={({ match }) => (
+            <Solution
+              challengeId={match.params.id}
+              userchallengeId={match.params.userchallengeId}
+            />
+          )}
+        />
         <Route
           exact
           path="/challenges/:id"
