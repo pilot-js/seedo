@@ -77,14 +77,14 @@ const _IndividualChallenge = ({
   };
   const customStyles = {
     overlay: {
-      backgroundColor: 'rgba(189, 195, 199, .8)'
+      backgroundColor: 'rgba(189, 195, 199, .8)',
     },
-    content : {
-      top                   : '50%',
-      left                  : '50%',
-      marginRight           : '-25%',
-      transform             : 'translate(-50%, -50%)',
-    }
+    content: {
+      top: '50%',
+      left: '50%',
+      marginRight: '-25%',
+      transform: 'translate(-50%, -50%)',
+    },
   };
   const solutionImage = convertBufferToImgSrc(images[0].data);
   return (

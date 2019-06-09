@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 
 export const Results = ({ userImage, solutionImage, diffImage, grade, closeModal }) => (
-  <div className="d-flex flex-column justify-content-around" style={{ width: '100%', height: '100%' }}>
+  <div
+    className="d-flex flex-column justify-content-around"
+    style={{ width: '100%', height: '100%' }}
+  >
     <div className="d-flex justify-content-around row">
       <img src={userImage} alt="Yours" />
       <img src={solutionImage} alt="Solution" />

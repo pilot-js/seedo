@@ -34,18 +34,14 @@ const _Solution = ({
       <h2>Our solution</h2>
       <div className="d-flex justify-content-around row">
         <div className="col">
-          {
-            individualChallenge ?
-              <CodeMirror defaultValue={individualChallenge.solutions[0].html} options={options} />
-              : null
-          }
+          {individualChallenge ? (
+            <CodeMirror defaultValue={individualChallenge.solutions[0].html} options={options} />
+          ) : null}
         </div>
         <div className="col">
-          {
-            individualChallenge ?
+          {individualChallenge ? (
             <CodeMirror defaultValue={individualChallenge.solutions[0].css} options={options} />
-            : null
-          }
+          ) : null}
         </div>
       </div>
       <h2>Your solution</h2>

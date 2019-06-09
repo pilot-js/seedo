@@ -26,19 +26,4 @@ module.exports = conn.define('challenge', {
       max: 5,
     },
   },
-  html: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    defaultValue: '',
-  },
-  css: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    defaultValue: '',
-  },
-  js: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    defaultValue: '',
-  },
 });
