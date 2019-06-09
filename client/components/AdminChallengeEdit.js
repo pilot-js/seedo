@@ -13,10 +13,9 @@ export const AdminChallengeEdit = props => {
   const [imageHeight, setImageHeight] = useState('');
   const [image, setImage] = useState('');
 
-
   const handleSubmit = ev => {
     ev.preventDefault();
-    console.log('challenge: ', ev)
+    console.log('challenge: ', ev);
     // axios.post('api/challenges', challenge)
     //   .then(() => history.pushState('/admin/challenges'))
     //   .catch(err => console.log(err));
@@ -141,11 +140,7 @@ export const AdminChallengeEdit = props => {
           />
         </div>
       </div>
-      <button type='submit'>
-        Create Challenge
-      </button>
+      <button type="submit">Create Challenge</button>
     </form>
   );
 };
-
-
