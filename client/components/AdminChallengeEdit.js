@@ -31,6 +31,10 @@ export const AdminChallengeEdit = props => {
       .catch(err => console.log(err));
   };
 
+  const preview = () => {
+    // refactor createFiles & createImages from puppeteer-utils
+  };
+
   return (
     <form onSubmit={handleSubmit}>
       <div className="form-group row">
@@ -136,7 +140,10 @@ export const AdminChallengeEdit = props => {
           />
         </div>
       </div>
-      <button type="submit">Create Challenge</button>
+      <button type="button" onClick={preview}>
+        Preview
+      </button>
+      <button type="submit">Save Challenge</button>
     </form>
   );
 };
