@@ -13,7 +13,7 @@ import {
   UserPage,
   AdminChallenges,
   AdminChallengeEdit,
-  // AdminUsers,
+  AdminUsers,
 } from './components';
 import { getGithubUser } from './store';
 
@@ -47,7 +47,7 @@ const App = props => {
           render={({ match }) => <AdminChallengeEdit challengeId={match.params.id} />}
         />
         <Route exact path="/admin/challenges" component={AdminChallenges} />
-        {/* <Route exact path="/admin/users" component={AdminUsers} /> */}
+        <Route exact path="/admin/users" component={AdminUsers} />
       </Switch>
       <Footer />
     </div>
