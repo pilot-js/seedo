@@ -38,7 +38,7 @@ const createImage = async userId => {
   const page = await browser.newPage();
   const retPath = `file://${path.join(process.cwd(), `server/tmp/${userId}.html`)}`;
   await page.goto(retPath);
-  await page.setViewport({ width: 100, height: 100 });
+  await page.setViewport({ width: 300, height: 300 });
   await page.screenshot({ path: `./server/tmp/${userId}.png` });
   await browser.close();
   return retPath;
