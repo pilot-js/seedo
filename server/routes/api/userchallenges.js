@@ -35,8 +35,7 @@ router.put('/:userchallengeId', (req, res, next) => {
       .then(userchall => userchall.update(req.body.userAnswer))
       .then(async userchall => {
         await createFiles(userchall.html, userchall.css, userchall.userId);
-
-        const retPathToUserImage = await createImage(userchall.userId);
+        const retPathToUserImage = await createImage(userchall.userId, userchall.challengeId);
         const pathToUserImage = retPathToUserImage.replace('file://', '').replace('.html', '.png');
         await Image.saveImage(pathToUserImage, userchallengeId);
 

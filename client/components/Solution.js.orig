@@ -40,9 +40,8 @@ const _Solution = ({
         </div>
 <<<<<<< HEAD
 =======
-        <div className="col">
-        </div>
->>>>>>> f336e2d31e83d546d48f183d20110b8b616424d0
+        <div className="col" />
+>>>>>>> a58d41badc037b17867428c488684b7ec0875e00
       </div>
       <h2>Your solution</h2>
       <div className="d-flex justify-content-around row">
@@ -54,9 +53,8 @@ const _Solution = ({
         </div>
 <<<<<<< HEAD
 =======
-        <div className="col">
-        </div>
->>>>>>> f336e2d31e83d546d48f183d20110b8b616424d0
+        <div className="col" />
+>>>>>>> a58d41badc037b17867428c488684b7ec0875e00
       </div>
     </div>
   );
