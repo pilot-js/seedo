@@ -134,18 +134,6 @@ const _IndividualChallenge = ({
             save
           </button>
         </div>
-        <div className="col">
-          <h2>JS</h2>
-          <CodeMirror value={js} onChange={(value, eventData) => setJS(value)} options={options} />
-          <button
-            name="codeJS"
-            type="button"
-            className="btn btn-success btn-outline btn-sm"
-            onClick={changeValue}
-          >
-            save
-          </button>
-        </div>
       </div>
       <div className="row btn-group" role="group">
         <button
