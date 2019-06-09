@@ -35,16 +35,20 @@ const createFiles = async (html, css, userId) => {
 };
 
 const createImage = async (userId, challengeId) => {
-  const image = await Image.findOne({ where: { challengeId } });
-  const args = ['-–no-sandbox', '-–disable-setuid-sandbox'];
-  const browser = await puppeteer.launch({ args });
-  const page = await browser.newPage();
-  const retPath = `file://${path.join(process.cwd(), `server/tmp/${userId}.html`)}`;
-  await page.goto(retPath);
-  await page.setViewport({ width: image.width, height: image.height });
-  await page.screenshot({ path: `./server/tmp/${userId}.png` });
-  await browser.close();
-  return retPath;
+  try {
+    const image = await Image.findOne({ where: { challengeId } });
+    const args = ['-–no-sandbox', '-–disable-setuid-sandbox'];
+    const browser = await puppeteer.launch({ args });
+    const page = await browser.newPage();
+    const retPath = `file://${path.join(process.cwd(), `server/tmp/${userId}.html`)}`;
+    await page.goto(retPath);
+    await page.setViewport({ width: image.width, height: image.height });
+    await page.screenshot({ path: `./server/tmp/${userId}.png` });
+    await browser.close();
+    return retPath;
+  } catch (err) {
+    console.log('error from createImage: ', err);
+  }
 };
 
 module.exports = {
