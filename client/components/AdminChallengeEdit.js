@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 export const AdminChallengeEdit = props => {
   const [name, setName] = useState('');
@@ -12,8 +13,17 @@ export const AdminChallengeEdit = props => {
   const [imageHeight, setImageHeight] = useState('');
   const [image, setImage] = useState('');
 
+
+  const handleSubmit = ev => {
+    ev.preventDefault();
+    console.log('challenge: ', ev)
+    // axios.post('api/challenges', challenge)
+    //   .then(() => history.pushState('/admin/challenges'))
+    //   .catch(err => console.log(err));
+  };
+
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <div className="form-group row">
         <label htmlFor="name" className="col-sm-2 col-form-label">
           Name
@@ -117,6 +127,25 @@ export const AdminChallengeEdit = props => {
           />
         </div>
       </div>
+      <div className="form-group row">
+        <label htmlFor="image" className="col-sm-2 col-form-label">
+          Image
+        </label>
+        <div className="col-sm-6">
+          <input
+            className="form-control"
+            type="file"
+            name="image"
+            value={image}
+            onChange={e => setImage(e.target.value)}
+          />
+        </div>
+      </div>
+      <button type='submit'>
+        Create Challenge
+      </button>
     </form>
   );
 };
+
+
