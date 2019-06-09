@@ -5,7 +5,7 @@ export const Filter = props => {
 
   const submitHanlder = event => {
     event.preventDefault();
-    props.history.push(`/challenges/filter/${difficulty}`)
+    props.history.push(`/challenges/filter/${difficulty}`);
   };
 
   const onClear = () => {
@@ -16,7 +16,7 @@ export const Filter = props => {
   return (
     <form onSubmit={submitHanlder}>
       <label>Difficulty:</label>
-      <select value={difficulty} onChange={e => setDifficulty(e.target.value)} >
+      <select value={difficulty} onChange={e => setDifficulty(e.target.value)}>
         <option>--</option>
         <option value={1}>1</option>
         <option value={2}>2</option>
