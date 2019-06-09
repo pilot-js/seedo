@@ -75,6 +75,17 @@ const _IndividualChallenge = ({
     width: '100%',
     visibility: showCodeMirror ? 'visible' : 'hidden',
   };
+  const customStyles = {
+    overlay: {
+      backgroundColor: 'rgba(189, 195, 199, .8)'
+    },
+    content : {
+      top                   : '50%',
+      left                  : '50%',
+      marginRight           : '-25%',
+      transform             : 'translate(-50%, -50%)',
+    }
+  };
   const solutionImage = convertBufferToImgSrc(images[0].data);
   return (
     <div className="d-flex flex-column align-items-center">
@@ -99,6 +110,7 @@ const _IndividualChallenge = ({
           <Modal
             isOpen={showModal}
             onRequestClose={() => setShowModal(false)}
+            style={customStyles}
             contentLabel="Test modal"
           >
             <Results
