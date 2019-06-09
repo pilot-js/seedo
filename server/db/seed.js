@@ -192,7 +192,13 @@ const solutionsSeed = [
 
 // from associations: challengeId, userchallengeId
 const images = [
-  { type: 'challenge', url: 'challenge-1-red-circle.png', connector: 'challenge-1', width:100, height:100 },
+  {
+    type: 'challenge',
+    url: 'challenge-1-red-circle.png',
+    connector: 'challenge-1',
+    width: 100,
+    height: 100,
+  },
   { type: 'challenge', url: 'challenge-2-blue-square.png', connector: 'challenge-2' },
   { type: 'challenge', url: 'challenge-3-yellow-rectangle.png', connector: 'challenge-3' },
   { type: 'challenge', url: 'challenge-4-orange-rectangle.png', connector: 'challenge-4' },
