@@ -28,6 +28,7 @@ const App = props => {
         <Route exact path="/team" component={MeetTheTeam} />
         <Route exact path="/challenges" component={ChallengesList} />
         <Route exact path="/challenges/search/:searchTerm" component={ChallengesList} />
+        <Route exact path="/challenges/filter/:difficulty" component={ChallengesList} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/logout" component={Logout} />
         <Route exact path="/userpage" component={UserPage} />

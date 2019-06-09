@@ -26,3 +26,9 @@ export const fetchChallenges = () => {
 export const fetchSearchChallenges = term => dispatch => {
   return axios.get(`api/challenges/search/${term}`).then(res => dispatch(getChallenges(res.data)));
 };
+
+export const fetchFilterChallenges = difficulty => dispatch => {
+  return axios
+    .get(`api/challenges/filter/${difficulty}`)
+    .then(res => dispatch(getChallenges(res.data)));
+};

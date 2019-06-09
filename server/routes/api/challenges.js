@@ -53,6 +53,19 @@ router.get('/search/:term', (req, res, next) => {
     .catch(next);
 });
 
+router.get('/filter/:difficulty', (req, res, next) => {
+  const { difficulty } = req.params;
+  Challenge.findAll({
+    where: {
+      difficulty,
+    },
+    order: [['name', 'asc']],
+    include: [Image],
+  })
+    .then(challenges => res.send(challenges))
+    .catch(next);
+});
+
 // update a single challenge
 router.put('/:id', (req, res, next) => {
   // TODO how to handle req.params.id === NaN ?

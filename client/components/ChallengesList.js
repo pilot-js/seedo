@@ -1,31 +1,37 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchChallenges, fetchSearchChallenges } from '../store';
+import { fetchChallenges, fetchSearchChallenges, fetchFilterChallenges } from '../store';
 import { convertBufferToImgSrc } from '../utils';
 import { Search } from './Search';
+import { Filter } from './Filter';
 
 const mapDispatchToProps = dispatch => ({
   fetchChallenges: () => dispatch(fetchChallenges()),
   fetchSearchChallenges: term => dispatch(fetchSearchChallenges(term)),
+  fetchFilterChallenges: difficulty => dispatch(fetchFilterChallenges(difficulty)),
 });
 
 const mapStateToProps = ({ challenges }) => ({ challenges });
 
 const component = props => {
+  const { searchTerm, difficulty } = props.match.params;
   useEffect(() => {
-    if (!props.match.params.searchTerm) {
+    if (!searchTerm && !difficulty) {
       props.fetchChallenges();
-    } else {
-      props.fetchSearchChallenges(props.match.params.searchTerm);
+    } else if (!difficulty) {
+      props.fetchSearchChallenges(searchTerm);
+    } else if (!searchTerm) {
+      props.fetchFilterChallenges(difficulty);
     }
-  }, [props.match.params.searchTerm]);
+  }, [searchTerm, difficulty]);
   return (
     <div>
       <div className="d-flex justify-content-center">
         <h1>Our Challenges</h1>
       </div>
       <Search history={props.history} term={props.match.params.searchTerm} />
+      <Filter history={props.history} />
       <div className="d-flex justify-content-around">
         {props.challenges.map(challenge => {
           const imageSrc = convertBufferToImgSrc(challenge.images[0].data);
