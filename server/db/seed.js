@@ -16,6 +16,9 @@ const challengesSeed = [
     name: 'Make circle',
     description: 'Make a red circle with radius 100px',
     difficulty: 1,
+    html: 'dummy data',
+    css: 'dummy data',
+    js: 'dummy data',
   },
   {
     name: 'Make square',
@@ -192,10 +195,34 @@ const solutionsSeed = [
 
 // from associations: challengeId, userchallengeId
 const images = [
-  { type: 'challenge', url: 'challenge-1-red-circle.png', connector: 'challenge-1' },
-  { type: 'challenge', url: 'challenge-2-blue-square.png', connector: 'challenge-2' },
-  { type: 'challenge', url: 'challenge-3-yellow-rectangle.png', connector: 'challenge-3' },
-  { type: 'challenge', url: 'challenge-4-orange-rectangle.png', connector: 'challenge-4' },
+  {
+    type: 'challenge',
+    url: 'challenge-1-red-circle.png',
+    connector: 'challenge-1',
+    width: 100,
+    height: 100,
+  },
+  {
+    type: 'challenge',
+    url: 'challenge-2-blue-square.png',
+    connector: 'challenge-2',
+    width: 100,
+    height: 100,
+  },
+  {
+    type: 'challenge',
+    url: 'challenge-3-yellow-rectangle.png',
+    connector: 'challenge-3',
+    width: 200,
+    height: 100,
+  },
+  {
+    type: 'challenge',
+    url: 'challenge-4-orange-rectangle.png',
+    connector: 'challenge-4',
+    width: 100,
+    height: 200,
+  },
   { type: 'userchallenge', url: 'userchallenge-1.png', connector: 'userchallenge-1' },
   { type: 'userchallenge', url: 'userchallenge-2.png', connector: 'userchallenge-2' },
   { type: 'userchallenge', url: 'userchallenge-3.png', connector: 'userchallenge-3' },
@@ -224,7 +251,14 @@ const syncAndSeed = () => {
           Promise.all(userchallengeSeed.map(chal => Userchallenge.create(chal))),
           Promise.all(solutionsSeed.map(sol => Solution.create(sol))),
           Promise.all(
-            imagesSeed.map(img => Image.create({ connector: img.connector, data: img.data })),
+            imagesSeed.map(img =>
+              Image.create({
+                connector: img.connector,
+                data: img.data,
+                width: img.width,
+                height: img.height,
+              }),
+            ),
           ),
         ]);
       })

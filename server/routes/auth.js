@@ -40,12 +40,12 @@ router.get('/github/callback', (req, res, next) => {
       if (req.session.user) {
         await User.update({ githubId: githubUser.id }, { where: { id: req.session.user.id } });
         req.session.user.githubId = githubUser.id;
-        res.redirect('/');
+        res.redirect(`${process.env.URL}/#/challenges`);
       } else {
         let user = await User.findOne({ where: { githubId: githubUser.id } });
         if (user !== null) {
           req.session.user = user;
-          res.redirect('/#/userpage');
+          res.redirect(`${process.env.URL}/#/challenges`);
         } else {
           user = await User.create({
             email: githubUser.email,
@@ -53,7 +53,7 @@ router.get('/github/callback', (req, res, next) => {
             githubId: githubUser.id,
           });
           req.session.user = user;
-          res.redirect('/');
+          res.redirect(`${process.env.URL}/#/challenges`);
         }
       }
     })

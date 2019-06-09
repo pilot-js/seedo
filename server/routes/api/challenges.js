@@ -47,7 +47,7 @@ router.post('/', (req, res, next) => {
 // get a single challenge with images and comments
 router.get('/:id', (req, res, next) => {
   Challenge.findByPk(req.params.id, {
-    include: [Image, Comment],
+    include: [Image, Comment, Solution],
   })
     .then(challenge => {
       res.send(challenge);

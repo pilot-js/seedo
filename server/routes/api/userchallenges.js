@@ -15,8 +15,16 @@ router.get('/users/:userId/challenges/:challengeId', (req, res, next) => {
     .catch(next);
 });
 
-// TODO need to check if there is an answer first ?
-// bigger question - how to handle multiple answers - Github Issue #31
+router.get('/:userchallengeId', (req, res, next) => {
+  const { userchallengeId } = req.params;
+  Userchallenge.findByPk(userchallengeId, {
+    include: [Image],
+  })
+    .then(userchallenge => {
+      res.send(userchallenge);
+    })
+    .catch(next);
+});
 
 // create answer for a challenge
 router.put('/:userchallengeId', (req, res, next) => {
@@ -26,9 +34,12 @@ router.put('/:userchallengeId', (req, res, next) => {
     Userchallenge.findByPk(userchallengeId)
       .then(userchall => userchall.update(req.body.userAnswer))
       .then(async userchall => {
-        await createFiles(userchall.html, userchall.css, userchall.userId);
-
-        const retPathToUserImage = await createImage(userchall.userId);
+        await createFiles(userchall.html, userchall.css, userchall.userId, './server/tmp/');
+        const retPathToUserImage = await createImage(
+          userchall.userId,
+          userchall.challengeId,
+          './server/tmp/',
+        );
         const pathToUserImage = retPathToUserImage.replace('file://', '').replace('.html', '.png');
         await Image.saveImage(pathToUserImage, userchallengeId);
 

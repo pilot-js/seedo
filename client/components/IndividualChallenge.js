@@ -1,23 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import CodeMirror from 'react-codemirror';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import Modal from 'react-modal';
+import { Results } from './Results';
 import { updateUserchallenge, fetchOneChallenge, fetchUserchallenge } from '../store';
 import { convertBufferToImgSrc } from '../utils';
 
-const _IndividualChallenge = props => {
+const _IndividualChallenge = ({
+  individualChallenge,
+  userchallenge,
+  updateUserchallenge,
+  user,
+  fetchOneChallenge,
+  challengeId,
+}) => {
   useEffect(() => {
     // TODO: pull active userchallenge if no id specified
-    // if (props.userchallengeId) {
-    //   fetchUserchallenge(props.userchallenge.Id);
+    // if (userchallengeId) {
+    //   fetchUserchallenge(userchallenge.Id);
     // } else {
-    //   fetchActiveUserchallenge(props.challengeId, props.userId);
+    //   fetchActiveUserchallenge(challengeId, props.userId);
     // };
-    if (props.user.id) {
-      props.fetchUserchallenge(props.user.id, props.challengeId);
+    if (user.id) {
+      fetchUserchallenge(user.id, challengeId);
     }
 
-    props.fetchOneChallenge(props.challengeId);
+    fetchOneChallenge(challengeId);
   }, []);
+  const [showModal, setShowModal] = useState(false);
+  const [showCodeMirror, setShowCodeMirror] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [html, setHTML] = useState('');
   const [css, setCSS] = useState('');
   const [js, setJS] = useState('');
@@ -28,85 +41,133 @@ const _IndividualChallenge = props => {
   };
 
   const updateValue = isSubmit => {
-    const userAnswer = { html, css, js, submitted: true, challengeId: props.challengeId };
-    props
-      .updateUserchallenge(userAnswer, props.challengeId, isSubmit)
+    setLoading(true);
+    const userAnswer = { html, css, js, submitted: true, challengeId };
+    updateUserchallenge(userAnswer, challengeId, isSubmit)
       .then(userchallenge => console.log(userchallenge))
+      .then(() => {
+        setShowModal(isSubmit);
+        setShowCodeMirror(!isSubmit);
+        setLoading(false);
+      })
       .catch(ex => console.log(ex));
+  };
+  const closeModal = () => {
+    setShowModal(false);
+    setShowCodeMirror(true);
   };
 
   const options = {
     lineNumbers: true,
     mode: 'javascript',
   };
-  let imgSrc2;
-  if (Object.keys(props.individualChallenge).length === 0) {
+  if (Object.keys(individualChallenge).length === 0) {
     return null;
   }
-  if (props.userchallenge.images) {
-    const { images } = props.userchallenge;
-    imgSrc2 = images.length ? convertBufferToImgSrc(images[0].data) : '';
+  let userImage;
+  if (userchallenge.images) {
+    const { images } = userchallenge;
+    userImage = images.length ? convertBufferToImgSrc(images[0].data) : '';
   }
-  const { name, description, images, comments } = props.individualChallenge;
+  const { name, description, images, comments } = individualChallenge;
 
-  const imgSrc = convertBufferToImgSrc(images[0].data);
+  const codeMirrorStyle = {
+    width: '100%',
+    visibility: showCodeMirror ? 'visible' : 'hidden',
+  };
+  const customStyles = {
+    overlay: {
+      backgroundColor: 'rgba(189, 195, 199, .8)',
+    },
+    content: {
+      top: '50%',
+      left: '50%',
+      marginRight: '-25%',
+      transform: 'translate(-50%, -50%)',
+    },
+  };
+  const solutionImage = convertBufferToImgSrc(images[0].data);
   return (
     <div className="d-flex flex-column align-items-center">
       <h1>{name}</h1>
       <p>{description}</p>
-      <div>
-        <div className="row">
-          <div className="col">
-            users page goes here:
-            <img src={imgSrc2} alt="" className="card-image-top" />
-          </div>
-          <div className="col">
-            our image goes here:
-            <img src={imgSrc} alt="" className="card-image-top" />
-          </div>
+      <div className="d-flex justify-content-between row" style={{ width: '100%' }}>
+        <div className="d-flex justify-content-center col">
+          <img src={userImage} alt="" className="card-image-top" />
         </div>
-        <div className="row">
-          <div className="col">
-            <h2>HTML Editor</h2>
-            <CodeMirror
-              value={html}
-              onChange={(value, eventData) => setHTML(value)}
-              options={options}
-            />
-            <button name="codeHTML" type="button" onClick={changeValue}>
-              save
-            </button>
-          </div>
-          <div className="col">
-            <h2>CSS Editor</h2>
-            <CodeMirror
-              value={css}
-              onChange={(value, eventData) => setCSS(value)}
-              options={options}
-            />
-            <button name="codeCSS" type="button" onClick={changeValue}>
-              save
-            </button>
-          </div>
-          <div className="col">
-            <h2>JS Editor</h2>
-            <CodeMirror
-              value={js}
-              onChange={(value, eventData) => setJS(value)}
-              options={options}
-            />
-            <button name="codeJS" type="button" onClick={changeValue}>
-              save
-            </button>
-          </div>
+        <div className="d-flex justify-content-center col">
+          <img src={solutionImage} alt="" className="card-image-top" />
         </div>
-        <button type="button" onClick={() => updateValue(false)}>
+      </div>
+      <div className="d-flex justify-content-between row" style={codeMirrorStyle}>
+        <div className="col">
+          <h2>HTML</h2>
+          <CodeMirror
+            value={html}
+            onChange={(value, eventData) => setHTML(value)}
+            options={options}
+          />
+          <Modal
+            isOpen={showModal}
+            onRequestClose={() => setShowModal(false)}
+            style={customStyles}
+            contentLabel="Test modal"
+          >
+            <Results
+              userImage={userImage}
+              solutionImage={solutionImage}
+              diffImage=""
+              grade={userchallenge.grade}
+              closeModal={closeModal}
+            />
+          </Modal>
+          <button
+            name="codeHTML"
+            type="button"
+            className="btn btn-success btn-outline btn-sm"
+            onClick={changeValue}
+          >
+            save
+          </button>
+        </div>
+        <div className="col">
+          <h2>CSS</h2>
+          <CodeMirror
+            value={css}
+            onChange={(value, eventData) => setCSS(value)}
+            options={options}
+          />
+          <button
+            name="codeCSS"
+            type="button"
+            className="btn btn-success btn-outline btn-sm"
+            onClick={changeValue}
+          >
+            save
+          </button>
+        </div>
+      </div>
+      <div className="row btn-group" role="group">
+        <button
+          className="btn btn-info btn-raised"
+          type="button"
+          onClick={() => updateValue(false)}
+        >
           Run
         </button>
-        <button type="button" onClick={() => updateValue(true)}>
-          Submit
+        <button
+          className="btn btn-success btn-raised"
+          type="button"
+          onClick={() => updateValue(true)}
+        >
+          {loading ? 'Loading...' : 'Submit'}
         </button>
       </div>
+      <Link to={`/solutions/${userchallenge.id}/challenges/${individualChallenge.id}`}>
+        <button type="button" className="btn btn-danger">
+          Go to Solution
+        </button>
+      </Link>
     </div>
   );
 };
