@@ -25,7 +25,8 @@ export const AdminChallengeEdit = props => {
     };
 
     console.log('challenge: ', challenge);
-    axios.post('api/challenges', challenge)
+    axios
+      .post('api/challenges', challenge)
       .then(() => props.history.push('/admin/challenges'))
       .catch(err => console.log(err));
   };

@@ -32,9 +32,14 @@ router.post('/', (req, res, next) => {
       const { name, description, difficulty } = chall;
       const { html, css, challengeId } = solution;
       const challenge = {
-        name, description, difficulty, html, css, challengeId,
+        name,
+        description,
+        difficulty,
+        html,
+        css,
+        challengeId,
       };
-      res.send(challenge)
+      res.send(challenge);
     })
     .catch(next);
 });
