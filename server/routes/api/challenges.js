@@ -1,11 +1,11 @@
 const router = require('express').Router();
-const { Challenge, Image, Comment } = require('../../db');
+const { Challenge, Image, Comment, Solution } = require('../../db');
 
 /**  /api/challenges **/
 
 // get all challenges
 router.get('/', (req, res, next) => {
-  Challenge.findAll({ include: [Image] })
+  Challenge.findAll({ include: [Image], order: ['id'] })
     .then(challenges => {
       res.send(challenges);
     })
@@ -14,13 +14,28 @@ router.get('/', (req, res, next) => {
 
 // create a single challenge
 router.post('/', (req, res, next) => {
-  const { name, description, difficulty } = req.body;
+  const { name, description, difficulty, html, css } = req.body;
   Challenge.create({
     name,
     description,
     difficulty,
   })
-    .then(challenge => res.send(challenge))
+    .then(async chall => {
+      const solution = await Solution.create({
+        html,
+        css,
+        challengeId: chall.id,
+      });
+      return [chall, solution];
+    })
+    .then(([chall, solution]) => {
+      const { name, description, difficulty } = chall;
+      const { html, css, challengeId } = solution;
+      const challenge = {
+        name, description, difficulty, html, css, challengeId,
+      };
+      res.send(challenge)
+    })
     .catch(next);
 });
 

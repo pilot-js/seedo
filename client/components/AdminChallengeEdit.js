@@ -11,14 +11,23 @@ export const AdminChallengeEdit = props => {
   // TODO upload image file, convert to binary, save in db
   const [imageWidth, setImageWidth] = useState('');
   const [imageHeight, setImageHeight] = useState('');
-  const [image, setImage] = useState('');
 
   const handleSubmit = ev => {
     ev.preventDefault();
-    console.log('challenge: ', ev);
-    // axios.post('api/challenges', challenge)
-    //   .then(() => history.pushState('/admin/challenges'))
-    //   .catch(err => console.log(err));
+    const challenge = {
+      name,
+      description,
+      difficulty,
+      html,
+      css,
+      imageWidth,
+      imageHeight,
+    };
+
+    console.log('challenge: ', challenge);
+    axios.post('api/challenges', challenge)
+      .then(() => props.history.push('/admin/challenges'))
+      .catch(err => console.log(err));
   };
 
   return (
@@ -123,20 +132,6 @@ export const AdminChallengeEdit = props => {
             name="imageHeight"
             value={imageHeight}
             onChange={e => setImageHeight(e.target.value)}
-          />
-        </div>
-      </div>
-      <div className="form-group row">
-        <label htmlFor="image" className="col-sm-2 col-form-label">
-          Image
-        </label>
-        <div className="col-sm-6">
-          <input
-            className="form-control"
-            type="file"
-            name="image"
-            value={image}
-            onChange={e => setImage(e.target.value)}
           />
         </div>
       </div>
