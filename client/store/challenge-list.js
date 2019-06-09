@@ -21,3 +21,8 @@ export const fetchChallenges = () => {
       .then(challenges => dispatch(getChallenges(challenges)));
   };
 };
+
+// Return search challenges with a search term
+export const fetchSearchChallenges = term => dispatch => {
+  return axios.get(`api/challenges/search/${term}`).then(res => dispatch(getChallenges(res.data)));
+};

@@ -38,8 +38,7 @@ const _Solution = ({
         <div className="col">
           <CodeMirror defaultValue={individualChallenge.css} options={options} />
         </div>
-        <div className="col">
-        </div>
+        <div className="col" />
       </div>
       <h2>Your solution</h2>
       <div className="d-flex justify-content-around row">
@@ -49,8 +48,7 @@ const _Solution = ({
         <div className="col">
           <CodeMirror defaultValue={userchallenge.css} options={options} />
         </div>
-        <div className="col">
-        </div>
+        <div className="col" />
       </div>
     </div>
   );

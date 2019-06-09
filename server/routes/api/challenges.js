@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { Challenge, Image, Comment } = require('../../db');
-
+const Op = require('../../db/conn').Sequelize.Op;
 /**  /api/challenges **/
 
 // get all challenges
@@ -32,6 +32,24 @@ router.get('/:id', (req, res, next) => {
     .then(challenge => {
       res.send(challenge);
     })
+    .catch(next);
+});
+
+// get challenges with search term
+router.get('/search/:term', (req, res, next) => {
+  const { term } = req.params;
+  console.log(term);
+  Challenge.findAll({
+    where: {
+      [Op.or]: [
+        { name: { [Op.iLike]: `%${term}%` } },
+        { description: { [Op.iLike]: `%${term}%` } },
+      ],
+    },
+    order: [['name', 'asc']],
+    include: [Image],
+  })
+    .then(challenges => res.send(challenges))
     .catch(next);
 });
 
