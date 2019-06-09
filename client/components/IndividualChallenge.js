@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import CodeMirror from 'react-codemirror';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Modal from 'react-modal';
+import { Results } from './Results';
 import { updateUserchallenge, fetchOneChallenge, fetchUserchallenge } from '../store';
 import { convertBufferToImgSrc } from '../utils';
 
@@ -26,6 +28,9 @@ const _IndividualChallenge = ({
 
     fetchOneChallenge(challengeId);
   }, []);
+  const [showModal, setShowModal] = useState(false);
+  const [showCodeMirror, setShowCodeMirror] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [html, setHTML] = useState('');
   const [css, setCSS] = useState('');
   const [js, setJS] = useState('');
@@ -36,42 +41,65 @@ const _IndividualChallenge = ({
   };
 
   const updateValue = isSubmit => {
+    setLoading(true);
     const userAnswer = { html, css, js, submitted: true, challengeId };
     updateUserchallenge(userAnswer, challengeId, isSubmit)
       .then(userchallenge => console.log(userchallenge))
+      .then(() => {
+        setShowModal(isSubmit);
+        setShowCodeMirror(!isSubmit);
+        setLoading(false);
+      })
       .catch(ex => console.log(ex));
   };
-
-  console.log(userchallenge);
+  const closeModal = () => {
+    setShowModal(false);
+    setShowCodeMirror(true);
+  };
 
   const options = {
     lineNumbers: true,
     mode: 'javascript',
   };
-  let imgSrc2;
   if (Object.keys(individualChallenge).length === 0) {
     return null;
   }
+  let userImage;
   if (userchallenge.images) {
     const { images } = userchallenge;
-    imgSrc2 = images.length ? convertBufferToImgSrc(images[0].data) : '';
+    userImage = images.length ? convertBufferToImgSrc(images[0].data) : '';
   }
   const { name, description, images, comments } = individualChallenge;
 
-  const imgSrc = convertBufferToImgSrc(images[0].data);
+  const codeMirrorStyle = {
+    width: '100%',
+    visibility: showCodeMirror ? 'visible' : 'hidden',
+  };
+  const customStyles = {
+    overlay: {
+      backgroundColor: 'rgba(189, 195, 199, .8)',
+    },
+    content: {
+      top: '50%',
+      left: '50%',
+      marginRight: '-25%',
+      transform: 'translate(-50%, -50%)',
+    },
+  };
+  const solutionImage = convertBufferToImgSrc(images[0].data);
   return (
     <div className="d-flex flex-column align-items-center">
       <h1>{name}</h1>
       <p>{description}</p>
       <div className="d-flex justify-content-between row" style={{ width: '100%' }}>
         <div className="d-flex justify-content-center col">
-          <img src={imgSrc2} alt="" className="card-image-top" />
+          <img src={userImage} alt="" className="card-image-top" />
         </div>
         <div className="d-flex justify-content-center col">
-          <img src={imgSrc} alt="" className="card-image-top" />
+          <img src={solutionImage} alt="" className="card-image-top" />
         </div>
       </div>
-      <div className="d-flex justify-content-between row" style={{ width: '100%' }}>
+      <div className="d-flex justify-content-between row" style={codeMirrorStyle}>
         <div className="col">
           <h2>HTML</h2>
           <CodeMirror
@@ -79,6 +107,20 @@ const _IndividualChallenge = ({
             onChange={(value, eventData) => setHTML(value)}
             options={options}
           />
+          <Modal
+            isOpen={showModal}
+            onRequestClose={() => setShowModal(false)}
+            style={customStyles}
+            contentLabel="Test modal"
+          >
+            <Results
+              userImage={userImage}
+              solutionImage={solutionImage}
+              diffImage=""
+              grade={userchallenge.grade}
+              closeModal={closeModal}
+            />
+          </Modal>
           <button
             name="codeHTML"
             type="button"
@@ -104,18 +146,6 @@ const _IndividualChallenge = ({
             save
           </button>
         </div>
-        <div className="col">
-          <h2>JS</h2>
-          <CodeMirror value={js} onChange={(value, eventData) => setJS(value)} options={options} />
-          <button
-            name="codeJS"
-            type="button"
-            className="btn btn-success btn-outline btn-sm"
-            onClick={changeValue}
-          >
-            save
-          </button>
-        </div>
       </div>
       <div className="row btn-group" role="group">
         <button
@@ -130,7 +160,7 @@ const _IndividualChallenge = ({
           type="button"
           onClick={() => updateValue(true)}
         >
-          Submit
+          {loading ? 'Loading...' : 'Submit'}
         </button>
       </div>
       <Link to={`/solutions/${userchallenge.id}/challenges/${individualChallenge.id}`}>

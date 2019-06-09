@@ -24,6 +24,7 @@ const _Solution = ({
     }
   }, []);
 
+  console.log(individualChallenge);
   const options = {
     lineNumbers: true,
     mode: 'javascript',
@@ -33,12 +34,15 @@ const _Solution = ({
       <h2>Our solution</h2>
       <div className="d-flex justify-content-around row">
         <div className="col">
-          <CodeMirror defaultValue={individualChallenge.html} options={options} />
+          {individualChallenge ? (
+            <CodeMirror defaultValue={individualChallenge.solutions[0].html} options={options} />
+          ) : null}
         </div>
         <div className="col">
-          <CodeMirror defaultValue={individualChallenge.css} options={options} />
+          {individualChallenge ? (
+            <CodeMirror defaultValue={individualChallenge.solutions[0].css} options={options} />
+          ) : null}
         </div>
-        <div className="col" />
       </div>
       <h2>Your solution</h2>
       <div className="d-flex justify-content-around row">
@@ -48,7 +52,6 @@ const _Solution = ({
         <div className="col">
           <CodeMirror defaultValue={userchallenge.css} options={options} />
         </div>
-        <div className="col" />
       </div>
     </div>
   );
