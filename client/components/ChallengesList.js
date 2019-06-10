@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchChallenges, fetchSearchChallenges, fetchFilterChallenges } from '../store';
 import { convertBufferToImgSrc } from '../utils';
 import { Search } from './Search';
-import { Filter } from './Filter';
 
 const mapDispatchToProps = dispatch => ({
   fetchChallenges: () => dispatch(fetchChallenges()),
@@ -38,7 +37,7 @@ const component = ({
         <h1>Our Challenges</h1>
       </div>
       <Search history={history} searchTerm={searchTerm} />
-      <Filter history={history} />
+      {/* <Filter history={history} /> */}
       <div className="d-flex justify-content-around">
         {challenges.map(challenge => {
           const imageSrc = convertBufferToImgSrc(challenge.images[0].data);

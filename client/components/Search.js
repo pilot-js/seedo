@@ -2,32 +2,54 @@ import React, { useState } from 'react';
 
 export const Search = ({ searchTerm, history }) => {
   const [term, setTerm] = useState(searchTerm ? searchTerm : '');
+  const [difficulty, setDifficulty] = useState('');
 
   const onSearch = ev => {
     ev.preventDefault();
     history.push(`/challenges/search/${term}`);
   };
 
-  const clearTerm = () => {
+  const onClear = () => {
     setTerm('');
     history.push('/challenges');
   };
 
+  const submitHandler = event => {
+    event.preventDefault();
+    history.push(`/challenges/filter/${difficulty}`);
+  };
+
   return (
-    <form className="m-2" onSubmit={onSearch}>
-      <input
-        type="text"
-        className="form-control"
-        value={term}
-        placeholder="Search"
-        onChange={e => setTerm(e.target.value)}
-      />
-      <button type="submit" disabled={!term.length}>
-        Search
-      </button>
-      <button type="button" disabled={!term.length} onClick={clearTerm}>
-        Clear
-      </button>
-    </form>
+    <div>
+      <form className="m-2" onSubmit={onSearch}>
+        <input
+          type="text"
+          className="form-control"
+          value={term}
+          placeholder="Search"
+          onChange={e => setTerm(e.target.value)}
+        />
+        <button type="submit" disabled={!term.length}>
+          Search
+        </button>
+        <button type="button" disabled={!term.length} onClick={onClear}>
+          Clear
+        </button>
+      </form>
+      <form onSubmit={submitHandler}>
+        <label>Difficulty:</label>
+        <select value={difficulty} onChange={e => setDifficulty(e.target.value)}>
+          <option>--</option>
+          <option value={1}>1</option>
+          <option value={2}>2</option>
+        </select>
+        <button type="submit" disabled={!difficulty.length}>
+          Filter
+        </button>
+        <button type="button" onClick={onClear}>
+          Clear
+        </button>
+      </form>
+    </div>
   );
 };
