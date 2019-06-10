@@ -85,7 +85,6 @@ const createImagePreview = async (userId, challengeId, dir) => {
   }
 };
 
-
 module.exports = {
   createFiles,
   createImage,

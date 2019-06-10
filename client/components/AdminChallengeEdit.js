@@ -36,7 +36,7 @@ export const AdminChallengeEdit = props => {
   const preview = () => {
     // refactor createFiles & createImages from puppeteer-utils
     const dir = process.cwd();
-    console.log('dir: ', dir)
+    console.log('dir: ', dir);
     // dir += '';
     // createFiles(html, css, 'preview', '')
   };
