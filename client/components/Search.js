@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 
-export const Search = props => {
-  const [term, setTerm] = useState(props.term ? props.term : '');
+export const Search = ({ searchTerm, history }) => {
+  const [term, setTerm] = useState(searchTerm ? searchTerm : '');
 
   const onSearch = ev => {
     ev.preventDefault();
-    props.history.push(`/challenges/search/${term}`);
+    history.push(`/challenges/search/${term}`);
   };
 
   const clearTerm = () => {
     setTerm('');
-    props.history.push('/challenges');
+    history.push('/challenges');
   };
 
   return (

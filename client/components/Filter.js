@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
 
-export const Filter = props => {
+export const Filter = ({ history }) => {
   const [difficulty, setDifficulty] = useState('');
 
-  const submitHanlder = event => {
+  const submitHandler = event => {
     event.preventDefault();
-    props.history.push(`/challenges/filter/${difficulty}`);
+    history.push(`/challenges/filter/${difficulty}`);
   };
 
   const onClear = () => {
     setDifficulty('');
-    props.history.push('/challenges');
+    history.push('/challenges');
   };
 
   return (
-    <form onSubmit={submitHanlder}>
+    <form onSubmit={submitHandler}>
       <label>Difficulty:</label>
       <select value={difficulty} onChange={e => setDifficulty(e.target.value)}>
         <option>--</option>

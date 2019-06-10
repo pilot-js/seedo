@@ -14,15 +14,22 @@ const mapDispatchToProps = dispatch => ({
 
 const mapStateToProps = ({ challenges }) => ({ challenges });
 
-const component = props => {
-  const { searchTerm, difficulty } = props.match.params;
+const component = ({
+  challenges,
+  fetchChallenges,
+  fetchSearchChallenges,
+  fetchFilterChallenges,
+  match,
+  history,
+}) => {
+  const { searchTerm, difficulty } = match.params;
   useEffect(() => {
     if (!searchTerm && !difficulty) {
-      props.fetchChallenges();
+      fetchChallenges();
     } else if (!difficulty) {
-      props.fetchSearchChallenges(searchTerm);
+      fetchSearchChallenges(searchTerm);
     } else if (!searchTerm) {
-      props.fetchFilterChallenges(difficulty);
+      fetchFilterChallenges(difficulty);
     }
   }, [searchTerm, difficulty]);
   return (
@@ -30,10 +37,10 @@ const component = props => {
       <div className="d-flex justify-content-center">
         <h1>Our Challenges</h1>
       </div>
-      <Search history={props.history} term={props.match.params.searchTerm} />
-      <Filter history={props.history} />
+      <Search history={history} searchTerm={searchTerm} />
+      <Filter history={history} />
       <div className="d-flex justify-content-around">
-        {props.challenges.map(challenge => {
+        {challenges.map(challenge => {
           const imageSrc = convertBufferToImgSrc(challenge.images[0].data);
           return (
             <div className="card" style={{ width: '20rem' }} key={challenge.id}>
