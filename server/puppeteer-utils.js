@@ -51,32 +51,17 @@ const createImage = async (userId, challengeId, dir) => {
   }
 };
 
-/******  PREVIEW ******/
+// /******  PREVIEW ******/
 
-const createFilesPreview = async (html, css, userId, dir) => {
-  await fs.mkdir(dir, { recursive: true }, err => {
-    if (err) throw err;
-    console.log('create dir: ', dir);
-  });
-  await fs.writeFile(`${dir}${userId}.html`, parseHTML(html, userId), err => {
-    if (err) throw err;
-    console.log('The html has been saved!');
-  });
-  await fs.writeFile(`${dir}${userId}.css`, css, err => {
-    if (err) throw err;
-    console.log('The css has been saved!');
-  });
-};
-
-const createImagePreview = async (userId, challengeId, dir) => {
+const createImagePreview = async (userId, dir, imageWidth, imageHeight) => {
   try {
-    const image = await Image.findOne({ where: { challengeId } });
+    // const image = await Image.findOne({ where: { challengeId } });
     const args = ['-–no-sandbox', '-–disable-setuid-sandbox'];
     const browser = await puppeteer.launch({ args });
     const page = await browser.newPage();
     const retPath = `file://${path.join(process.cwd(), `${dir}${userId}.html`)}`;
     await page.goto(retPath);
-    await page.setViewport({ width: image.width, height: image.height });
+    await page.setViewport({ width: imageWidth, height: imageHeight });
     await page.screenshot({ path: `${dir}${userId}.png` });
     await browser.close();
     return retPath;
@@ -88,6 +73,5 @@ const createImagePreview = async (userId, challengeId, dir) => {
 module.exports = {
   createFiles,
   createImage,
-  createFilesPreview,
   createImagePreview,
 };

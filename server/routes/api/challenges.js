@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { Challenge, Image, Comment, Solution } = require('../../db');
+const { createFiles, createImagePreview } = require('../../puppeteer-utils');
 
 /**  /api/challenges **/
 
@@ -40,6 +41,19 @@ router.post('/', (req, res, next) => {
         challengeId,
       };
       res.send(challenge);
+    })
+    .catch(next);
+});
+
+router.put('/preview', (req, res, next) => {
+  console.log('req.body: ', req.body);
+  const { html, css, imageWidth, imageHeight } = req.body;
+  createFiles(html, css, 'preview', './dist/images/');
+
+  createImagePreview('preview', './dist/images/', Number(imageWidth), Number(imageHeight))
+    .then(retPathToUserImage => {
+      const pathToUserImage = retPathToUserImage.replace('file://', '').replace('.html', '.png');
+      res.send('./dist/images/preview.png');
     })
     .catch(next);
 });

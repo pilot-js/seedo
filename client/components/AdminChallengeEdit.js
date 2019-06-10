@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import { createFiles } from '../../server/puppeteer-utils';
+// import { createImage } from '../../server/puppeteer-utils';
 
 export const AdminChallengeEdit = props => {
   const [name, setName] = useState('');
@@ -13,6 +13,7 @@ export const AdminChallengeEdit = props => {
   // TODO upload image file, convert to binary, save in db
   const [imageWidth, setImageWidth] = useState('');
   const [imageHeight, setImageHeight] = useState('');
+  const [imagePath, setImagePath] = useState('');
 
   const handleSubmit = ev => {
     ev.preventDefault();
@@ -35,14 +36,31 @@ export const AdminChallengeEdit = props => {
 
   const preview = () => {
     // refactor createFiles & createImages from puppeteer-utils
-    const dir = process.cwd();
-    console.log('dir: ', dir);
+    // const dir = process.cwd();
+    // console.log('dir: ', dir);
     // dir += '';
     // createFiles(html, css, 'preview', '')
+    const challenge = {
+      html,
+      css,
+      imageWidth,
+      imageHeight,
+    };
+    axios
+      .put('/api/challenges/preview', challenge)
+      .then(resp => {
+        const pathToUserImage = `#${resp.data.slice(1)}`;
+        console.log('path: ', pathToUserImage);
+        // setImagePath(pathToUserImage);
+        setImagePath('#/dist/images/preview.png');
+        console.log('imagePath: ', imagePath);
+      })
+      .catch(err => console.log(err));
   };
 
   return (
     <form onSubmit={handleSubmit}>
+      <img src={imagePath} alt="" />
       <div className="form-group row">
         <label htmlFor="name" className="col-sm-2 col-form-label">
           Name
