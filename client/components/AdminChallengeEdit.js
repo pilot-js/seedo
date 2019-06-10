@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+import { createFiles } from '../../server/puppeteer-utils';
+
 export const AdminChallengeEdit = props => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
@@ -33,6 +35,10 @@ export const AdminChallengeEdit = props => {
 
   const preview = () => {
     // refactor createFiles & createImages from puppeteer-utils
+    const dir = process.cwd();
+    console.log('dir: ', dir)
+    // dir += '';
+    // createFiles(html, css, 'preview', '')
   };
 
   return (
