@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchChallenges, fetchSearchChallenges, fetchFilterChallenges } from '../store';
+import { fetchChallenges, fetchFilterChallenges, fetchSrchFltrChal } from '../store';
 import { convertBufferToImgSrc } from '../utils';
 import { Search } from './Search';
 
 const mapDispatchToProps = dispatch => ({
   fetchChallenges: () => dispatch(fetchChallenges()),
-  fetchSearchChallenges: term => dispatch(fetchSearchChallenges(term)),
   fetchFilterChallenges: difficulty => dispatch(fetchFilterChallenges(difficulty)),
+  fetchSrchFltrChal: (difficulty, term) => dispatch(fetchSrchFltrChal(difficulty, term)),
 });
 
 const mapStateToProps = ({ challenges }) => ({ challenges });
@@ -16,28 +16,29 @@ const mapStateToProps = ({ challenges }) => ({ challenges });
 const component = ({
   challenges,
   fetchChallenges,
-  fetchSearchChallenges,
   fetchFilterChallenges,
+  fetchSrchFltrChal,
   match,
   history,
 }) => {
   const { searchTerm, difficulty } = match.params;
+
   useEffect(() => {
-    if (!searchTerm && !difficulty) {
-      fetchChallenges();
-    } else if (!difficulty) {
-      fetchSearchChallenges(searchTerm);
-    } else if (!searchTerm) {
+    if (difficulty && !searchTerm) {
       fetchFilterChallenges(difficulty);
+    } else if (difficulty && searchTerm) {
+      fetchSrchFltrChal(difficulty, searchTerm);
+    } else {
+      fetchChallenges();
     }
-  }, [searchTerm, difficulty]);
+  }, [difficulty, searchTerm]);
+
   return (
     <div>
       <div className="d-flex justify-content-center">
         <h1>Our Challenges</h1>
       </div>
       <Search history={history} searchTerm={searchTerm} />
-      {/* <Filter history={history} /> */}
       <div className="d-flex justify-content-around">
         {challenges.map(challenge => {
           const imageSrc = convertBufferToImgSrc(challenge.images[0].data);

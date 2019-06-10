@@ -35,16 +35,11 @@ router.get('/:id', (req, res, next) => {
     .catch(next);
 });
 
-// get challenges with search term
-router.get('/search/:term', (req, res, next) => {
-  const { term } = req.params;
-  console.log(term);
+router.get('/filter/:difficulty', (req, res, next) => {
+  const { difficulty } = req.params;
   Challenge.findAll({
     where: {
-      [Op.or]: [
-        { name: { [Op.iLike]: `%${term}%` } },
-        { description: { [Op.iLike]: `%${term}%` } },
-      ],
+      difficulty: difficulty === 'all' ? { [Op.gt]: 0 } : difficulty,
     },
     order: [['name', 'asc']],
     include: [Image],
@@ -53,11 +48,15 @@ router.get('/search/:term', (req, res, next) => {
     .catch(next);
 });
 
-router.get('/filter/:difficulty', (req, res, next) => {
-  const { difficulty } = req.params;
+router.get('/filter/:difficulty/search/:term', (req, res, next) => {
+  const { difficulty, term } = req.params;
   Challenge.findAll({
     where: {
-      difficulty,
+      difficulty: difficulty === 'all' ? { [Op.gt]: 0 } : difficulty,
+      [Op.or]: [
+        { name: { [Op.iLike]: `%${term}%` } },
+        { description: { [Op.iLike]: `%${term}%` } },
+      ],
     },
     order: [['name', 'asc']],
     include: [Image],
