@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 const _Nav = props => {
   const navLinks = [
     {
-      label: 'About Us',
+      label: 'Home',
       to: '/',
     },
     {
