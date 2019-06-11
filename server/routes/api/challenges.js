@@ -53,7 +53,9 @@ router.put('/preview', (req, res, next) => {
   createImagePreview('preview', './dist/images/', Number(imageWidth), Number(imageHeight))
     .then(retPathToUserImage => {
       const pathToUserImage = retPathToUserImage.replace('file://', '').replace('.html', '.png');
-      res.send('./dist/images/preview.png');
+      const now = new Date();
+      console.log('now: ', now)
+      res.send(now);
     })
     .catch(next);
 });
