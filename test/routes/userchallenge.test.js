@@ -2,7 +2,7 @@ require('@babel/polyfill');
 const supertest = require('supertest');
 
 const app = require('../../server/app');
-const { Userchallenge, conn, User, Challenge } = require('../../server/db');
+const { Userchallenge, conn, User, Challenge, Image } = require('../../server/db');
 
 const client = supertest(app);
 
@@ -12,8 +12,11 @@ describe('Userchallenge routes', () => {
   beforeAll(async () => {
     await conn.sync({ force: true });
     const u = await User.create({
+      firstName: 'test',
+      lastName: 'test',
       email: 'email@email.com',
       password: 'hello',
+      type: 'user',
     });
     const c = await Challenge.create({
       name: 'Basic html page',
@@ -29,6 +32,15 @@ describe('Userchallenge routes', () => {
       userId: u.id,
       challengeId: c.id,
     });
+    const image = await Image.create({
+      type: 'challenge',
+      url: 'challenge-1-red-circle.png',
+      connector: 'challenge-1',
+      width: 100,
+      height: 100,
+      userchallengeId: uc.id,
+      challengeId: c.id,
+    });
   });
   afterAll(async () => {
     await conn.close();
@@ -42,7 +54,9 @@ describe('Userchallenge routes', () => {
     });
   });
   it('can update a userchallenge', () => {
-    return client.put(`${url}1`).expect(200);
+    return Userchallenge.findOne({ where: { html: 'TEXT' } }).then(Userchallenge => {
+      return client.put(`${url}${Userchallenge.id}`).expect(200);
+    });
   });
   it('can delete a userchallenge', () => {
     return Challenge.findOne({ where: { name: 'Basic html page' } }).then(challenge => {

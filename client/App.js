@@ -12,12 +12,21 @@ import {
   Logout,
   UserPage,
   Solution,
+  Signup,
 } from './components';
 import { getGithubUser } from './store';
 
-const App = props => {
+const mapStateToProps = ({ user }) => ({ user });
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getGithubUser: () => dispatch(getGithubUser()),
+  };
+};
+
+const App = ({ getGithubUser }) => {
   useEffect(() => {
-    props.getGithubUser().catch(error => console.log(error));
+    getGithubUser().catch(error => console.log(error));
   }, []);
 
   return (
@@ -34,6 +43,7 @@ const App = props => {
         />
         <Route exact path="/challenges/filter/:difficulty" component={ChallengesList} />
         <Route exact path="/login" component={Login} />
+        <Route exact path="/signup" component={Signup} />
         <Route exact path="/logout" component={Logout} />
         <Route exact path="/userpage" component={UserPage} />
         <Route
@@ -55,14 +65,6 @@ const App = props => {
       <Footer />
     </div>
   );
-};
-
-const mapStateToProps = ({ user }) => ({ user });
-
-const mapDispatchToProps = dispatch => {
-  return {
-    getGithubUser: () => dispatch(getGithubUser()),
-  };
 };
 
 export default connect(

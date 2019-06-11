@@ -3,11 +3,29 @@ const { Challenge, Image, Solution, User, Userchallenge } = require('./models');
 const conn = require('./conn');
 
 const usersSeed = [
-  { email: 'grant@geezemail.com', password: '1234' },
-  { email: 'kristy@geezemail.com', password: '1234' },
-  { email: 'haoyu@geezemail.com', password: '1234' },
-  { email: 'thee@geezemail.com', password: '1234' },
-  { email: 'a@a.com', password: 'a' },
+  {
+    firstName: 'Grant',
+    lastName: 'H',
+    email: 'grant@geezemail.com',
+    password: '1234',
+    type: 'user',
+  },
+  {
+    firstName: 'Kristy',
+    lastName: 'C',
+    email: 'kristy@geezemail.com',
+    password: '1234',
+    type: 'user',
+  },
+  {
+    firstName: 'Haoyu',
+    lastName: 'Y',
+    email: 'haoyu@geezemail.com',
+    password: '1234',
+    type: 'user',
+  },
+  { firstName: 'Theo', lastName: 'M', email: 'thee@geezemail.com', password: '1234', type: 'user' },
+  { firstName: 'Admin', lastName: 'Admin', email: 'a@a.com', password: 'a', type: 'admin' },
 ];
 
 // from associations: imageId
@@ -195,10 +213,34 @@ const solutionsSeed = [
 
 // from associations: challengeId, userchallengeId
 const images = [
-  { type: 'challenge', url: 'challenge-1-red-circle.png', connector: 'challenge-1' },
-  { type: 'challenge', url: 'challenge-2-blue-square.png', connector: 'challenge-2' },
-  { type: 'challenge', url: 'challenge-3-yellow-rectangle.png', connector: 'challenge-3' },
-  { type: 'challenge', url: 'challenge-4-orange-rectangle.png', connector: 'challenge-4' },
+  {
+    type: 'challenge',
+    url: 'challenge-1-red-circle.png',
+    connector: 'challenge-1',
+    width: 100,
+    height: 100,
+  },
+  {
+    type: 'challenge',
+    url: 'challenge-2-blue-square.png',
+    connector: 'challenge-2',
+    width: 100,
+    height: 100,
+  },
+  {
+    type: 'challenge',
+    url: 'challenge-3-yellow-rectangle.png',
+    connector: 'challenge-3',
+    width: 200,
+    height: 100,
+  },
+  {
+    type: 'challenge',
+    url: 'challenge-4-orange-rectangle.png',
+    connector: 'challenge-4',
+    width: 100,
+    height: 200,
+  },
   { type: 'userchallenge', url: 'userchallenge-1.png', connector: 'userchallenge-1' },
   { type: 'userchallenge', url: 'userchallenge-2.png', connector: 'userchallenge-2' },
   { type: 'userchallenge', url: 'userchallenge-3.png', connector: 'userchallenge-3' },
@@ -227,7 +269,14 @@ const syncAndSeed = () => {
           Promise.all(userchallengeSeed.map(chal => Userchallenge.create(chal))),
           Promise.all(solutionsSeed.map(sol => Solution.create(sol))),
           Promise.all(
-            imagesSeed.map(img => Image.create({ connector: img.connector, data: img.data })),
+            imagesSeed.map(img =>
+              Image.create({
+                connector: img.connector,
+                data: img.data,
+                width: img.width,
+                height: img.height,
+              }),
+            ),
           ),
         ]);
       })
