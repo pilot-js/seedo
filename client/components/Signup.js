@@ -11,7 +11,7 @@ const _Signup = ({ createUser, history }) => {
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [type] = useState('user')
+  const type = 'user';
 
   const signup = ev => {
     ev.preventDefault();
