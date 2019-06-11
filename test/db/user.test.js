@@ -6,7 +6,12 @@ const db = require('../../server/db/conn');
 describe('testing user model', () => {
   beforeAll(async () => {
     await db.sync({ force: true });
-    await User.create({ email: 'email@email.com', password: 'hello' });
+    await User.create({
+      firstName: 'test',
+      lastName: 'test',
+      email: 'email@email.com',
+      password: 'hello',
+    });
   });
   afterAll(async () => {
     await db.close();
@@ -16,7 +21,14 @@ describe('testing user model', () => {
     return expect(users.length).toBe(1);
   });
   it('requires email to be an email', () => {
-    return expect(User.create({ email: 'notanemail', password: 'failing test' })).rejects.toThrow();
+    return expect(
+      User.create({
+        firstName: 'test',
+        lastName: 'test',
+        email: 'notanemail',
+        password: 'failing test',
+      }),
+    ).rejects.toThrow();
   });
   it('requires email and password to not be empty', async () => {
     await expect(User.create({ password: '' })).rejects.toThrow();
