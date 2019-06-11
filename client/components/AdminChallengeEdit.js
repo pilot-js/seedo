@@ -16,8 +16,9 @@ export const AdminChallengeEdit = props => {
   const [imageUpdateTime, setImageUpdateTime] = useState('');
 
   useEffect(() => {
-
-    setTimeout(() => { console.log('refreshed') }, 0)
+    setTimeout(() => {
+      console.log('refreshed');
+    }, 0);
   }, [imageUpdateTime]);
 
   const handleSubmit = ev => {
@@ -55,7 +56,7 @@ export const AdminChallengeEdit = props => {
       .put('/api/challenges/preview', challenge)
       .then(({ data }) => {
         const timeStamp = data;
-        console.log('timeStamp: ', timeStamp)
+        console.log('timeStamp: ', timeStamp);
         setImageUpdateTime(timeStamp);
         console.log('imageUpdateTime: ', imageUpdateTime);
       })
@@ -70,7 +71,7 @@ export const AdminChallengeEdit = props => {
           <div className="form-group row">
             <label htmlFor="name" className="col-sm-2 col-form-label">
               Name
-        </label>
+            </label>
             <div className="col-sm-9">
               <input
                 className="form-control"
@@ -84,7 +85,7 @@ export const AdminChallengeEdit = props => {
           <div className="form-group row">
             <label htmlFor="description" className="col-sm-2 col-form-label">
               Description
-        </label>
+            </label>
             <div className="col-sm-9">
               <textarea
                 className="form-control"
@@ -98,7 +99,7 @@ export const AdminChallengeEdit = props => {
           <div className="form-group row">
             <label htmlFor="difficulty" className="col-sm-2 col-form-label">
               Difficulty
-        </label>
+            </label>
             <div className="col-sm-1">
               <select
                 className="form-control"
@@ -117,7 +118,7 @@ export const AdminChallengeEdit = props => {
           <div className="form-group row">
             <label htmlFor="html" className="col-sm-2 col-form-label">
               HTML
-        </label>
+            </label>
             <div className="col-sm-9">
               <textarea
                 className="form-control"
@@ -131,7 +132,7 @@ export const AdminChallengeEdit = props => {
           <div className="form-group row">
             <label htmlFor="css" className="col-sm-2 col-form-label">
               CSS
-        </label>
+            </label>
             <div className="col-sm-9">
               <textarea
                 className="form-control"
@@ -145,7 +146,7 @@ export const AdminChallengeEdit = props => {
           <div className="form-group row">
             <label htmlFor="imageWidth" className="col-sm-2 col-form-label">
               Image Width
-        </label>
+            </label>
             <div className="col-sm-9">
               <input
                 className="form-control"
@@ -159,7 +160,7 @@ export const AdminChallengeEdit = props => {
           <div className="form-group row">
             <label htmlFor="imageHeight" className="col-sm-2 col-form-label">
               Image Height
-        </label>
+            </label>
             <div className="col-sm-9">
               <input
                 className="form-control"
@@ -172,13 +173,13 @@ export const AdminChallengeEdit = props => {
           </div>
           <button type="button" onClick={preview}>
             Preview
-      </button>
+          </button>
           <button type="submit">Save Challenge</button>
         </form>
       </div>
       <div className="col-4">
         <h2>Image Preview</h2>
-        <img src='/images/preview.png' alt="" />
+        <img src="/images/preview.png" alt="" />
       </div>
     </div>
   );

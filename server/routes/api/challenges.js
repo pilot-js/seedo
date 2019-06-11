@@ -54,7 +54,7 @@ router.put('/preview', (req, res, next) => {
     .then(retPathToUserImage => {
       const pathToUserImage = retPathToUserImage.replace('file://', '').replace('.html', '.png');
       const now = new Date();
-      console.log('now: ', now)
+      console.log('now: ', now);
       res.send(now);
     })
     .catch(next);
