@@ -32,8 +32,8 @@ export const fetchChallenges = () => {
 export const fetchChallengesWithFilterAndSearch = (difficulty, term) => dispatch => {
   if (!term) {
     return axios
-    .get(`api/challenges/filter/${difficulty}`)
-    .then(res => dispatch(getChallenges(res.data)));
+      .get(`api/challenges/filter/${difficulty}`)
+      .then(res => dispatch(getChallenges(res.data)));
   }
   return axios
     .get(`api/challenges/filter/${difficulty}/search/${term}`)
