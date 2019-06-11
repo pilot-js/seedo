@@ -21,6 +21,7 @@ describe('testing the challenges routes', () => {
       lastName: 'test',
       email: 'email@email.com',
       password: 'password',
+      type: 'user',
     });
     const comment = await Comment.create({
       userId: user.id,
