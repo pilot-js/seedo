@@ -22,14 +22,19 @@ export const fetchChallenges = () => {
   };
 };
 
-// Return search challenges with a search term
-export const fetchFilterChallenges = difficulty => dispatch => {
-  return axios
+// // Return search challenges with a search term
+// export const fetchFilterChallenges = difficulty => dispatch => {
+//   return axios
+//     .get(`api/challenges/filter/${difficulty}`)
+//     .then(res => dispatch(getChallenges(res.data)));
+// };
+
+export const fetchChallengesWithFilterAndSearch = (difficulty, term) => dispatch => {
+  if (!term) {
+    return axios
     .get(`api/challenges/filter/${difficulty}`)
     .then(res => dispatch(getChallenges(res.data)));
-};
-
-export const fetchSrchFltrChal = (difficulty, term) => dispatch => {
+  }
   return axios
     .get(`api/challenges/filter/${difficulty}/search/${term}`)
     .then(res => dispatch(getChallenges(res.data)));

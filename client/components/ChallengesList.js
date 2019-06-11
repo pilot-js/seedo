@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchChallenges, fetchFilterChallenges, fetchSrchFltrChal } from '../store';
+import { fetchChallenges, fetchChallengesWithFilterAndSearch } from '../store';
 import { convertBufferToImgSrc } from '../utils';
 import { Search } from './Search';
 
 const mapDispatchToProps = dispatch => ({
   fetchChallenges: () => dispatch(fetchChallenges()),
-  fetchFilterChallenges: difficulty => dispatch(fetchFilterChallenges(difficulty)),
-  fetchSrchFltrChal: (difficulty, term) => dispatch(fetchSrchFltrChal(difficulty, term)),
+  fetchChallengesWithFilterAndSearch: (difficulty, term) =>
+    dispatch(fetchChallengesWithFilterAndSearch(difficulty, term)),
 });
 
 const mapStateToProps = ({ challenges }) => ({ challenges });
@@ -16,18 +16,15 @@ const mapStateToProps = ({ challenges }) => ({ challenges });
 const component = ({
   challenges,
   fetchChallenges,
-  fetchFilterChallenges,
-  fetchSrchFltrChal,
+  fetchChallengesWithFilterAndSearch,
   match,
   history,
 }) => {
   const { searchTerm, difficulty } = match.params;
 
   useEffect(() => {
-    if (difficulty && !searchTerm) {
-      fetchFilterChallenges(difficulty);
-    } else if (difficulty && searchTerm) {
-      fetchSrchFltrChal(difficulty, searchTerm);
+    if (difficulty) {
+      fetchChallengesWithFilterAndSearch(difficulty, searchTerm);
     } else {
       fetchChallenges();
     }
