@@ -49,6 +49,7 @@ const _Signup = ({ createUser, history }) => {
         />
         <label htmlFor="password">Password</label>
         <input
+          type="password"
           className="form-control"
           name="password"
           value={password}
