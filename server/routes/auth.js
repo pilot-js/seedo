@@ -54,6 +54,7 @@ router.get('/github/callback', (req, res, next) => {
             email: githubUser.email,
             password: '1234',
             githubId: githubUser.id,
+            type: 'user',
           });
           req.session.user = user;
           res.redirect(`${process.env.URL}/#/challenges`);
