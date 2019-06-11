@@ -25,6 +25,7 @@ const _Signup = ({ createUser, history }) => {
       <form onSubmit={signup}>
         <label htmlFor="firstName">First Name</label>
         <input
+          type="text"
           className="form-control"
           name="firstName"
           value={firstName}
@@ -32,7 +33,7 @@ const _Signup = ({ createUser, history }) => {
         />
         <label htmlFor="lastName">Last Name</label>
         <input
-          name="text"
+          type="text"
           className="form-control"
           name="lastName"
           value={lastName}
