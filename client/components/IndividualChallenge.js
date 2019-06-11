@@ -4,7 +4,12 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Modal from 'react-modal';
 import { Results } from './Results';
-import { updateUserchallenge, fetchOneChallenge, fetchUserchallenge } from '../store';
+import {
+  updateUserchallenge,
+  fetchOneChallenge,
+  fetchUserchallenge,
+  fetchUserchallengeById,
+} from '../store';
 import { convertBufferToImgSrc } from '../utils';
 
 const _IndividualChallenge = ({
@@ -13,21 +18,20 @@ const _IndividualChallenge = ({
   updateUserchallenge,
   user,
   fetchOneChallenge,
+  fetchUserchallengeById,
+  fetchUserchallenge,
   challengeId,
+  history,
 }) => {
   useEffect(() => {
-    // TODO: pull active userchallenge if no id specified
-    // if (userchallengeId) {
-    //   fetchUserchallenge(userchallenge.Id);
-    // } else {
-    //   fetchActiveUserchallenge(challengeId, props.userId);
-    // };
-    if (user.id) {
+    if (userchallenge) {
+      fetchUserchallengeById(userchallenge.id);
+    } else if (user) {
       fetchUserchallenge(user.id, challengeId);
     }
-
     fetchOneChallenge(challengeId);
   }, []);
+
   const [showModal, setShowModal] = useState(false);
   const [showCodeMirror, setShowCodeMirror] = useState(true);
   const [loading, setLoading] = useState(false);
@@ -37,21 +41,22 @@ const _IndividualChallenge = ({
 
   const changeValue = () => {
     // TODO: axios post call to the backend
-    console.log({ html, css, js });
   };
 
-  const updateValue = isSubmit => {
+  const updateValue = (createDiff, isSubmit = false) => {
     setLoading(true);
-    const userAnswer = { html, css, js, submitted: true, challengeId };
-    updateUserchallenge(userAnswer, challengeId, isSubmit)
-      .then(userchallenge => console.log(userchallenge))
+    const userAnswer = { html, css, js, challengeId };
+    updateUserchallenge(userAnswer, challengeId, createDiff, isSubmit)
       .then(() => {
-        setShowModal(isSubmit);
-        setShowCodeMirror(!isSubmit);
+        setShowModal(createDiff);
+        setShowCodeMirror(!createDiff);
         setLoading(false);
+        history.push('/');
       })
       .catch(ex => console.log(ex));
   };
+  console.log(userchallenge);
+
   const closeModal = () => {
     setShowModal(false);
     setShowCodeMirror(true);
@@ -68,6 +73,10 @@ const _IndividualChallenge = ({
   if (userchallenge.images) {
     const { images } = userchallenge;
     userImage = images.length ? convertBufferToImgSrc(images[0].data) : '';
+  }
+  let diffImage = '';
+  if (userchallenge.diffImage) {
+    diffImage = convertBufferToImgSrc(userchallenge.diffImage);
   }
   const { name, description, images, comments } = individualChallenge;
 
@@ -116,9 +125,12 @@ const _IndividualChallenge = ({
             <Results
               userImage={userImage}
               solutionImage={solutionImage}
-              diffImage=""
+              diffImage={diffImage}
               grade={userchallenge.grade}
               closeModal={closeModal}
+              submit={() => updateValue(true, true)}
+              challengeId={challengeId}
+              userchallengeId={userchallenge.id}
             />
           </Modal>
           <button
@@ -179,10 +191,11 @@ const mapStateToProps = ({ user, individualChallenge, userchallenge }) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  updateUserchallenge: (userAnswer, userchallengeId, isSubmit) =>
-    dispatch(updateUserchallenge(userAnswer, userchallengeId, isSubmit)),
+  updateUserchallenge: (userAnswer, userchallengeId, createDiff, isSubmit) =>
+    dispatch(updateUserchallenge(userAnswer, userchallengeId, createDiff, isSubmit)),
   fetchOneChallenge: challengeId => dispatch(fetchOneChallenge(challengeId)),
   fetchUserchallenge: (userId, challengeId) => dispatch(fetchUserchallenge(userId, challengeId)),
+  fetchUserchallengeById: id => dispatch(fetchUserchallengeById(id)),
 });
 
 export const IndividualChallenge = connect(

@@ -13,11 +13,17 @@ export const userchallenge = (state = {}, action) => {
   }
 };
 
-export const updateUserchallenge = (userAnswer, userchallengeId, isSubmit) => dispatch => {
+export const updateUserchallenge = (
+  userAnswer,
+  userchallengeId,
+  createDiff,
+  isSubmit,
+) => dispatch => {
+  userAnswer.submitted = isSubmit;
   return axios
-    .put(`/api/userchallenges/${userchallengeId}`, { userAnswer, isSubmit })
+    .put(`/api/userchallenges/${userchallengeId}`, { userAnswer, createDiff, isSubmit })
     .then(res => res.data)
-    .then(userAnswer => dispatch(setUserchallenge(userAnswer)));
+    .then(userchallenge => dispatch(setUserchallenge(userchallenge)));
 };
 
 export const fetchUserchallengeById = id => dispatch => {

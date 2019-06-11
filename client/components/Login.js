@@ -39,6 +39,7 @@ const LoginClass = props => {
         <label htmlFor="password">Password</label>
         <input
           className="form-control"
+          type="password"
           name="password"
           value={password}
           onChange={e => setPassword(e.target.value)}
