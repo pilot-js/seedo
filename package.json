@@ -6,9 +6,9 @@
   "scripts": {
     "lint": "make lint",
     "postinstall": "npm run webpack",
-    "seed": "DATABASE_URL=postgres://localhost/seedo node server/db/seed.js",
+    "seed": "DATABASE_URL=postgres://localhost/seedo node server/db/seed/index.js",
     "server:watch": "node_modules/.bin/nodemon server/server.js --ignore client --ignore dist",
-    "start": "node server/db/seed.js && node server/server.js",
+    "start": "node server/db/seed/index.js && node server/server.js",
     "start:dev": "npm run webpack:watch & DATABASE_URL=postgres://localhost/seedo npm run server:watch",
     "test:dev": "npm run test:dev:models && npm run test:dev:routes",
     "test:dev:models": "DATABASE_URL=postgresql://localhost/seedo_test jest test/db -i",
