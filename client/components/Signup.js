@@ -31,6 +31,7 @@ const _Signup = ({ createUser, history }) => {
         />
         <label htmlFor="lastName">Last Name</label>
         <input
+          name="text"
           className="form-control"
           name="lastName"
           value={lastName}
