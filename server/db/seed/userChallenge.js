@@ -1,6 +1,6 @@
 const userchallengeSeed = [
-    {
-      html: `<!DOCTYPE html>
+  {
+    html: `<!DOCTYPE html>
       <html>
         <head>
           <title>Circle</title>
@@ -9,18 +9,18 @@ const userchallengeSeed = [
           <div id='circle'></div>
         </body>
       </html>`,
-      css: `#circle {
+    css: `#circle {
         width: 100px;
         height: 100px;
         background-color: red;
         border-radius: 50%;
       }`,
-      js: '',
-      submitted: true,
-      grade: 5,
-    },
-    {
-      html: `<!DOCTYPE html>
+    js: '',
+    submitted: true,
+    grade: 5,
+  },
+  {
+    html: `<!DOCTYPE html>
       <html>
         <head>
           <title>Square</title>
@@ -29,17 +29,17 @@ const userchallengeSeed = [
           <div id='square'></div>
         </body>
       </html>`,
-      css: `#square {
+    css: `#square {
         width: 50px;
         height: 50px;
         background-color: blue;
       }`,
-      js: '',
-      submitted: true,
-      grade: 4,
-    },
-    {
-      html: `<!DOCTYPE html>
+    js: '',
+    submitted: true,
+    grade: 4,
+  },
+  {
+    html: `<!DOCTYPE html>
       <html>
         <head>
           <title>Rectangle</title>
@@ -48,16 +48,16 @@ const userchallengeSeed = [
           <div id='rectangle'></div>
         </body>
       </html>`,
-      css: `#rectangle {
+    css: `#rectangle {
         width: 200px;
         height: 100px;
         background-color: yellow;
       }`,
-      js: '',
-      submitted: false,
-    },
-    {
-      html: `<!DOCTYPE html>
+    js: '',
+    submitted: false,
+  },
+  {
+    html: `<!DOCTYPE html>
       <html>
         <head>
           <title>Rectangle</title>
@@ -66,16 +66,16 @@ const userchallengeSeed = [
           <div id='rectangle'></div>
         </body>
       </html>`,
-      css: `#rectangle {
+    css: `#rectangle {
         width: 100px;
         height: 200px;
         background-color: orange;
       }`,
-      js: '',
-      submitted: false,
-    },
-  ];
+    js: '',
+    submitted: false,
+  },
+];
 
-  module.exports = {
-    userchallengeSeed
-  }
+module.exports = {
+  userchallengeSeed,
+};

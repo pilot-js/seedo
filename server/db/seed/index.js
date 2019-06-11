@@ -7,7 +7,6 @@ const { userchallengeSeed } = require('./userChallenge');
 
 // from associations: imageId
 
-
 // TODO for js - console.log()
 
 // from associations: userId, challengeId, imageId
