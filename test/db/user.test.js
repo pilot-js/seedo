@@ -11,6 +11,7 @@ describe('testing user model', () => {
       lastName: 'test',
       email: 'email@email.com',
       password: 'hello',
+      type: 'user',
     });
   });
   afterAll(async () => {
@@ -27,6 +28,7 @@ describe('testing user model', () => {
         lastName: 'test',
         email: 'notanemail',
         password: 'failing test',
+        type: 'user',
       }),
     ).rejects.toThrow();
   });

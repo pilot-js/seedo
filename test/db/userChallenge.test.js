@@ -43,6 +43,7 @@ describe('testing Userchallenge model', () => {
       lastName: 'test',
       email: 'email@email.com',
       password: 'password',
+      type: 'user',
     });
     const challenge = await Challenge.create({
       name: 'hello',

@@ -14,6 +14,7 @@ describe('User routes', () => {
       lastName: 'test',
       email: 'email@email.com',
       password: 'password',
+      type: 'user',
     });
     const challenge = await Challenge.create({
       name: 'challenge',
@@ -41,6 +42,7 @@ describe('User routes', () => {
         lastName: 'test',
         email: 'email2@email.com',
         password: 'password',
+        type: 'user',
       })
       .expect(200);
   });

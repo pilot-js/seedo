@@ -3,11 +3,29 @@ const { Challenge, Image, Solution, User, Userchallenge } = require('./models');
 const conn = require('./conn');
 
 const usersSeed = [
-  { firstName: 'Grant', lastName: 'H', email: 'grant@geezemail.com', password: '1234' },
-  { firstName: 'Kristy', lastName: 'C', email: 'kristy@geezemail.com', password: '1234' },
-  { firstName: 'Haoyu', lastName: 'Y', email: 'haoyu@geezemail.com', password: '1234' },
-  { firstName: 'Theo', lastName: 'M', email: 'thee@geezemail.com', password: '1234' },
-  { firstName: 'Admin', lastName: 'Admin', email: 'a@a.com', password: 'a' },
+  {
+    firstName: 'Grant',
+    lastName: 'H',
+    email: 'grant@geezemail.com',
+    password: '1234',
+    type: 'user',
+  },
+  {
+    firstName: 'Kristy',
+    lastName: 'C',
+    email: 'kristy@geezemail.com',
+    password: '1234',
+    type: 'user',
+  },
+  {
+    firstName: 'Haoyu',
+    lastName: 'Y',
+    email: 'haoyu@geezemail.com',
+    password: '1234',
+    type: 'user',
+  },
+  { firstName: 'Theo', lastName: 'M', email: 'thee@geezemail.com', password: '1234', type: 'user' },
+  { firstName: 'Admin', lastName: 'Admin', email: 'a@a.com', password: 'a', type: 'admin' },
 ];
 
 // from associations: imageId
