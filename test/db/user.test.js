@@ -6,7 +6,13 @@ const db = require('../../server/db/conn');
 describe('testing user model', () => {
   beforeAll(async () => {
     await db.sync({ force: true });
-    await User.create({ email: 'email@email.com', password: 'hello', type: 'user' });
+    await User.create({
+      firstName: 'test',
+      lastName: 'test',
+      email: 'email@email.com',
+      password: 'hello',
+      type: 'user',
+    });
   });
   afterAll(async () => {
     await db.close();
@@ -17,7 +23,13 @@ describe('testing user model', () => {
   });
   it('requires email to be an email', () => {
     return expect(
-      User.create({ email: 'notanemail', password: 'failing test', type: 'user' }),
+      User.create({
+        firstName: 'test',
+        lastName: 'test',
+        email: 'notanemail',
+        password: 'failing test',
+        type: 'user',
+      }),
     ).rejects.toThrow();
   });
   it('requires email, password and type to not be empty', async () => {

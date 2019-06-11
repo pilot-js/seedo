@@ -10,9 +10,10 @@ describe('User routes', () => {
   beforeAll(async () => {
     await conn.sync({ force: true });
     const user = await User.create({
+      firstName: 'test',
+      lastName: 'test',
       email: 'email@email.com',
       password: 'password',
-      type: 'user',
     });
     const challenge = await Challenge.create({
       name: 'challenge',
@@ -35,7 +36,12 @@ describe('User routes', () => {
   it('can create a user', () => {
     return client
       .post('/api/users/')
-      .send({ email: 'email2@email.com', password: 'password', type: 'user' })
+      .send({
+        firstName: 'test',
+        lastName: 'test',
+        email: 'email2@email.com',
+        password: 'password',
+      })
       .expect(200);
   });
   it('can delete a user by id', () => {

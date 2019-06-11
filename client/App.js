@@ -15,12 +15,21 @@ import {
   AdminChallengeEdit,
   AdminUsers,
   Solution,
+  Signup,
 } from './components';
 import { getGithubUser } from './store';
 
-const App = props => {
+const mapStateToProps = ({ user }) => ({ user });
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getGithubUser: () => dispatch(getGithubUser()),
+  };
+};
+
+const App = ({ getGithubUser }) => {
   useEffect(() => {
-    props.getGithubUser().catch(error => console.log(error));
+    getGithubUser().catch(error => console.log(error));
     // TODO getUser (if type = admin, allow access to admin components)
   }, []);
 
@@ -32,6 +41,7 @@ const App = props => {
         <Route exact path="/team" component={MeetTheTeam} />
         <Route exact path="/challenges" component={ChallengesList} />
         <Route exact path="/login" component={Login} />
+        <Route exact path="/signup" component={Signup} />
         <Route exact path="/logout" component={Logout} />
         <Route exact path="/userpage" component={UserPage} />
         <Route
@@ -63,14 +73,6 @@ const App = props => {
       <Footer />
     </div>
   );
-};
-
-const mapStateToProps = ({ user }) => ({ user });
-
-const mapDispatchToProps = dispatch => {
-  return {
-    getGithubUser: () => dispatch(getGithubUser()),
-  };
 };
 
 export default connect(

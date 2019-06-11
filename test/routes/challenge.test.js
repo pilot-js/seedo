@@ -17,6 +17,8 @@ describe('testing the challenges routes', () => {
       difficulty: 3,
     });
     const user = await User.create({
+      firstName: 'test',
+      lastName: 'test',
       email: 'email@email.com',
       password: 'password',
       type: 'user',

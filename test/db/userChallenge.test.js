@@ -39,6 +39,8 @@ describe('testing Userchallenge model', () => {
   });
   it('can create a userchallenge if no user/challenge combination exists', async () => {
     const user = await User.create({
+      firstName: 'test',
+      lastName: 'test',
       email: 'email@email.com',
       password: 'password',
       type: 'user',
