@@ -24,9 +24,10 @@ const _IndividualChallenge = ({
   history,
 }) => {
   useEffect(() => {
-    if (userchallenge) {
+    if (Object.keys(userchallenge).length > 0) {
+      console.log(userchallenge);
       fetchUserchallengeById(userchallenge.id);
-    } else if (user) {
+    } else if (Object.keys(user).length > 0) {
       fetchUserchallenge(user.id, challengeId);
     }
     fetchOneChallenge(challengeId);
