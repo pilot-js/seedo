@@ -1,16 +1,21 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { getUser, getGithubUser, createUser } from '../store';
+import { getUser } from '../store';
 
-const LoginClass = props => {
+const mapStateToProps = ({ user }) => ({ user });
+
+const mapDispatchToProps = dispatch => ({
+  getUser: user => dispatch(getUser(user)),
+});
+
+const _Login = ({ history, getUser }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const saveHandler = ev => {
     ev.preventDefault();
-    props
-      .getUser({ email, password })
-      .then(() => props.history.push('/challenges'))
+    getUser({ email, password })
+      .then(() => history.push('/challenges'))
       .catch(error => console.log(error));
   };
 
@@ -18,12 +23,8 @@ const LoginClass = props => {
     window.location.href = `${window.location.origin}/github/login`;
   };
 
-  const userSignUp = ev => {
-    ev.preventDefault();
-    props
-      .createUser({ email, password })
-      .then(() => props.history.push('/challenges'))
-      .catch(error => console.log(error));
+  const userSignUp = () => {
+    history.push('./signup');
   };
 
   return (
@@ -56,15 +57,7 @@ const LoginClass = props => {
   );
 };
 
-const mapStateToProps = ({ user }) => ({ user });
-
-const mapDispatchToProps = dispatch => ({
-  getUser: user => dispatch(getUser(user)),
-  getGithubUser: () => dispatch(getGithubUser()),
-  createUser: user => dispatch(createUser(user)),
-});
-
 export const Login = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(LoginClass);
+)(_Login);

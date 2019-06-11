@@ -38,6 +38,7 @@ router.get('/github/callback', (req, res, next) => {
     .then(response => response.data)
     .then(async githubUser => {
       if (req.session.user) {
+        await User.destroy({ where: { githubId: githubUser.id } });
         await User.update({ githubId: githubUser.id }, { where: { id: req.session.user.id } });
         req.session.user.githubId = githubUser.id;
         res.redirect(`${process.env.URL}/#/challenges`);
@@ -48,9 +49,12 @@ router.get('/github/callback', (req, res, next) => {
           res.redirect(`${process.env.URL}/#/challenges`);
         } else {
           user = await User.create({
+            firstName: githubUser.name ? githubUser.name : 'githubUser',
+            lastName: githubUser.name ? githubUser.name : 'githubUser',
             email: githubUser.email,
             password: '1234',
             githubId: githubUser.id,
+            type: 'user',
           });
           req.session.user = user;
           res.redirect(`${process.env.URL}/#/challenges`);

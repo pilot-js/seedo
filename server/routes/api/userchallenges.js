@@ -37,8 +37,12 @@ router.put('/:userchallengeId', (req, res, next) => {
     Userchallenge.findByPk(userchallengeId)
       .then(userchall => userchall.update(userAnswer))
       .then(async userchall => {
-        await createFiles(userchall.html, userchall.css, userchall.userId);
-        const retPathToUserImage = await createImage(userchall.userId, userchall.challengeId);
+        await createFiles(userchall.html, userchall.css, userchall.userId, './server/tmp/');
+        const retPathToUserImage = await createImage(
+          userchall.userId,
+          userchall.challengeId,
+          './server/tmp/',
+        );
         const pathToUserImage = retPathToUserImage.replace('file://', '').replace('.html', '.png');
         await Image.saveImage(pathToUserImage, userchallengeId);
 

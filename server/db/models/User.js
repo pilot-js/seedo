@@ -16,6 +16,20 @@ module.exports = conn.define('user', {
       notEmpty: false,
     },
   },
+  firstName: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      notEmpty: true,
+    },
+  },
+  lastName: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      notEmpty: true,
+    },
+  },
   password: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -26,5 +40,12 @@ module.exports = conn.define('user', {
   githubId: {
     type: Sequelize.INTEGER,
     allowNull: true,
+  },
+  type: {
+    type: Sequelize.ENUM('user', 'admin'),
+    allowNull: false,
+    validate: {
+      notEmpty: false,
+    },
   },
 });

@@ -12,8 +12,11 @@ describe('Userchallenge routes', () => {
   beforeAll(async () => {
     await conn.sync({ force: true });
     const u = await User.create({
+      firstName: 'test',
+      lastName: 'test',
       email: 'email@email.com',
       password: 'hello',
+      type: 'user',
     });
     const c = await Challenge.create({
       name: 'Basic html page',
