@@ -15,6 +15,7 @@ const _Signup = ({ createUser, history }) => {
   const signup = ev => {
     ev.preventDefault();
     createUser({ firstName, lastName, email, password })
+      .then(() => window.alert('You have successfully sign up, check out some challenges now.'))
       .then(() => history.push('/challenges'))
       .catch(error => console.log(error));
   };
