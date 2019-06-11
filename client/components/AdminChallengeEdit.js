@@ -16,6 +16,10 @@ export const AdminChallengeEdit = props => {
   const [imageUpdateTime, setImageUpdateTime] = useState('');
 
   useEffect(() => {
+    document.getElementById('name').focus();
+  }, []);
+
+  useEffect(() => {
     setTimeout(() => {
       console.log('refreshed');
     }, 0);
@@ -74,6 +78,7 @@ export const AdminChallengeEdit = props => {
             </label>
             <div className="col-sm-9">
               <input
+                id="name"
                 className="form-control"
                 type="text"
                 name="name"

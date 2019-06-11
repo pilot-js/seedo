@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { getUser } from '../store';
 
@@ -11,6 +11,10 @@ const mapDispatchToProps = dispatch => ({
 const _Login = ({ history, getUser }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  useEffect(() => {
+    document.getElementById('email').focus();
+  }, []);
 
   const saveHandler = ev => {
     ev.preventDefault();
@@ -32,6 +36,7 @@ const _Login = ({ history, getUser }) => {
       <form onSubmit={saveHandler}>
         <label htmlFor="email">Email</label>
         <input
+          id="email"
           className="form-control"
           name="email"
           value={email}
