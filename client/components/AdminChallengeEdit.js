@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { convertBufferToImgSrc } from '../utils';
 
 const _AdminChallengeEdit = props => {
-  console.log('props: ', props);
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [difficulty, setDifficulty] = useState('');
@@ -22,6 +21,7 @@ const _AdminChallengeEdit = props => {
   }, []);
 
   const handleSubmit = ev => {
+    // TODO convert challenge image to binary, then save
     ev.preventDefault();
     const challenge = {
       name,
@@ -40,7 +40,6 @@ const _AdminChallengeEdit = props => {
   };
 
   const preview = () => {
-    console.log('props: ', props.user.id);
     const challenge = {
       html,
       css,

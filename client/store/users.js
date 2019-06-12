@@ -20,4 +20,5 @@ export const users = (state = [], action) => {
 };
 
 // thunks
-export const fetchUsers = () => {};
+// TODO grab users for AdminUsers
+// export const fetchUsers = () => {};
