@@ -4,6 +4,8 @@ const conn = require('../conn');
 const { usersSeed } = require('./user');
 const { challengesSeed } = require('./challenge');
 const { userchallengeSeed } = require('./userChallenge');
+const { solutionsSeed } = require('./solution');
+const { images } = require('./image');
 
 // from associations: imageId
 
@@ -12,115 +14,8 @@ const { userchallengeSeed } = require('./userChallenge');
 // from associations: userId, challengeId, imageId
 
 // from associations: challengeId
-const solutionsSeed = [
-  {
-    html: `<!DOCTYPE html>
-    <html>
-      <head>
-        <title>Circle</title>
-      </head>
-      <body>
-        <div id='circle'></div>
-      </body>
-    </html>`,
-    css: `#circle {
-      width: 100px;
-      height: 100px;
-      background-color: red;
-      border-radius: 50%;
-    }`,
-    js: '',
-  },
-  {
-    html: `<!DOCTYPE html>
-    <html>
-      <head>
-        <title>Circle</title>
-      </head>
-      <body>
-        <div id='square'></div>
-      </body>
-    </html>`,
-    css: `#square {
-      width: 100px;
-      height: 100px;
-      background-color: blue;
-    }`,
-    js: '',
-  },
-  {
-    html: `<!DOCTYPE html>
-    <html>
-      <head>
-        <title>Rectangle</title>
-      </head>
-      <body>
-        <div id='rectangle'></div>
-      </body>
-    </html>`,
-    css: `#rectangle {
-      width: 200px;
-      height: 100px;
-      background-color: yellow;
-    }`,
-    js: '',
-    submitted: false,
-  },
-  {
-    html: `<!DOCTYPE html>
-    <html>
-      <head>
-        <title>Rectangle</title>
-      </head>
-      <body>
-        <div id='rectangle'></div>
-      </body>
-    </html>`,
-    css: `#rectangle {
-      width: 100px;
-      height: 200px;
-      background-color: orange;
-    }`,
-    js: '',
-    submitted: false,
-  },
-];
 
 // from associations: challengeId, userchallengeId
-const images = [
-  {
-    type: 'challenge',
-    url: 'challenge-1-red-circle.png',
-    connector: 'challenge-1',
-    width: 100,
-    height: 100,
-  },
-  {
-    type: 'challenge',
-    url: 'challenge-2-blue-square.png',
-    connector: 'challenge-2',
-    width: 100,
-    height: 100,
-  },
-  {
-    type: 'challenge',
-    url: 'challenge-3-yellow-rectangle.png',
-    connector: 'challenge-3',
-    width: 200,
-    height: 100,
-  },
-  {
-    type: 'challenge',
-    url: 'challenge-4-orange-rectangle.png',
-    connector: 'challenge-4',
-    width: 100,
-    height: 200,
-  },
-  { type: 'userchallenge', url: 'userchallenge-1.png', connector: 'userchallenge-1' },
-  { type: 'userchallenge', url: 'userchallenge-2.png', connector: 'userchallenge-2' },
-  { type: 'userchallenge', url: 'userchallenge-3.png', connector: 'userchallenge-3' },
-  { type: 'userchallenge', url: 'userchallenge-4.png', connector: 'userchallenge-4' },
-];
 
 const currDir = process.cwd();
 const imagesSeed = images.map(image => {
