@@ -26,9 +26,9 @@ Image.saveImage = (pathToImage, userchallengeId) => {
   });
 };
 
-Image.seedImage = (pathToImage, challengeId) => {
+Image.seedImage = (pathToImage, challengeId, height, width) => {
   const imageData = fs.readFileSync(pathToImage);
-  return Image.create({ challengeId, data: imageData });
+  return Image.create({ challengeId, data: imageData, height, width });
 };
 
 module.exports = Image;

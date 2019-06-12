@@ -37,7 +37,7 @@ const syncAndSeed = () => {
           await utils.createFiles(sol.html, sol.css, sol.id, dirname);
           const retImagePath = await utils.seedImage(sol.id, dirname);
           const imagePath = retImagePath.replace('file://', '').replace('.html', '.png');
-          return Image.seedImage(imagePath, sol.challengeId);
+          return Image.seedImage(imagePath, sol.challengeId, 337, 600);
         }),
       ]);
     });
