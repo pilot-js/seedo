@@ -12,17 +12,19 @@ import {
 } from '../store';
 import { convertBufferToImgSrc } from '../utils';
 
-const _IndividualChallenge = ({
-  individualChallenge,
-  userchallenge,
-  updateUserchallenge,
-  user,
-  fetchOneChallenge,
-  fetchUserchallengeById,
-  fetchUserchallenge,
-  challengeId,
-  history,
-}) => {
+const _IndividualChallenge = props => {
+  console.log('props: ', props);
+  const {
+    individualChallenge,
+    userchallenge,
+    updateUserchallenge,
+    user,
+    fetchOneChallenge,
+    fetchUserchallengeById,
+    fetchUserchallenge,
+    challengeId,
+    history,
+  } = props;
   useEffect(() => {
     if (Object.keys(user).length > 0) {
       fetchUserchallenge(user.id, challengeId);
