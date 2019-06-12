@@ -1,4 +1,4 @@
-/* eslint indent: 1 */
+/* eslint indent: 0 */
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -34,7 +34,14 @@ const _AdminChallenges = props => {
                 const { id, name, description, image } = chall;
                 return (
                   <tr key={id}>
-                    <td />
+                    <td>
+                      <Link to="/" className="item-delete" style={{ marginRight: '1rem' }}>
+                        Del
+                      </Link>
+                      <Link to="/" className="item-edit">
+                        Edit
+                      </Link>
+                    </td>
                     <td>{id}</td>
                     <td>{name}</td>
                     <td>{description}</td>
@@ -61,5 +68,6 @@ const mapDispatchToProps = dispatch => {
 
 export const AdminChallenges = connect(
   mapStateToProps,
+
   mapDispatchToProps,
 )(_AdminChallenges);
