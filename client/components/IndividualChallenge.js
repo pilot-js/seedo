@@ -24,10 +24,7 @@ const _IndividualChallenge = ({
   history,
 }) => {
   useEffect(() => {
-    if (Object.keys(userchallenge).length > 0) {
-      console.log(userchallenge);
-      fetchUserchallengeById(userchallenge.id);
-    } else if (Object.keys(user).length > 0) {
+    if (Object.keys(user).length > 0) {
       fetchUserchallenge(user.id, challengeId);
     }
     fetchOneChallenge(challengeId);
@@ -47,7 +44,7 @@ const _IndividualChallenge = ({
   const updateValue = (createDiff, isSubmit = false) => {
     setLoading(true);
     const userAnswer = { html, css, js, challengeId };
-    updateUserchallenge(userAnswer, challengeId, createDiff, isSubmit)
+    updateUserchallenge(userAnswer, userchallenge.id, createDiff, isSubmit)
       .then(() => {
         setShowModal(createDiff);
         setShowCodeMirror(!createDiff);
