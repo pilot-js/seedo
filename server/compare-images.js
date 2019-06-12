@@ -5,7 +5,7 @@ const stream = require('stream');
 const PNG = require('pngjs').PNG;
 const pixelmatch = require('pixelmatch');
 
-function compareImages(userchallengePath, challengeImg) {
+function compareImages(userchallengePath, challengeImg, userId) {
   // use promise so that can return percentMatch
   return new Promise((resolve, reject) => {
     try {
@@ -22,9 +22,10 @@ function compareImages(userchallengePath, challengeImg) {
         const numDiffPixels = pixelmatch(img1.data, img2.data, diff.data, img1.width, img1.height, {
           threshold: 0.1,
         });
+        console.log(`${dir}${userId}.diff.png`);
         diff
           .pack()
-          .pipe(fs.createWriteStream(`${dir}diff-image.png`))
+          .pipe(fs.createWriteStream(`${dir}${userId}.diff.png`))
           .on('finish', () => {
             percentMatch = Math.round(100 * (1 - numDiffPixels / (img1.width * img1.height)));
             resolve(percentMatch);
