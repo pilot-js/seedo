@@ -30,25 +30,25 @@ const _AdminChallenges = props => {
         <tbody>
           {challenges
             ? challenges.map(chall => {
-              const { id, name, description, image } = chall;
-              return (
-                <tr key={id}>
-                  <td>
-                    <Link to="/" className="item-delete" style={{ marginRight: '1rem' }}>
-                      Del
+                const { id, name, description, image } = chall;
+                return (
+                  <tr key={id}>
+                    <td>
+                      <Link to="/" className="item-delete" style={{ marginRight: '1rem' }}>
+                        Del
                       </Link>
-                    <Link to="/" className="item-edit">
-                      Edit
+                      <Link to="/" className="item-edit">
+                        Edit
                       </Link>
-                  </td>
-                  <td>{id}</td>
-                  <td>{name}</td>
-                  <td>{description}</td>
-                  {/* TODO link to popup image goes here */}
-                  <td>link to popup image goes here</td>
-                </tr>
-              );
-            })
+                    </td>
+                    <td>{id}</td>
+                    <td>{name}</td>
+                    <td>{description}</td>
+                    {/* TODO link to popup image goes here */}
+                    <td>link to popup image goes here</td>
+                  </tr>
+                );
+              })
             : ''}
         </tbody>
       </table>
