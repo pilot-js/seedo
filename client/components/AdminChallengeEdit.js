@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
 
 import { convertBufferToImgSrc } from '../utils';
 
-export const AdminChallengeEdit = props => {
+const _AdminChallengeEdit = props => {
+  console.log('props: ', props)
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [difficulty, setDifficulty] = useState('');
@@ -38,11 +40,13 @@ export const AdminChallengeEdit = props => {
   };
 
   const preview = () => {
+    console.log('props: ', props.user.id)
     const challenge = {
       html,
       css,
       imageWidth,
       imageHeight,
+      userId: props.user.id,
     };
     axios
       .put('/api/challenges/preview', challenge)
@@ -180,3 +184,9 @@ export const AdminChallengeEdit = props => {
     </div>
   );
 };
+
+const mapStateToProps = ({ user }) => {
+  return { user };
+};
+
+export const AdminChallengeEdit = connect(mapStateToProps)(_AdminChallengeEdit);
