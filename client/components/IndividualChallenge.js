@@ -12,19 +12,16 @@ import {
 } from '../store';
 import { convertBufferToImgSrc } from '../utils';
 
-const _IndividualChallenge = props => {
-  console.log('props: ', props);
-  const {
-    individualChallenge,
-    userchallenge,
-    updateUserchallenge,
-    user,
-    fetchOneChallenge,
-    fetchUserchallengeById,
-    fetchUserchallenge,
-    challengeId,
-    history,
-  } = props;
+const _IndividualChallenge = ({
+  individualChallenge,
+  userchallenge,
+  updateUserchallenge,
+  user,
+  fetchOneChallenge,
+  fetchUserchallengeById,
+  fetchUserchallenge,
+  challengeId,
+}) => {
   useEffect(() => {
     if (Object.keys(user).length > 0) {
       fetchUserchallenge(user.id, challengeId);
@@ -51,11 +48,9 @@ const _IndividualChallenge = props => {
         setShowModal(createDiff);
         setShowCodeMirror(!createDiff);
         setLoading(false);
-        history.push('/');
       })
       .catch(ex => console.log(ex));
   };
-  console.log(userchallenge);
 
   const closeModal = () => {
     setShowModal(false);
