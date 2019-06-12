@@ -1,4 +1,6 @@
 const router = require('express').Router();
+const fs = require('fs');
+const path = require('path');
 
 const { Userchallenge, Image } = require('../../db');
 const { createFiles, createImage } = require('../../puppeteer-utils');
@@ -29,10 +31,11 @@ router.get('/:userchallengeId', (req, res, next) => {
 // create answer for a challenge
 router.put('/:userchallengeId', (req, res, next) => {
   const { userchallengeId } = req.params;
+  console.log(req.body);
   try {
-    const { isSubmit } = req.body;
+    const { isSubmit, userAnswer, createDiff } = req.body;
     Userchallenge.findByPk(userchallengeId)
-      .then(userchall => userchall.update(req.body.userAnswer))
+      .then(userchall => userchall.update(userAnswer))
       .then(async userchall => {
         await createFiles(userchall.html, userchall.css, userchall.userId, './server/tmp/');
         const retPathToUserImage = await createImage(
@@ -43,18 +46,21 @@ router.put('/:userchallengeId', (req, res, next) => {
         const pathToUserImage = retPathToUserImage.replace('file://', '').replace('.html', '.png');
         await Image.saveImage(pathToUserImage, userchallengeId);
 
-        if (isSubmit) {
+        if (createDiff) {
           const challengeImg = await Image.findOne({
             where: { challengeId: userchall.challengeId },
           });
-
-          const percentMatch = await compareImages(pathToUserImage, challengeImg);
-
+          const percentMatch = await compareImages(pathToUserImage, challengeImg, userchall.userId);
           await userchall.update({ grade: percentMatch });
         }
-
         const userChallenge = await Userchallenge.findByPk(userchallengeId, { include: [Image] });
-        res.send(userChallenge);
+        const userchallengeObject = userChallenge.get();
+        if (createDiff) {
+          userchallengeObject.diffImage = fs.readFileSync(
+            `${path.join(process.cwd(), `server/tmp/${userChallenge.userId}.diff.png`)}`,
+          );
+        }
+        res.send(userchallengeObject);
       })
       .catch(next);
   } catch {

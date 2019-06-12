@@ -1,6 +1,16 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
-export const Results = ({ userImage, solutionImage, diffImage, grade, closeModal }) => (
+export const Results = ({
+  userImage,
+  solutionImage,
+  diffImage,
+  grade,
+  closeModal,
+  submit,
+  userchallengeId,
+  challengeId,
+}) => (
   <div
     className="d-flex flex-column justify-content-around"
     style={{ width: '100%', height: '100%' }}
@@ -13,9 +23,11 @@ export const Results = ({ userImage, solutionImage, diffImage, grade, closeModal
     <div className="d-flex justify-content-around row">
       <h4 className="d-flex align-items-center">Your grade: {grade}</h4>
       <div className="d-flex align-items-center btn-group" role="group">
-        <button className="btn btn-sm btn-success" type="button">
-          Submit answer!
-        </button>
+        <Link to={`/solutions/${userchallengeId}/challenges/${challengeId}`}>
+          <button className="btn btn-sm btn-success" type="button" onClick={() => submit()}>
+            Submit answer!
+          </button>
+        </Link>
         <button className="btn btn-sm btn-info" onClick={closeModal} type="button">
           Continue designing...
         </button>
