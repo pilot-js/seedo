@@ -3,19 +3,19 @@ const { Challenge, Image, Solution, User, Userchallenge } = require('../models')
 const conn = require('../conn');
 const { usersSeed } = require('./user');
 const { challengesSeed } = require('./challenge');
-const { userchallengeSeed } = require('./userChallenge');
+const { userchallengeSeed } = require('./userChallenge'); // may delete later
 const { solutionsSeed } = require('./solution');
 const { images } = require('./image');
 
-// from associations: imageId
-
-// TODO for js - console.log()
-
-// from associations: userId, challengeId, imageId
-
-// from associations: challengeId
-
-// from associations: challengeId, userchallengeId
+const seedUser = () => {
+  return Promise.all(usersSeed.map(user => User.create(user)));
+};
+const seedChallenge = () => {
+  return Promise.all(challengesSeed.map(chal => Challenge.create(chal)));
+};
+const seedSolution = () => {
+  return Promise.all(solutionsSeed.map(sol => Solution.create(sol)));
+};
 
 const currDir = process.cwd();
 const imagesSeed = images.map(image => {
