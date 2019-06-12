@@ -21,10 +21,12 @@ const component = ({
   history,
 }) => {
   const { searchTerm, difficulty } = match.params;
+  let filter = {};
 
   useEffect(() => {
     if (difficulty) {
-      fetchChallengesWithFilterAndSearch(difficulty, searchTerm);
+      filter = difficulty;
+      fetchChallengesWithFilterAndSearch(filter, searchTerm);
     } else {
       fetchChallenges();
     }

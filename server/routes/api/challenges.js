@@ -38,10 +38,9 @@ router.get('/:id', (req, res, next) => {
 
 router.get('/filter/:difficulty', (req, res, next) => {
   const { difficulty } = req.params;
+  const option = JSON.parse(difficulty);
   Challenge.findAll({
-    where: {
-      difficulty: difficulty === 'all' ? { [Op.gt]: 0 } : difficulty,
-    },
+    where: option,
     order: [['name', 'asc']],
     include: [Image],
   })
@@ -51,13 +50,14 @@ router.get('/filter/:difficulty', (req, res, next) => {
 
 router.get('/filter/:difficulty/search/:term', (req, res, next) => {
   const { difficulty, term } = req.params;
+  const option = JSON.parse(difficulty);
   Challenge.findAll({
     where: {
-      difficulty: difficulty === 'all' ? { [Op.gt]: 0 } : difficulty,
       [Op.or]: [
         { name: { [Op.iLike]: `%${term}%` } },
         { description: { [Op.iLike]: `%${term}%` } },
       ],
+      ...option,
     },
     order: [['name', 'asc']],
     include: [Image],

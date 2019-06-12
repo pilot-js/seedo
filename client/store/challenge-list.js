@@ -29,13 +29,16 @@ export const fetchChallenges = () => {
 //     .then(res => dispatch(getChallenges(res.data)));
 // };
 
-export const fetchChallengesWithFilterAndSearch = (difficulty, term) => dispatch => {
-  if (!term) {
+export const fetchChallengesWithFilterAndSearch = (filter, search) => dispatch => {
+  console.log('logging in store', typeof filter, search);
+  if (!search) {
+    console.log(`api/challenges/filter/${filter}`)
     return axios
-      .get(`api/challenges/filter/${difficulty}`)
+      .get(`api/challenges/filter/${filter}`)
       .then(res => dispatch(getChallenges(res.data)));
   }
+  console.log(`api/challenges/filter/${filter}/search/${search}`)
   return axios
-    .get(`api/challenges/filter/${difficulty}/search/${term}`)
+    .get(`api/challenges/filter/${filter}/search/${search}`)
     .then(res => dispatch(getChallenges(res.data)));
 };

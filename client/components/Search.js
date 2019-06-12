@@ -2,22 +2,32 @@ import React, { useState } from 'react';
 
 export const Search = ({ searchTerm, history }) => {
   const [term, setTerm] = useState(searchTerm ? searchTerm : '');
-  const [difficulty, setDifficulty] = useState('all');
+  const [filter, setFilter] = useState({ difficulty: 'all' });
 
   const onSearch = ev => {
     ev.preventDefault();
-    history.push(`/challenges/filter/${difficulty}/search/${term}`);
+    history.push(`/challenges/filter/${filter}/search/${term}`);
   };
 
   const onClear = () => {
     setTerm('');
-    setDifficulty('all');
+    setFilter({ difficulty: 'all' });
     history.push('/challenges');
   };
 
   const submitHandler = event => {
     event.preventDefault();
-    history.push(`/challenges/filter/${difficulty}`);
+    const filterStr = JSON.stringify(filter);
+    history.push(`/challenges/filter/${filterStr}`);
+  };
+
+  const filterIsAll = arr => {
+    for (let i = 0; i < arr.length; ++i) {
+      if (arr[i] !== 'all') {
+        return false;
+      }
+    }
+    return true;
   };
 
   return (
@@ -38,13 +48,22 @@ export const Search = ({ searchTerm, history }) => {
         </button>
       </form>
       <form onSubmit={submitHandler}>
-        <label>Difficulty:</label>
-        <select value={difficulty} onChange={e => setDifficulty(e.target.value)}>
+        <label>Filter difficulty:</label>
+        <select
+          name="difficulty"
+          value={filter.difficulty}
+          onChange={e => {
+            const val = e.target.value;
+            setFilter(prevState => {
+              return { ...prevState, difficulty: val };
+            });
+          }}
+        >
           <option value="all">All</option>
           <option value={1}>1</option>
           <option value={2}>2</option>
         </select>
-        <button type="submit" disabled={difficulty === 'all'}>
+        <button type="submit" disabled={filterIsAll(Object.values(filter))}>
           Filter
         </button>
         <button type="button" onClick={onClear}>
