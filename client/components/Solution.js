@@ -24,7 +24,6 @@ const _Solution = ({
     }
   }, []);
 
-  console.log(individualChallenge);
   const options = {
     lineNumbers: true,
     mode: 'javascript',

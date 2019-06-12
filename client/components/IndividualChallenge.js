@@ -21,7 +21,6 @@ const _IndividualChallenge = ({
   fetchUserchallengeById,
   fetchUserchallenge,
   challengeId,
-  history,
 }) => {
   useEffect(() => {
     if (Object.keys(user).length > 0) {
@@ -49,11 +48,9 @@ const _IndividualChallenge = ({
         setShowModal(createDiff);
         setShowCodeMirror(!createDiff);
         setLoading(false);
-        history.push('/');
       })
       .catch(ex => console.log(ex));
   };
-  console.log(userchallenge);
 
   const closeModal = () => {
     setShowModal(false);
