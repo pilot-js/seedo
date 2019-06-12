@@ -53,7 +53,12 @@ router.put('/preview', (req, res, next) => {
   const { html, css, imageWidth, imageHeight, userId } = req.body;
   createFiles(html, css, `${userId}-preview`, './dist/images/tmp/');
 
-  createImagePreview(`${userId}-preview`, './dist/images/tmp/', Number(imageWidth), Number(imageHeight))
+  createImagePreview(
+    `${userId}-preview`,
+    './dist/images/tmp/',
+    Number(imageWidth),
+    Number(imageHeight),
+  )
     .then(retPathToUserImage => {
       const pathToUserImage = retPathToUserImage.replace('file://', '').replace('.html', '.png');
       const imageData = fs.readFileSync(pathToUserImage);
