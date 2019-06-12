@@ -3,8 +3,6 @@ import axios from 'axios';
 
 import { convertBufferToImgSrc } from '../utils';
 
-// import { createImage } from '../../server/puppeteer-utils';
-
 export const AdminChallengeEdit = props => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
@@ -21,10 +19,6 @@ export const AdminChallengeEdit = props => {
     document.getElementById('name').focus();
   }, []);
 
-  useEffect(() => {
-    console.log('refreshed');
-  }, [image]);
-
   const handleSubmit = ev => {
     ev.preventDefault();
     const challenge = {
@@ -37,7 +31,6 @@ export const AdminChallengeEdit = props => {
       imageHeight,
     };
 
-    console.log('challenge: ', challenge);
     axios
       .post('api/challenges', challenge)
       .then(() => props.history.push('/admin/challenges'))
@@ -45,11 +38,6 @@ export const AdminChallengeEdit = props => {
   };
 
   const preview = () => {
-    // refactor createFiles & createImages from puppeteer-utils
-    // const dir = process.cwd();
-    // console.log('dir: ', dir);
-    // dir += '';
-    // createFiles(html, css, 'preview', '')
     const challenge = {
       html,
       css,
@@ -60,7 +48,6 @@ export const AdminChallengeEdit = props => {
       .put('/api/challenges/preview', challenge)
       .then(resp => resp.data)
       .then(data => {
-        console.log('data: ', data);
         setImage(data);
       })
       .catch(err => console.log(err));
@@ -73,7 +60,7 @@ export const AdminChallengeEdit = props => {
       {/* TODO make conditional - Create | Edit */}
       <h1>Create Challenge</h1>
       <div className="row">
-        <div className="col-8">
+        <div className="col-6">
           <form onSubmit={handleSubmit}>
             <div className="form-group row">
               <label htmlFor="name" className="col-sm-2 col-form-label">
@@ -185,7 +172,7 @@ export const AdminChallengeEdit = props => {
             <button type="submit">Save Challenge</button>
           </form>
         </div>
-        <div className="col-4">
+        <div className="col-6">
           <h2>Image Preview</h2>
           <img src={imageSrc} alt="" />
         </div>
