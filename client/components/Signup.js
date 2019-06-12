@@ -11,6 +11,7 @@ const _Signup = ({ createUser, history }) => {
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const type = 'user';
 
   useEffect(() => {
     document.getElementById('firstName').focus();
@@ -18,7 +19,7 @@ const _Signup = ({ createUser, history }) => {
 
   const signup = ev => {
     ev.preventDefault();
-    createUser({ firstName, lastName, email, password })
+    createUser({ firstName, lastName, email, password, type })
       .then(() => window.alert('You have successfully sign up, check out some challenges now.'))
       .then(() => history.push('/challenges'))
       .catch(error => console.log(error));
