@@ -11,6 +11,7 @@ import {
   Login,
   Logout,
   UserPage,
+  Community,
   Solution,
   Signup,
 } from './components';
@@ -40,6 +41,7 @@ const App = ({ getGithubUser }) => {
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/logout" component={Logout} />
         <Route exact path="/userpage" component={UserPage} />
+        <Route exact path="/community" component={Community} />
         <Route
           exact
           path="/solutions/:userchallengeId/challenges/:id"
