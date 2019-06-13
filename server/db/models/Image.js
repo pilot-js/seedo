@@ -15,25 +15,25 @@ const Image = conn.define('image', {
 });
 
 Image.saveImage = (pathToImage, id, isUserchallenge, imageWidth, imageHeight) => {
-  return isUserchallenge
+  return (isUserchallenge
     ? Image.findOne({ where: { userchallengeId: id } })
-    : Image.findOne({ where: { challengeId: id } }).then(async maybeImage => {
-        const imageData = fs.readFileSync(pathToImage);
-        if (maybeImage) {
-          await maybeImage.update({ ...maybeImage, data: imageData });
-        } else {
-          maybeImage = isUserchallenge
-            ? await Image.create({ userchallengeId: id, data: imageData })
-            : await Image.create({
-                challengeId: id,
-                data: imageData,
-                width: imageWidth,
-                height: imageHeight,
-              });
-        }
-
-        return maybeImage;
-      });
+    : Image.findOne({ where: { challengeId: id } })
+  ).then(async maybeImage => {
+    const imageData = fs.readFileSync(pathToImage);
+    if (maybeImage) {
+      await maybeImage.update({ ...maybeImage, data: imageData });
+    } else {
+      maybeImage = isUserchallenge
+        ? await Image.create({ userchallengeId: id, data: imageData })
+        : await Image.create({
+            challengeId: id,
+            data: imageData,
+            width: imageWidth,
+            height: imageHeight,
+          });
+    }
+    return maybeImage;
+  });
 };
 
 module.exports = Image;

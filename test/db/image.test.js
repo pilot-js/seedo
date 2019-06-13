@@ -49,6 +49,7 @@ describe('testing image model', () => {
         submitted: true,
       });
       const image = await Image.saveImage(pathToImage, uc.id, true, 150, 150);
+      console.log('image2: ', image.get());
       expect(image).toBeTruthy();
     });
     it('can update an image record in the database', async () => {
