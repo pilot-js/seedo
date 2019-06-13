@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const fs = require('fs');
+const Op = require('../../db/conn').Sequelize.Op;
 const { Challenge, Image, Comment, Solution } = require('../../db');
 const { createFiles, createImagePreview } = require('../../puppeteer-utils');
 
@@ -93,6 +94,39 @@ router.get('/:id', (req, res, next) => {
     .then(challenge => {
       res.send(challenge);
     })
+    .catch(next);
+});
+
+router.get('/filter/:difficulty', (req, res, next) => {
+  const { difficulty } = req.params;
+  const option = JSON.parse(difficulty);
+  Challenge.findAll({
+    where: option,
+    order: [['name', 'asc']],
+    include: [Image],
+  })
+    .then(challenges => res.send(challenges))
+    .catch(next);
+});
+
+router.get('/search/:term/filter/:difficulty', (req, res, next) => {
+  const { difficulty, term } = req.params;
+  const option = JSON.parse(difficulty);
+  if (option.difficulty === 'all') {
+    option.difficulty = { [Op.gt]: 0 };
+  }
+  Challenge.findAll({
+    where: {
+      [Op.or]: [
+        { name: { [Op.iLike]: `%${term}%` } },
+        { description: { [Op.iLike]: `%${term}%` } },
+      ],
+      ...option,
+    },
+    order: [['name', 'asc']],
+    include: [Image],
+  })
+    .then(challenges => res.send(challenges))
     .catch(next);
 });
 

@@ -27,6 +27,10 @@ const _Nav = props => {
         label: 'User Page',
         to: '/userpage',
       },
+      {
+        label: 'Community',
+        to: '/community',
+      },
     );
   } else {
     navLinks.push({

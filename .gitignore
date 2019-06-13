@@ -13,3 +13,4 @@ server/tmp/
 .env.js
 tags
 bundle.js.map
+server/db/seed/images/

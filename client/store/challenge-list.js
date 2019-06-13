@@ -21,3 +21,21 @@ export const fetchChallenges = () => {
       .then(challenges => dispatch(getChallenges(challenges)));
   };
 };
+
+// // Return search challenges with a search term
+// export const fetchFilterChallenges = difficulty => dispatch => {
+//   return axios
+//     .get(`api/challenges/filter/${difficulty}`)
+//     .then(res => dispatch(getChallenges(res.data)));
+// };
+
+export const fetchChallengesWithFilterAndSearch = (filter, search) => dispatch => {
+  if (!search) {
+    return axios
+      .get(`api/challenges/filter/${filter}`)
+      .then(res => dispatch(getChallenges(res.data)));
+  }
+  return axios
+    .get(`api/challenges/search/${search}/filter/${filter}`)
+    .then(res => dispatch(getChallenges(res.data)));
+};
