@@ -37,8 +37,8 @@ export const fetchChallengesWithFilterAndSearch = (filter, search) => dispatch =
       .get(`api/challenges/filter/${filter}`)
       .then(res => dispatch(getChallenges(res.data)));
   }
-  console.log(`api/challenges/filter/${filter}/search/${search}`);
+  console.log(`api/challenges/search/${search}/filter/${filter}`);
   return axios
-    .get(`api/challenges/filter/${filter}/search/${search}`)
+    .get(`api/challenges/search/${search}/filter/${filter}`)
     .then(res => dispatch(getChallenges(res.data)));
 };

@@ -48,9 +48,12 @@ router.get('/filter/:difficulty', (req, res, next) => {
     .catch(next);
 });
 
-router.get('/filter/:difficulty/search/:term', (req, res, next) => {
+router.get('/search/:term/filter/:difficulty', (req, res, next) => {
   const { difficulty, term } = req.params;
   const option = JSON.parse(difficulty);
+  if (option.difficulty === 'all') {
+    option.difficulty = { [Op.gt]: 0 };
+  }
   Challenge.findAll({
     where: {
       [Op.or]: [

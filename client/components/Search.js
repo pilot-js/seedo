@@ -6,7 +6,8 @@ export const Search = ({ searchTerm, history }) => {
 
   const onSearch = ev => {
     ev.preventDefault();
-    history.push(`/challenges/filter/${filter}/search/${term}`);
+    const filterStr = JSON.stringify(filter);
+    history.push(`/challenges/search/${term}/filter/${filterStr}`);
   };
 
   const onClear = () => {

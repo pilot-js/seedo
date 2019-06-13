@@ -38,7 +38,7 @@ const App = ({ getGithubUser }) => {
         <Route exact path="/challenges" component={ChallengesList} />
         <Route
           exact
-          path="/challenges/filter/:difficulty/search/:searchTerm"
+          path="/challenges/search/:searchTerm/filter/:difficulty"
           component={ChallengesList}
         />
         <Route exact path="/challenges/filter/:difficulty" component={ChallengesList} />
