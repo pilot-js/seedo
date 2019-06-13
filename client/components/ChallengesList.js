@@ -40,7 +40,9 @@ const component = ({
       <Search history={history} searchTerm={searchTerm} />
       <div className="d-flex justify-content-around">
         {challenges.map(challenge => {
-          const imageSrc = convertBufferToImgSrc(challenge.images[0].data);
+          const images = challenge.images ? challenge.images : [{ data: { data: [1] } }];
+          const image = images[0];
+          const imageSrc = convertBufferToImgSrc(image.data);
           return (
             <div className="card" style={{ width: '20rem' }} key={challenge.id}>
               <div className="card-body">
