@@ -9,3 +9,4 @@ export * from './Logout';
 export * from './UserPage';
 export * from './Solution';
 export * from './Signup';
+export * from './Community';
