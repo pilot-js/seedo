@@ -53,7 +53,9 @@ const App = ({ getGithubUser }) => {
         <Route
           exact
           path="/challenges/:id"
-          render={({ match }) => <IndividualChallenge challengeId={match.params.id} />}
+          render={({ match, history }) => (
+            <IndividualChallenge challengeId={match.params.id} history={history} />
+          )}
         />
       </Switch>
       <Footer />
