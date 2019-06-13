@@ -24,7 +24,6 @@ const component = ({
   let filter = {};
 
   useEffect(() => {
-    console.log('logging in component:', difficulty, searchTerm)
     if (difficulty) {
       filter = difficulty;
       fetchChallengesWithFilterAndSearch(filter, searchTerm);
