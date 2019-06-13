@@ -31,7 +31,9 @@ app.use('/api', api);
 app.use('/auth', auth);
 
 app.get('/github/login', (req, res, next) => {
-  const URL = `https://github.com/login/oauth/authorize?client_id=${process.env.CLIENT_ID}&scope=repo_deployment`;
+  const URL = `https://github.com/login/oauth/authorize?client_id=${
+    process.env.CLIENT_ID
+  }&scope=repo_deployment`;
   res.redirect(URL);
 });
 
