@@ -3,6 +3,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 
 import { convertBufferToImgSrc } from '../utils';
+import { fetchOneChallenge } from '../store';
 
 const _AdminChallengeEdit = props => {
   const [name, setName] = useState('');
@@ -10,17 +11,31 @@ const _AdminChallengeEdit = props => {
   const [difficulty, setDifficulty] = useState('');
   const [html, setHtml] = useState('');
   const [css, setCss] = useState('');
-
-  // TODO upload image file, convert to binary, save in db
   const [imageWidth, setImageWidth] = useState('');
   const [imageHeight, setImageHeight] = useState('');
   const [image, setImage] = useState({ data: '' });
 
   useEffect(() => {
     document.getElementById('name').focus();
-    console.log('props, ', props);
+
+    if (props.challengeId) {
+      props.fetchOneChallenge(props.challengeId).then(() => console.log('after: ', props));
+    }
   }, []);
 
+  useEffect(() => {
+    // const { name, description, difficulty } = props.challenge;
+    // const [name, setName] = useState('');
+    // const [description, setDescription] = useState('');
+    // const [difficulty, setDifficulty] = useState('');
+    // const [html, setHtml] = useState('');
+    // const [css, setCss] = useState('');
+    // const [imageWidth, setImageWidth] = useState('');
+    // const [imageHeight, setImageHeight] = useState('');
+    // const [image, setImage] = useState({ data: '' });
+  }, [props.individualChallenge]);
+
+  console.log('outside:', props);
   const handleSubmit = ev => {
     ev.preventDefault();
     const challenge = {
@@ -184,8 +199,17 @@ const _AdminChallengeEdit = props => {
   );
 };
 
-const mapStateToProps = ({ user }) => {
-  return { user };
+const mapStateToProps = ({ user, individualChallenge }) => {
+  return { user, individualChallenge };
 };
 
-export const AdminChallengeEdit = connect(mapStateToProps)(_AdminChallengeEdit);
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchOneChallenge: challengeId => dispatch(fetchOneChallenge(challengeId)),
+  };
+};
+
+export const AdminChallengeEdit = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(_AdminChallengeEdit);

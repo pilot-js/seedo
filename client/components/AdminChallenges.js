@@ -50,7 +50,11 @@ const _AdminChallenges = props => {
                 return (
                   <tr key={id}>
                     <td>
-                      <Link to="/" className="item-edit" style={{ marginRight: '1rem' }}>
+                      <Link
+                        to={`/admin/challenge/${id}`}
+                        className="item-edit"
+                        style={{ marginRight: '1rem' }}
+                      >
                         Edit
                       </Link>
                       <Link to="/" className="item-archive" style={{ marginRight: '1rem' }}>
