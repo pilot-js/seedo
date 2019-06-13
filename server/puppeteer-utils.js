@@ -37,7 +37,7 @@ const createFiles = async (html, css, userId, dir) => {
 const createImage = async (userId, challengeId, dir) => {
   try {
     const image = await Image.findOne({ where: { challengeId } });
-    const args = process.env.SANDBOX ? ['-–no-sandbox', '-–disable-setuid-sandbox'] : [];
+    const args = ['-–no-sandbox', '-–disable-setuid-sandbox'];
     const browser = await puppeteer.launch({ args });
     const page = await browser.newPage();
     const retPath = `file://${path.join(process.cwd(), `${dir}${userId}.html`)}`;
