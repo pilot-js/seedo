@@ -12,7 +12,7 @@ const _UserPage = ({ user, userChallenges, individualChallenge, fetchUserChallen
         })
         .catch(e => console.error(`Failed to get userChallenges. Here's why:\n${e}`));
     }
-  }, []);
+  }, [userChallenges]);
 
   const linkGithub = () => {
     window.location.href = `${window.location.origin}/github/login`;
