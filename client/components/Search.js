@@ -19,7 +19,11 @@ export const Search = ({ searchTerm, history }) => {
   const submitHandler = event => {
     event.preventDefault();
     const filterStr = JSON.stringify(filter);
-    history.push(`/challenges/filter/${filterStr}`);
+    if (term !== '') {
+      history.push(`/challenges/search/${term}/filter/${filterStr}`);
+    } else {
+      history.push(`/challenges/filter/${filterStr}`);
+    }
   };
 
   const filterIsAll = arr => {
