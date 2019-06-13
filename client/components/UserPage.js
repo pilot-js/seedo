@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { fetchUserChallenges } from '../store';
 
-const _UserPage = ({ user, userChallenges, fetchUserChallenges }) => {
+const _UserPage = ({ user, userChallenges, individualChallenge, fetchUserChallenges }) => {
   useEffect(() => {
     if (user.id) {
       fetchUserChallenges(user.id)
@@ -37,17 +38,38 @@ const _UserPage = ({ user, userChallenges, fetchUserChallenges }) => {
           </button>
         )}
       </div>
-      <ul>
-        {userChallenges.map(uc => (
-          <li>{uc.name}</li>
-        ))}
-      </ul>
+      <div className="d-flex flex-column align-items-center">
+        <h1>My Completed Challenges</h1>
+        <table className="table">
+          <thead>
+            <tr>
+              <th>Challenge Name</th>
+              <th>UserChallenge</th>
+            </tr>
+          </thead>
+          <tbody>
+            {userChallenges.map(uc => {
+              return (
+                <tr key={uc.id}>
+                  <td>{uc.name}</td>
+                  <td>
+                    <Link to={`/solutions/${uc.id}/challenges/${individualChallenge.id}`}>
+                      <span>{uc.name}</span>
+                    </Link>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
 
-const mapStateToProps = ({ user, userChallenges }) => ({
+const mapStateToProps = ({ user, userChallenges, individualChallenge }) => ({
   user,
+  individualChallenge,
   userChallenges,
 });
 
