@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const fs = require('fs');
-const { Challenge, Image, Comment, Solution } = require('../../db');
+const { Challenge, Image, Comment, Solution, Userchallenge } = require('../../db');
 const { createFiles, createImagePreview } = require('../../puppeteer-utils');
 
 /**  /api/challenges **/
@@ -59,7 +59,7 @@ router.post('/', async (req, res, next) => {
 
     res.send(newChallenge);
   } catch (err) {
-    throw new Error(err);
+    next(err);
   }
 });
 
@@ -99,6 +99,7 @@ router.get('/:id', (req, res, next) => {
 // update a single challenge
 router.put('/:id', (req, res, next) => {
   // TODO how to handle req.params.id === NaN ?
+  // TODO need to also create image again and update solution
   Challenge.findByPk(Number(req.params.id))
     .then(challenge => challenge.update(req.body))
     .then(updatedChallenge => res.send(updatedChallenge))
@@ -106,12 +107,29 @@ router.put('/:id', (req, res, next) => {
 });
 
 // delete a single challenge
-router.delete('/:id', (req, res, next) => {
+router.delete('/:id', async (req, res, next) => {
   // TODO how to handle req.params.id === NaN ?
-  Challenge.findByPk(Number(req.params.id))
-    .then(challenge => challenge.destroy())
-    .then(() => res.sendStatus(204))
-    .catch(next);
+  try {
+    const challenge = await Challenge.findByPk(Number(req.params.id));
+    const challengesTaken = await Userchallenge.findAll({ where: { challengeId: challenge.id } });
+    console.log('challengesTaken: ', challengesTaken.length);
+    if (!challengesTaken.length) {
+      const solution = await Solution.findOne({ where: { challengeId: challenge.id } });
+      const image = await Image.findOne({ where: { challengeId: challenge.id } });
+      await solution.destroy();
+      await image.destroy();
+      await challenge.destroy();
+
+      const msg = 'Challenge deleted';
+      res.status(204).send(msg);
+    } else {
+      const msg =
+        'Challenge has been taken already, so are not able to Delete.  Click Archive to make it inactive.';
+      res.send(msg);
+    }
+  } catch (err) {
+    next(err);
+  }
 });
 
 module.exports = router;

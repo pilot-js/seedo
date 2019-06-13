@@ -18,10 +18,10 @@ const _AdminChallengeEdit = props => {
 
   useEffect(() => {
     document.getElementById('name').focus();
+    console.log('props, ', props);
   }, []);
 
   const handleSubmit = ev => {
-    // TODO convert challenge image to binary, then save
     ev.preventDefault();
     const challenge = {
       name,
