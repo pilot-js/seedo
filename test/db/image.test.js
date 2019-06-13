@@ -36,7 +36,6 @@ describe('testing image model', () => {
       width: 150,
       height: 150,
     });
-    console.log('image: ', image.get());
     expect(image).toBeTruthy();
   });
   describe('Image.saveImage tests', () => {
@@ -49,7 +48,6 @@ describe('testing image model', () => {
         submitted: true,
       });
       const image = await Image.saveImage(pathToImage, uc.id, true, 150, 150);
-      console.log('image2: ', image.get());
       expect(image).toBeTruthy();
     });
     it('can update an image record in the database', async () => {
