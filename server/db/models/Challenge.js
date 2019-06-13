@@ -20,6 +20,7 @@ module.exports = conn.define('challenge', {
   difficulty: {
     type: Sequelize.INTEGER,
     allowNull: false,
+    defaultValue: 1,
     validate: {
       notEmpty: true,
       min: 1,
