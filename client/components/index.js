@@ -12,3 +12,4 @@ export * from './AdminChallengeEdit';
 export * from './AdminUsers';
 export * from './Solution';
 export * from './Signup';
+export * from './Community';
