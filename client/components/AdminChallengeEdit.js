@@ -7,7 +7,7 @@ import { convertBufferToImgSrc } from '../utils';
 const _AdminChallengeEdit = props => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
-  const [difficulty, setDifficulty] = useState('');
+  const [difficulty, setDifficulty] = useState(1);
   const [html, setHtml] = useState('');
   const [css, setCss] = useState('');
 
