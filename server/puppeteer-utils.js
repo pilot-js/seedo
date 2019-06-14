@@ -53,8 +53,8 @@ const createImage = async (userId, challengeId, dir) => {
 
 const seedImage = async (fileName, dir) => {
   try {
-    const args = ['-–no-sandbox', '-–disable-setuid-sandbox'];
-    const browser = await puppeteer.launch({ args });
+    // const args = ['-–no-sandbox', '-–disable-setuid-sandbox'];
+    const browser = await puppeteer.launch();
     const page = await browser.newPage();
     const retPath = `file://${path.join(process.cwd(), `${dir}${fileName}.html`)}`;
     await page.goto(retPath);
@@ -63,7 +63,7 @@ const seedImage = async (fileName, dir) => {
     await browser.close();
     return retPath;
   } catch (err) {
-    console.log('error from createImage: ', err);
+    console.log('error from seedImage: ', err);
   }
 };
 
