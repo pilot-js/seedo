@@ -75,9 +75,29 @@ const seedImage = async (fileName, dir) => {
   }
 };
 
+// /******  PREVIEW ******/
+
+const createImagePreview = async (userId, dir, imageWidth, imageHeight) => {
+  try {
+    // const image = await Image.findOne({ where: { challengeId } });
+    const args = ['-–no-sandbox', '-–disable-setuid-sandbox'];
+    const browser = await puppeteer.launch({ args });
+    const page = await browser.newPage();
+    const retPath = `file://${path.join(process.cwd(), `${dir}${userId}.html`)}`;
+    await page.goto(retPath);
+    await page.setViewport({ width: imageWidth, height: imageHeight });
+    await page.screenshot({ path: `${dir}${userId}.png` });
+    await browser.close();
+    return retPath;
+  } catch (err) {
+    console.log('error from createImage: ', err);
+  }
+};
+
 module.exports = {
   createFiles,
   createImage,
+  createImagePreview,
   seedImage,
   puppy,
 };

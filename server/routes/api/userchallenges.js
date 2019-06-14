@@ -44,7 +44,7 @@ router.put('/:userchallengeId', (req, res, next) => {
           './server/tmp/',
         );
         const pathToUserImage = retPathToUserImage.replace('file://', '').replace('.html', '.png');
-        await Image.saveImage(pathToUserImage, userchallengeId);
+        await Image.saveImage(pathToUserImage, userchallengeId, true);
 
         if (createDiff) {
           const challengeImg = await Image.findOne({

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { createUser } from '../store';
 
@@ -13,6 +13,10 @@ const _Signup = ({ createUser, history }) => {
   const [password, setPassword] = useState('');
   const type = 'user';
 
+  useEffect(() => {
+    document.getElementById('firstName').focus();
+  }, []);
+
   const signup = ev => {
     ev.preventDefault();
     createUser({ firstName, lastName, email, password, type })
@@ -26,6 +30,7 @@ const _Signup = ({ createUser, history }) => {
       <form onSubmit={signup}>
         <label htmlFor="firstName">First Name</label>
         <input
+          id="firstName"
           type="text"
           className="form-control"
           name="firstName"

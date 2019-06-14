@@ -11,6 +11,9 @@ import {
   Login,
   Logout,
   UserPage,
+  AdminChallenges,
+  AdminChallengeEdit,
+  AdminUsers,
   Community,
   Solution,
   Signup,
@@ -28,6 +31,7 @@ const mapDispatchToProps = dispatch => {
 const App = ({ getGithubUser }) => {
   useEffect(() => {
     getGithubUser().catch(error => console.log(error));
+    // TODO getUser (if type = admin, allow access to admin components)
   }, []);
 
   return (
@@ -65,6 +69,16 @@ const App = ({ getGithubUser }) => {
             <IndividualChallenge challengeId={match.params.id} history={history} />
           )}
         />
+        {/* TODO admin components */}
+        {/* TODO if user.type = admin, allow access to routes */}
+        <Route exact path="/admin/challenge" component={AdminChallengeEdit} />
+        <Route
+          // exact
+          path="/admin/challenge/:id"
+          render={({ match }) => <AdminChallengeEdit challengeId={match.params.id} />}
+        />
+        <Route exact path="/admin/challenges" component={AdminChallenges} />
+        <Route exact path="/admin/users" component={AdminUsers} />
       </Switch>
       <Footer />
     </div>

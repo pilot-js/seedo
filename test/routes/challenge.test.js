@@ -54,6 +54,7 @@ describe('testing the challenges routes', () => {
     const c = await Challenge.findByPk(1, {
       include: [Image, Comment],
     });
+
     return client
       .get(`${url}1`)
       .expect(200)

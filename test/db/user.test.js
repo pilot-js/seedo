@@ -32,8 +32,9 @@ describe('testing user model', () => {
       }),
     ).rejects.toThrow();
   });
-  it('requires email and password to not be empty', async () => {
+  it('requires email, password and type to not be empty', async () => {
     await expect(User.create({ password: '' })).rejects.toThrow();
     await expect(User.create({ email: '' })).rejects.toThrow();
+    await expect(User.create({ type: '' })).rejects.toThrow();
   });
 });
