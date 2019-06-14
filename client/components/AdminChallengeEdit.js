@@ -14,28 +14,34 @@ const _AdminChallengeEdit = props => {
   const [imageWidth, setImageWidth] = useState('');
   const [imageHeight, setImageHeight] = useState('');
   const [image, setImage] = useState({ data: '' });
+  const [errors, setErrors] = useState([]);
+
+  // true - update existing challenge
+  const isUpdate = Object.keys(props.individualChallenge).length ? true : false;
 
   useEffect(() => {
     document.getElementById('name').focus();
 
     if (props.challengeId) {
-      props.fetchOneChallenge(props.challengeId).then(() => console.log('after: ', props));
+      props.fetchOneChallenge(props.challengeId);
     }
   }, []);
 
   useEffect(() => {
-    // const { name, description, difficulty } = props.challenge;
-    // const [name, setName] = useState('');
-    // const [description, setDescription] = useState('');
-    // const [difficulty, setDifficulty] = useState('');
-    // const [html, setHtml] = useState('');
-    // const [css, setCss] = useState('');
-    // const [imageWidth, setImageWidth] = useState('');
-    // const [imageHeight, setImageHeight] = useState('');
-    // const [image, setImage] = useState({ data: '' });
+    if (isUpdate) {
+      const { individualChallenge } = props;
+      setName(individualChallenge.name);
+      setDescription(individualChallenge.description);
+      setDifficulty(individualChallenge.difficulty);
+
+      const { solutions, images } = props.individualChallenge;
+      setHtml(solutions[0].html);
+      setCss(solutions[0].css);
+      setImageWidth(images[0].width);
+      setImageHeight(images[0].height);
+    }
   }, [props.individualChallenge]);
 
-  console.log('outside:', props);
   const handleSubmit = ev => {
     ev.preventDefault();
     const challenge = {
@@ -48,10 +54,27 @@ const _AdminChallengeEdit = props => {
       imageHeight,
     };
 
+    // if (isUpdate) {
+
+    // } else {
     axios
       .post('api/challenges', challenge)
+      .then(() => {
+        setName('');
+        setDescription('');
+        setDifficulty(1);
+        setHtml('');
+        setCss('');
+        setImageWidth('');
+        setImageHeight('');
+        // setErrors([]);  // not sure about this one
+      })
       .then(() => props.history.push('/admin/challenges'))
-      .catch(err => console.log(err));
+      .catch(error => {
+        console.log(error);
+        setErrors([...errors, error]);
+      });
+    // }
   };
 
   const preview = () => {
@@ -68,15 +91,21 @@ const _AdminChallengeEdit = props => {
       .then(data => {
         setImage(data);
       })
-      .catch(err => console.log(err));
+      .catch(error => {
+        console.log(error);
+        setErrors([...errors, error]);
+      });
   };
 
   const imageSrc = convertBufferToImgSrc(image);
 
+  const action = isUpdate ? 'Edit' : 'Create';
+  const btnActionText = isUpdate ? 'Update' : 'Save';
+
   return (
     <div>
       {/* TODO make conditional - Create | Edit */}
-      <h1>Create Challenge</h1>
+      <h1>{action} Challenge</h1>
       <div className="row">
         <div className="col-6">
           <form onSubmit={handleSubmit}>
@@ -187,7 +216,7 @@ const _AdminChallengeEdit = props => {
             <button type="button" onClick={preview}>
               Preview
             </button>
-            <button type="submit">Save Challenge</button>
+            <button type="submit">{btnActionText} Challenge</button>
           </form>
         </div>
         <div className="col-6">

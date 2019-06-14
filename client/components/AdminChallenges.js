@@ -13,17 +13,15 @@ const _AdminChallenges = props => {
   }, []);
 
   const deleteChallenge = challengeId => {
-    axios
-      .delete(`/api/challenges/${challengeId}`)
-      .then(resp => {
-        // TODO give ability to click Archive link or Cancel
-        if (resp.data) {
-          console.log('resp.data: ', resp);
-          window.alert(resp.data);
-        }
-      })
-      // TODO why redirects to home page ???
-      .then(() => props.history.push('/admin/challenges'));
+    axios.delete(`/api/challenges/${challengeId}`).then(resp => {
+      // TODO give ability to click Archive link or Cancel
+      if (resp.data) {
+        console.log('resp.data: ', resp);
+        window.alert(resp.data);
+      }
+    });
+    // TODO why redirects to home page ???
+    // .then(() => props.history.push('/admin/challenges'));
   };
 
   const { challenges } = props;
