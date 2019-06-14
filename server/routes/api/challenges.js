@@ -9,7 +9,10 @@ const { createFiles, createImagePreview } = require('../../puppeteer-utils');
 
 // get all challenges
 router.get('/', (req, res, next) => {
-  Challenge.findAll({ include: [Image], order: ['id'] })
+  Challenge.findAll({
+    include: [Image, Solution],
+    order: ['id'],
+  })
     .then(challenges => {
       res.send(challenges);
     })
@@ -87,7 +90,7 @@ router.put('/preview', (req, res, next) => {
     .catch(next);
 });
 
-// get a single challenge with images and comments
+// get a single challenge with image, solution and comments
 router.get('/:id', (req, res, next) => {
   Challenge.findByPk(req.params.id, {
     include: [Image, Comment, Solution],
