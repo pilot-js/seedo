@@ -13,16 +13,20 @@ const seedUser = () => {
 };
 
 const seedChallenge = () => {
-  return challengesSeed.reduce((promiseChain, currentTask)=>{
-    return promiseChain.then(chainResults => Challenge.create(currentTask).then(currentResult => [...chainResults, currentResult]));
-  }, Promise.resolve([]))
-}
+  return challengesSeed.reduce((promiseChain, currentTask) => {
+    return promiseChain.then(chainResults =>
+      Challenge.create(currentTask).then(currentResult => [...chainResults, currentResult]),
+    );
+  }, Promise.resolve([]));
+};
 
 const seedSolution = () => {
-  return solutionsSeed.reduce((promiseChain, currentTask)=>{
-    return promiseChain.then(chainResults => Solution.create(currentTask).then(currentResult => [...chainResults, currentResult]));
-  }, Promise.resolve([]))
-}
+  return solutionsSeed.reduce((promiseChain, currentTask) => {
+    return promiseChain.then(chainResults =>
+      Solution.create(currentTask).then(currentResult => [...chainResults, currentResult]),
+    );
+  }, Promise.resolve([]));
+};
 
 const syncAndSeed = () => {
   return conn
