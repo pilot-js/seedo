@@ -34,6 +34,14 @@ const createFiles = async (html, css, userId, dir) => {
   });
 };
 
+const puppy = async () => {
+  const args = ['-–no-sandbox', '-–disable-setuid-sandbox'];
+  const browser = await puppeteer.launch({ args });
+  const page = await browser.newPage();
+  await browser.close();
+  return 'hello';
+};
+
 const createImage = async (userId, challengeId, dir) => {
   try {
     const image = await Image.findOne({ where: { challengeId } });
@@ -71,4 +79,5 @@ module.exports = {
   createFiles,
   createImage,
   seedImage,
+  puppy,
 };
