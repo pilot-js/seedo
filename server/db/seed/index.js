@@ -11,16 +11,17 @@ const utils = require('../../puppeteer-utils');
 const seedUser = () => {
   return Promise.all(usersSeed.map(user => User.create(user)));
 };
-const seedChallenge = () => {
-  return Promise.all(challengesSeed.map(chal => Challenge.create(chal)));
-};
-const seedSolution = () => {
-  return Promise.all(solutionsSeed.map(sol => Solution.create(sol)));
-};
 
-function getRandom(type, max) {
-  const randInt = Math.floor(Math.random() * Math.floor(max));
-  return type[randInt].get().id;
+const seedChallenge = () => {
+  return challengesSeed.reduce((promiseChain, currentTask)=>{
+    return promiseChain.then(chainResults => Challenge.create(currentTask).then(currentResult => [...chainResults, currentResult]));
+  }, Promise.resolve([]))
+}
+
+const seedSolution = () => {
+  return solutionsSeed.reduce((promiseChain, currentTask)=>{
+    return promiseChain.then(chainResults => Solution.create(currentTask).then(currentResult => [...chainResults, currentResult]));
+  }, Promise.resolve([]))
 }
 
 const syncAndSeed = () => {
@@ -31,7 +32,7 @@ const syncAndSeed = () => {
     })
     .then(([users, challenges, solutions]) => {
       return Promise.all([
-        solutions.map((sol, idx) => sol.update({ challengeId: idx + 1 })),
+        solutions.map((sol, idx) => sol.update({ challengeId: challenges[idx].id })),
         solutions.map(async sol => {
           const dirname = './server/db/seed/images/';
           await utils.createFiles(sol.html, sol.css, sol.id, dirname);
