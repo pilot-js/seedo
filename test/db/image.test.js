@@ -36,7 +36,6 @@ describe('testing image model', () => {
       width: 150,
       height: 150,
     });
-    console.log('image: ', image.get());
     expect(image).toBeTruthy();
   });
   describe('Image.saveImage tests', () => {

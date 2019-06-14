@@ -1,8 +1,9 @@
 const router = require('express').Router();
 const fs = require('fs');
+const Op = require('../../db/conn').Sequelize.Op;
+
 const { Challenge, Image, Comment, Solution, Userchallenge } = require('../../db');
 const { createFiles, createImagePreview } = require('../../puppeteer-utils');
-const Op = require('../../db/conn').Sequelize.Op;
 
 /**  /api/challenges **/
 

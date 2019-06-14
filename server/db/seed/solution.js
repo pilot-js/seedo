@@ -21,7 +21,7 @@ const solutionsSeed = [
     html: `<!DOCTYPE html>
       <html>
         <head>
-          <title>Circle</title>
+          <title>Square</title>
         </head>
         <body>
           <div id='square'></div>
