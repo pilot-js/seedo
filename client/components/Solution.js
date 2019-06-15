@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import CodeMirror from 'react-codemirror';
 import { connect } from 'react-redux';
 import { fetchOneChallenge, fetchUserchallengeById } from '../store';
-import { convertBufferToImgSrc } from '../utils';
 
 // todo convert to functional component
 class _Solution extends Component {
@@ -15,6 +14,7 @@ class _Solution extends Component {
 
   componentDidMount() {
     this.props.fetchOneChallenge(this.props.challengeId);
+    this.props.fetchUserchallengeById(this.props.userchallengeId);
   }
 
   componentDidUpdate(prevProps) {
