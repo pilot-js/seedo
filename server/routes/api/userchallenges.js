@@ -10,6 +10,13 @@ const { compareImages } = require('../../compare-images');
 
 // TODO what happens if there is more than one answer ?
 
+//get all userchallenges for statistic analysis
+router.get('/', (req, res, next) => {
+  Userchallenge.findAll()
+    .then(userChallenges => res.send(userChallenges))
+    .catch(next);
+});
+
 // get user answer for a challenge
 router.get('/users/:userId/challenges/:challengeId', (req, res, next) => {
   Userchallenge.getActiveAnswer(req.params.userId, req.params.challengeId)
