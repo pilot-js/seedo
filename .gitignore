@@ -3,6 +3,7 @@
 dist/bundle.js
 dist/bundle.js.map
 dist/images/tmp
+server/db/seed/images
 node_modules
 package-lock.json
 .DS_Store

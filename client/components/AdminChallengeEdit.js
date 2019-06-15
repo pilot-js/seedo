@@ -3,6 +3,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 
 import { convertBufferToImgSrc } from '../utils';
+import { fetchOneChallenge } from '../store';
 
 const _AdminChallengeEdit = props => {
   const [name, setName] = useState('');
@@ -10,18 +11,40 @@ const _AdminChallengeEdit = props => {
   const [difficulty, setDifficulty] = useState(1);
   const [html, setHtml] = useState('');
   const [css, setCss] = useState('');
-
-  // TODO upload image file, convert to binary, save in db
   const [imageWidth, setImageWidth] = useState('');
   const [imageHeight, setImageHeight] = useState('');
   const [image, setImage] = useState({ data: '' });
+  const [errors, setErrors] = useState([]);
+
+  // true - update existing challenge
+  const isUpdate = props.challengeId ? true : false;
+
+  const isIndividualChallenge = Object.keys(props.individualChallenge).length ? true : false;
 
   useEffect(() => {
     document.getElementById('name').focus();
+
+    if (props.challengeId) {
+      props.fetchOneChallenge(props.challengeId);
+    }
   }, []);
 
+  useEffect(() => {
+    if (isUpdate && isIndividualChallenge) {
+      const { individualChallenge } = props;
+      setName(individualChallenge.name);
+      setDescription(individualChallenge.description);
+      setDifficulty(individualChallenge.difficulty);
+
+      const { solutions, images } = props.individualChallenge;
+      setHtml(solutions[0].html);
+      setCss(solutions[0].css);
+      setImageWidth(images[0].width);
+      setImageHeight(images[0].height);
+    }
+  }, [props.individualChallenge]);
+
   const handleSubmit = ev => {
-    // TODO convert challenge image to binary, then save
     ev.preventDefault();
     const challenge = {
       name,
@@ -33,10 +56,29 @@ const _AdminChallengeEdit = props => {
       imageHeight,
     };
 
-    axios
-      .post('api/challenges', challenge)
-      .then(() => props.history.push('/admin/challenges'))
-      .catch(err => console.log(err));
+    if (isUpdate) {
+      const { id } = props.individualChallenge;
+      axios
+        .put(`/api/challenges/${id}`, challenge)
+        // .then(resp => console.log(resp.data))
+        .then(() => {
+          props.history.push('/admin/challenges');
+        })
+        .catch(error => {
+          console.log(error);
+          setErrors([...errors, error]);
+        });
+    } else {
+      axios
+        .post('api/challenges', challenge)
+        .then(() => {
+          props.history.push('/admin/challenges');
+        })
+        .catch(error => {
+          console.log(error);
+          setErrors([...errors, error]);
+        });
+    }
   };
 
   const preview = () => {
@@ -49,19 +91,27 @@ const _AdminChallengeEdit = props => {
     };
     axios
       .put('/api/challenges/preview', challenge)
-      .then(resp => resp.data)
-      .then(data => {
-        setImage(data);
+      .then(resp => {
+        setImage(resp.data);
       })
-      .catch(err => console.log(err));
+      .catch(error => {
+        console.log(error);
+        setErrors([...errors, error]);
+      });
+  };
+
+  const cancel = () => {
+    props.history.push('/admin/challenges');
   };
 
   const imageSrc = convertBufferToImgSrc(image);
 
+  const actionText = isUpdate ? 'Edit' : 'Create';
+  const actionTextBtn = isUpdate ? 'Update' : 'Save';
+
   return (
     <div>
-      {/* TODO make conditional - Create | Edit */}
-      <h1>Create Challenge</h1>
+      <h1>{actionText} Challenge</h1>
       <div className="row">
         <div className="col-6">
           <form onSubmit={handleSubmit}>
@@ -172,7 +222,10 @@ const _AdminChallengeEdit = props => {
             <button type="button" onClick={preview}>
               Preview
             </button>
-            <button type="submit">Save Challenge</button>
+            <button type="submit">{actionTextBtn} Challenge</button>
+            <button type="button" onClick={cancel}>
+              Cancel
+            </button>
           </form>
         </div>
         <div className="col-6">
@@ -184,8 +237,17 @@ const _AdminChallengeEdit = props => {
   );
 };
 
-const mapStateToProps = ({ user }) => {
-  return { user };
+const mapStateToProps = ({ user, individualChallenge }) => {
+  return { user, individualChallenge };
 };
 
-export const AdminChallengeEdit = connect(mapStateToProps)(_AdminChallengeEdit);
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchOneChallenge: challengeId => dispatch(fetchOneChallenge(challengeId)),
+  };
+};
+
+export const AdminChallengeEdit = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(_AdminChallengeEdit);

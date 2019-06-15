@@ -90,7 +90,7 @@ const createImagePreview = async (userId, dir, imageWidth, imageHeight) => {
     await browser.close();
     return retPath;
   } catch (err) {
-    console.log('error from createImage: ', err);
+    console.log('error from createImagePreview: ', err);
   }
 };
 

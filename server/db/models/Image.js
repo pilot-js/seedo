@@ -14,22 +14,27 @@ const Image = conn.define('image', {
   width: Sequelize.INTEGER,
 });
 
-Image.saveImage = (pathToImage, id, isUserchallenge, imageWidth, imageHeight) => {
+Image.saveImage = (pathToImage, id, isUserchallenge, width, height) => {
   return (isUserchallenge
     ? Image.findOne({ where: { userchallengeId: id } })
     : Image.findOne({ where: { challengeId: id } })
   ).then(async maybeImage => {
     const imageData = fs.readFileSync(pathToImage);
     if (maybeImage) {
-      await maybeImage.update({ ...maybeImage, data: imageData });
+      await maybeImage.update({
+        ...maybeImage,
+        data: imageData,
+        width,
+        height,
+      });
     } else {
       maybeImage = isUserchallenge
         ? await Image.create({ userchallengeId: id, data: imageData })
         : await Image.create({
             challengeId: id,
             data: imageData,
-            width: imageWidth,
-            height: imageHeight,
+            width,
+            height,
           });
     }
     return maybeImage;

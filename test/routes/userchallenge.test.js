@@ -33,9 +33,6 @@ describe('Userchallenge routes', () => {
       challengeId: c.id,
     });
     const image = await Image.create({
-      type: 'challenge',
-      url: 'challenge-1-red-circle.png',
-      connector: 'challenge-1',
       width: 100,
       height: 100,
       userchallengeId: uc.id,
