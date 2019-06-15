@@ -31,18 +31,17 @@ const component = ({
   let filter = {};
 
   useEffect(() => {
+    fetchAllUserchallenges();
     if (difficulty) {
       filter = difficulty;
-      fetchAllUserchallenges();
       fetchChallengesWithFilterAndSearch(filter, searchTerm);
     } else {
       fetchChallenges();
-      fetchAllUserchallenges();
     }
   }, [difficulty, searchTerm]);
 
   // console.log(typeof userchallenge)
-  const solutionBychallengeId = challengeId => {
+  const solutionByChallengeId = challengeId => {
     if (userchallenge) {
       const solutions = userchallenge.filter(solution => solution.challengeId === challengeId);
       return solutions;
@@ -54,20 +53,20 @@ const component = ({
   };
 
   const attemptedByUsers = arr => {
-    const userId = [];
-    arr.forEach(solution => {
-      if (!userId.includes(solution.userId)) {
-        userId.push(solution.userId);
+    const userIds = arr.reduce((acc, solution) => {
+      if (!acc.includes(solution.userId)) {
+        acc.push(solution.userId);
       }
-    });
-    return userId.length;
+      return acc;
+    }, []);
+    return userIds.length;
   };
 
   const avgScore = arr => {
-    let totalScore = 0;
-    arr.forEach(solution => {
-      totalScore += solution.grade;
-    });
+    const totalScore = arr.reduce((acc, solution) => {
+      acc += solution.grade;
+      return acc;
+    }, 0);
     const avgScore = totalScore / arr.length ? totalScore / arr.length : 0;
     return avgScore;
   };
@@ -95,14 +94,14 @@ const component = ({
                 </Link>
                 <p>Statistic</p>
                 <p>
-                  Attempted: {attemptedTimes(solutionBychallengeId(challenge.id))}{' '}
-                  {attemptedTimes(solutionBychallengeId(challenge.id)) > 1 ? 'times' : 'time'}
+                  Attempted: {attemptedTimes(solutionByChallengeId(challenge.id))}{' '}
+                  {attemptedTimes(solutionByChallengeId(challenge.id)) > 1 ? 'times' : 'time'}
                 </p>
                 <p>
                   Attempted by number of Users:{' '}
-                  {attemptedByUsers(solutionBychallengeId(challenge.id))}
+                  {attemptedByUsers(solutionByChallengeId(challenge.id))}
                 </p>
-                <p>Average Score: {avgScore(solutionBychallengeId(challenge.id))}</p>
+                <p>Average Score: {avgScore(solutionByChallengeId(challenge.id))}</p>
               </div>
             </div>
           );
