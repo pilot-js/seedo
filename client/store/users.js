@@ -6,7 +6,7 @@ const SET_USERS = Symbol('set users');
 // action creators
 const setUsers = users => ({
   type: SET_USERS,
-  SET_USERS,
+  users,
 });
 
 // reducer
@@ -20,5 +20,13 @@ export const users = (state = [], action) => {
 };
 
 // thunks
-// TODO grab users for AdminUsers
-// export const fetchUsers = () => {};
+export const fetchUsers = () => {
+  return dispatch => {
+    return axios
+      .get('/api/users')
+      .then(resp => dispatch(setUsers(resp.data)))
+      .catch(err => {
+        throw new Error(err);
+      });
+  };
+};
