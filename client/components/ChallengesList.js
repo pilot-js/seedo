@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import {
   fetchChallenges,
   fetchChallengesWithFilterAndSearch,
-  fetchAllUserchallenge,
+  fetchAllUserchallenges,
 } from '../store';
 import { convertBufferToImgSrc } from '../utils';
 import { Search } from './Search';
@@ -13,7 +13,7 @@ const mapDispatchToProps = dispatch => ({
   fetchChallenges: () => dispatch(fetchChallenges()),
   fetchChallengesWithFilterAndSearch: (difficulty, term) =>
     dispatch(fetchChallengesWithFilterAndSearch(difficulty, term)),
-  fetchAllUserchallenge: () => dispatch(fetchAllUserchallenge()),
+  fetchAllUserchallenges: () => dispatch(fetchAllUserchallenges()),
 });
 
 const mapStateToProps = ({ challenges, userchallenge }) => ({ challenges, userchallenge });
@@ -22,7 +22,7 @@ const component = ({
   challenges,
   fetchChallenges,
   fetchChallengesWithFilterAndSearch,
-  fetchAllUserchallenge,
+  fetchAllUserchallenges,
   userchallenge,
   match,
   history,
@@ -33,11 +33,11 @@ const component = ({
   useEffect(() => {
     if (difficulty) {
       filter = difficulty;
-      fetchAllUserchallenge();
+      fetchAllUserchallenges();
       fetchChallengesWithFilterAndSearch(filter, searchTerm);
     } else {
       fetchChallenges();
-      fetchAllUserchallenge();
+      fetchAllUserchallenges();
     }
   }, [difficulty, searchTerm]);
 
