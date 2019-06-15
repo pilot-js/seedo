@@ -12,13 +12,13 @@ const _CommunityChallenge = ({ challenge, challengeId, fetchOneChallenge }) => {
       <h1>{challenge.name}</h1>
       {Object.keys(challenge).length ? (
         <div>
-          <h4>all user submitted answers: </h4>
+          <h2>all user submitted answers: </h2>
           <ul>
             {challenge.userchallenges.map(userchal => {
               return <li key={userchal.id}>{userchal.html}</li>;
             })}
           </ul>
-          <h4>all user comments</h4>
+          <h2>all user comments</h2>
           <ul>
             {challenge.comments.map(comment => {
               return <li key={comment.id}>comment</li>;
