@@ -88,6 +88,5 @@ const mapDispatchToProps = dispatch => {
 
 export const AdminChallenges = connect(
   mapStateToProps,
-
   mapDispatchToProps,
 )(_AdminChallenges);
