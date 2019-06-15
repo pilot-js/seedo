@@ -1,63 +1,73 @@
-import React, { useState, useEffect } from 'react';
+import React, { Component } from 'react';
 import CodeMirror from 'react-codemirror';
 import { connect } from 'react-redux';
 import { fetchOneChallenge, fetchUserchallengeById } from '../store';
 import { convertBufferToImgSrc } from '../utils';
 
-// two props passed down from route parameters
-// challengeId and userchallengeId
-const _Solution = ({
-  user,
-  individualChallenge,
-  userchallenge,
-  challengeId,
-  userchallengeId,
-  fetchOneChallenge,
-  fetchUserchallengeById,
-}) => {
-  useEffect(() => {
-    if (challengeId) {
-      fetchOneChallenge(challengeId);
-    }
-    if (userchallengeId) {
-      fetchUserchallengeById(userchallengeId);
-    }
-  }, []);
-
-  const options = {
-    lineNumbers: true,
-    mode: 'javascript',
-  };
-  if (!individualChallenge.solutions) {
-    return null;
+// todo convert to functional component
+class _Solution extends Component {
+  constructor() {
+    super();
+    this.state = {
+      userchallenge: {},
+    };
   }
-  return (
-    <div>
-      <h2>Our solution</h2>
-      <div className="d-flex justify-content-around row">
-        <div className="col">
-          {individualChallenge ? (
-            <CodeMirror defaultValue={individualChallenge.solutions[0].html} options={options} />
-          ) : null}
+
+  componentDidMount() {
+    this.props.fetchOneChallenge(this.props.challengeId);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (JSON.stringify(prevProps) !== JSON.stringify(this.props)) {
+      this.props.fetchUserchallengeById(this.props.userchallengeId).then(({ userchallenge }) =>
+        this.setState({
+          userchallenge,
+        }),
+      );
+    }
+  }
+
+  render() {
+    const { userchallenge } = this.state;
+    const { individualChallenge } = this.props;
+    const options = {
+      lineNumbers: true,
+      mode: 'javascript',
+    };
+    if (!individualChallenge.solutions) {
+      return null;
+    }
+    if (!Object.keys(userchallenge).length) {
+      return null;
+    }
+    return (
+      <div>
+        <h2>Our solution</h2>
+        <div className="d-flex justify-content-around row">
+          <div className="col">
+            {individualChallenge ? (
+              <CodeMirror defaultValue={individualChallenge.solutions[0].html} options={options} />
+            ) : null}
+          </div>
+          <div className="col">
+            {individualChallenge ? (
+              <CodeMirror defaultValue={individualChallenge.solutions[0].css} options={options} />
+            ) : null}
+          </div>
         </div>
-        <div className="col">
-          {individualChallenge ? (
-            <CodeMirror defaultValue={individualChallenge.solutions[0].css} options={options} />
-          ) : null}
+        <h2>Your solution</h2>
+        <div className="d-flex justify-content-around row">
+          <div className="col">
+            <CodeMirror defaultValue={userchallenge.html} options={options} />
+          </div>
+          <div className="col">
+            <CodeMirror defaultValue={userchallenge.css} options={options} />
+          </div>
         </div>
       </div>
-      <h2>Your solution</h2>
-      <div className="d-flex justify-content-around row">
-        <div className="col">
-          <CodeMirror defaultValue={userchallenge.html} options={options} />
-        </div>
-        <div className="col">
-          <CodeMirror defaultValue={userchallenge.css} options={options} />
-        </div>
-      </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 const mapStateToProps = ({ user, individualChallenge, userchallenge }) => ({
   user,
