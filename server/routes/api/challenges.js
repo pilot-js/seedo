@@ -135,13 +135,49 @@ router.get('/search/:term/filter/:difficulty', (req, res, next) => {
 });
 
 // update a single challenge
-router.put('/:id', (req, res, next) => {
+router.put('/:id', async (req, res, next) => {
   // TODO how to handle req.params.id === NaN ?
-  // TODO need to also create image again and update solution
-  Challenge.findByPk(Number(req.params.id))
-    .then(challenge => challenge.update(req.body))
-    .then(updatedChallenge => res.send(updatedChallenge))
-    .catch(next);
+  try {
+    console.log('req.body put route: ', req.body);
+    const { name, description, difficulty, html, css, imageWidth, imageHeight } = req.body;
+
+    const challenge = await Challenge.findByPk(Number(req.params.id));
+    await challenge.update({
+      name,
+      description,
+      difficulty,
+    });
+
+    const solution = await Solution.findOne({ where: { challengeId: challenge.id } });
+    await solution.update({ html, css });
+
+    // create image and save in db
+    await createFiles(html, css, challenge.id, './server/tmp/challenge/');
+    const retPathToUserImage = await createImagePreview(
+      challenge.id,
+      './server/tmp/challenge/',
+      Number(imageWidth),
+      Number(imageHeight),
+    );
+    console.log('retPathToUserImage: ', retPathToUserImage);
+
+    const pathToUserImage = retPathToUserImage.replace('file://', '').replace('.html', '.png');
+    await Image.saveImage(
+      pathToUserImage,
+      challenge.id,
+      false,
+      Number(imageWidth),
+      Number(imageHeight),
+    );
+    // TODO delete tmp files created in /server/challenge/
+
+    const newChallenge = await Challenge.findByPk(challenge.id, {
+      include: [Image, Solution],
+    });
+    res.send(newChallenge);
+  } catch (err) {
+    next(err);
+  }
 });
 
 // delete a single challenge

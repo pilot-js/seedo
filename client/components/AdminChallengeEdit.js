@@ -17,7 +17,8 @@ const _AdminChallengeEdit = props => {
   const [errors, setErrors] = useState([]);
 
   // true - update existing challenge
-  const isUpdate = Object.keys(props.individualChallenge).length ? true : false;
+  const isUpdate = props.challengeId ? true : false;
+  const isIndividualChallenge = Object.keys(props.individualChallenge).length ? true : false;
 
   useEffect(() => {
     document.getElementById('name').focus();
@@ -28,7 +29,8 @@ const _AdminChallengeEdit = props => {
   }, []);
 
   useEffect(() => {
-    if (isUpdate) {
+    console.log('props.individualChallenge: ', props.individualChallenge);
+    if (isUpdate && isIndividualChallenge) {
       const { individualChallenge } = props;
       setName(individualChallenge.name);
       setDescription(individualChallenge.description);
@@ -42,6 +44,17 @@ const _AdminChallengeEdit = props => {
     }
   }, [props.individualChallenge]);
 
+  const clearState = () => {
+    setName('');
+    setDescription('');
+    setDifficulty(1);
+    setHtml('');
+    setCss('');
+    setImageWidth('');
+    setImageHeight('');
+    // setErrors([]);  // not sure about this one
+  };
+
   const handleSubmit = ev => {
     ev.preventDefault();
     const challenge = {
@@ -54,27 +67,33 @@ const _AdminChallengeEdit = props => {
       imageHeight,
     };
 
-    // if (isUpdate) {
+    if (isUpdate) {
+      const { id } = props.individualChallenge;
+      axios
+        .put(`/api/challenges/${id}`, challenge)
+        // .then(resp => console.log(resp.data))
+        .then(() => {
+          clearState();
+          props.history.push('/admin/challenges');
+        })
+        .catch(error => {
+          console.log(error);
+          setErrors([...errors, error]);
+        });
+    } else {
+      axios
+        .post('api/challenges', challenge)
+        .then(() => {
+          clearState();
+          props.history.push('/admin/challenges');
+        })
+        .catch(error => {
+          console.log(error);
+          setErrors([...errors, error]);
+        });
+    }
 
-    // } else {
-    axios
-      .post('api/challenges', challenge)
-      .then(() => {
-        setName('');
-        setDescription('');
-        setDifficulty(1);
-        setHtml('');
-        setCss('');
-        setImageWidth('');
-        setImageHeight('');
-        // setErrors([]);  // not sure about this one
-      })
-      .then(() => props.history.push('/admin/challenges'))
-      .catch(error => {
-        console.log(error);
-        setErrors([...errors, error]);
-      });
-    // }
+    // (may not need this) TODO remove individualChallenge from store in order to reset so will not interfere
   };
 
   const preview = () => {
