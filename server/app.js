@@ -5,6 +5,7 @@ const morgan = require('morgan');
 const session = require('express-session');
 const api = require('./routes/api');
 const auth = require('./routes/auth');
+const { puppy } = require('./puppeteer-utils');
 
 try {
   Object.assign(process.env, require('./.env'));
@@ -27,6 +28,11 @@ app.use(express.static(path.join(__dirname, '../dist')));
 
 app.use(morgan('dev'));
 
+app.get('/puppy', (req, res, next) => {
+  puppy()
+    .then(() => res.sendStatus(200))
+    .catch(next);
+});
 app.use('/api', api);
 app.use('/auth', auth);
 

@@ -44,8 +44,5 @@ module.exports = conn.define('user', {
   type: {
     type: Sequelize.ENUM('user', 'admin'),
     allowNull: false,
-    validate: {
-      notEmpty: false,
-    },
   },
 });

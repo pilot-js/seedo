@@ -1,6 +1,10 @@
 import React from 'react';
+import axios from 'axios';
 
 export const Home = () => {
+  const callPuppy = () => {
+    axios.get('/puppy');
+  };
   return (
     <div className="d-flex flex-column align-items-center">
       <h1>Welcome to [insert name here]!</h1>
@@ -20,6 +24,9 @@ export const Home = () => {
           <div>Video Solution</div>
           <div>Image Front-End Test</div>
           <div>Ace Coding Interview</div>
+          <button type="button" onClick={() => callPuppy()}>
+            Puppeteer
+          </button>
         </div>
       </div>
     </div>

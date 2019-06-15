@@ -1,12 +1,14 @@
 const router = require('express').Router();
+const fs = require('fs');
 const Op = require('../../db/conn').Sequelize.Op;
 const { Challenge, Image, Comment, Solution } = require('../../db');
+const { createFiles, createImagePreview } = require('../../puppeteer-utils');
 
 /**  /api/challenges **/
 
 // get all challenges
 router.get('/', (req, res, next) => {
-  Challenge.findAll({ include: [Image] })
+  Challenge.findAll({ include: [Image], order: ['id'] })
     .then(challenges => {
       res.send(challenges);
     })
@@ -14,14 +16,73 @@ router.get('/', (req, res, next) => {
 });
 
 // create a single challenge
-router.post('/', (req, res, next) => {
-  const { name, description, difficulty } = req.body;
-  Challenge.create({
-    name,
-    description,
-    difficulty,
-  })
-    .then(challenge => res.send(challenge))
+router.post('/', async (req, res, next) => {
+  try {
+    console.log('req.body: ', req.body);
+    const { name, description, difficulty, html, css, imageWidth, imageHeight } = req.body;
+    const challenge = await Challenge.create({
+      name,
+      description,
+      difficulty,
+    });
+
+    await Solution.create({
+      html,
+      css,
+      challengeId: challenge.id,
+    });
+    const newChallenge = {
+      name,
+      description,
+      difficulty,
+      html,
+      css,
+      challengeId: challenge.id,
+    };
+    // create image and save in db
+    await createFiles(html, css, challenge.id, './server/tmp/challenge/');
+    const retPathToUserImage = await createImagePreview(
+      challenge.id,
+      './server/tmp/challenge/',
+      Number(imageWidth),
+      Number(imageHeight),
+    );
+
+    const pathToUserImage = retPathToUserImage.replace('file://', '').replace('.html', '.png');
+    await Image.saveImage(
+      pathToUserImage,
+      challenge.id,
+      false,
+      Number(imageWidth),
+      Number(imageHeight),
+    );
+    // TODO delete tmp files created in /server/challenge/
+
+    res.send(newChallenge);
+  } catch (err) {
+    throw new Error(err);
+  }
+});
+
+router.put('/preview', (req, res, next) => {
+  console.log('req.body: ', req.body);
+  const { html, css, imageWidth, imageHeight, userId } = req.body;
+
+  // use userId (admin user) to create unique tmp files
+  createFiles(html, css, `${userId}-preview`, './dist/images/tmp/');
+
+  createImagePreview(
+    `${userId}-preview`,
+    './dist/images/tmp/',
+    Number(imageWidth),
+    Number(imageHeight),
+  )
+    .then(retPathToUserImage => {
+      const pathToUserImage = retPathToUserImage.replace('file://', '').replace('.html', '.png');
+      const imageData = fs.readFileSync(pathToUserImage);
+      console.log('imageData: ', imageData);
+      res.send(JSON.stringify(imageData));
+    })
     .catch(next);
 });
 
