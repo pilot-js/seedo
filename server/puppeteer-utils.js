@@ -1,9 +1,11 @@
 const fs = require('fs');
-const puppeteer = require('puppeteer');
+//const puppeteer = require('puppeteer');
 const path = require('path');
+const axios = require('axios');
+const config = require('./.env');
 
-const { Image } = require('./db');
-
+console.log(config);
+// const { Image } = require('./db');
 const parseHTML = (html, userId) => {
   return `<html lang="en">
   <head>
@@ -34,61 +36,36 @@ const createFiles = async (html, css, userId, dir) => {
   });
 };
 
-const puppy = async () => {
-  const args = ['-–no-sandbox', '-–disable-setuid-sandbox'];
-  const browser = await puppeteer.launch({ args });
-  const page = await browser.newPage();
-  await browser.close();
-  return 'hello';
+const createImage = async (html, css, userId, challengeId, width, height) => {
+  const response = await axios.post(`${config.API}/create-image`, {
+    html,
+    css,
+    userId,
+    challengeId,
+    width,
+    height,
+  });
+  return response.data;
 };
 
-const createImage = async (userId, challengeId, dir) => {
-  try {
-    const image = await Image.findOne({ where: { challengeId } });
-    // const args = ['-–no-sandbox', '-–disable-setuid-sandbox'];
-    const browser = await puppeteer.launch();
-    const page = await browser.newPage();
-    const retPath = `file://${path.join(process.cwd(), `${dir}${userId}.html`)}`;
-    await page.goto(retPath);
-    await page.setViewport({ width: image.width, height: image.height });
-    await page.screenshot({ path: `${dir}${userId}.png` });
-    await browser.close();
-    return retPath;
-  } catch (err) {
-    console.log('error from createImage: ', err);
-  }
-};
-
-const seedImage = async (fileName, dir) => {
-  try {
-    // const args = ['-–no-sandbox', '-–disable-setuid-sandbox'];
-    const browser = await puppeteer.launch();
-    const page = await browser.newPage();
-    const retPath = `file://${path.join(process.cwd(), `${dir}${fileName}.html`)}`;
-    await page.goto(retPath);
-    await page.setViewport({ width: 600, height: 337 });
-    await page.screenshot({ path: `${dir}${fileName}.png` });
-    await browser.close();
-    return retPath;
-  } catch (err) {
-    console.log('error from seedImage: ', err);
-  }
+const seedImage = async (html, css, userId, challengeId) => {
+  const response = await axios.post(`${config.API}/seed-image`, { html, css, userId, challengeId });
+  return response.data;
 };
 
 // /******  PREVIEW ******/
 
-const createImagePreview = async (userId, dir, imageWidth, imageHeight) => {
+const createImagePreview = async (html, css, userId, width, height) => {
   try {
-    // const image = await Image.findOne({ where: { challengeId } });
-    const args = ['-–no-sandbox', '-–disable-setuid-sandbox'];
-    const browser = await puppeteer.launch({ args });
-    const page = await browser.newPage();
-    const retPath = `file://${path.join(process.cwd(), `${dir}${userId}.html`)}`;
-    await page.goto(retPath);
-    await page.setViewport({ width: imageWidth, height: imageHeight });
-    await page.screenshot({ path: `${dir}${userId}.png` });
-    await browser.close();
-    return retPath;
+    const response = await axios.post(`${config.API}/create-image`, {
+      html,
+      css,
+      userId,
+      challengeId: -1,
+      width,
+      height,
+    });
+    return response.data;
   } catch (err) {
     console.log('error from createImagePreview: ', err);
   }
@@ -99,5 +76,4 @@ module.exports = {
   createImage,
   createImagePreview,
   seedImage,
-  puppy,
 };
