@@ -44,17 +44,6 @@ const _AdminChallengeEdit = props => {
     }
   }, [props.individualChallenge]);
 
-  const clearState = () => {
-    setName('');
-    setDescription('');
-    setDifficulty(1);
-    setHtml('');
-    setCss('');
-    setImageWidth('');
-    setImageHeight('');
-    // setErrors([]);  // not sure about this one
-  };
-
   const handleSubmit = ev => {
     ev.preventDefault();
     const challenge = {
@@ -73,7 +62,6 @@ const _AdminChallengeEdit = props => {
         .put(`/api/challenges/${id}`, challenge)
         // .then(resp => console.log(resp.data))
         .then(() => {
-          clearState();
           props.history.push('/admin/challenges');
         })
         .catch(error => {
@@ -84,7 +72,6 @@ const _AdminChallengeEdit = props => {
       axios
         .post('api/challenges', challenge)
         .then(() => {
-          clearState();
           props.history.push('/admin/challenges');
         })
         .catch(error => {
@@ -114,7 +101,6 @@ const _AdminChallengeEdit = props => {
   };
 
   const cancel = () => {
-    clearState();
     props.history.push('/admin/challenges');
   };
 
