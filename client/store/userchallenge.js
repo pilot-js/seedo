@@ -26,6 +26,12 @@ export const updateUserchallenge = (
     .then(userchallenge => dispatch(setUserchallenge(userchallenge)));
 };
 
+export const fetchAllUserchallenge = () => dispatch => {
+  return axios
+    .get('/api/userchallenges')
+    .then(userchallenges => dispatch(setUserchallenge(userchallenges.data)))
+};
+
 export const fetchUserchallengeById = id => dispatch => {
   return axios
     .get(`/api/userchallenges/${id}`)

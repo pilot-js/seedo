@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchChallenges, fetchChallengesWithFilterAndSearch } from '../store';
+import { fetchChallenges, fetchChallengesWithFilterAndSearch, fetchAllUserchallenge, userChallenges } from '../store';
 import { convertBufferToImgSrc } from '../utils';
 import { Search } from './Search';
 
@@ -9,14 +9,17 @@ const mapDispatchToProps = dispatch => ({
   fetchChallenges: () => dispatch(fetchChallenges()),
   fetchChallengesWithFilterAndSearch: (difficulty, term) =>
     dispatch(fetchChallengesWithFilterAndSearch(difficulty, term)),
+  fetchAllUserchallenge: () => dispatch(fetchAllUserchallenge()),
 });
 
-const mapStateToProps = ({ challenges }) => ({ challenges });
+const mapStateToProps = ({ challenges, userchallenge }) => ({ challenges, userchallenge });
 
 const component = ({
   challenges,
   fetchChallenges,
   fetchChallengesWithFilterAndSearch,
+  fetchAllUserchallenge,
+  userchallenge,
   match,
   history,
 }) => {
@@ -26,11 +29,44 @@ const component = ({
   useEffect(() => {
     if (difficulty) {
       filter = difficulty;
+      fetchAllUserchallenge();
       fetchChallengesWithFilterAndSearch(filter, searchTerm);
     } else {
       fetchChallenges();
+      fetchAllUserchallenge();
     }
   }, [difficulty, searchTerm]);
+
+  // console.log(typeof userchallenge)
+  const solutionBychallengeId = challengeId => {
+    if (userchallenge) {
+      const solutions = userchallenge.filter(solution => solution.challengeId === challengeId);
+      return solutions;
+    }
+  };
+
+  const attemptedTimes = arr => {
+    return arr.length;
+  };
+
+  const attemptedByUsers = arr => {
+    const userId = [];
+    arr.forEach(solution => {
+      if (!userId.includes(solution.userId)) {
+        userId.push(solution.userId);
+      }
+    });
+    return userId.length;
+  };
+
+  const avgScore = arr => {
+    let totalScore = 0;
+    arr.forEach(solution => {
+      totalScore += solution.grade;
+    });
+    const avgScore = totalScore / arr.length ? totalScore / arr.length : 0;
+    return avgScore;
+  };
 
   return (
     <div>
@@ -53,6 +89,16 @@ const component = ({
                 <Link to={`/challenges/${challenge.id}`} className="btn btn-primary">
                   Go to Challenge
                 </Link>
+                <p>Statistic</p>
+                <p>
+                  Attempted: {attemptedTimes(solutionBychallengeId(challenge.id))}{' '}
+                  {attemptedTimes(solutionBychallengeId(challenge.id)) > 1 ? 'times' : 'time'}
+                </p>
+                <p>
+                  Attempted by number of Users:{' '}
+                  {attemptedByUsers(solutionBychallengeId(challenge.id))}
+                </p>
+                <p>Average Score: {avgScore(solutionBychallengeId(challenge.id))}</p>
               </div>
             </div>
           );
