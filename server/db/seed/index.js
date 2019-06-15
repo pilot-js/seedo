@@ -1,15 +1,18 @@
 const fs = require('fs');
-const { Challenge, Image, Solution, User, Userchallenge } = require('../models');
+const { Challenge, Image, Solution, User, Comment } = require('../models');
 const conn = require('../conn');
 const { usersSeed } = require('./user');
 const { challengesSeed } = require('./challenge');
-const { userchallengeSeed } = require('./userChallenge'); // may delete later
 const { solutionsSeed } = require('./solution');
-const { images } = require('./image');
+const { commentSeed } = require('./comment');
 const utils = require('../../puppeteer-utils');
 
 const seedUser = () => {
   return Promise.all(usersSeed.map(user => User.create(user)));
+};
+
+const seedComment = () => {
+  return Promise.all(commentSeed.map(comment => Comment.create(comment)));
 };
 
 const seedChallenge = () => {
@@ -32,7 +35,7 @@ const syncAndSeed = () => {
   return conn
     .sync({ force: true })
     .then(() => {
-      return Promise.all([seedUser(), seedChallenge(), seedSolution()]);
+      return Promise.all([seedUser(), seedChallenge(), seedSolution(), seedComment()]);
     })
     .then(([users, challenges, solutions]) => {
       return Promise.all([
