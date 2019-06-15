@@ -37,7 +37,7 @@ const syncAndSeed = () => {
     .then(() => {
       return Promise.all([seedUser(), seedChallenge(), seedSolution(), seedComment()]);
     })
-    .then(([users, challenges, solutions]) => {
+    .then(([users, challenges, solutions, comments]) => {
       return Promise.all([
         solutions.map((sol, idx) => sol.update({ challengeId: challenges[idx].id })),
         solutions.map(async sol => {
@@ -46,6 +46,9 @@ const syncAndSeed = () => {
           const retImagePath = await utils.seedImage(sol.id, dirname);
           const imagePath = retImagePath.replace('file://', '').replace('.html', '.png');
           return Image.seedImage(imagePath, sol.challengeId, 337, 600);
+        }),
+        comments.map((comment, idx) => {
+          return comment.update({ userId: users[idx].id, challengeId: challenges[idx].id });
         }),
       ]);
     });
