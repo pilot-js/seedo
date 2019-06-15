@@ -15,7 +15,6 @@ class _Solution extends Component {
 
   componentDidMount() {
     this.props.fetchOneChallenge(this.props.challengeId);
-    this.props.fetchUserchallengeById(this.props.userchallengeId);
   }
 
   componentDidUpdate(prevProps) {
@@ -82,9 +81,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(fetchUserchallengeById(userId, challengeId)),
 });
 
-const Solution = connect(
+export const Solution = connect(
   mapStateToProps,
   mapDispatchToProps,
 )(_Solution);
-
-export { Solution };
