@@ -1,7 +1,11 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchChallenges, fetchChallengesWithFilterAndSearch, fetchAllUserchallenge, userChallenges } from '../store';
+import {
+  fetchChallenges,
+  fetchChallengesWithFilterAndSearch,
+  fetchAllUserchallenge,
+} from '../store';
 import { convertBufferToImgSrc } from '../utils';
 import { Search } from './Search';
 
