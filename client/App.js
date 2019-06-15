@@ -66,7 +66,10 @@ const App = ({ getGithubUser }) => {
           exact
           path="/challenges/:id"
           render={({ match, history }) => (
-            <IndividualChallenge challengeId={match.params.id} history={history} />
+            <IndividualChallenge
+              challengeId={match.params.id}
+              history={history}
+            />
           )}
         />
         {/* TODO admin components */}
@@ -75,7 +78,12 @@ const App = ({ getGithubUser }) => {
         <Route
           // exact
           path="/admin/challenge/:id"
-          render={({ match }) => <AdminChallengeEdit challengeId={match.params.id} />}
+          render={({ match, history }) => (
+            <AdminChallengeEdit
+              challengeId={match.params.id}
+              history={history}
+            />
+          )}
         />
         <Route exact path="/admin/challenges" component={AdminChallenges} />
         <Route exact path="/admin/users" component={AdminUsers} />
