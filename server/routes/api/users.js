@@ -5,6 +5,13 @@ const { User, Userchallenge, Challenge } = require('../../db');
 
 /**     /api/users     **/
 
+// get all users
+router.get('/', (req, res, next) => {
+  User.findAll()
+    .then(users => res.send(users))
+    .catch(next);
+});
+
 // create user (at sign up)
 router.post('/', (req, res, next) => {
   User.create(req.body)
