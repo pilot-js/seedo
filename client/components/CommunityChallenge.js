@@ -3,24 +3,24 @@ import { connect } from 'react-redux';
 
 import { fetchOneChallenge } from '../store';
 
-const _CommunityChallenge = ({ challenge, challengeId, fetchOneChallenge }) => {
+const _CommunityChallenge = ({ individualChallenge, challengeId, fetchOneChallenge }) => {
   useEffect(() => {
     fetchOneChallenge(challengeId);
   }, []);
   return (
     <div>
-      <h1>{challenge.name}</h1>
-      {Object.keys(challenge).length ? (
+      <h1>{individualChallenge.name}</h1>
+      {Object.keys(individualChallenge).length ? (
         <div>
           <h2>all user submitted answers: </h2>
           <ul>
-            {challenge.userchallenges.map(userchal => {
+            {individualChallenge.userchallenges.map(userchal => {
               return <li key={userchal.id}>{userchal.html}</li>;
             })}
           </ul>
           <h2>all user comments</h2>
           <ul>
-            {challenge.comments.map(comment => {
+            {individualChallenge.comments.map(comment => {
               return <li key={comment.id}>comment</li>;
             })}
           </ul>
@@ -32,11 +32,11 @@ const _CommunityChallenge = ({ challenge, challengeId, fetchOneChallenge }) => {
   );
 };
 
-const mapStateToProps = state => {
-  return {
-    challenge: state.individualChallenge,
-  };
-};
+const mapStateToProps = ({individualChallenge}) => ({
+  individualChallenge
+})
+  
+;
 
 const mapDispatchToProps = dispatch => {
   return {
