@@ -79,7 +79,7 @@ const component = ({
   const solutionComleted = (arr, userId) => {
     let result = false;
     arr.forEach(solution => {
-      if (solution.userId == userId) {
+      if (solution.userId === userId) {
         result = true;
       }
     });
