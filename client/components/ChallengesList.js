@@ -77,13 +77,12 @@ const component = ({
   };
 
   const solutionComleted = (arr, userId) => {
-    let result = false;
-    arr.forEach(solution => {
+    return arr.reduce((acc, solution) => {
       if (solution.userId === userId) {
-        result = true;
+        acc = true;
       }
-    });
-    return result;
+      return acc;
+    }, false);
   };
 
   return (
