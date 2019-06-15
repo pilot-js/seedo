@@ -47,19 +47,32 @@ const _AdminChallenges = props => {
                 return (
                   <tr key={id}>
                     <td>
-                      <Link
-                        to={`/admin/challenge/${id}`}
-                        className="item-edit"
-                        style={{ marginRight: '1rem' }}
-                      >
-                        Edit
-                      </Link>
-                      <Link to="/" className="item-archive" style={{ marginRight: '1rem' }}>
-                        Archive
-                      </Link>
-                      <Link to="/" className="item-delete" onClick={() => deleteChallenge(id)}>
-                        Del
-                      </Link>
+                      <div className="btn-group" role="group" aria-label="edit actions">
+                        <Link to={`/admin/challenge/${id}`}>
+                          <button
+                            type="button"
+                            className="btn btn-secondary item-edit"
+                            // style={{ marginRight: '1rem' }}
+                          >
+                            Edit
+                          </button>
+                        </Link>
+                        <Link
+                          to="/"
+                          // to={`/admin/challenge/${id}`}
+                        >
+                          <button type="button" className="btn btn-secondary item-archive">
+                            Archive
+                          </button>
+                        </Link>
+                        <button
+                          type="button"
+                          className="btn btn-secondary item-delete"
+                          onClick={() => deleteChallenge(id)}
+                        >
+                          Del
+                        </button>
+                      </div>
                     </td>
                     <td>{id}</td>
                     <td>{name}</td>
