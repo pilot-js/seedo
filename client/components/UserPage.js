@@ -1,8 +1,16 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { fetchUserChallenges } from '../store';
+import { fetchUserChallenges, fetchOneChallenge } from '../store';
 
-const _UserPage = ({ user, userChallenges, fetchUserChallenges }) => {
+import { UserCompletedChallenges } from './UserCompletedChallenges';
+
+const _UserPage = ({
+  user,
+  userChallenges,
+  challengeId,
+  individualChallenge,
+  fetchUserChallenges,
+}) => {
   useEffect(() => {
     if (user.id) {
       fetchUserChallenges(user.id)
@@ -11,7 +19,8 @@ const _UserPage = ({ user, userChallenges, fetchUserChallenges }) => {
         })
         .catch(e => console.error(`Failed to get userChallenges. Here's why:\n${e}`));
     }
-  }, []);
+    fetchOneChallenge(challengeId);
+  }, [user.id]);
 
   const linkGithub = () => {
     window.location.href = `${window.location.origin}/github/login`;
@@ -24,6 +33,8 @@ const _UserPage = ({ user, userChallenges, fetchUserChallenges }) => {
     return false;
   };
 
+  console.log('individualChallenge: ', individualChallenge);
+  console.log('challengeId: ', challengeId);
   return (
     <div>
       <p> User ID: {user.id}</p>
@@ -37,22 +48,23 @@ const _UserPage = ({ user, userChallenges, fetchUserChallenges }) => {
           </button>
         )}
       </div>
-      <ul>
-        {userChallenges.map(uc => (
-          <li>{uc.name}</li>
-        ))}
-      </ul>
+      <UserCompletedChallenges
+        userChallenges={userChallenges}
+        individualChallenge={individualChallenge}
+      />
     </div>
   );
 };
 
-const mapStateToProps = ({ user, userChallenges }) => ({
+const mapStateToProps = ({ user, userChallenges, individualChallenge }) => ({
   user,
+  individualChallenge,
   userChallenges,
 });
 
 const mapDispatchToProps = dispatch => ({
   fetchUserChallenges: userId => dispatch(fetchUserChallenges(userId)),
+  fetchOneChallenge: challengeId => dispatch(fetchOneChallenge(challengeId)),
 });
 
 export const UserPage = connect(

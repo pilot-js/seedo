@@ -31,8 +31,8 @@ router.get('/:id/userchallenges/', (req, res, next) => {
   Challenge.findAll({
     include: [
       {
-        model: Userchallenge,
         where: { userId: req.params.id },
+        model: Userchallenge,
       },
     ],
   })
