@@ -9,7 +9,6 @@ import { fetchChallenges } from '../store';
 const _AdminChallenges = props => {
   useEffect(() => {
     props.fetchChallenges();
-    console.log(props);
   }, []);
 
   const deleteChallenge = challengeId => {

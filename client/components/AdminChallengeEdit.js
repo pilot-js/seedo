@@ -18,6 +18,7 @@ const _AdminChallengeEdit = props => {
 
   // true - update existing challenge
   const isUpdate = props.challengeId ? true : false;
+
   const isIndividualChallenge = Object.keys(props.individualChallenge).length ? true : false;
 
   useEffect(() => {
@@ -29,7 +30,6 @@ const _AdminChallengeEdit = props => {
   }, []);
 
   useEffect(() => {
-    console.log('props.individualChallenge: ', props.individualChallenge);
     if (isUpdate && isIndividualChallenge) {
       const { individualChallenge } = props;
       setName(individualChallenge.name);
@@ -92,8 +92,6 @@ const _AdminChallengeEdit = props => {
           setErrors([...errors, error]);
         });
     }
-
-    // (may not need this) TODO remove individualChallenge from store in order to reset so will not interfere
   };
 
   const preview = () => {
@@ -106,9 +104,8 @@ const _AdminChallengeEdit = props => {
     };
     axios
       .put('/api/challenges/preview', challenge)
-      .then(resp => resp.data)
-      .then(data => {
-        setImage(data);
+      .then(resp => {
+        setImage(resp.data);
       })
       .catch(error => {
         console.log(error);
@@ -116,15 +113,19 @@ const _AdminChallengeEdit = props => {
       });
   };
 
+  const cancel = () => {
+    clearState();
+    props.history.push('/admin/challenges');
+  };
+
   const imageSrc = convertBufferToImgSrc(image);
 
-  const action = isUpdate ? 'Edit' : 'Create';
-  const btnActionText = isUpdate ? 'Update' : 'Save';
+  const actionText = isUpdate ? 'Edit' : 'Create';
+  const actionTextBtn = isUpdate ? 'Update' : 'Save';
 
   return (
     <div>
-      {/* TODO make conditional - Create | Edit */}
-      <h1>{action} Challenge</h1>
+      <h1>{actionText} Challenge</h1>
       <div className="row">
         <div className="col-6">
           <form onSubmit={handleSubmit}>
@@ -235,7 +236,10 @@ const _AdminChallengeEdit = props => {
             <button type="button" onClick={preview}>
               Preview
             </button>
-            <button type="submit">{btnActionText} Challenge</button>
+            <button type="submit">{actionTextBtn} Challenge</button>
+            <button type="button" onClick={cancel}>
+              Cancel
+            </button>
           </form>
         </div>
         <div className="col-6">
