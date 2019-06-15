@@ -55,13 +55,13 @@ const seedImage = async (html, css, userId, challengeId) => {
 
 // /******  PREVIEW ******/
 
-const createImagePreview = async (html, css, userId, width, height) => {
+const createImagePreview = async (html, css, challengeId, userId, width, height) => {
   try {
     const response = await axios.post(`${config.API}/create-image`, {
       html,
       css,
       userId,
-      challengeId: -1,
+      challengeId,
       width,
       height,
     });

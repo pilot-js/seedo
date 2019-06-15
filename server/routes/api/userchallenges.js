@@ -2,7 +2,7 @@ const router = require('express').Router();
 const fs = require('fs');
 const path = require('path');
 
-const { Userchallenge, Image } = require('../../db');
+const { Userchallenge, Challenge, Image } = require('../../db');
 const { createFiles, createImage } = require('../../puppeteer-utils');
 const { compareImages } = require('../../compare-images');
 
@@ -44,14 +44,33 @@ router.put('/:userchallengeId', (req, res, next) => {
     Userchallenge.findByPk(userchallengeId)
       .then(userchall => userchall.update(userAnswer))
       .then(async userchall => {
-        await createFiles(userchall.html, userchall.css, userchall.userId, './server/tmp/');
-        const retPathToUserImage = await createImage(
+        console.log('challengeId: ', userchall.challengeId);
+        const image = Challenge.findOne({ where: { id: userAnswer.challengeId } });
+
+        console.log(
+          'Axios: ',
+          userAnswer.html,
+          userAnswer.css,
           userchall.userId,
           userchall.challengeId,
-          './server/tmp/',
+          image.width,
+          image.height,
         );
-        const pathToUserImage = retPathToUserImage.replace('file://', '').replace('.html', '.png');
-        await Image.saveImage(pathToUserImage, userchallengeId, true);
+
+        const data = await createImage(
+          userAnswer.html,
+          userAnswer.css,
+          userchall.userId,
+          userchall.challengeId,
+          100,
+          100,
+          //image.width,
+          //image.height
+        );
+
+        console.log(JSON.stringify(data));
+        await Image.create({ userchallengeId: userchall.id, data: JSON.stringify(data) });
+        console.log('data from image: ', await Image.findOne({ where: { data } }));
 
         if (createDiff) {
           const challengeImg = await Image.findOne({
@@ -60,6 +79,7 @@ router.put('/:userchallengeId', (req, res, next) => {
           const percentMatch = await compareImages(pathToUserImage, challengeImg, userchall.userId);
           await userchall.update({ grade: percentMatch });
         }
+
         const userChallenge = await Userchallenge.findByPk(userchallengeId, { include: [Image] });
         const userchallengeObject = userChallenge.get();
         if (createDiff) {
@@ -67,6 +87,7 @@ router.put('/:userchallengeId', (req, res, next) => {
             `${path.join(process.cwd(), `server/tmp/${userChallenge.userId}.diff.png`)}`,
           );
         }
+        console.log(JSON.stringify(userchallengeObject.images[0].data));
         res.send(userchallengeObject);
       })
       .catch(next);

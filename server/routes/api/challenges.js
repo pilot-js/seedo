@@ -44,22 +44,15 @@ router.post('/', async (req, res, next) => {
       challengeId: challenge.id,
     };
     // create image and save in db
-    await createFiles(html, css, challenge.id, './server/tmp/challenge/');
-    const retPathToUserImage = await createImagePreview(
+    const data = await createImagePreview(
+      html,
+      css,
       challenge.id,
-      './server/tmp/challenge/',
       Number(imageWidth),
       Number(imageHeight),
     );
 
-    const pathToUserImage = retPathToUserImage.replace('file://', '').replace('.html', '.png');
-    await Image.saveImage(
-      pathToUserImage,
-      challenge.id,
-      false,
-      Number(imageWidth),
-      Number(imageHeight),
-    );
+    await Image.create({ data, height: imageHeight, width: imageWidth });
     // TODO delete tmp files created in /server/challenge/
 
     res.send(newChallenge);
@@ -72,20 +65,9 @@ router.put('/preview', (req, res, next) => {
   console.log('req.body: ', req.body);
   const { html, css, imageWidth, imageHeight, userId } = req.body;
 
-  // use userId (admin user) to create unique tmp files
-  createFiles(html, css, `${userId}-preview`, './dist/images/tmp/');
-
-  createImagePreview(
-    `${userId}-preview`,
-    './dist/images/tmp/',
-    Number(imageWidth),
-    Number(imageHeight),
-  )
-    .then(retPathToUserImage => {
-      const pathToUserImage = retPathToUserImage.replace('file://', '').replace('.html', '.png');
-      const imageData = fs.readFileSync(pathToUserImage);
-      console.log('imageData: ', imageData);
-      res.send(JSON.stringify(imageData));
+  createImagePreview(html, css, `${userId}-preview`, -1, Number(imageWidth), Number(imageHeight))
+    .then(data => {
+      res.send(JSON.stringify(data));
     })
     .catch(next);
 });
