@@ -32,11 +32,9 @@ const _CommunityChallenge = ({ individualChallenge, challengeId, fetchOneChallen
   );
 };
 
-const mapStateToProps = ({individualChallenge}) => ({
-  individualChallenge
-})
-  
-;
+const mapStateToProps = ({ individualChallenge }) => ({
+  individualChallenge,
+});
 
 const mapDispatchToProps = dispatch => {
   return {
