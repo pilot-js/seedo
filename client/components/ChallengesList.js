@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import MdCheckmarkCircle from 'react-ionicons/lib/MdCheckmarkCircle';
 import {
   fetchChallenges,
   fetchChallengesWithFilterAndSearch,
@@ -16,7 +17,11 @@ const mapDispatchToProps = dispatch => ({
   fetchAllUserchallenges: () => dispatch(fetchAllUserchallenges()),
 });
 
-const mapStateToProps = ({ challenges, userchallenge }) => ({ challenges, userchallenge });
+const mapStateToProps = ({ challenges, userchallenge, user }) => ({
+  challenges,
+  userchallenge,
+  user,
+});
 
 const component = ({
   challenges,
@@ -26,6 +31,7 @@ const component = ({
   userchallenge,
   match,
   history,
+  user,
 }) => {
   const { searchTerm, difficulty } = match.params;
   let filter = {};
@@ -40,7 +46,6 @@ const component = ({
     }
   }, [difficulty, searchTerm]);
 
-  // console.log(typeof userchallenge)
   const solutionByChallengeId = challengeId => {
     if (userchallenge) {
       const solutions = userchallenge.filter(solution => solution.challengeId === challengeId);
@@ -69,6 +74,16 @@ const component = ({
     }, 0);
     const avgScore = totalScore / arr.length ? totalScore / arr.length : 0;
     return avgScore;
+  };
+
+  const solutionComleted = (arr, userId) => {
+    let result = false;
+    arr.forEach(solution => {
+      if (solution.userId === userId) {
+        result = true;
+      }
+    });
+    return result;
   };
 
   return (
@@ -102,6 +117,11 @@ const component = ({
                   {attemptedByUsers(solutionByChallengeId(challenge.id))}
                 </p>
                 <p>Average Score: {avgScore(solutionByChallengeId(challenge.id))}</p>
+                <div>
+                  {solutionComleted(solutionByChallengeId(challenge.id), user.id) ? (
+                    <MdCheckmarkCircle fontSize="30px" color="#43853d" />
+                  ) : null}
+                </div>
               </div>
             </div>
           );
