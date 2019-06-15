@@ -13,3 +13,4 @@ export * from './AdminUsers';
 export * from './Solution';
 export * from './Signup';
 export * from './Community';
+export * from './UserCompletedChallenges';
