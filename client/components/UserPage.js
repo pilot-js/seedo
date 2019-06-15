@@ -1,9 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { fetchUserChallenges } from '../store';
+import { fetchUserChallenges, fetchOneChallenge } from '../store';
 
-const _UserPage = ({ user, userChallenges, individualChallenge, fetchUserChallenges }) => {
+import { UserCompletedChallenges } from './UserCompletedChallenges';
+
+const _UserPage = ({
+  user,
+  userChallenges,
+  challengeId,
+  individualChallenge,
+  fetchUserChallenges,
+}) => {
   useEffect(() => {
     if (user.id) {
       fetchUserChallenges(user.id)
@@ -12,6 +19,7 @@ const _UserPage = ({ user, userChallenges, individualChallenge, fetchUserChallen
         })
         .catch(e => console.error(`Failed to get userChallenges. Here's why:\n${e}`));
     }
+    fetchOneChallenge(challengeId);
   }, [user.id]);
 
   const linkGithub = () => {
@@ -25,6 +33,8 @@ const _UserPage = ({ user, userChallenges, individualChallenge, fetchUserChallen
     return false;
   };
 
+  console.log('individualChallenge: ', individualChallenge);
+  console.log('challengeId: ', challengeId);
   return (
     <div>
       <p> User ID: {user.id}</p>
@@ -38,31 +48,10 @@ const _UserPage = ({ user, userChallenges, individualChallenge, fetchUserChallen
           </button>
         )}
       </div>
-      <div className="d-flex flex-column align-items-center">
-        <h1>My Completed Challenges</h1>
-        <table className="table">
-          <thead>
-            <tr>
-              <th>Challenge Name</th>
-              <th>UserChallenge</th>
-            </tr>
-          </thead>
-          <tbody>
-            {userChallenges.map(uc => {
-              return (
-                <tr key={uc.id}>
-                  <td>{uc.name}</td>
-                  <td>
-                    <Link to={`/solutions/${uc.id}/challenges/${individualChallenge.id}`}>
-                      <span>{uc.name}</span>
-                    </Link>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
+      <UserCompletedChallenges
+        userChallenges={userChallenges}
+        individualChallenge={individualChallenge}
+      />
     </div>
   );
 };
@@ -75,6 +64,7 @@ const mapStateToProps = ({ user, userChallenges, individualChallenge }) => ({
 
 const mapDispatchToProps = dispatch => ({
   fetchUserChallenges: userId => dispatch(fetchUserChallenges(userId)),
+  fetchOneChallenge: challengeId => dispatch(fetchOneChallenge(challengeId)),
 });
 
 export const UserPage = connect(

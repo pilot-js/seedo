@@ -16,6 +16,7 @@ import {
   AdminUsers,
   Community,
   Solution,
+  UserCompletedChallenges,
   Signup,
 } from './components';
 import { getGithubUser } from './store';
@@ -79,6 +80,7 @@ const App = ({ getGithubUser }) => {
         />
         <Route exact path="/admin/challenges" component={AdminChallenges} />
         <Route exact path="/admin/users" component={AdminUsers} />
+        <Route exact path="/userpage/usercompletedchallenge" component={UserCompletedChallenges} />
       </Switch>
       <Footer />
     </div>

@@ -28,6 +28,9 @@ const _Solution = ({
     lineNumbers: true,
     mode: 'javascript',
   };
+  if (!individualChallenge.solutions) {
+    return null;
+  }
   return (
     <div>
       <h2>Our solution</h2>
