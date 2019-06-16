@@ -53,7 +53,7 @@ router.post('/', async (req, res, next) => {
       Number(imageHeight),
     );
 
-    await Image.create({ data, height: imageHeight, width: imageWidth });
+    await Image.create({ data, height: imageHeight, width: imageWidth, challengeId: challenge.id });
     // TODO delete tmp files created in /server/challenge/
 
     res.send(newChallenge);
