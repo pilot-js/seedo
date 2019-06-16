@@ -2,12 +2,12 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import { fetchOneChallenge } from '../store';
+import { Review } from './Review';
 
-const _CommunityChallenge = ({ individualChallenge, challengeId, fetchOneChallenge }) => {
+const _CommunityChallenge = ({ individualChallenge, challengeId, user, fetchOneChallenge }) => {
   useEffect(() => {
     fetchOneChallenge(challengeId);
   }, []);
-  console.log(individualChallenge);
   return (
     <div>
       <h1>{individualChallenge.name}</h1>
@@ -46,12 +46,14 @@ const _CommunityChallenge = ({ individualChallenge, challengeId, fetchOneChallen
       ) : (
         ''
       )}
+      <Review userId={user.id} challengeId={challengeId} />
     </div>
   );
 };
 
-const mapStateToProps = ({ individualChallenge }) => ({
+const mapStateToProps = ({ individualChallenge, user }) => ({
   individualChallenge,
+  user,
 });
 
 const mapDispatchToProps = dispatch => {
