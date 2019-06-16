@@ -13,7 +13,7 @@ router.get('/', (req, res, next) => {
 });
 
 // create user (at sign up)
-router.post('/', (req, res, next) => {
+router.post('/create', (req, res, next) => {
   User.create(req.body)
     .then(user => res.send(user))
     .catch(next);
@@ -31,8 +31,8 @@ router.get('/:id/userchallenges/', (req, res, next) => {
   Challenge.findAll({
     include: [
       {
-        model: Userchallenge,
         where: { userId: req.params.id },
+        model: Userchallenge,
       },
     ],
   })
@@ -47,7 +47,8 @@ router.get('/:id/userchallenges/', (req, res, next) => {
 });
 
 // update user
-router.put('/:id', (req, res, next) => {
+router.put('/update/:id', (req, res, next) => {
+  console.log('in update route');
   User.findByPk(req.params.id)
     .then(user => user.update(req.body))
     .then(updatedUser => res.send(updatedUser))
