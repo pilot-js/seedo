@@ -104,7 +104,7 @@ const _AdminChallengeEdit = props => {
     props.history.push('/admin/challenges');
   };
 
-  const imageSrc = convertBufferToImgSrc(image);
+  const imageSrc = image.length > 0 ? image : null;
 
   const actionText = isUpdate ? 'Edit' : 'Create';
   const actionTextBtn = isUpdate ? 'Update' : 'Save';

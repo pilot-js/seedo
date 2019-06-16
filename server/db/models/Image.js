@@ -1,6 +1,7 @@
 /* eslint indent: 0 */
 const fs = require('fs');
 const conn = require('../conn');
+const utils = require('../../puppeteer-utils');
 const { Sequelize } = conn;
 
 // used to store images for both challenges and userchallenges
@@ -9,7 +10,7 @@ const { Sequelize } = conn;
 const Image = conn.define('image', {
   // from associations: challengeId, userchallengeId
   connector: Sequelize.STRING, // only need for seeding ?
-  data: Sequelize.BLOB,
+  data: Sequelize.TEXT,
   height: Sequelize.INTEGER,
   width: Sequelize.INTEGER,
 });
@@ -41,9 +42,9 @@ Image.saveImage = (pathToImage, id, isUserchallenge, width, height) => {
   });
 };
 
-Image.seedImage = (pathToImage, challengeId, height, width) => {
-  const imageData = fs.readFileSync(pathToImage);
-  return Image.create({ challengeId, data: imageData, height, width });
+Image.seedImage = (html, css, challengeId, height, width) => {
+  const data = utils.createImage(html, css, 'seed', challengeId, width, height);
+  return Image.create({ challengeId, data, height, width });
 };
 
 module.exports = Image;
