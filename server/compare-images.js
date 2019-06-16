@@ -1,13 +1,17 @@
 /* eslint no-use-before-define: 1 */
 /* eslint no-inner-declarations: 1 */
 const axios = require('axios');
-const config = require('./.env');
+try {
+  Object.assign(process.env, require('./.env'));
+} catch (error) {
+  console.log('Could not find .env file.');
+}
 
 // what do we need out of this function?
 // just the percentage
 
 async function compareImages(userchallenge, challenge, width, height, userId) {
-  const response = await axios.post(`${config.API}/compare-images`, {
+  const response = await axios.post(`${process.env.API}/compare-images`, {
     userchallenge,
     challenge,
     width,

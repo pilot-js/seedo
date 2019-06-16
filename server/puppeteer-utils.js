@@ -2,10 +2,12 @@ const fs = require('fs');
 //const puppeteer = require('puppeteer');
 const path = require('path');
 const axios = require('axios');
-const config = require('./.env');
+try {
+  Object.assign(process.env, require('./.env'));
+} catch (error) {
+  console.log('Could not find .env file.');
+}
 
-console.log(config);
-// const { Image } = require('./db');
 const parseHTML = (html, userId) => {
   return `<html lang="en">
   <head>
@@ -37,7 +39,7 @@ const createFiles = async (html, css, userId, dir) => {
 };
 
 const createImage = async (html, css, userId, challengeId, width, height) => {
-  const response = await axios.post(`${config.API}/create-image`, {
+  const response = await axios.post(`${process.env.API}/create-image`, {
     html,
     css,
     userId,
@@ -49,7 +51,12 @@ const createImage = async (html, css, userId, challengeId, width, height) => {
 };
 
 const seedImage = async (html, css, userId, challengeId) => {
-  const response = await axios.post(`${config.API}/seed-image`, { html, css, userId, challengeId });
+  const response = await axios.post(`${process.env.API}/seed-image`, {
+    html,
+    css,
+    userId,
+    challengeId,
+  });
   return response.data;
 };
 
@@ -57,7 +64,7 @@ const seedImage = async (html, css, userId, challengeId) => {
 
 const createImagePreview = async (html, css, challengeId, userId, width, height) => {
   try {
-    const response = await axios.post(`${config.API}/create-image`, {
+    const response = await axios.post(`${process.env.API}/create-image`, {
       html,
       css,
       userId,
