@@ -70,7 +70,7 @@ const _AdminUserEdit = props => {
         });
     } else {
       axios
-        .post('/api/users/create', user)
+        .post('/api/users', user)
         .then(() => props.history.push('/admin/users'))
         .catch(error => {
           console.log('updating error: ', error);

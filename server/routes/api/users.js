@@ -13,7 +13,7 @@ router.get('/', (req, res, next) => {
 });
 
 // create user (at sign up)
-router.post('/create', (req, res, next) => {
+router.post('/', (req, res, next) => {
   User.create(req.body)
     .then(user => res.send(user))
     .catch(next);
