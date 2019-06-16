@@ -116,14 +116,18 @@ const component = ({
         <h1>Our Challenges</h1>
       </div>
       <Search history={history} searchTerm={searchTerm} />
-      <div className="d-flex justify-content-around">
+      <div>
         {challenges.map(challenge => {
           const images =
             challenge.images && challenge.images > 0 ? challenge.images : [{ data: { data: [1] } }];
           const image = images[0];
           const imageSrc = convertBufferToImgSrc(image.data);
           return (
-            <div className="card" style={{ width: '20rem' }} key={challenge.id}>
+            <div
+              className="card d-inline-flex"
+              style={{ width: '25%', marginRight: '1em', marginBottom: '1em' }}
+              key={challenge.id}
+            >
               <div className="card-body">
                 <img src={imageSrc} alt="" className="card-image-top" />
                 <h5 className="card-title">{challenge.name}</h5>
@@ -136,7 +140,6 @@ const component = ({
                 </button>
                 <Collapse
                   isOpened={collapseStatus[challenge.id] ? collapseStatus[challenge.id] : false}
-                  fixedHeight={200}
                 >
                   <div>
                     {solutionByChallengeId(challenge.id) ? (
