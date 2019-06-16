@@ -67,7 +67,13 @@ const _Nav = props => {
           ))}
           {props.user.type === 'admin' ? (
             <div className="btn-group">
-              <button type="button" className="btn btn-primary dropdown-toggle" data-toggle="dropdown">Admin</button>
+              <button
+                type="button"
+                className="btn btn-primary dropdown-toggle"
+                data-toggle="dropdown"
+              >
+                Admin
+              </button>
               <div className="dropdown-menu">
                 {adminNavLinks.map(link => (
                   <NavLink exact key={link.to} to={link.to} className="dropdown-item">
