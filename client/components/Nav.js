@@ -53,41 +53,46 @@ const _Nav = props => {
   }
 
   return (
-    <div className="d-flex flex-row">
-      <div style={{ flex: 2, textAlign: 'center', alignItems: 'center' }}>image Here</div>
-      <div
-        className="d-flex flex-column justify-content-center nav nav-pills"
-        style={{ flex: 3, marginBottom: '20px', marginTop: '10px' }}
-      >
-        <div className="flex-row nav nav-pills">
+    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <NavLink class="navbar-brand" href="#">
+        Image maybe?
+      </NavLink>
+      <div className="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul className="navbar-nav mr-auto">
           {navLinks.map(link => (
-            <NavLink exact key={link.to} to={link.to} className="nav-link nav-item">
-              {link.label}
-            </NavLink>
+            <li className="nav-item">
+              <NavLink exact key={link.to} to={link.to} className="nav-link">
+                {link.label}
+              </NavLink>
+            </li>
           ))}
           {props.user.type === 'admin' ? (
-            <div className="btn-group">
-              <button
-                type="button"
-                className="btn btn-primary dropdown-toggle"
+            <li className="nav-item dropdown">
+              <NavLink
+                className="nav-link dropdown-toggle"
+                href="/"
+                id="navbarDropdown"
+                role="button"
                 data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
               >
                 Admin
-              </button>
-              <div className="dropdown-menu">
+              </NavLink>
+              <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                 {adminNavLinks.map(link => (
                   <NavLink exact key={link.to} to={link.to} className="dropdown-item">
                     {link.label}
                   </NavLink>
                 ))}
               </div>
-            </div>
+            </li>
           ) : (
             ''
           )}
-        </div>
+        </ul>
       </div>
-    </div>
+    </nav>
   );
 };
 
