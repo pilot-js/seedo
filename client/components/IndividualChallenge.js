@@ -66,17 +66,18 @@ const _IndividualChallenge = ({
     lineNumbers: true,
     mode: 'javascript',
   };
+
   if (Object.keys(individualChallenge).length === 0) {
     return null;
   }
   let userImage;
   if (userchallenge.images) {
-    const { images } = userchallenge;
-    userImage = images.length ? convertBufferToImgSrc(images[0].data) : '';
+    userImage = userchallenge.images[0].data;
+    console.log(userImage);
   }
   let diffImage = '';
   if (userchallenge.diffImage) {
-    diffImage = convertBufferToImgSrc(userchallenge.diffImage);
+    diffImage = userchallenge.diffImage;
   }
   const { name, description, images, comments } = individualChallenge;
 
@@ -95,7 +96,7 @@ const _IndividualChallenge = ({
       transform: 'translate(-50%, -50%)',
     },
   };
-  const solutionImage = convertBufferToImgSrc(images[0].data);
+  const solutionImage = images[0].data;
   return (
     <div className="d-flex flex-column align-items-center">
       <h1>{name}</h1>
