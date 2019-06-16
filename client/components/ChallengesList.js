@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import MdCheckmarkCircle from 'react-ionicons/lib/MdCheckmarkCircle';
 import {
   fetchChallenges,
   fetchChallengesWithFilterAndSearch,
@@ -16,7 +17,11 @@ const mapDispatchToProps = dispatch => ({
   fetchAllUserchallenges: () => dispatch(fetchAllUserchallenges()),
 });
 
-const mapStateToProps = ({ challenges, userchallenge }) => ({ challenges, userchallenge });
+const mapStateToProps = ({ challenges, userchallenge, user }) => ({
+  challenges,
+  userchallenge,
+  user,
+});
 
 const component = ({
   challenges,
@@ -24,8 +29,10 @@ const component = ({
   fetchChallengesWithFilterAndSearch,
   fetchAllUserchallenges,
   userchallenge,
+
   match,
   history,
+  user,
 }) => {
   const { searchTerm, difficulty } = match.params;
   let filter = {};
@@ -40,9 +47,8 @@ const component = ({
     }
   }, [difficulty, searchTerm]);
 
-  // console.log(typeof userchallenge)
   const solutionByChallengeId = challengeId => {
-    if (userchallenge) {
+    if (userchallenge.constructor === Array) {
       const solutions = userchallenge.filter(solution => solution.challengeId === challengeId);
       return solutions;
     }
@@ -71,6 +77,15 @@ const component = ({
     return avgScore;
   };
 
+  const solutionComleted = (arr, userId) => {
+    return arr.reduce((acc, solution) => {
+      if (solution.userId === userId) {
+        acc = true;
+      }
+      return acc;
+    }, false);
+  };
+
   return (
     <div>
       <div className="d-flex justify-content-center">
@@ -92,16 +107,29 @@ const component = ({
                 <Link to={`/challenges/${challenge.id}`} className="btn btn-primary">
                   Go to Challenge
                 </Link>
-                <p>Statistic</p>
-                <p>
-                  Attempted: {attemptedTimes(solutionByChallengeId(challenge.id))}{' '}
-                  {attemptedTimes(solutionByChallengeId(challenge.id)) > 1 ? 'times' : 'time'}
-                </p>
-                <p>
-                  Attempted by number of Users:{' '}
-                  {attemptedByUsers(solutionByChallengeId(challenge.id))}
-                </p>
-                <p>Average Score: {avgScore(solutionByChallengeId(challenge.id))}</p>
+                <div>
+                  {solutionByChallengeId(challenge.id) ? (
+                    <div>
+                      <p>Statistic</p>
+                      <p>
+                        Attempted: {attemptedTimes(solutionByChallengeId(challenge.id))}{' '}
+                        {attemptedTimes(solutionByChallengeId(challenge.id)) > 1 ? 'times' : 'time'}
+                      </p>
+                      <p>
+                        Attempted by number of Users:{' '}
+                        {attemptedByUsers(solutionByChallengeId(challenge.id))}
+                      </p>
+                      <p>Average Score: {avgScore(solutionByChallengeId(challenge.id))}</p>
+                      <div>
+                        {solutionComleted(solutionByChallengeId(challenge.id), user.id) ? (
+                          <MdCheckmarkCircle fontSize="30px" color="#43853d" />
+                        ) : null}
+                      </div>
+                    </div>
+                  ) : (
+                    ''
+                  )}
+                </div>
               </div>
             </div>
           );

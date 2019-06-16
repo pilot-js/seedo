@@ -15,7 +15,10 @@ router.get('/', (req, res, next) => {
 // create user (at sign up)
 router.post('/', (req, res, next) => {
   User.create(req.body)
-    .then(user => res.send(user))
+    .then(user => {
+      req.session.user = user;
+      res.send(user);
+    })
     .catch(next);
 });
 

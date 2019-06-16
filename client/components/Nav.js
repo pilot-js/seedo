@@ -20,16 +20,16 @@ const _Nav = props => {
   if (props.user.id) {
     navLinks.push(
       {
-        label: 'Logout',
-        to: '/logout',
-      },
-      {
         label: 'User Page',
         to: '/userpage',
       },
       {
         label: 'Community',
         to: '/community',
+      },
+      {
+        label: 'Logout',
+        to: '/logout',
       },
     );
   } else {
@@ -53,33 +53,46 @@ const _Nav = props => {
   }
 
   return (
-    <div className="d-flex flex-row">
-      <div style={{ flex: 2, textAlign: 'center', alignItems: 'center' }}>image Here</div>
-      <div
-        className="d-flex flex-column justify-content-center nav nav-pills"
-        style={{ flex: 3, marginBottom: '20px', marginTop: '10px' }}
-      >
-        <div className="flex-row nav nav-pills">
+    <nav className="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+      <NavLink class="navbar-brand" href="#">
+        Image maybe?
+      </NavLink>
+      <div className="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul className="navbar-nav mr-auto">
           {navLinks.map(link => (
-            <NavLink exact key={link.to} to={link.to} className="nav-link nav-item">
-              {link.label}
-            </NavLink>
-          ))}
-        </div>
-        {props.user.type === 'admin' ? (
-          <div className="flex-row nav">
-            Admin:
-            {adminNavLinks.map(link => (
-              <NavLink exact key={link.to} to={link.to} className="nav-link nav-item">
+            <li className="nav-item">
+              <NavLink exact key={link.to} to={link.to} className="nav-link">
                 {link.label}
               </NavLink>
-            ))}
-          </div>
-        ) : (
-          ''
-        )}
+            </li>
+          ))}
+          {props.user.type === 'admin' ? (
+            <li className="nav-item dropdown">
+              <NavLink
+                className="nav-link dropdown-toggle"
+                href="/"
+                id="navbarDropdown"
+                role="button"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Admin
+              </NavLink>
+              <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                {adminNavLinks.map(link => (
+                  <NavLink exact key={link.to} to={link.to} className="dropdown-item">
+                    {link.label}
+                  </NavLink>
+                ))}
+              </div>
+            </li>
+          ) : (
+            ''
+          )}
+        </ul>
       </div>
-    </div>
+    </nav>
   );
 };
 

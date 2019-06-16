@@ -16,6 +16,7 @@ import {
   AdminUsers,
   AdminUserEdit,
   Community,
+  CommunityChallenge,
   Solution,
   UserCompletedChallenges,
   Signup,
@@ -54,6 +55,11 @@ const App = ({ getGithubUser }) => {
         <Route exact path="/logout" component={Logout} />
         <Route exact path="/userpage" component={UserPage} />
         <Route exact path="/community" component={Community} />
+        <Route
+          exact
+          path="/community/challenge/:challengeId"
+          render={({ match }) => <CommunityChallenge challengeId={match.params.challengeId} />}
+        />
         <Route
           exact
           path="/solutions/:userchallengeId/challenges/:id"
