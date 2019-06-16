@@ -9,7 +9,7 @@ import { fetchChallenges } from '../store';
 const _AdminChallenges = props => {
   useEffect(() => {
     props.fetchChallenges();
-  }, []);
+  }, [props.challenges]);
 
   const deleteChallenge = challengeId => {
     axios.delete(`/api/challenges/${challengeId}`).then(resp => {
@@ -61,7 +61,7 @@ const _AdminChallenges = props => {
                           to="/"
                           // to={`/admin/challenge/${id}`}
                         >
-                          <button type="button" className="btn btn-secondary item-archive">
+                          <button type="button" className="btn btn-secondary item-archive" disabled>
                             Archive
                           </button>
                         </Link>
