@@ -2,7 +2,7 @@ const router = require('express').Router();
 const fs = require('fs');
 const path = require('path');
 
-const { Userchallenge, Challenge, Image } = require('../../db');
+const { Userchallenge, Challenge, Solution, Image } = require('../../db');
 const { createFiles, createImage } = require('../../puppeteer-utils');
 const { compareImages } = require('../../compare-images');
 
@@ -38,17 +38,24 @@ router.get('/:userchallengeId', (req, res, next) => {
 // create answer for a challenge
 router.put('/:userchallengeId', (req, res, next) => {
   const { userchallengeId } = req.params;
-  console.log(req.body);
   try {
     const { isSubmit, userAnswer, createDiff } = req.body;
     Userchallenge.findByPk(userchallengeId)
       .then(userchall => userchall.update(userAnswer))
       .then(async userchall => {
-        console.log('challengeId: ', userchall.challengeId);
-        const image = Challenge.findOne({ where: { id: userAnswer.challengeId } });
+        const image = await Image.findOne({ where: { challengeId: userAnswer.challengeId } });
 
+        console.log('Image: ', image);
         console.log(
-          'Axios: ',
+          userAnswer.html,
+          userAnswer.css,
+          userchall.userId,
+          userchall.challengeId,
+          image.width,
+          image.height,
+        );
+        console.log('made it here');
+        const data = await createImage(
           userAnswer.html,
           userAnswer.css,
           userchall.userId,
@@ -57,37 +64,36 @@ router.put('/:userchallengeId', (req, res, next) => {
           image.height,
         );
 
-        const data = await createImage(
-          userAnswer.html,
-          userAnswer.css,
-          userchall.userId,
-          userchall.challengeId,
-          100,
-          100,
-          //image.width,
-          //image.height
-        );
+        const userchallengeImage = await Image.findOne({
+          where: { userchallengeId: userchall.id },
+        });
+        console.log(userchallengeImage);
+        if (userchallengeImage) {
+          await userchallengeImage.update({ data });
+        } else {
+          await Image.create({ userchallengeId: userchall.id, data });
+        }
 
-        console.log(JSON.stringify(data));
-        await Image.create({ userchallengeId: userchall.id, data: JSON.stringify(data) });
-        console.log('data from image: ', await Image.findOne({ where: { data } }));
-
+        console.log('then here');
+        const userchallenge = await Userchallenge.findByPk(userchallengeId, { include: [Image] });
+        const userchallengeObject = userchallenge.get();
         if (createDiff) {
-          const challengeImg = await Image.findOne({
-            where: { challengeId: userchall.challengeId },
+          // need the html, css and ids for userchallenge and challenge
+          const challenge = await Challenge.findByPk(userchall.challengeId, {
+            include: [Solution],
           });
-          const percentMatch = await compareImages(pathToUserImage, challengeImg, userchall.userId);
-          await userchall.update({ grade: percentMatch });
-        }
-
-        const userChallenge = await Userchallenge.findByPk(userchallengeId, { include: [Image] });
-        const userchallengeObject = userChallenge.get();
-        if (createDiff) {
-          userchallengeObject.diffImage = fs.readFileSync(
-            `${path.join(process.cwd(), `server/tmp/${userChallenge.userId}.diff.png`)}`,
+          console.log('Challenge: ', challenge.get());
+          const { percentMatch, src } = await compareImages(
+            userchallenge,
+            challenge,
+            image.width,
+            image.height,
+            userchall.userId,
           );
+          await userchall.update({ grade: percentMatch });
+          userchallengeObject.grade = percentMatch;
+          userchallengeObject.diffImage = src;
         }
-        console.log(JSON.stringify(userchallengeObject.images[0].data));
         res.send(userchallengeObject);
       })
       .catch(next);

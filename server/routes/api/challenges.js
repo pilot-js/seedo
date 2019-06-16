@@ -3,7 +3,7 @@ const fs = require('fs');
 const Op = require('../../db/conn').Sequelize.Op;
 
 const { Challenge, Image, Comment, Solution, Userchallenge } = require('../../db');
-const { createFiles, createImagePreview } = require('../../puppeteer-utils');
+const { createFiles, createImage } = require('../../puppeteer-utils');
 
 /**  /api/challenges **/
 
@@ -44,9 +44,10 @@ router.post('/', async (req, res, next) => {
       challengeId: challenge.id,
     };
     // create image and save in db
-    const data = await createImagePreview(
+    const data = await createImage(
       html,
       css,
+      'admin',
       challenge.id,
       Number(imageWidth),
       Number(imageHeight),
@@ -65,9 +66,9 @@ router.put('/preview', (req, res, next) => {
   console.log('req.body: ', req.body);
   const { html, css, imageWidth, imageHeight, userId } = req.body;
 
-  createImagePreview(html, css, `${userId}-preview`, -1, Number(imageWidth), Number(imageHeight))
+  createImage(html, css, `${userId}-preview`, -1, Number(imageWidth), Number(imageHeight))
     .then(data => {
-      res.send(JSON.stringify(data));
+      res.send(data);
     })
     .catch(next);
 });
@@ -133,25 +134,17 @@ router.put('/:id', async (req, res, next) => {
     const solution = await Solution.findOne({ where: { challengeId: challenge.id } });
     await solution.update({ html, css });
 
-    // create image and save in db
-    await createFiles(html, css, challenge.id, './server/tmp/challenge/');
-    const retPathToUserImage = await createImagePreview(
-      challenge.id,
-      './server/tmp/challenge/',
+    const data = await createImage(
+      html,
+      css,
+      'admin-id',
+      req.params.id,
       Number(imageWidth),
       Number(imageHeight),
     );
-    console.log('retPathToUserImage: ', retPathToUserImage);
 
-    const pathToUserImage = retPathToUserImage.replace('file://', '').replace('.html', '.png');
-    await Image.saveImage(
-      pathToUserImage,
-      challenge.id,
-      false,
-      Number(imageWidth),
-      Number(imageHeight),
-    );
-    // TODO delete tmp files created in /server/challenge/
+    const image = await Image.findOne({ where: { challengeId: req.params.id } });
+    image.update({ data });
 
     const newChallenge = await Challenge.findByPk(challenge.id, {
       include: [Image, Solution],
