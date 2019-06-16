@@ -9,18 +9,23 @@ import { fetchChallenges } from '../store';
 const _AdminChallenges = props => {
   useEffect(() => {
     props.fetchChallenges();
-  }, [props.challenges]);
+  }, []);
 
   const deleteChallenge = challengeId => {
-    axios.delete(`/api/challenges/${challengeId}`).then(resp => {
-      // TODO give ability to click Archive link or Cancel
-      if (resp.data) {
-        console.log('resp.data: ', resp);
-        window.alert(resp.data);
-      }
-    });
-    // TODO why redirects to home page ???
-    // .then(() => props.history.push('/admin/challenges'));
+    axios
+      .delete(`/api/challenges/${challengeId}`)
+      .then(resp => {
+        // TODO give ability to click Archive link or Cancel
+        if (resp.data) {
+          console.log('resp.data: ', resp);
+          window.alert(resp.data);
+        }
+      })
+      .then(() => props.fetchChallenges())
+      .catch(error => {
+        // TODO display error msg in browser
+        console.log('error:', error);
+      });
   };
 
   const { challenges } = props;
