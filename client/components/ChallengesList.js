@@ -38,15 +38,34 @@ const component = ({
   const { searchTerm, difficulty } = match.params;
   let filter = {};
 
-  const [collapseStatus, setCollapseStatus] = useState({ 1: false, 2: false, 3: false, 4: false });
+  const challengesCollapseStatus = {};
+  const [collapseStatus, setCollapseStatus] = useState({});
 
   useEffect(() => {
     fetchAllUserchallenges();
     if (difficulty) {
       filter = difficulty;
-      fetchChallengesWithFilterAndSearch(filter, searchTerm);
+      fetchChallengesWithFilterAndSearch(filter, searchTerm)
+        .then(resp => resp.challenges)
+        .then(challenges => {
+          if (challenges.length > 1) {
+            challenges.forEach(challenge => {
+              challengesCollapseStatus[challenge.id] = false;
+            });
+          }
+        })
+        .then(() => setCollapseStatus(challengesCollapseStatus));
     } else {
-      fetchChallenges();
+      fetchChallenges()
+        .then(resp => resp.challenges)
+        .then(challenges => {
+          if (challenges.length > 1) {
+            challenges.forEach(challenge => {
+              challengesCollapseStatus[challenge.id] = false;
+            });
+          }
+        })
+        .then(() => setCollapseStatus(challengesCollapseStatus));
     }
   }, [difficulty, searchTerm]);
 
@@ -125,7 +144,10 @@ const component = ({
                 <button type="button" onClick={() => collapseController(challenge.id)}>
                   More info
                 </button>
-                <Collapse isOpened={collapseStatus[challenge.id]} fixedHeight={200}>
+                <Collapse
+                  isOpened={collapseStatus[challenge.id] ? collapseStatus[challenge.id] : false}
+                  fixedHeight={200}
+                >
                   <div>
                     {solutionByChallengeId(challenge.id) ? (
                       <div>
