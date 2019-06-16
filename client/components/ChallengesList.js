@@ -38,7 +38,7 @@ const component = ({
   const { searchTerm, difficulty } = match.params;
   let filter = {};
 
-  const [opened, setOpened] = useState(false);
+  const [collapseStatus, setCollapseStatus] = useState({ 1: false, 2: false, 3: false, 4: false });
 
   useEffect(() => {
     fetchAllUserchallenges();
@@ -89,11 +89,15 @@ const component = ({
     }, false);
   };
 
-  const collapseController = () => {
-    if (opened) {
-      setOpened(false);
+  const collapseController = id => {
+    if (collapseStatus[id]) {
+      setCollapseStatus(prevState => {
+        return { ...prevState, [id]: false };
+      });
     } else {
-      setOpened(true);
+      setCollapseStatus(prevState => {
+        return { ...prevState, [id]: true };
+      });
     }
   };
 
@@ -118,10 +122,10 @@ const component = ({
                 <Link to={`/challenges/${challenge.id}`} className="btn btn-primary">
                   Go to Challenge
                 </Link>
-                <button type="button" onClick={collapseController}>
+                <button type="button" onClick={() => collapseController(challenge.id)}>
                   More info
                 </button>
-                <Collapse isOpened={opened} fixedHeight={200}>
+                <Collapse isOpened={collapseStatus[challenge.id]} fixedHeight={200}>
                   <div>
                     {solutionByChallengeId(challenge.id) ? (
                       <div>
