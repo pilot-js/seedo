@@ -12,6 +12,7 @@ jobs:
           DATABASE_URL: postgres://postgres@localhost/circle_test
           PORT: 3000
           SANDBOX: true
+          API: 'https://still-eyrie-67842.herokuapp.com'
       - image: circleci/postgres:9.6.5-alpine-ram
 
         # Specify service dependencies here if necessary

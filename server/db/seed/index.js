@@ -43,9 +43,8 @@ const syncAndSeed = () => {
         solutions.map(async sol => {
           const dirname = './server/db/seed/images/';
           await utils.createFiles(sol.html, sol.css, sol.id, dirname);
-          const retImagePath = await utils.seedImage(sol.id, dirname);
-          const imagePath = retImagePath.replace('file://', '').replace('.html', '.png');
-          return Image.seedImage(imagePath, sol.challengeId, 337, 600);
+          const data = await utils.seedImage(sol.html, sol.css, 'seed', sol.challengeId);
+          return Image.create({ challengeId: sol.challengeId, width: 600, height: 337, data });
         }),
         comments.map((comment, idx) => {
           return comment.update({ userId: users[idx].id, challengeId: challenges[idx].id });
