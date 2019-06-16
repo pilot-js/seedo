@@ -2,13 +2,27 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 import { fetchUsers } from '../store';
 
 const _AdminUsers = props => {
   useEffect(() => {
     props.fetchUsers();
-  }, []);
+  }, [props.users]);
+
+  const deleteUser = userId => {
+    axios
+      .delete(`/api/users/${userId}`)
+      .then(status => {
+        // TODO display 'User deleted'
+        console.log('status: ', status.data);
+      })
+      .catch(error => {
+        // TODO display error msg in browser
+        console.log('error:', error);
+      });
+  };
 
   const { users } = props;
   return (
@@ -42,18 +56,18 @@ const _AdminUsers = props => {
                         </Link>
                         {/* <Link
                         to="/"
-                      >
-                        <button type="button" className="btn btn-secondary item-archive">
+                      > */}
+                        <button type="button" className="btn btn-secondary item-archive" disabled>
                           Archive
                         </button>
-                      </Link>
-                      <button
-                        type="button"
-                        className="btn btn-secondary item-delete"
-                        onClick={() => deleteUser(id)}
-                      >
-                        Del
-                        </button> */}
+                        {/* </Link> */}
+                        <button
+                          type="button"
+                          className="btn btn-secondary item-delete"
+                          onClick={() => deleteUser(id)}
+                        >
+                          Del
+                        </button>
                       </div>
                     </td>
                     <td>{firstName}</td>
