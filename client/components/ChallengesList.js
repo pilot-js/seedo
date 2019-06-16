@@ -41,30 +41,26 @@ const component = ({
   const challengesCollapseStatus = {};
   const [collapseStatus, setCollapseStatus] = useState({});
 
+  const fetchCollapseStatus = arr => {
+    if (arr.length > 1) {
+      arr.forEach(challenge => {
+        challengesCollapseStatus[challenge.id] = false;
+      });
+    }
+  };
+
   useEffect(() => {
     fetchAllUserchallenges();
     if (difficulty) {
       filter = difficulty;
       fetchChallengesWithFilterAndSearch(filter, searchTerm)
         .then(resp => resp.challenges)
-        .then(challenges => {
-          if (challenges.length > 1) {
-            challenges.forEach(challenge => {
-              challengesCollapseStatus[challenge.id] = false;
-            });
-          }
-        })
+        .then(challenges => fetchCollapseStatus(challenges))
         .then(() => setCollapseStatus(challengesCollapseStatus));
     } else {
       fetchChallenges()
         .then(resp => resp.challenges)
-        .then(challenges => {
-          if (challenges.length > 1) {
-            challenges.forEach(challenge => {
-              challengesCollapseStatus[challenge.id] = false;
-            });
-          }
-        })
+        .then(challenges => fetchCollapseStatus(challenges))
         .then(() => setCollapseStatus(challengesCollapseStatus));
     }
   }, [difficulty, searchTerm]);
