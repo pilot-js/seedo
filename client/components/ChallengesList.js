@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import MdCheckmarkCircle from 'react-ionicons/lib/MdCheckmarkCircle';
+import { Collapse } from 'react-collapse';
 import {
   fetchChallenges,
   fetchChallengesWithFilterAndSearch,
@@ -36,6 +37,8 @@ const component = ({
 }) => {
   const { searchTerm, difficulty } = match.params;
   let filter = {};
+
+  const [opened, setOpened] = useState(false);
 
   useEffect(() => {
     fetchAllUserchallenges();
@@ -73,7 +76,7 @@ const component = ({
       acc += solution.grade;
       return acc;
     }, 0);
-    const avgScore = totalScore / arr.length ? totalScore / arr.length : 0;
+    const avgScore = totalScore / arr.length ? Math.round(totalScore / arr.length) : 0;
     return avgScore;
   };
 
@@ -84,6 +87,14 @@ const component = ({
       }
       return acc;
     }, false);
+  };
+
+  const collapseController = () => {
+    if (opened) {
+      setOpened(false);
+    } else {
+      setOpened(true);
+    }
   };
 
   return (
@@ -107,29 +118,36 @@ const component = ({
                 <Link to={`/challenges/${challenge.id}`} className="btn btn-primary">
                   Go to Challenge
                 </Link>
-                <div>
-                  {solutionByChallengeId(challenge.id) ? (
-                    <div>
-                      <p>Statistic</p>
-                      <p>
-                        Attempted: {attemptedTimes(solutionByChallengeId(challenge.id))}{' '}
-                        {attemptedTimes(solutionByChallengeId(challenge.id)) > 1 ? 'times' : 'time'}
-                      </p>
-                      <p>
-                        Attempted by number of Users:{' '}
-                        {attemptedByUsers(solutionByChallengeId(challenge.id))}
-                      </p>
-                      <p>Average Score: {avgScore(solutionByChallengeId(challenge.id))}</p>
+                <button type="button" onClick={collapseController}>
+                  More info
+                </button>
+                <Collapse isOpened={opened} fixedHeight={200}>
+                  <div>
+                    {solutionByChallengeId(challenge.id) ? (
                       <div>
-                        {solutionComleted(solutionByChallengeId(challenge.id), user.id) ? (
-                          <MdCheckmarkCircle fontSize="30px" color="#43853d" />
-                        ) : null}
+                        <p>Statistic</p>
+                        <p>
+                          Attempted: {attemptedTimes(solutionByChallengeId(challenge.id))}{' '}
+                          {attemptedTimes(solutionByChallengeId(challenge.id)) > 1
+                            ? 'times'
+                            : 'time'}
+                        </p>
+                        <p>
+                          Attempted by number of Users:{' '}
+                          {attemptedByUsers(solutionByChallengeId(challenge.id))}
+                        </p>
+                        <p>Average Score: {avgScore(solutionByChallengeId(challenge.id))}</p>
+                        <div>
+                          {solutionComleted(solutionByChallengeId(challenge.id), user.id) ? (
+                            <MdCheckmarkCircle fontSize="30px" color="#43853d" />
+                          ) : null}
+                        </div>
                       </div>
-                    </div>
-                  ) : (
-                    ''
-                  )}
-                </div>
+                    ) : (
+                      ''
+                    )}
+                  </div>
+                </Collapse>
               </div>
             </div>
           );
