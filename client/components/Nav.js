@@ -53,7 +53,7 @@ const _Nav = props => {
   }
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav className="navbar navbar-expand-lg navbar-light bg-light sticky-top">
       <NavLink class="navbar-brand" href="#">
         Image maybe?
       </NavLink>
