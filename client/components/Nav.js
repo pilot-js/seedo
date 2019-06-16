@@ -20,16 +20,16 @@ const _Nav = props => {
   if (props.user.id) {
     navLinks.push(
       {
-        label: 'Logout',
-        to: '/logout',
-      },
-      {
         label: 'User Page',
         to: '/userpage',
       },
       {
         label: 'Community',
         to: '/community',
+      },
+      {
+        label: 'Logout',
+        to: '/logout',
       },
     );
   } else {
@@ -65,19 +65,21 @@ const _Nav = props => {
               {link.label}
             </NavLink>
           ))}
+          {props.user.type === 'admin' ? (
+            <div className="btn-group">
+              <button type="button" className="btn btn-primary dropdown-toggle" data-toggle="dropdown">Admin</button>
+              <div className="dropdown-menu">
+                {adminNavLinks.map(link => (
+                  <NavLink exact key={link.to} to={link.to} className="dropdown-item">
+                    {link.label}
+                  </NavLink>
+                ))}
+              </div>
+            </div>
+          ) : (
+            ''
+          )}
         </div>
-        {props.user.type === 'admin' ? (
-          <div className="flex-row nav">
-            Admin:
-            {adminNavLinks.map(link => (
-              <NavLink exact key={link.to} to={link.to} className="nav-link nav-item">
-                {link.label}
-              </NavLink>
-            ))}
-          </div>
-        ) : (
-          ''
-        )}
       </div>
     </div>
   );
