@@ -14,8 +14,10 @@ import {
   AdminChallenges,
   AdminChallengeEdit,
   AdminUsers,
+  AdminUserEdit,
   Community,
   Solution,
+  UserCompletedChallenges,
   Signup,
 } from './components';
 import { getGithubUser } from './store';
@@ -73,7 +75,7 @@ const App = ({ getGithubUser }) => {
         {/* TODO if user.type = admin, allow access to routes */}
         <Route exact path="/admin/challenge" component={AdminChallengeEdit} />
         <Route
-          // exact
+          exact
           path="/admin/challenge/:id"
           render={({ match, history }) => (
             <AdminChallengeEdit challengeId={match.params.id} history={history} />
@@ -81,6 +83,17 @@ const App = ({ getGithubUser }) => {
         />
         <Route exact path="/admin/challenges" component={AdminChallenges} />
         <Route exact path="/admin/users" component={AdminUsers} />
+        {/* <Route exact path="/admin/users/create"
+          render={({ history, location }) => <AdminUserEdit history={history} location={location} />} /> */}
+        <Route exact path="/admin/users/create" component={AdminUserEdit} />
+        <Route exact path="/userpage/usercompletedchallenge" component={UserCompletedChallenges} />
+        <Route
+          exact
+          path="/admin/users/:id"
+          render={({ match, history }) => (
+            <AdminUserEdit userId={match.params.id} history={history} />
+          )}
+        />
       </Switch>
       <Footer />
     </div>

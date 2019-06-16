@@ -10,6 +10,8 @@ export * from './UserPage';
 export * from './AdminChallenges';
 export * from './AdminChallengeEdit';
 export * from './AdminUsers';
+export * from './AdminUserEdit';
 export * from './Solution';
 export * from './Signup';
 export * from './Community';
+export * from './UserCompletedChallenges';
