@@ -6,9 +6,6 @@ import { addCommentToOneChallenge } from '../store';
 
 const _Review = ({ userId, challengeId, addCommentToOneChallenge }) => {
   const [content, setContent] = useState('');
-  useEffect(() => {
-    setContent(content);
-  });
   const handleSubmit = ev => {
     ev.preventDefault();
     const comment = {
