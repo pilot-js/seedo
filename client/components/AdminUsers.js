@@ -9,15 +9,17 @@ import { fetchUsers } from '../store';
 const _AdminUsers = props => {
   useEffect(() => {
     props.fetchUsers();
-  }, [props.users]);
+  }, []);
 
   const deleteUser = userId => {
     axios
       .delete(`/api/users/${userId}`)
-      .then(status => {
+      .then(resp => {
         // TODO display 'User deleted'
-        console.log('status: ', status.data);
+        // if (resp.status === 204){ // display 'User deleted' }
+        console.log('status: ', resp.status);
       })
+      .then(() => props.fetchUsers())
       .catch(error => {
         // TODO display error msg in browser
         console.log('error:', error);
@@ -85,7 +87,6 @@ const _AdminUsers = props => {
 };
 
 const mapStateToProps = ({ users }) => {
-  // console.log('users: ', users);
   return {
     users,
   };
