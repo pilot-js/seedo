@@ -109,15 +109,9 @@ const component = ({
   };
 
   const collapseController = id => {
-    if (collapseStatus[id]) {
-      setCollapseStatus(prevState => {
-        return { ...prevState, [id]: false };
-      });
-    } else {
-      setCollapseStatus(prevState => {
-        return { ...prevState, [id]: true };
-      });
-    }
+    setCollapseStatus(prevState => {
+      return { ...prevState, [id]: !collapseStatus[id] };
+    });
   };
 
   return (
