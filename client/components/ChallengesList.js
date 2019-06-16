@@ -103,20 +103,28 @@ const component = ({
                 <Link to={`/challenges/${challenge.id}`} className="btn btn-primary">
                   Go to Challenge
                 </Link>
-                <p>Statistic</p>
-                <p>
-                  Attempted: {attemptedTimes(solutionByChallengeId(challenge.id))}{' '}
-                  {attemptedTimes(solutionByChallengeId(challenge.id)) > 1 ? 'times' : 'time'}
-                </p>
-                <p>
-                  Attempted by number of Users:{' '}
-                  {attemptedByUsers(solutionByChallengeId(challenge.id))}
-                </p>
-                <p>Average Score: {avgScore(solutionByChallengeId(challenge.id))}</p>
                 <div>
-                  {solutionCompleted(solutionByChallengeId(challenge.id), user.id) ? (
-                    <MdCheckmarkCircle fontSize="30px" color="#43853d" />
-                  ) : null}
+                  {solutionByChallengeId(challenge.id) ? (
+                    <div>
+                      <p>Statistic</p>
+                      <p>
+                        Attempted: {attemptedTimes(solutionByChallengeId(challenge.id))}{' '}
+                        {attemptedTimes(solutionByChallengeId(challenge.id)) > 1 ? 'times' : 'time'}
+                      </p>
+                      <p>
+                        Attempted by number of Users:{' '}
+                        {attemptedByUsers(solutionByChallengeId(challenge.id))}
+                      </p>
+                      <p>Average Score: {avgScore(solutionByChallengeId(challenge.id))}</p>
+                      <div>
+                        {solutionCompleted(solutionByChallengeId(challenge.id), user.id) ? (
+                          <MdCheckmarkCircle fontSize="30px" color="#43853d" />
+                        ) : null}
+                      </div>
+                    </div>
+                  ) : (
+                    ''
+                  )}
                 </div>
               </div>
             </div>

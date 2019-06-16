@@ -21,3 +21,18 @@ export const fetchOneChallenge = challengeId => {
       .then(challenge => dispatch(getChallenge(challenge)));
   };
 };
+
+export const addCommentToOneChallenge = (challengeId, comment) => {
+  return dispatch => {
+    return axios
+      .post('/api/comments', comment)
+      .then(res => res.data)
+      .then(comment => {
+        console.log(comment);
+        return axios
+          .get(`api/challenges/${challengeId}`)
+          .then(res => res.data)
+          .then(challenge => dispatch(getChallenge(challenge)));
+      });
+  };
+};

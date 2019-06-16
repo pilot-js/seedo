@@ -14,3 +14,4 @@ export * from './Solution';
 export * from './Signup';
 export * from './Community';
 export * from './UserCompletedChallenges';
+export * from './CommunityChallenge';
