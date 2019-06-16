@@ -43,13 +43,18 @@ const _IndividualChallenge = ({
   const updateValue = (createDiff, isSubmit = false) => {
     setLoading(true);
     const userAnswer = { html, css, js, challengeId };
-    updateUserchallenge(userAnswer, userchallenge.id, createDiff, isSubmit)
-      .then(() => {
-        setShowModal(createDiff);
-        setShowCodeMirror(!createDiff);
-        setLoading(false);
-      })
-      .catch(ex => console.log(ex));
+    if (user.id) {
+      updateUserchallenge(userAnswer, userchallenge.id, createDiff, isSubmit)
+        .then(() => {
+          setShowModal(createDiff);
+          setShowCodeMirror(!createDiff);
+          setLoading(false);
+        })
+        .catch(ex => console.log(ex));
+    } else {
+      setLoading(false);
+      window.alert('Please login for submitting solution.');
+    }
   };
 
   const closeModal = () => {
