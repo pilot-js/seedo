@@ -29,6 +29,7 @@ const component = ({
   fetchChallengesWithFilterAndSearch,
   fetchAllUserchallenges,
   userchallenge,
+
   match,
   history,
   user,
@@ -47,7 +48,7 @@ const component = ({
   }, [difficulty, searchTerm]);
 
   const solutionByChallengeId = challengeId => {
-    if (userchallenge) {
+    if (userchallenge.constructor === Array) {
       const solutions = userchallenge.filter(solution => solution.challengeId === challengeId);
       return solutions;
     }
@@ -106,20 +107,28 @@ const component = ({
                 <Link to={`/challenges/${challenge.id}`} className="btn btn-primary">
                   Go to Challenge
                 </Link>
-                <p>Statistic</p>
-                <p>
-                  Attempted: {attemptedTimes(solutionByChallengeId(challenge.id))}{' '}
-                  {attemptedTimes(solutionByChallengeId(challenge.id)) > 1 ? 'times' : 'time'}
-                </p>
-                <p>
-                  Attempted by number of Users:{' '}
-                  {attemptedByUsers(solutionByChallengeId(challenge.id))}
-                </p>
-                <p>Average Score: {avgScore(solutionByChallengeId(challenge.id))}</p>
                 <div>
-                  {solutionComleted(solutionByChallengeId(challenge.id), user.id) ? (
-                    <MdCheckmarkCircle fontSize="30px" color="#43853d" />
-                  ) : null}
+                  {solutionByChallengeId(challenge.id) ? (
+                    <div>
+                      <p>Statistic</p>
+                      <p>
+                        Attempted: {attemptedTimes(solutionByChallengeId(challenge.id))}{' '}
+                        {attemptedTimes(solutionByChallengeId(challenge.id)) > 1 ? 'times' : 'time'}
+                      </p>
+                      <p>
+                        Attempted by number of Users:{' '}
+                        {attemptedByUsers(solutionByChallengeId(challenge.id))}
+                      </p>
+                      <p>Average Score: {avgScore(solutionByChallengeId(challenge.id))}</p>
+                      <div>
+                        {solutionComleted(solutionByChallengeId(challenge.id), user.id) ? (
+                          <MdCheckmarkCircle fontSize="30px" color="#43853d" />
+                        ) : null}
+                      </div>
+                    </div>
+                  ) : (
+                    ''
+                  )}
                 </div>
               </div>
             </div>
