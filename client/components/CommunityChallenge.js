@@ -7,6 +7,7 @@ const _CommunityChallenge = ({ individualChallenge, challengeId, fetchOneChallen
   useEffect(() => {
     fetchOneChallenge(challengeId);
   }, []);
+  console.log(individualChallenge);
   return (
     <div>
       <h1>{individualChallenge.name}</h1>
@@ -14,14 +15,31 @@ const _CommunityChallenge = ({ individualChallenge, challengeId, fetchOneChallen
         <div>
           <h2>all user submitted answers: </h2>
           <ul>
-            {individualChallenge.userchallenges.map(userchal => {
-              return <li key={userchal.id}>{userchal.html}</li>;
-            })}
+            <div className="container">
+              {individualChallenge.userchallenges.map(userchal => {
+                return (
+                  <li key={userchal.id}>
+                    <div className="row">
+                      <div className="col-sm">
+                        <pre className="line-numbers">
+                          <code className="language-html">{userchal.html}</code>
+                        </pre>
+                      </div>
+                      <div className="col-sm">
+                        <pre className="line-numbers">
+                          <code className="language-css">{userchal.css}</code>
+                        </pre>
+                      </div>
+                    </div>
+                  </li>
+                );
+              })}
+            </div>
           </ul>
           <h2>all user comments</h2>
           <ul>
             {individualChallenge.comments.map(comment => {
-              return <li key={comment.id}>comment</li>;
+              return <li key={comment.id}>{comment.text}</li>;
             })}
           </ul>
         </div>
