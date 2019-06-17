@@ -79,6 +79,11 @@ const App = ({ getGithubUser }) => {
         />
         {/* TODO admin components */}
         {/* TODO if user.type = admin, allow access to routes */}
+        <Route
+          exact
+          path="/admin/userpage/:adminUserId"
+          render={({ match }) => <UserPage adminUserId={match.params.adminUserId} />}
+        />
         <Route exact path="/admin/challenge" component={AdminChallengeEdit} />
         <Route
           exact
