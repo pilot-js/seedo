@@ -60,8 +60,8 @@ const _Nav = props => {
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav mr-auto">
           {navLinks.map(link => (
-            <li className="nav-item" key={link.to}>
-              <NavLink exact to={link.to} className="nav-link">
+            <li key={link.label} className="nav-item">
+              <NavLink exact key={link.to} to={link.to} className="nav-link">
                 {link.label}
               </NavLink>
             </li>
