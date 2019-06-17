@@ -61,7 +61,8 @@ const component = ({
       fetchChallenges()
         .then(resp => resp.challenges)
         .then(challenges => fetchCollapseStatus(challenges))
-        .then(() => setCollapseStatus(challengesCollapseStatus));
+        .then(() => setCollapseStatus(challengesCollapseStatus))
+        .catch(err => console.log(err));
     }
   }, [difficulty, searchTerm]);
 
@@ -126,6 +127,11 @@ const component = ({
               key={challenge.id}
             >
               <div className="card-body">
+                <div>
+                  {solutionCompleted(solutionByChallengeId(challenge.id), user.id) ? (
+                    <MdCheckmarkCircle fontSize="20px" color="#43853d" />
+                  ) : null}
+                </div>
                 <img src={imageSrc} alt="" className="card-image-top" />
                 <h5 className="card-title">{challenge.name}</h5>
                 <p className="card-text">{challenge.description}</p>
@@ -153,11 +159,6 @@ const component = ({
                           {attemptedByUsers(solutionByChallengeId(challenge.id))}
                         </p>
                         <p>Average Score: {avgScore(solutionByChallengeId(challenge.id))}</p>
-                        <div>
-                          {solutionCompleted(solutionByChallengeId(challenge.id), user.id) ? (
-                            <MdCheckmarkCircle fontSize="30px" color="#43853d" />
-                          ) : null}
-                        </div>
                       </div>
                     ) : (
                       ''
