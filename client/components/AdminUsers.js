@@ -41,44 +41,48 @@ const _AdminUsers = props => {
             <th scope="col">Last Name</th>
             <th scope="col">Email</th>
             <th scope="col">Type</th>
+            <th scope="col">User Page</th>
           </tr>
         </thead>
         <tbody>
           {users
             ? users.map(user => {
-                const { id, firstName, lastName, email, type } = user;
-                return (
-                  <tr key={id}>
-                    <td>
-                      <div className="btn-group" role="group" aria-label="edit actions">
-                        <Link to={`/admin/users/${id}`}>
-                          <button type="button" className="btn btn-secondary item-edit">
-                            Edit
+              const { id, firstName, lastName, email, type } = user;
+              return (
+                <tr key={id}>
+                  <td>
+                    <div className="btn-group" role="group" aria-label="edit actions">
+                      <Link to={`/admin/users/${id}`}>
+                        <button type="button" className="btn btn-secondary item-edit">
+                          Edit
                           </button>
-                        </Link>
-                        {/* <Link
+                      </Link>
+                      {/* <Link
                         to="/"
                       > */}
-                        <button type="button" className="btn btn-secondary item-archive" disabled>
-                          Archive
+                      <button type="button" className="btn btn-secondary item-archive" disabled>
+                        Archive
                         </button>
-                        {/* </Link> */}
-                        <button
-                          type="button"
-                          className="btn btn-secondary item-delete"
-                          onClick={() => deleteUser(id)}
-                        >
-                          Del
+                      {/* </Link> */}
+                      <button
+                        type="button"
+                        className="btn btn-secondary item-delete"
+                        onClick={() => deleteUser(id)}
+                      >
+                        Del
                         </button>
-                      </div>
-                    </td>
-                    <td>{firstName}</td>
-                    <td>{lastName}</td>
-                    <td>{email}</td>
-                    <td>{type}</td>
-                  </tr>
-                );
-              })
+                    </div>
+                  </td>
+                  <td>{firstName}</td>
+                  <td>{lastName}</td>
+                  <td>{email}</td>
+                  <td>{type}</td>
+                  <td>
+                    <Link to={`/admin/userpage/${id}`}>user page</Link>
+                  </td>
+                </tr>
+              );
+            })
             : ''}
         </tbody>
       </table>

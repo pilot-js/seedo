@@ -94,8 +94,6 @@ const App = ({ getGithubUser }) => {
         />
         <Route exact path="/admin/challenges" component={AdminChallenges} />
         <Route exact path="/admin/users" component={AdminUsers} />
-        {/* <Route exact path="/admin/users/create"
-          render={({ history, location }) => <AdminUserEdit history={history} location={location} />} /> */}
         <Route exact path="/admin/users/create" component={AdminUserEdit} />
         <Route exact path="/userpage/usercompletedchallenge" component={UserCompletedChallenges} />
         <Route
