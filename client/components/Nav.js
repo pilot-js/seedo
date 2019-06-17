@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 const _Nav = props => {
@@ -53,12 +53,23 @@ const _Nav = props => {
   }
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light sticky-top">
-      <NavLink className="navbar-brand" to="/">
-        Image maybe?
-      </NavLink>
-      <div className="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul className="navbar-nav mr-auto">
+    <nav className="navbar navbar-expand-lg navbar-light sticky-top">
+      <Link className="navbar-brand" to="/">
+        <img src="logo.png" alt="logo" className="logo-img" />
+      </Link>
+      <div id="site-name" className="flex-container">
+        Design Wars
+      </div>
+      <div className="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+        {/* <ul className="navbar-nav mr-auto">
+          {navLinks.map(link => (
+            <li key={link.label} className="nav-item">
+              <NavLink exact key={link.to} to={link.to} className="nav-link">
+                {link.label}
+              </NavLink>
+            </li>
+          ))} */}
+        <ul className="navbar-nav">
           {navLinks.map(link => (
             <li key={link.label} className="nav-item">
               <NavLink exact key={link.to} to={link.to} className="nav-link">
