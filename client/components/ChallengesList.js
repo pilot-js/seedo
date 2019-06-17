@@ -55,7 +55,8 @@ const component = ({
       fetchChallengesWithFilterAndSearch(filter, searchTerm)
         .then(resp => resp.challenges)
         .then(challenges => fetchCollapseStatus(challenges))
-        .then(() => setCollapseStatus(challengesCollapseStatus));
+        .then(() => setCollapseStatus(challengesCollapseStatus))
+        .catch(err => console.log(err));
     } else {
       fetchChallenges()
         .then(resp => resp.challenges)
