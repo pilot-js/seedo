@@ -1,19 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { fetchUserChallenges, fetchOneChallenge } from '../store';
+import { fetchUserChallenges, fetchOneChallenge, fetchAdminUser } from '../store';
 
 import { UserCompletedChallenges } from './UserCompletedChallenges';
 
 const _UserPage = ({
   user,
+  adminUserId,
+  adminUser,
   userChallenges,
   challengeId,
   individualChallenge,
   fetchUserChallenges,
+  fetchAdminUser,
 }) => {
+  const isAdminUser = adminUserId ? true : false;
+
   useEffect(() => {
-    if (user.id) {
-      fetchUserChallenges(user.id)
+    let userId = user.id;
+    if (isAdminUser) {
+      userId = adminUserId;
+      fetchAdminUser(userId).catch(err => console.log('err fetching adminUser:', err));
+    }
+
+    if (userId) {
+      fetchUserChallenges(userId)
         .then(() => {
           console.log('Got userChallenges!');
         })
@@ -33,8 +44,6 @@ const _UserPage = ({
     return false;
   };
 
-  console.log('individualChallenge: ', individualChallenge);
-  console.log('challengeId: ', challengeId);
   return (
     <div>
       <p> User ID: {user.id}</p>
@@ -51,20 +60,28 @@ const _UserPage = ({
       <UserCompletedChallenges
         userChallenges={userChallenges}
         individualChallenge={individualChallenge}
+        isAdminUser={isAdminUser}
+        firstName={user.firstName}
       />
     </div>
   );
 };
 
-const mapStateToProps = ({ user, userChallenges, individualChallenge }) => ({
-  user,
-  individualChallenge,
-  userChallenges,
-});
+const mapStateToProps = ({ user, adminUser, userChallenges, individualChallenge }) => {
+  if (user.type === 'admin') {
+    user = adminUser;
+  }
+  return {
+    user,
+    individualChallenge,
+    userChallenges,
+  };
+};
 
 const mapDispatchToProps = dispatch => ({
   fetchUserChallenges: userId => dispatch(fetchUserChallenges(userId)),
   fetchOneChallenge: challengeId => dispatch(fetchOneChallenge(challengeId)),
+  fetchAdminUser: userId => dispatch(fetchAdminUser(userId)),
 });
 
 export const UserPage = connect(

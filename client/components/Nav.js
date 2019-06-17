@@ -54,7 +54,7 @@ const _Nav = props => {
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light sticky-top">
-      <NavLink className="navbar-brand" to="#">
+      <NavLink className="navbar-brand" to="/">
         Image maybe?
       </NavLink>
       <div className="collapse navbar-collapse" id="navbarSupportedContent">

@@ -12,15 +12,20 @@ const _AdminChallenges = props => {
   }, []);
 
   const deleteChallenge = challengeId => {
-    axios.delete(`/api/challenges/${challengeId}`).then(resp => {
-      // TODO give ability to click Archive link or Cancel
-      if (resp.data) {
-        console.log('resp.data: ', resp);
-        window.alert(resp.data);
-      }
-    });
-    // TODO why redirects to home page ???
-    // .then(() => props.history.push('/admin/challenges'));
+    axios
+      .delete(`/api/challenges/${challengeId}`)
+      .then(resp => {
+        // TODO give ability to click Archive link or Cancel
+        if (resp.data) {
+          console.log('resp.data: ', resp);
+          window.alert(resp.data);
+        }
+      })
+      .then(() => props.fetchChallenges())
+      .catch(error => {
+        // TODO display error msg in browser
+        console.log('error:', error);
+      });
   };
 
   const { challenges } = props;
@@ -61,7 +66,7 @@ const _AdminChallenges = props => {
                           to="/"
                           // to={`/admin/challenge/${id}`}
                         >
-                          <button type="button" className="btn btn-secondary item-archive">
+                          <button type="button" className="btn btn-secondary item-archive" disabled>
                             Archive
                           </button>
                         </Link>
@@ -101,6 +106,5 @@ const mapDispatchToProps = dispatch => {
 
 export const AdminChallenges = connect(
   mapStateToProps,
-
   mapDispatchToProps,
 )(_AdminChallenges);

@@ -1,10 +1,13 @@
 import axios from 'axios';
 
+// action types
 export const SET_USER = Symbol('set user');
 
+// action creators
 export const setUser = user => ({ type: SET_USER, user });
 
-export const user = (state = [], action) => {
+// reducer
+export const user = (state = {}, action) => {
   switch (action.type) {
     case SET_USER:
       return action.user;
@@ -13,6 +16,7 @@ export const user = (state = [], action) => {
   }
 };
 
+// thunks
 export const getGithubUser = () => dispatch => {
   return axios
     .get('/auth/login/github_user')

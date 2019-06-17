@@ -5,6 +5,13 @@ const { User, Userchallenge, Challenge } = require('../../db');
 
 /**     /api/users     **/
 
+// get all users
+router.get('/', (req, res, next) => {
+  User.findAll()
+    .then(users => res.send(users))
+    .catch(next);
+});
+
 // create user (at sign up)
 router.post('/', (req, res, next) => {
   User.create(req.body)
@@ -43,7 +50,8 @@ router.get('/:id/userchallenges/', (req, res, next) => {
 });
 
 // update user
-router.put('/:id', (req, res, next) => {
+router.put('/update/:id', (req, res, next) => {
+  console.log('in update route');
   User.findByPk(req.params.id)
     .then(user => user.update(req.body))
     .then(updatedUser => res.send(updatedUser))

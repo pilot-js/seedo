@@ -2,13 +2,18 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { userchallenge } from '../store';
 
-const UserCompletedChallenges = ({ userChallenges, individualChallenge }) => {
+const UserCompletedChallenges = ({
+  userChallenges,
+  individualChallenge,
+  isAdminUser,
+  firstName,
+}) => {
+  const nameText = isAdminUser ? `${firstName}'s` : 'My';
   return (
     <div className="d-flex flex-column align-items-center">
-      <h1>My Completed Challenges</h1>
+      <h1>{nameText} Completed Challenges</h1>
       <ul className="list-group">
         {userChallenges.map(challenge => {
-          console.log(challenge);
           return (
             <li key={challenge.id} className="list-group-item">
               {challenge.name}
