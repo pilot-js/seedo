@@ -54,13 +54,13 @@ const _Nav = props => {
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light sticky-top">
-      <NavLink class="navbar-brand" href="#">
+      <NavLink className="navbar-brand" to="#">
         Image maybe?
       </NavLink>
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav mr-auto">
           {navLinks.map(link => (
-            <li className="nav-item">
+            <li key={link.label} className="nav-item">
               <NavLink exact key={link.to} to={link.to} className="nav-link">
                 {link.label}
               </NavLink>
@@ -70,7 +70,7 @@ const _Nav = props => {
             <li className="nav-item dropdown">
               <NavLink
                 className="nav-link dropdown-toggle"
-                href="/"
+                to="/"
                 id="navbarDropdown"
                 role="button"
                 data-toggle="dropdown"

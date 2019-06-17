@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import MdCheckmarkCircle from 'react-ionicons/lib/MdCheckmarkCircle';
+import { Collapse } from 'react-collapse';
 import {
   fetchChallenges,
   fetchChallengesWithFilterAndSearch,
@@ -36,13 +37,32 @@ const component = ({
   const { searchTerm, difficulty } = match.params;
   let filter = {};
 
+  const challengesCollapseStatus = {};
+  const [collapseStatus, setCollapseStatus] = useState({});
+
+  const fetchCollapseStatus = arr => {
+    if (arr.length > 1) {
+      arr.forEach(challenge => {
+        challengesCollapseStatus[challenge.id] = false;
+      });
+    }
+  };
+
   useEffect(() => {
     fetchAllUserchallenges();
     if (difficulty) {
       filter = difficulty;
-      fetchChallengesWithFilterAndSearch(filter, searchTerm);
+      fetchChallengesWithFilterAndSearch(filter, searchTerm)
+        .then(resp => resp.challenges)
+        .then(challenges => fetchCollapseStatus(challenges))
+        .then(() => setCollapseStatus(challengesCollapseStatus))
+        .catch(err => console.log(err));
     } else {
-      fetchChallenges();
+      fetchChallenges()
+        .then(resp => resp.challenges)
+        .then(challenges => fetchCollapseStatus(challenges))
+        .then(() => setCollapseStatus(challengesCollapseStatus))
+        .catch(err => console.log(err));
     }
   }, [difficulty, searchTerm]);
 
@@ -72,7 +92,7 @@ const component = ({
       acc += solution.grade;
       return acc;
     }, 0);
-    const avgScore = totalScore / arr.length ? totalScore / arr.length : 0;
+    const avgScore = totalScore / arr.length ? Math.round(totalScore / arr.length) : 0;
     return avgScore;
   };
 
@@ -85,47 +105,66 @@ const component = ({
     }, false);
   };
 
+  const collapseController = id => {
+    setCollapseStatus(prevState => {
+      return { ...prevState, [id]: !collapseStatus[id] };
+    });
+  };
+
   return (
     <div>
       <div className="d-flex justify-content-center">
         <h1>Our Challenges</h1>
       </div>
       <Search history={history} searchTerm={searchTerm} />
-      <div className="d-flex justify-content-around">
+      <div>
         {challenges.map(challenge => {
           const imageSrc = challenge.images[0] ? challenge.images[0].data : null;
           return (
-            <div className="card" style={{ width: '20rem' }} key={challenge.id}>
+            <div
+              className="card d-inline-flex"
+              style={{ width: '25%', marginRight: '1em', marginBottom: '1em' }}
+              key={challenge.id}
+            >
               <div className="card-body">
+                <div>
+                  {solutionCompleted(solutionByChallengeId(challenge.id), user.id) ? (
+                    <MdCheckmarkCircle fontSize="20px" color="#43853d" />
+                  ) : null}
+                </div>
                 <img src={imageSrc} alt="" className="card-image-top" />
                 <h5 className="card-title">{challenge.name}</h5>
                 <p className="card-text">{challenge.description}</p>
                 <Link to={`/challenges/${challenge.id}`} className="btn btn-primary">
                   Go to Challenge
                 </Link>
-                <div>
-                  {solutionByChallengeId(challenge.id) ? (
-                    <div>
-                      <p>Statistic</p>
-                      <p>
-                        Attempted: {attemptedTimes(solutionByChallengeId(challenge.id))}{' '}
-                        {attemptedTimes(solutionByChallengeId(challenge.id)) > 1 ? 'times' : 'time'}
-                      </p>
-                      <p>
-                        Attempted by number of Users:{' '}
-                        {attemptedByUsers(solutionByChallengeId(challenge.id))}
-                      </p>
-                      <p>Average Score: {avgScore(solutionByChallengeId(challenge.id))}</p>
+                <button type="button" onClick={() => collapseController(challenge.id)}>
+                  More info
+                </button>
+                <Collapse
+                  isOpened={collapseStatus[challenge.id] ? collapseStatus[challenge.id] : false}
+                >
+                  <div>
+                    {solutionByChallengeId(challenge.id) ? (
                       <div>
-                        {solutionCompleted(solutionByChallengeId(challenge.id), user.id) ? (
-                          <MdCheckmarkCircle fontSize="30px" color="#43853d" />
-                        ) : null}
+                        <p>Statistic</p>
+                        <p>
+                          Attempted: {attemptedTimes(solutionByChallengeId(challenge.id))}{' '}
+                          {attemptedTimes(solutionByChallengeId(challenge.id)) > 1
+                            ? 'times'
+                            : 'time'}
+                        </p>
+                        <p>
+                          Attempted by number of Users:{' '}
+                          {attemptedByUsers(solutionByChallengeId(challenge.id))}
+                        </p>
+                        <p>Average Score: {avgScore(solutionByChallengeId(challenge.id))}</p>
                       </div>
-                    </div>
-                  ) : (
-                    ''
-                  )}
-                </div>
+                    ) : (
+                      ''
+                    )}
+                  </div>
+                </Collapse>
               </div>
             </div>
           );
