@@ -66,7 +66,9 @@ const _AdminUserEdit = props => {
         })
         .catch(error => {
           console.log('updating error: ', error);
-          setErrors([...errors, error]);
+          setErrors(prevState => {
+            return [...prevState, error];
+          });
         });
     } else {
       axios
@@ -74,7 +76,9 @@ const _AdminUserEdit = props => {
         .then(() => props.history.push('/admin/users'))
         .catch(error => {
           console.log('updating error: ', error);
-          setErrors([...errors, error]);
+          setErrors(prevState => {
+            return [...prevState, error];
+          });
         });
     }
   };
