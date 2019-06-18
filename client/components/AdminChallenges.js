@@ -30,7 +30,7 @@ const _AdminChallenges = props => {
   const { challenges } = props;
   return (
     <div>
-      <h1>Challenges</h1>
+      <h1 className="text-center">Challenges</h1>
       <Link to="/admin/challenge">
         <button type="submit">Add Challenge</button>
       </Link>

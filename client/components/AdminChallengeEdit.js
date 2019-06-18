@@ -111,7 +111,7 @@ const _AdminChallengeEdit = props => {
 
   return (
     <div>
-      <h1>{actionText} Challenge</h1>
+      <h1 className="text-center">{actionText} Challenge</h1>
       <div className="row">
         <div className="col-6">
           <form onSubmit={handleSubmit}>
@@ -148,9 +148,9 @@ const _AdminChallengeEdit = props => {
               <label htmlFor="difficulty" className="col-sm-2 col-form-label">
                 Difficulty
               </label>
-              <div className="col-sm-1">
+              <div className="col-sm-2">
                 <select
-                  className="form-control"
+                  className="custom-select"
                   name="difficulty"
                   value={difficulty}
                   onChange={e => setDifficulty(e.target.value)}

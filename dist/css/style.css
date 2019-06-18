@@ -1,4 +1,166 @@
-#navbar{
-  background-color: blue;
-  color: white;
+/*
+Variables from Material Design Bootstrap
+  --blue: #007bff;
+  --indigo: #6610f2;
+  --purple: #6f42c1;
+  --pink: #e83e8c;
+  --red: #dc3545;
+  --orange: #fd7e14;
+  --yellow: #ffc107;
+  --green: #28a745;
+  --teal: #20c997;
+  --cyan: #17a2b8;
+  --white: #fff;
+  --gray: #6c757d;
+  --gray-dark: #343a40;
+  --primary: #007bff;
+  --secondary: #6c757d;
+  --success: #28a745;
+  --info: #17a2b8;
+  --warning: #ffc107;
+  --danger: #dc3545;
+  --light: #f8f9fa;
+  --dark: #343a40;
+  --breakpoint-xs: 0;
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+  --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+COLORS
+dark blue: #1E374E  - body bkg
+med blue: #c1d5e0 - container bkg
+light blue: #e1f1ff - nav bkg
+gray: #d8d8d8 - card body
+
+light blue:  #1E374E  - secondary
+orange: #FFA564 - accent 
+*/
+
+/*********  GENERAL STYLES  *********/
+:root {
+  --blue-dark: #1e374e; /* body bkg */
+  --blue-med: #c1d5e0; /* container bkg */
+  --blue-light: #e1f1ff; /* nav bkg */
+  --gray-light: #d8d8d8; /* card body */
+  --accent: #ffa564; /* orange */
+  /* --accent-2: #c4c4c4; /* gray */
+  /* --card: rgba(255, 165, 100, 0.52); */
+  /* --link: ;  */
+}
+
+body {
+  background-color: var(--blue-dark);
+}
+
+.container {
+  background-color: var(--blue-med);
+}
+
+header {
+  margin-bottom: 20px;
+}
+
+footer {
+  margin: 20px;
+  padding: 10px;
+}
+
+h1 {
+  margin-bottom: 30px;
+}
+
+/*********  NAV  *********/
+nav {
+  background-color: var(--blue-light);
+}
+.navbar {
+  /* background-color: var(--secondary);  */
+  color: red;
+}
+
+#site-name {
+  font-size: 2rem;
+  color: #ffa564;
+}
+
+/*********  CHALLENGES PAGE  *********/
+.card {
+  border: inherit;
+  background-color: var(--gray-light);
+  margin-bottom: 20px;
+}
+
+.card-image {
+  width: 100%;
+  padding: 1px;
+}
+
+.card-body {
+  background-color: var(--gray-light);
+  border-top: 2px solid black;
+}
+
+.card h3.card-title {
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+
+.ReactCollapse--collapse p:last-of-type {
+  margin-bottom: 0;
+}
+
+/* small down arrow on btn */
+.more-info:after,
+.select-difficulty:after {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 0.255em;
+  vertical-align: 0.255em;
+  content: '';
+  border-top: 0.3em solid;
+  border-right: 0.3em solid transparent;
+  border-bottom: 0;
+  border-left: 0.3em solid transparent;
+}
+
+/*********  SEARCH  *********/
+
+.search-form {
+  margin: 20px;
+}
+
+.select-difficulty {
+  width: 3.5rem;
+}
+
+.form-control {
+  background-image: none;
+  background-color: white;
+  padding-left: 8px;
+}
+
+.form-control:focus {
+  background-color: white;
+}
+
+.form-control,
+.custom-select {
+  border-radius: 0.4rem;
+}
+
+input::placeholder {
+  padding-left: 8px;
+}
+
+/*********  MEDIA QUERIES  *********/
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1200px;
+  }
 }
