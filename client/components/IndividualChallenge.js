@@ -65,6 +65,7 @@ const _IndividualChallenge = ({
   const options = {
     lineNumbers: true,
     mode: 'javascript',
+    theme: 'monokai',
   };
 
   if (Object.keys(individualChallenge).length === 0) {
