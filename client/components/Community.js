@@ -1,3 +1,4 @@
+/* eslint indent: 0 */
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -19,18 +20,34 @@ const _communitySolutionComments = ({ challenges, fetchChallenges }) => {
     fetchChallenges();
   }, []);
   return (
-    <div>
+    <div id="community-main" className="list-group text-center">
       <h1>Solution and Comments</h1>
-      {
-        <ul>
-          {challenges.map(chal => {
-            return (
-              <li key={chal.id}>
-                <Link to={`/community/challenge/${chal.id}`}>{chal.name}</Link>
-              </li>
-            );
-          })}
-        </ul>
+      {// <ul>
+      // {
+      challenges.map(chal => {
+        return (
+          // <li key={chal.id}>
+          <Link
+            key={chal.id}
+            to={`/community/challenge/${chal.id}`}
+            className="list-group-item list-group-item-action"
+          >
+            {chal.name}
+          </Link>
+          // </li>
+        );
+      })
+      // }
+      // </ul>
+      // <ul>
+      //   {challenges.map(chal => {
+      //     return (
+      //       <li key={chal.id}>
+      //         <Link to={`/community/challenge/${chal.id}`}>{chal.name}</Link>
+      //       </li>
+      //     );
+      //   })}
+      // </ul>
       }
     </div>
   );
