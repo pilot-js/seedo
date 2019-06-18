@@ -16,9 +16,9 @@ export const Results = ({
     style={{ width: '100%', height: '100%' }}
   >
     <div className="d-flex justify-content-around row">
-      <img src={userImage} alt="Yours" />
-      <img src={solutionImage} alt="Solution" />
-      <img src={diffImage} alt="Diff" />
+      <img src={userImage} alt="Yours" className="card-image col" />
+      <img src={solutionImage} alt="Solution" className="card-image col" />
+      <img src={diffImage} alt="Diff" className="card-image col" />
     </div>
     <div className="d-flex justify-content-around row">
       <h4 className="d-flex align-items-center">Your grade: {grade}</h4>
