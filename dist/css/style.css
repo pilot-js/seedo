@@ -42,21 +42,22 @@ orange: #FFA564 - accent
 
 /*********  GENERAL STYLES  *********/
 :root {
-  --primary: #1e374e; /* dark blue */
-  --secondary: #c1d5e0; /* light blue */
+  --blue-dark: #1e374e; /* body bkg */
+  --blue-med: #c1d5e0; /* container bkg */
+  --blue-light: #e1f1ff; /* nav bkg */
+  --gray-light: #d8d8d8; /* card body */
   --accent: #ffa564; /* orange */
-  --accent-2: #c4c4c4; /* gray */
-  --card: rgba(255, 165, 100, 0.52);
-  --link: ;
+  /* --accent-2: #c4c4c4; /* gray */
+  /* --card: rgba(255, 165, 100, 0.52); */
+  /* --link: ;  */
 }
 
 body {
-  background-color: #1e374e;
-  /* color: var(--accent-2); */
+  background-color: var(--blue-dark);
 }
 
 .container {
-  background-color: #c1d5e0;
+  background-color: var(--blue-med);
 }
 
 header {
@@ -68,9 +69,13 @@ footer {
   padding: 10px;
 }
 
+h1 {
+  margin-bottom: 30px;
+}
+
 /*********  NAV  *********/
 nav {
-  background-color: #e1f1ff;
+  background-color: var(--blue-light);
 }
 .navbar {
   /* background-color: var(--secondary);  */
@@ -85,7 +90,7 @@ nav {
 /*********  CHALLENGES PAGE  *********/
 .card {
   border: inherit;
-  background-color: #d8d8d8;
+  background-color: var(--gray-light);
   margin-bottom: 20px;
 }
 
@@ -95,7 +100,7 @@ nav {
 }
 
 .card-body {
-  background-color: #d8d8d8;
+  background-color: var(--gray-light);
   border-top: 2px solid black;
 }
 
@@ -108,6 +113,7 @@ nav {
   margin-bottom: 0;
 }
 
+/* small down arrow on btn */
 .more-info:after,
 .select-difficulty:after {
   display: inline-block;
@@ -134,22 +140,24 @@ nav {
 
 .form-control {
   background-image: none;
-  background-color: #fff;
+  background-color: white;
   padding-left: 8px;
 }
 
 .form-control:focus {
-  background-color: #fff;
+  background-color: white;
 }
 
 .form-control,
 .custom-select {
-  border-radius: 0.25rem;
+  border-radius: 0.4rem;
 }
 
 input::placeholder {
   padding-left: 8px;
 }
+
+/*********  MEDIA QUERIES  *********/
 
 @media (min-width: 1200px) {
   .container {

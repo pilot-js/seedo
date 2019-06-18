@@ -121,20 +121,14 @@ const component = ({
 
   return (
     <div>
-      {/* <div className="d-flex justify-content-center"> */}
       <h1 className="text-center">Challenges</h1>
-      {/* </div> */}
       <Search history={history} searchTerm={searchTerm} />
       <div className="row">
         {challenges.map(challenge => {
           const imageSrc = challenge.images[0] ? challenge.images[0].data : null;
           return (
             <div className="col-sm-4">
-              <div
-                className="card d-inline-flex"
-                // style={{ width: '25%', marginRight: '1em', marginBottom: '1em' }}
-                key={challenge.id}
-              >
+              <div className="card d-inline-flex" key={challenge.id}>
                 <img src={imageSrc} alt="" className="card-image-top card-image" />
                 <div className="card-body">
                   <div className="float-right">
