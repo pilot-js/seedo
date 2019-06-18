@@ -22,7 +22,6 @@ router.get('/', (req, res, next) => {
 // create a single challenge
 router.post('/', async (req, res, next) => {
   try {
-    console.log('req.body: ', req.body);
     const { name, description, difficulty, html, css, imageWidth, imageHeight } = req.body;
     const challenge = await Challenge.create({
       name,
@@ -63,7 +62,6 @@ router.post('/', async (req, res, next) => {
 });
 
 router.put('/preview', (req, res, next) => {
-  console.log('req.body: ', req.body);
   const { html, css, imageWidth, imageHeight, userId } = req.body;
 
   createImage(html, css, `${userId}-preview`, -1, Number(imageWidth), Number(imageHeight))
@@ -121,7 +119,6 @@ router.get('/search/:term/filter/:difficulty', (req, res, next) => {
 router.put('/:id', async (req, res, next) => {
   // TODO how to handle req.params.id === NaN ?
   try {
-    console.log('req.body put route: ', req.body);
     const { name, description, difficulty, html, css, imageWidth, imageHeight } = req.body;
 
     const challenge = await Challenge.findByPk(Number(req.params.id));
@@ -161,7 +158,6 @@ router.delete('/:id', async (req, res, next) => {
   try {
     const challenge = await Challenge.findByPk(Number(req.params.id));
     const challengesTaken = await Userchallenge.findAll({ where: { challengeId: challenge.id } });
-    console.log('challengesTaken: ', challengesTaken.length);
     if (!challengesTaken.length) {
       const solution = await Solution.findOne({ where: { challengeId: challenge.id } });
       const image = await Image.findOne({ where: { challengeId: challenge.id } });
