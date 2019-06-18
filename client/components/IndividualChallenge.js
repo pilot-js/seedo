@@ -71,8 +71,11 @@ const _IndividualChallenge = ({
     return null;
   }
   let userImage;
-  if (userchallenge.images) {
-    userImage = userchallenge.images[0].data;
+  if (userchallenge) {
+    if (userchallenge.images && userchallenge.images instanceof Array) {
+      const image = userchallenge.images[0];
+      userImage = image ? image.data : null;
+    }
   }
   let diffImage = '';
   if (userchallenge.diffImage) {
