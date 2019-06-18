@@ -53,7 +53,7 @@ const _Nav = props => {
   }
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light sticky-top">
+    <nav className="navbar navbar-expand-lg navbar-light">
       <Link className="navbar-brand" to="/">
         <img src="logo.png" alt="logo" className="logo-img" />
       </Link>
