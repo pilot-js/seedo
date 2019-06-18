@@ -32,32 +32,37 @@ const _Login = ({ history, getUser }) => {
   };
 
   return (
-    <div className="justify-align-center">
-      <form onSubmit={saveHandler}>
+    <div className="d-flex justify-content-center flex-column">
+      <form
+        onSubmit={saveHandler}
+        className="d-flex justify-content-center flex-column align-items-center login-form"
+      >
         <label htmlFor="email" className="login-text">
           Email
         </label>
         <input
           id="email"
-          className="form-control login-form"
+          className="form-control login-input"
           name="email"
           value={email}
           onChange={e => setEmail(e.target.value)}
         />
         <label htmlFor="password">Password</label>
         <input
-          className="form-control login-form"
+          className="form-control login-input"
           type="password"
           name="password"
           value={password}
           onChange={e => setPassword(e.target.value)}
         />
-        <button type="submit">Login</button>
+        <button type="submit" className="login-button">
+          Login
+        </button>
       </form>
-      <button type="button" onClick={userSignUp}>
+      <button type="button" onClick={userSignUp} className="btn btn-success">
         Sign Up!
       </button>
-      <button type="button" onClick={githubOauth}>
+      <button type="button" onClick={githubOauth} className="btn btn-info">
         Login With Github
       </button>
     </div>
