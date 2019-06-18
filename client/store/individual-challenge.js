@@ -28,7 +28,6 @@ export const addCommentToOneChallenge = (challengeId, comment) => {
       .post('/api/comments', comment)
       .then(res => res.data)
       .then(comment => {
-        console.log(comment);
         return axios
           .get(`api/challenges/${challengeId}`)
           .then(res => res.data)

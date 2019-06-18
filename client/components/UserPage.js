@@ -24,11 +24,9 @@ const _UserPage = ({
     }
 
     if (userId) {
-      fetchUserChallenges(userId)
-        .then(() => {
-          console.log('Got userChallenges!');
-        })
-        .catch(e => console.error(`Failed to get userChallenges. Here's why:\n${e}`));
+      fetchUserChallenges(userId).catch(e =>
+        console.error(`Failed to get userChallenges. Here's why:\n${e}`),
+      );
     }
     fetchOneChallenge(challengeId);
   }, [user.id]);

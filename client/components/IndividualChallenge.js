@@ -73,7 +73,6 @@ const _IndividualChallenge = ({
   let userImage;
   if (userchallenge.images) {
     userImage = userchallenge.images[0].data;
-    console.log(userImage);
   }
   let diffImage = '';
   if (userchallenge.diffImage) {

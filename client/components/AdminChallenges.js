@@ -17,7 +17,6 @@ const _AdminChallenges = props => {
       .then(resp => {
         // TODO give ability to click Archive link or Cancel
         if (resp.data) {
-          console.log('resp.data: ', resp);
           window.alert(resp.data);
         }
       })

@@ -58,7 +58,6 @@ const _AdminUserEdit = props => {
 
     if (isUpdate) {
       const { id } = props.adminUser;
-      console.log('id: ', id);
       axios
         .put(`/api/users/update/${id}`, user)
         .then(() => {
