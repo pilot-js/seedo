@@ -113,58 +113,64 @@ const component = ({
 
   return (
     <div>
-      <div className="d-flex justify-content-center">
-        <h1>Our Challenges</h1>
-      </div>
+      {/* <div className="d-flex justify-content-center"> */}
+      <h1 className="text-center">Challenges</h1>
+      {/* </div> */}
       <Search history={history} searchTerm={searchTerm} />
-      <div>
+      <div className="row">
         {challenges.map(challenge => {
           const imageSrc = challenge.images[0] ? challenge.images[0].data : null;
           return (
-            <div
-              className="card d-inline-flex"
-              style={{ width: '25%', marginRight: '1em', marginBottom: '1em' }}
-              key={challenge.id}
-            >
-              <div className="card-body">
-                <div>
-                  {solutionCompleted(solutionByChallengeId(challenge.id), user.id) ? (
-                    <MdCheckmarkCircle fontSize="20px" color="#43853d" />
-                  ) : null}
-                </div>
-                <img src={imageSrc} alt="" className="card-image-top" />
-                <h5 className="card-title">{challenge.name}</h5>
-                <p className="card-text">{challenge.description}</p>
-                <Link to={`/challenges/${challenge.id}`} className="btn btn-primary">
-                  Go to Challenge
-                </Link>
-                <button type="button" onClick={() => collapseController(challenge.id)}>
-                  More info
-                </button>
-                <Collapse
-                  isOpened={collapseStatus[challenge.id] ? collapseStatus[challenge.id] : false}
-                >
+            <div className="col-sm-4">
+              <div
+                className="card d-inline-flex"
+                // style={{ width: '25%', marginRight: '1em', marginBottom: '1em' }}
+                key={challenge.id}
+              >
+                <img src={imageSrc} alt="" className="card-image-top card-image" />
+                <div className="card-body">
                   <div>
-                    {solutionByChallengeId(challenge.id) ? (
-                      <div>
-                        <p>Statistic</p>
-                        <p>
-                          Attempted: {attemptedTimes(solutionByChallengeId(challenge.id))}{' '}
-                          {attemptedTimes(solutionByChallengeId(challenge.id)) > 1
-                            ? 'times'
-                            : 'time'}
-                        </p>
-                        <p>
-                          Attempted by number of Users:{' '}
-                          {attemptedByUsers(solutionByChallengeId(challenge.id))}
-                        </p>
-                        <p>Average Score: {avgScore(solutionByChallengeId(challenge.id))}</p>
-                      </div>
-                    ) : (
-                      ''
-                    )}
+                    {solutionCompleted(solutionByChallengeId(challenge.id), user.id) ? (
+                      <MdCheckmarkCircle fontSize="20px" color="#43853d" />
+                    ) : null}
                   </div>
-                </Collapse>
+                  <h5 className="card-title">{challenge.name}</h5>
+                  <p className="card-text">{challenge.description}</p>
+                  <Link to={`/challenges/${challenge.id}`} className="btn btn-primary">
+                    Go to Challenge
+                  </Link>
+                  <button
+                    className="btn btn-secondary"
+                    type="button"
+                    onClick={() => collapseController(challenge.id)}
+                  >
+                    More info
+                  </button>
+                  <Collapse
+                    isOpened={collapseStatus[challenge.id] ? collapseStatus[challenge.id] : false}
+                  >
+                    <div>
+                      {solutionByChallengeId(challenge.id) ? (
+                        <div>
+                          <p>Statistic</p>
+                          <p>
+                            Attempted: {attemptedTimes(solutionByChallengeId(challenge.id))}{' '}
+                            {attemptedTimes(solutionByChallengeId(challenge.id)) > 1
+                              ? 'times'
+                              : 'time'}
+                          </p>
+                          <p>
+                            Attempted by number of Users:{' '}
+                            {attemptedByUsers(solutionByChallengeId(challenge.id))}
+                          </p>
+                          <p>Average Score: {avgScore(solutionByChallengeId(challenge.id))}</p>
+                        </div>
+                      ) : (
+                        ''
+                      )}
+                    </div>
+                  </Collapse>
+                </div>
               </div>
             </div>
           );
