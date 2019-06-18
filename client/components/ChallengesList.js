@@ -67,42 +67,50 @@ const component = ({
   }, [difficulty, searchTerm]);
 
   const solutionByChallengeId = challengeId => {
-    if (userchallenge) {
+    if (userchallenge instanceof Array) {
       const solutions = userchallenge.filter(solution => solution.challengeId === challengeId);
       return solutions;
     }
   };
 
   const attemptedTimes = arr => {
-    return arr.length;
+    if (arr instanceof Array) {
+      return arr.length;
+    }
   };
 
   const attemptedByUsers = arr => {
-    const userIds = arr.reduce((acc, solution) => {
-      if (!acc.includes(solution.userId)) {
-        acc.push(solution.userId);
-      }
-      return acc;
-    }, []);
-    return userIds.length;
+    if (arr instanceof Array) {
+      const userIds = arr.reduce((acc, solution) => {
+        if (!acc.includes(solution.userId)) {
+          acc.push(solution.userId);
+        }
+        return acc;
+      }, []);
+      return userIds.length;
+    }
   };
 
   const avgScore = arr => {
-    const totalScore = arr.reduce((acc, solution) => {
-      acc += solution.grade;
-      return acc;
-    }, 0);
-    const avgScore = totalScore / arr.length ? Math.round(totalScore / arr.length) : 0;
-    return avgScore;
+    if (arr instanceof Array) {
+      const totalScore = arr.reduce((acc, solution) => {
+        acc += solution.grade;
+        return acc;
+      }, 0);
+      const avgScore = totalScore / arr.length ? Math.round(totalScore / arr.length) : 0;
+      return avgScore;
+    }
   };
 
   const solutionCompleted = (arr, userId) => {
-    return arr.reduce((acc, solution) => {
-      if (solution.userId === userId) {
-        acc = true;
-      }
-      return acc;
-    }, false);
+    if (arr instanceof Array) {
+      return arr.reduce((acc, solution) => {
+        if (solution.userId === userId) {
+          acc = true;
+        }
+        return acc;
+      }, false);
+    }
   };
 
   const collapseController = id => {
