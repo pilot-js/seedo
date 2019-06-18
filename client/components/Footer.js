@@ -1,5 +1,5 @@
 import React from 'react';
 
 export const Footer = () => {
-  return <div />;
+  return <footer className="border-top">&copy; 2019</footer>;
 };
