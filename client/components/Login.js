@@ -33,8 +33,10 @@ const _Login = ({ history, getUser }) => {
 
   return (
     <div className="justify-align-center">
-      <form onSubmit={saveHandler} >
-        <label htmlFor="email" className="login-text">Email</label>
+      <form onSubmit={saveHandler}>
+        <label htmlFor="email" className="login-text">
+          Email
+        </label>
         <input
           id="email"
           className="form-control login-form"
