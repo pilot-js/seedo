@@ -8,7 +8,7 @@ const mapDispatchToProps = dispatch => ({
   getUser: user => dispatch(getUser(user)),
 });
 
-const _Login = ({ history, getUser }) => {
+const _Login = ({ history, getUser, user }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -19,7 +19,13 @@ const _Login = ({ history, getUser }) => {
   const saveHandler = ev => {
     ev.preventDefault();
     getUser({ email, password })
-      .then(() => history.push('/challenges'))
+      .then(() => {
+        if (user.id) {
+          history.push('/challenges');
+        } else {
+          window.alert('Incorrect username/password.');
+        }
+      })
       .catch(error => console.log(error));
   };
 
