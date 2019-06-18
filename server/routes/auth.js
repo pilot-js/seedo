@@ -12,7 +12,6 @@ router.put('/login', (req, res, next) => {
   })
     .then(user => {
       req.session.user = user;
-      console.log(user.get());
       res.send(user);
     })
     .catch(next);

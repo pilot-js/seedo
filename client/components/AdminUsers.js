@@ -14,11 +14,6 @@ const _AdminUsers = props => {
   const deleteUser = userId => {
     axios
       .delete(`/api/users/${userId}`)
-      .then(resp => {
-        // TODO display 'User deleted'
-        // if (resp.status === 204){ // display 'User deleted' }
-        console.log('status: ', resp.status);
-      })
       .then(() => props.fetchUsers())
       .catch(error => {
         // TODO display error msg in browser

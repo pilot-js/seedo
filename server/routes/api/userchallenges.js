@@ -45,16 +45,6 @@ router.put('/:userchallengeId', (req, res, next) => {
       .then(async userchall => {
         const image = await Image.findOne({ where: { challengeId: userAnswer.challengeId } });
 
-        console.log('Image: ', image);
-        console.log(
-          userAnswer.html,
-          userAnswer.css,
-          userchall.userId,
-          userchall.challengeId,
-          image.width,
-          image.height,
-        );
-        console.log('made it here');
         const data = await createImage(
           userAnswer.html,
           userAnswer.css,
@@ -67,22 +57,23 @@ router.put('/:userchallengeId', (req, res, next) => {
         const userchallengeImage = await Image.findOne({
           where: { userchallengeId: userchall.id },
         });
-        console.log(userchallengeImage);
+
         if (userchallengeImage) {
           await userchallengeImage.update({ data });
         } else {
           await Image.create({ userchallengeId: userchall.id, data });
         }
 
-        console.log('then here');
         const userchallenge = await Userchallenge.findByPk(userchallengeId, { include: [Image] });
         const userchallengeObject = userchallenge.get();
         if (createDiff) {
           // need the html, css and ids for userchallenge and challenge
+          console.log('Creating diff');
           const challenge = await Challenge.findByPk(userchall.challengeId, {
             include: [Solution],
           });
           console.log('Challenge: ', challenge.get());
+          console.log('Userchallenge: ', userchallenge.get());
           const { percentMatch, src } = await compareImages(
             userchallenge,
             challenge,

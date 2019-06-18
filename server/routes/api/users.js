@@ -51,7 +51,6 @@ router.get('/:id/userchallenges/', (req, res, next) => {
 
 // update user
 router.put('/update/:id', (req, res, next) => {
-  console.log('in update route');
   User.findByPk(req.params.id)
     .then(user => user.update(req.body))
     .then(updatedUser => res.send(updatedUser))
