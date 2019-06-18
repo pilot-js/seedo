@@ -37,10 +37,11 @@ export const Search = ({ searchTerm, history }) => {
 
   return (
     <div className="search-form row align-items-center justify-content-start">
-      <div className="col-sm-4 d-flex align-items-center">
+      <div className="col-sm-6 d-flex align-items-center">
         <form onSubmit={submitHandler} className="form-inline align-middle">
-          <label>Filter difficulty:</label>
+          <label className="mr-2">Filter difficulty:</label>
           <select
+            className="select-difficulty custom-select px-2"
             name="difficulty"
             value={filter.difficulty}
             onChange={e => {
@@ -54,12 +55,14 @@ export const Search = ({ searchTerm, history }) => {
             <option value={1}>1</option>
             <option value={2}>2</option>
           </select>
-          <button type="submit" disabled={filterIsAll(Object.values(filter))}>
+          {/* <div className="btn-group"> */}
+          <button type="submit" disabled={filterIsAll(Object.values(filter))} className="btn">
             Filter
           </button>
-          <button type="button" onClick={onClear}>
+          <button type="button" onClick={onClear} className="btn">
             Clear
           </button>
+          {/* </div> */}
         </form>
       </div>
       <div className="d-flex col-sm-6 align-items-center">
@@ -71,10 +74,10 @@ export const Search = ({ searchTerm, history }) => {
             placeholder="Search"
             onChange={e => setTerm(e.target.value)}
           />
-          <button type="submit" disabled={!term}>
+          <button type="submit" className="btn btn-raised mx-2" disabled={!term}>
             Search
           </button>
-          <button type="button" disabled={!term} onClick={onClear}>
+          <button type="button" className="btn btn-raised" disabled={!term} onClick={onClear}>
             Clear
           </button>
         </form>

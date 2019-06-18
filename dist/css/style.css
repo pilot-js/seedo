@@ -1,10 +1,4 @@
 /*
-COLORS
-dark blue: #1E374E  - background
-light blue:  #1E374E  - secondary
-orange: #FFA564 - accent 
-gray: #C4C4C4
-
 Variables from Material Design Bootstrap
   --blue: #007bff;
   --indigo: #6610f2;
@@ -35,6 +29,15 @@ Variables from Material Design Bootstrap
   --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
+
+COLORS
+dark blue: #1E374E  - body bkg
+med blue: #c1d5e0 - container bkg
+light blue: #e1f1ff - nav bkg
+gray: #d8d8d8 - card body
+
+light blue:  #1E374E  - secondary
+orange: #FFA564 - accent 
 */
 
 /*********  GENERAL STYLES  *********/
@@ -84,20 +87,65 @@ nav {
   background-color: #d8d8d8;
   margin-bottom: 20px;
 }
-.card-body {
-  background-color: #d8d8d8;
-  border-top: 2px solid black;
-}
 
 .card-image {
   width: 100%;
   padding: 1px;
 }
 
+.card-body {
+  background-color: #d8d8d8;
+  border-top: 2px solid black;
+}
+
+.card h3.card-title {
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+
 .ReactCollapse--collapse p:last-of-type {
   margin-bottom: 0;
 }
 
+.more-info:after,
+.select-difficulty:after {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 0.255em;
+  vertical-align: 0.255em;
+  content: '';
+  border-top: 0.3em solid;
+  border-right: 0.3em solid transparent;
+  border-bottom: 0;
+  border-left: 0.3em solid transparent;
+}
+
+/*********  SEARCH  *********/
+
 .search-form {
   margin: 20px;
+}
+
+.select-difficulty {
+  width: 3.5rem;
+}
+
+.form-control {
+  background-image: none;
+  background-color: #fff;
+  padding-left: 8px;
+}
+
+.form-control:focus {
+  background-color: #fff;
+}
+
+.form-control,
+.custom-select {
+  border-radius: 0.25rem;
+}
+
+input::placeholder {
+  padding-left: 8px;
 }

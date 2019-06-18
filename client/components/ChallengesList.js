@@ -129,18 +129,20 @@ const component = ({
               >
                 <img src={imageSrc} alt="" className="card-image-top card-image" />
                 <div className="card-body">
-                  <div>
+                  <div className="float-right">
                     {solutionCompleted(solutionByChallengeId(challenge.id), user.id) ? (
-                      <MdCheckmarkCircle fontSize="20px" color="#43853d" />
+                      <MdCheckmarkCircle fontSize="25px" color="#43853d" />
                     ) : null}
                   </div>
-                  <h5 className="card-title">{challenge.name}</h5>
-                  <p className="card-text">{challenge.description}</p>
-                  <Link to={`/challenges/${challenge.id}`} className="btn btn-primary">
-                    Go to Challenge
+                  <h3 className="card-title text-center">{challenge.name}</h3>
+                  <p className="card-text text-center">{challenge.description}</p>
+                  <Link to={`/challenges/${challenge.id}`}>
+                    <button type="button" className="btn btn-raised btn-primary mr-2">
+                      Go to Challenge
+                    </button>
                   </Link>
                   <button
-                    className="btn btn-secondary"
+                    className="btn btn-raised btn-secondary more-info"
                     type="button"
                     onClick={() => collapseController(challenge.id)}
                   >
@@ -152,15 +154,12 @@ const component = ({
                     <div>
                       {solutionByChallengeId(challenge.id) ? (
                         <div>
-                          <p>Statistic</p>
+                          <p>Challenge Statistics</p>
                           <p>
-                            Attempted: {attemptedTimes(solutionByChallengeId(challenge.id))}{' '}
-                            {attemptedTimes(solutionByChallengeId(challenge.id)) > 1
-                              ? 'times'
-                              : 'time'}
+                            # My Attempts: {attemptedTimes(solutionByChallengeId(challenge.id))}
                           </p>
                           <p>
-                            Attempted by number of Users:{' '}
+                            # Users Attempted:{' '}
                             {attemptedByUsers(solutionByChallengeId(challenge.id))}
                           </p>
                           <p>Average Score: {avgScore(solutionByChallengeId(challenge.id))}</p>
