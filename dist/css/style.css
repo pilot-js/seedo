@@ -45,7 +45,7 @@ orange: #FFA564 - accent
   --blue-dark: #1e374e; /* body bkg */
   --blue-med: #c1d5e0; /* container bkg */
   --blue-light: #e1f1ff; /* nav bkg */
-  --gray: #6c757d
+  --gray: #6c757d;
   --gray-light: #d8d8d8; /* card body */
   --accent: #ffa564; /* orange */
   /* --accent-2: #c4c4c4; /* gray */
@@ -73,6 +73,14 @@ footer {
 h1 {
   margin-bottom: 30px;
   text-align: center;
+}
+
+.btn-tertiary {
+  background-color: darkgrey;
+}
+
+.btn-tertiary:hover {
+  background-color: var(--gray);
 }
 
 /*********  NAV  *********/
@@ -177,7 +185,7 @@ input::placeholder {
   color: #a0a0a0;
 }
 
-.ReactModal__Content .ReactModal__Content--after-open {
+/* .ReactModal__Content .ReactModal__Content--after-open {
   position: absolute;
   top: 18%;
   left: 45%;
@@ -189,8 +197,13 @@ input::placeholder {
   border-radius: 4px;
   outline: none;
   padding: 20px;
-  /* margin-right: -25%; */
   transform: translate(-50%, -1%);
+} */
+
+/*********  COMMUNITY PAGE  *********/
+
+#community-main .list-group-item {
+  display: block;
 }
 
 /*********  MEDIA QUERIES  *********/

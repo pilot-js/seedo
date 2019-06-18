@@ -17,11 +17,11 @@ const _Logout = props => {
   return (
     <div className="text-center">
       <p>Do you want to log out?</p>
-      <button type="button" className="btn btn-raised mr-2" onClick={logout}>
+      <button type="button" className="btn btn-raised btn-primary mr-2" onClick={logout}>
         Yes!
       </button>
-      <button type="button" className="btn btn-raised" onClick={cancel}>
-        No, silly!
+      <button type="button" className="btn btn-raised btn-secondary" onClick={cancel}>
+        No, I&apos;m having too much fun!
       </button>
     </div>
   );
