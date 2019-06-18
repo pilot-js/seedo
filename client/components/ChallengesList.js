@@ -8,7 +8,6 @@ import {
   fetchChallengesWithFilterAndSearch,
   fetchAllUserchallenges,
 } from '../store';
-import { convertBufferToImgSrc } from '../utils';
 import { Search } from './Search';
 
 const mapDispatchToProps = dispatch => ({
@@ -129,7 +128,7 @@ const component = ({
         {challenges.map(challenge => {
           const imageSrc = challenge.images[0] ? challenge.images[0].data : null;
           return (
-            <div className="col-sm-4">
+            <div className="col-sm-4" key={challenge.id}>
               <div
                 className="card d-inline-flex"
                 // style={{ width: '25%', marginRight: '1em', marginBottom: '1em' }}
@@ -154,7 +153,7 @@ const component = ({
                     type="button"
                     onClick={() => collapseController(challenge.id)}
                   >
-                    More info
+                    {collapseStatus[challenge.id] || false ? 'Less info' : 'More info'}
                   </button>
                   <Collapse
                     isOpened={collapseStatus[challenge.id] ? collapseStatus[challenge.id] : false}
