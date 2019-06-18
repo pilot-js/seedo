@@ -157,6 +157,15 @@ input::placeholder {
   padding-left: 8px;
 }
 
+/*********  LOGIN PAGE  *********/
+.login-form {
+  margin: 20px;
+  width: 20rem;
+  padding-left: 8px;
+  background-color: orange;
+}
+
+
 /*********  MEDIA QUERIES  *********/
 
 @media (min-width: 1200px) {

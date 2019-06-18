@@ -32,19 +32,19 @@ const _Login = ({ history, getUser }) => {
   };
 
   return (
-    <div>
-      <form onSubmit={saveHandler}>
-        <label htmlFor="email">Email</label>
+    <div className="justify-align-center">
+      <form onSubmit={saveHandler} >
+        <label htmlFor="email" className="login-text">Email</label>
         <input
           id="email"
-          className="form-control"
+          className="form-control login-form"
           name="email"
           value={email}
           onChange={e => setEmail(e.target.value)}
         />
         <label htmlFor="password">Password</label>
         <input
-          className="form-control"
+          className="form-control login-form"
           type="password"
           name="password"
           value={password}
