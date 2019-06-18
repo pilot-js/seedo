@@ -39,7 +39,7 @@ const App = ({ getGithubUser }) => {
 
   return (
     <div>
-      <header id="main-header">
+      <header id="main-header" className="sticky-top">
         <Nav />
       </header>
       <section id="content" className="container-fluid">
