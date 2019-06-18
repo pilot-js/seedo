@@ -20,7 +20,7 @@ const _communitySolutionComments = ({ challenges, fetchChallenges }) => {
   }, []);
   return (
     <div>
-      <h1 className="text-center">Solution and Comments</h1>
+      <h1>Solution and Comments</h1>
       {
         <ul>
           {challenges.map(chal => {

@@ -111,7 +111,7 @@ const _AdminChallengeEdit = props => {
 
   return (
     <div>
-      <h1 className="text-center">{actionText} Challenge</h1>
+      <h1>{actionText} Challenge</h1>
       <div className="row">
         <div className="col-6">
           <form onSubmit={handleSubmit}>

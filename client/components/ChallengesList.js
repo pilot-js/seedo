@@ -121,7 +121,7 @@ const component = ({
 
   return (
     <div>
-      <h1 className="text-center">Challenges</h1>
+      <h1>Challenges</h1>
       <Search history={history} searchTerm={searchTerm} />
       <div className="row">
         {challenges.map(challenge => {

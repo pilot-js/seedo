@@ -10,11 +10,18 @@ const _Logout = props => {
       .catch(error => console.log(error));
   };
 
+  const cancel = () => {
+    props.history.push('/challenges');
+  };
+
   return (
     <div className="text-center">
       <p>Do you want to log out?</p>
-      <button type="button" className="btn btn-raised" onClick={logout}>
+      <button type="button" className="btn btn-raised mr-2" onClick={logout}>
         Yes!
+      </button>
+      <button type="button" className="btn btn-raised" onClick={cancel}>
+        No, silly!
       </button>
     </div>
   );
