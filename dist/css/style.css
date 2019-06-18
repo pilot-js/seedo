@@ -77,8 +77,9 @@ nav {
   color: red;
 }
 
-.table thead th {
-  color: var(--accent);
+#site-name {
+  font-size: 2rem;
+  color: #ffa564;
 }
 
 /*********  CHALLENGES PAGE  *********/
@@ -148,4 +149,10 @@ nav {
 
 input::placeholder {
   padding-left: 8px;
+}
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1200px;
+  }
 }
