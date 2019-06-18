@@ -11,14 +11,24 @@ export const Results = ({
   userchallengeId,
   challengeId,
 }) => (
-  <div
-    className="d-flex flex-column justify-content-around"
-    style={{ width: '100%', height: '100%' }}
-  >
-    <div className="d-flex justify-content-around row">
-      <img src={userImage} alt="Yours" />
-      <img src={solutionImage} alt="Solution" />
-      <img src={diffImage} alt="Diff" />
+  <div id="results-modal" className="" style={{ width: '100%', height: '100%' }}>
+    <div className="d-flex row">
+      <div className="col-sm-6">
+        <h3>My Submission</h3>
+        <img className="border" src={userImage} alt="Yours" />
+      </div>
+      <div className="col-sm-6">
+        <h3>Solution</h3>
+        <img className="border" src={solutionImage} alt="Solution" />
+      </div>
+    </div>
+    <hr />
+    <div className="d-flex justify-content-center row">
+      <div className="col-sm-6">
+        <h3>Difference</h3>
+        <p id="difference-comment">difference shown in red</p>
+        <img className="border" src={diffImage} alt="Diff" />
+      </div>
     </div>
     <div className="d-flex justify-content-around row">
       <h4 className="d-flex align-items-center">Your grade: {grade}</h4>

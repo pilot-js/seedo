@@ -45,6 +45,7 @@ orange: #FFA564 - accent
   --blue-dark: #1e374e; /* body bkg */
   --blue-med: #c1d5e0; /* container bkg */
   --blue-light: #e1f1ff; /* nav bkg */
+  --gray: #6c757d
   --gray-light: #d8d8d8; /* card body */
   --accent: #ffa564; /* orange */
   /* --accent-2: #c4c4c4; /* gray */
@@ -164,6 +165,32 @@ nav {
 
 input::placeholder {
   padding-left: 8px;
+}
+
+/*********  RESULTS MODAL  *********/
+#results-modal h3 {
+  text-align: center;
+}
+
+#difference-comment {
+  text-align: center;
+  color: #a0a0a0;
+}
+
+.ReactModal__Content .ReactModal__Content--after-open {
+  position: absolute;
+  top: 18%;
+  left: 45%;
+  right: 0px;
+  bottom: 0px;
+  border: 1px solid rgb(204, 204, 204);
+  background: #d8d8d8;
+  overflow: auto;
+  border-radius: 4px;
+  outline: none;
+  padding: 20px;
+  /* margin-right: -25%; */
+  transform: translate(-50%, -1%);
 }
 
 /*********  MEDIA QUERIES  *********/
