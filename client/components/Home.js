@@ -24,9 +24,6 @@ export const Home = () => {
           <div>Video Solution</div>
           <div>Image Front-End Test</div>
           <div>Ace Coding Interview</div>
-          <button type="button" onClick={() => callPuppy()}>
-            Puppeteer
-          </button>
         </div>
       </div>
     </div>

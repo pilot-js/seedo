@@ -10,7 +10,6 @@ import {
   fetchUserchallenge,
   fetchUserchallengeById,
 } from '../store';
-import { convertBufferToImgSrc } from '../utils';
 
 const _IndividualChallenge = ({
   individualChallenge,
@@ -103,30 +102,14 @@ const _IndividualChallenge = ({
     <div className="d-flex flex-column align-items-center">
       <h1>{name}</h1>
       <p>{description}</p>
-      {/* <div className="row" style={{ width: '100%' }}>
-        <div className="col-sm-6">
-          <img src={userImage} alt="" className="card-image-top" />
-        </div>
-        <div className="col-sm-6">
-          <img src={solutionImage} alt="" className="card-image-top" />
-        </div>
-      </div> */}
       <div className="d-flex row" style={{ width: '100%' }}>
         <div className="col-sm-6">
-          <img src={userImage} alt="" className="card-image-top" />
+          <img src={userImage} alt="" className="card-image-top card-image" />
         </div>
         <div className="col-sm-6">
-          <img src={solutionImage} alt="" className="card-image-top" />
+          <img src={solutionImage} alt="" className="card-image-top card-image" />
         </div>
       </div>
-      {/* <div className="d-flex justify-content-between row" style={{ width: '100%' }}>
-        <div className="d-flex justify-content-center col">
-          <img src={userImage} alt="" className="card-image-top" />
-        </div>
-        <div className="d-flex justify-content-center col">
-          <img src={solutionImage} alt="" className="card-image-top" />
-        </div>
-      </div> */}
       <div className="d-flex justify-content-between row" style={codeMirrorStyle}>
         <div className="col">
           <h2>HTML</h2>
