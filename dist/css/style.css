@@ -1,4 +1,103 @@
-#navbar{
-  background-color: blue;
-  color: white;
+/*
+COLORS
+dark blue: #1E374E  - background
+light blue:  #1E374E  - secondary
+orange: #FFA564 - accent 
+gray: #C4C4C4
+
+Variables from Material Design Bootstrap
+  --blue: #007bff;
+  --indigo: #6610f2;
+  --purple: #6f42c1;
+  --pink: #e83e8c;
+  --red: #dc3545;
+  --orange: #fd7e14;
+  --yellow: #ffc107;
+  --green: #28a745;
+  --teal: #20c997;
+  --cyan: #17a2b8;
+  --white: #fff;
+  --gray: #6c757d;
+  --gray-dark: #343a40;
+  --primary: #007bff;
+  --secondary: #6c757d;
+  --success: #28a745;
+  --info: #17a2b8;
+  --warning: #ffc107;
+  --danger: #dc3545;
+  --light: #f8f9fa;
+  --dark: #343a40;
+  --breakpoint-xs: 0;
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+  --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+*/
+
+/*********  GENERAL STYLES  *********/
+:root {
+  --primary: #1e374e; /* dark blue */
+  --secondary: #c1d5e0; /* light blue */
+  --accent: #ffa564; /* orange */
+  --accent-2: #c4c4c4; /* gray */
+  --card: rgba(255, 165, 100, 0.52);
+  --link: ;
+}
+
+body {
+  background-color: #1e374e;
+  /* color: var(--accent-2); */
+}
+
+.container {
+  background-color: #c1d5e0;
+}
+
+header {
+  margin-bottom: 20px;
+}
+
+footer {
+  margin: 20px;
+  padding: 10px;
+}
+
+/*********  NAV  *********/
+nav {
+  background-color: #e1f1ff;
+}
+.navbar {
+  /* background-color: var(--secondary);  */
+  color: red;
+}
+
+.table thead th {
+  color: var(--accent);
+}
+
+/*********  CHALLENGES PAGE  *********/
+.card {
+  border: inherit;
+  background-color: #d8d8d8;
+  margin-bottom: 20px;
+}
+.card-body {
+  background-color: #d8d8d8;
+  border-top: 2px solid black;
+}
+
+.card-image {
+  width: 100%;
+  padding: 1px;
+}
+
+.ReactCollapse--collapse p:last-of-type {
+  margin-bottom: 0;
+}
+
+.search-form {
+  margin: 20px;
 }
