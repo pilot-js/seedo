@@ -8,7 +8,6 @@ import {
   fetchChallengesWithFilterAndSearch,
   fetchAllUserchallenges,
 } from '../store';
-import { convertBufferToImgSrc } from '../utils';
 import { Search } from './Search';
 
 const mapDispatchToProps = dispatch => ({
@@ -148,7 +147,7 @@ const component = ({
                     type="button"
                     onClick={() => collapseController(challenge.id)}
                   >
-                    More info
+                    {collapseStatus[challenge.id] || false ? 'Less info' : 'More info'}
                   </button>
                   <Collapse
                     isOpened={collapseStatus[challenge.id] ? collapseStatus[challenge.id] : false}

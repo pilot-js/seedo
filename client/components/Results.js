@@ -29,6 +29,14 @@ export const Results = ({
         <p id="difference-comment">difference shown in red</p>
         <img className="border" src={diffImage} alt="Diff" />
       </div>
+      {/* <div
+    className="d-flex flex-column justify-content-around"
+    style={{ width: '100%', height: '100%' }}
+  >
+    <div className="d-flex justify-content-around row">
+      <img src={userImage} alt="Yours" className="card-image col" />
+      <img src={solutionImage} alt="Solution" className="card-image col" />
+      <img src={diffImage} alt="Diff" className="card-image col" /> */}
     </div>
     <div className="d-flex justify-content-around row">
       <h4 className="d-flex align-items-center">Your grade: {grade}</h4>

@@ -10,7 +10,6 @@ import {
   fetchUserchallenge,
   fetchUserchallengeById,
 } from '../store';
-import { convertBufferToImgSrc } from '../utils';
 
 const _IndividualChallenge = ({
   individualChallenge,
@@ -65,6 +64,7 @@ const _IndividualChallenge = ({
   const options = {
     lineNumbers: true,
     mode: 'javascript',
+    theme: 'monokai',
   };
 
   if (Object.keys(individualChallenge).length === 0) {
@@ -113,10 +113,10 @@ const _IndividualChallenge = ({
       <p>{description}</p>
       <div className="d-flex row">
         <div className="col-sm-6">
-          <img src={userImage} alt="" className="card-image-top" />
+          <img src={userImage} alt="" className="card-image-top card-image" />
         </div>
         <div className="col-sm-6">
-          <img src={solutionImage} alt="" className="card-image-top" />
+          <img src={solutionImage} alt="" className="card-image-top card-image" />
         </div>
       </div>
       <div className="d-flex justify-content-between row" style={codeMirrorStyle}>
