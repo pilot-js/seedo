@@ -33,7 +33,47 @@ const _Login = ({ history, getUser }) => {
 
   return (
     <div>
-      <form onSubmit={saveHandler}>
+      <h1>Login</h1>
+      <div className="row justify-content-center">
+        <div className="col-9">
+          <form id="login-form" className="form-inline" onSubmit={saveHandler}>
+            <div className="form-group">
+              <label htmlFor="email">Email</label>
+              <input
+                id="email"
+                className="form-control"
+                name="email"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="password">Password</label>
+              <input
+                className="form-control"
+                type="password"
+                name="password"
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+              />
+            </div>
+            <div className="form-group">
+              <button type="submit" className="btn btn-raised">
+                Login
+              </button>
+            </div>
+          </form>
+        </div>
+        <div className="col-4">
+          <button type="button" className="btn btn-raised mr-2" onClick={userSignUp}>
+            Sign Up!
+          </button>
+          <button type="button" className="btn btn-raised" onClick={githubOauth}>
+            Login With Github
+          </button>
+        </div>
+      </div>
+      {/* <form onSubmit={saveHandler}>
         <label htmlFor="email">Email</label>
         <input
           id="email"
@@ -50,14 +90,8 @@ const _Login = ({ history, getUser }) => {
           value={password}
           onChange={e => setPassword(e.target.value)}
         />
-        <button type="submit">Login</button>
-      </form>
-      <button type="button" onClick={userSignUp}>
-        Sign Up!
-      </button>
-      <button type="button" onClick={githubOauth}>
-        Login With Github
-      </button>
+        <button type="submit" className="btn btn-raised mt-2">Login</button>
+      </form> */}
     </div>
   );
 };

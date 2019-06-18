@@ -11,9 +11,9 @@ const _Logout = props => {
   };
 
   return (
-    <div>
+    <div className="text-center">
       <p>Do you want to log out?</p>
-      <button type="button" onClick={logout}>
+      <button type="button" className="btn btn-raised" onClick={logout}>
         Yes!
       </button>
     </div>

@@ -71,6 +71,7 @@ footer {
 
 h1 {
   margin-bottom: 30px;
+  text-align: center;
 }
 
 /*********  NAV  *********/
@@ -85,6 +86,14 @@ nav {
 #site-name {
   font-size: 2rem;
   color: #ffa564;
+}
+
+#login-form .form-group {
+  margin-right: 30px;
+}
+
+#login-form .form-group label {
+  margin-right: 10px;
 }
 
 /*********  CHALLENGES PAGE  *********/
