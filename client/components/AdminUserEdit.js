@@ -87,7 +87,7 @@ const _AdminUserEdit = props => {
 
   return (
     <div>
-      <h1>{actionText} User</h1>
+      <h1 className="text-center">{actionText} User</h1>
       <div className="row">
         <form onSubmit={handleSubmit}>
           <div className="form-group row">
@@ -139,7 +139,7 @@ const _AdminUserEdit = props => {
             </label>
             <div className="col-sm-8">
               <select
-                className="form-control"
+                className="custom-select"
                 name="type"
                 value={type}
                 onChange={e => setType(e.target.value)}

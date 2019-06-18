@@ -20,9 +20,7 @@ const _communitySolutionComments = ({ challenges, fetchChallenges }) => {
   }, []);
   return (
     <div>
-      <div className="d-flex justify-content-center">
-        <h1>Solution and Comments</h1>
-      </div>
+      <h1 className="text-center">Solution and Comments</h1>
       {
         <ul>
           {challenges.map(chal => {
