@@ -3,9 +3,6 @@ const challengesSeed = [
     name: 'Make circle',
     description: 'Make a red circle with radius 100px',
     difficulty: 1,
-    html: 'dummy data',
-    css: 'dummy data',
-    js: 'dummy data',
   },
   {
     name: 'Make square',

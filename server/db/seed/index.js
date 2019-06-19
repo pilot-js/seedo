@@ -1,5 +1,6 @@
 const fs = require('fs');
 const { Challenge, Image, Solution, User, Comment } = require('../models');
+
 const conn = require('../conn');
 const { usersSeed } = require('./user');
 const { challengesSeed } = require('./challenge');
@@ -16,19 +17,11 @@ const seedComment = () => {
 };
 
 const seedChallenge = () => {
-  return challengesSeed.reduce((promiseChain, currentTask) => {
-    return promiseChain.then(chainResults =>
-      Challenge.create(currentTask).then(currentResult => [...chainResults, currentResult]),
-    );
-  }, Promise.resolve([]));
+  return Promise.all(challengesSeed.map(challenge => Challenge.create(challenge)));
 };
 
 const seedSolution = () => {
-  return solutionsSeed.reduce((promiseChain, currentTask) => {
-    return promiseChain.then(chainResults =>
-      Solution.create(currentTask).then(currentResult => [...chainResults, currentResult]),
-    );
-  }, Promise.resolve([]));
+  return Promise.all(solutionsSeed.map(solution => Solution.create(solution)));
 };
 
 const syncAndSeed = () => {
@@ -40,16 +33,23 @@ const syncAndSeed = () => {
     .then(([users, challenges, solutions, comments]) => {
       return Promise.all([
         solutions.map((sol, idx) => sol.update({ challengeId: challenges[idx].id })),
-        solutions.map(async sol => {
-          const dirname = './server/db/seed/images/';
-          await utils.createFiles(sol.html, sol.css, sol.id, dirname);
-          const data = await utils.seedImage(sol.html, sol.css, 'seed', sol.challengeId);
-          return Image.create({ challengeId: sol.challengeId, width: 600, height: 337, data });
-        }),
         comments.map((comment, idx) => {
           return comment.update({ userId: users[idx].id, challengeId: challenges[idx].id });
         }),
-      ]).catch(err => console.log(err));
+      ])
+        .then(async () => {
+          const solutions = await Solution.findAll();
+          await (async function loop() {
+            for (let i = 0; i < solutions.length; i++) {
+              const sol = solutions[i];
+              console.log(sol.get());
+              const data = await utils.seedImage(sol.html, sol.css, 'seed', sol.challengeId);
+              console.log('generated data');
+              await Image.create({ challengeId: sol.challengeId, width: 540, height: 304, data });
+            }
+          })();
+        })
+        .catch(err => console.log(err));
     });
 };
 
