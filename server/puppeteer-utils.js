@@ -24,18 +24,22 @@ const parseHTML = (html, userId) => {
 };
 
 const createFiles = async (html, css, userId, dir) => {
-  await fs.mkdir(dir, { recursive: true }, err => {
-    if (err) throw err;
-    console.log('create dir: ', dir);
-  });
-  await fs.writeFile(`${dir}${userId}.html`, parseHTML(html, userId), err => {
-    if (err) throw err;
-    console.log('The html has been saved!');
-  });
-  await fs.writeFile(`${dir}${userId}.css`, css, err => {
-    if (err) throw err;
-    console.log('The css has been saved!');
-  });
+  try {
+    await fs.mkdir(dir, { recursive: true }, err => {
+      if (err) throw err;
+      console.log('create dir: ', dir);
+    });
+    await fs.writeFile(`${dir}${userId}.html`, parseHTML(html, userId), err => {
+      if (err) throw err;
+      console.log('The html has been saved!');
+    });
+    await fs.writeFile(`${dir}${userId}.css`, css, err => {
+      if (err) throw err;
+      console.log('The css has been saved!');
+    });
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 const createImage = async (html, css, userId, challengeId, width, height) => {

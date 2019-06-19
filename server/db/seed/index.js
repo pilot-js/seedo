@@ -49,7 +49,7 @@ const syncAndSeed = () => {
         comments.map((comment, idx) => {
           return comment.update({ userId: users[idx].id, challengeId: challenges[idx].id });
         }),
-      ]);
+      ]).catch(err => console.log(err));
     });
 };
 
