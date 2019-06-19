@@ -28,7 +28,7 @@ const challengesSeed = [
     difficulty: 3,
   },
   {
-    name: 'squares',
+    name: 'four squares',
     description: 'Make a row of four squares, each of them is 40px by 40px',
     difficulty: 3,
   },
