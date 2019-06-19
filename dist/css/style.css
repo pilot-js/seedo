@@ -66,9 +66,7 @@ header {
 }
 
 #logo {
-  height: 38px; /* 50px */
-  margin-top: -10px;
-  margin-bottom: -10px;
+  height: 50px;
 }
 
 footer {
