@@ -55,20 +55,12 @@ const _Nav = props => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light">
       <Link className="navbar-brand" to="/">
-        <img src="logo.png" alt="logo" className="logo-img" />
+        <img id="logo" src="/images/logo.png" alt="logo" className="logo-img" />
       </Link>
       <div id="site-name" className="flex-container">
-        Design Wars
+        MASK OFF
       </div>
       <div className="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-        {/* <ul className="navbar-nav mr-auto">
-          {navLinks.map(link => (
-            <li key={link.label} className="nav-item">
-              <NavLink exact key={link.to} to={link.to} className="nav-link">
-                {link.label}
-              </NavLink>
-            </li>
-          ))} */}
         <ul className="navbar-nav">
           {navLinks.map(link => (
             <li key={link.label} className="nav-item">

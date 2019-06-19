@@ -65,6 +65,13 @@ header {
   margin-bottom: 20px;
 }
 
+#logo {
+  height: 50px;
+  width: 57px;
+  margin-top: -10px;
+  margin-bottom: -10px;
+}
+
 footer {
   margin: 20px;
   padding: 10px;
