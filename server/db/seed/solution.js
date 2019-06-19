@@ -49,7 +49,7 @@ const solutionsSeed = [
         height: 100px;
         background-color: yellow;
       }`,
-    js: ''
+    js: '',
   },
   {
     html: `<div class="clock">
@@ -142,7 +142,7 @@ const solutionsSeed = [
       margin: auto;
       z-index: 1;
     }`,
-    js: ''
+    js: '',
   },
   {
     html: `
