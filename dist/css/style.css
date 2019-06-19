@@ -66,8 +66,7 @@ header {
 }
 
 #logo {
-  height: 50px;
-  width: 57px;
+  height: 38px; /* 50px */
   margin-top: -10px;
   margin-bottom: -10px;
 }
@@ -79,6 +78,11 @@ footer {
 
 h1 {
   margin-bottom: 30px;
+  text-align: center;
+}
+
+h2 {
+  margin: 20px;
   text-align: center;
 }
 
@@ -97,11 +101,6 @@ nav {
 .navbar {
   /* background-color: var(--secondary);  */
   color: red;
-}
-
-#site-name {
-  font-size: 2rem;
-  color: #ffa564;
 }
 
 #login-form .form-group {
