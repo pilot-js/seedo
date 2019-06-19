@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import CodeMirror from 'react-codemirror';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { fetchOneChallenge, fetchUserchallengeById } from '../store';
 
 // todo convert to functional component
@@ -42,7 +43,12 @@ class _Solution extends Component {
     }
     return (
       <div>
-        <h2>Our solution</h2>
+        <Link to="/userpage">
+          <button type="button" className="btn">
+            Back to User Page
+          </button>
+        </Link>
+        <h2>Our Solution</h2>
         <div className="d-flex justify-content-around row">
           <div className="col">
             {individualChallenge ? (
@@ -55,7 +61,7 @@ class _Solution extends Component {
             ) : null}
           </div>
         </div>
-        <h2>Your solution</h2>
+        <h2>My Solution</h2>
         <div className="d-flex justify-content-around row">
           <div className="col">
             <CodeMirror defaultValue={userchallenge.html} options={options} />
