@@ -21,13 +21,9 @@ const _Login = ({ history, getUser, user }) => {
     ev.preventDefault();
     getUser({ email, password })
       .then(() => {
-        if (user.id) {
-          history.push('/challenges');
-        } else {
-          window.alert('Incorrect username/password.');
-        }
+        history.push('/challenges');
       })
-      .catch(error => console.log(error));
+      .catch(() => window.alert('Incorrect username/password.'));
   };
 
   const githubOauth = () => {
