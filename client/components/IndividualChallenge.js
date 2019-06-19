@@ -90,20 +90,28 @@ const _IndividualChallenge = ({
   const customStyles = {
     overlay: {
       backgroundColor: 'rgba(189, 195, 199, .8)',
+      // backgroundColor: 'rgba(230, 230, 230, 1)',
     },
     content: {
-      top: '50%',
+      top: '8%',
       left: '50%',
-      marginRight: '-25%',
-      transform: 'translate(-50%, -50%)',
+      marginRight: '-45%',
+      transform: 'translate(-50%, 0%)',
+      backgroundColor: 'rgba(230, 230, 230, 1)',
     },
+    // content: {
+    //   top: '50%',
+    //   left: '50%',
+    //   marginRight: '-25%',
+    //   transform: 'translate(-50%, -50%)',
+    // },
   };
   const solutionImage = images[0].data;
   return (
     <div className="d-flex flex-column align-items-center">
       <h1>{name}</h1>
       <p>{description}</p>
-      <div className="d-flex row" style={{ width: '100%' }}>
+      <div className="d-flex row">
         <div className="col-sm-6">
           <img src={userImage} alt="" className="card-image-top card-image" />
         </div>

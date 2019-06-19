@@ -87,7 +87,7 @@ const _AdminUserEdit = props => {
 
   return (
     <div>
-      <h1 className="text-center">{actionText} User</h1>
+      <h1>{actionText} User</h1>
       <div className="row">
         <form onSubmit={handleSubmit}>
           <div className="form-group row">

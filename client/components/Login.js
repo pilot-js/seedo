@@ -1,3 +1,4 @@
+/* eslint indent: 1 */
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { getUser } from '../store';

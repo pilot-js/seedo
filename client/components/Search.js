@@ -55,14 +55,12 @@ export const Search = ({ searchTerm, history }) => {
             <option value={1}>1</option>
             <option value={2}>2</option>
           </select>
-          {/* <div className="btn-group"> */}
           <button type="submit" disabled={filterIsAll(Object.values(filter))} className="btn">
             Filter
           </button>
           <button type="button" onClick={onClear} className="btn">
             Clear
           </button>
-          {/* </div> */}
         </form>
       </div>
       <div className="d-flex col-sm-6 align-items-center">

@@ -24,7 +24,7 @@ const _AdminUsers = props => {
   const { users } = props;
   return (
     <div>
-      <h1 className="text-center">Users</h1>
+      <h1>Users</h1>
       <Link to="/admin/users/create">
         <button type="submit">Add User</button>
       </Link>

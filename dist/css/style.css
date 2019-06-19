@@ -45,6 +45,7 @@ orange: #FFA564 - accent
   --blue-dark: #1e374e; /* body bkg */
   --blue-med: #c1d5e0; /* container bkg */
   --blue-light: #e1f1ff; /* nav bkg */
+  --gray: #6c757d;
   --gray-light: #d8d8d8; /* card body */
   --accent: #ffa564; /* orange */
   /* --accent-2: #c4c4c4; /* gray */
@@ -64,6 +65,13 @@ header {
   margin-bottom: 20px;
 }
 
+#logo {
+  height: 50px;
+  width: 57px;
+  margin-top: -10px;
+  margin-bottom: -10px;
+}
+
 footer {
   margin: 20px;
   padding: 10px;
@@ -71,6 +79,15 @@ footer {
 
 h1 {
   margin-bottom: 30px;
+  text-align: center;
+}
+
+.btn-tertiary {
+  background-color: darkgrey;
+}
+
+.btn-tertiary:hover {
+  background-color: var(--gray);
 }
 
 /*********  NAV  *********/
@@ -85,6 +102,14 @@ nav {
 #site-name {
   font-size: 2rem;
   color: #ffa564;
+}
+
+#login-form .form-group {
+  margin-right: 30px;
+}
+
+#login-form .form-group label {
+  margin-right: 10px;
 }
 
 /*********  CHALLENGES PAGE  *********/
@@ -157,12 +182,44 @@ input::placeholder {
   padding-left: 8px;
 }
 
+/*********  RESULTS MODAL  *********/
+#results-modal h3 {
+  text-align: center;
+}
+
+#difference-comment {
+  text-align: center;
+  color: #a0a0a0;
+}
+
+/* TODO decide if need these original settings */
+/* .ReactModal__Content .ReactModal__Content--after-open {
+  position: absolute;
+  top: 18%;
+  left: 45%;
+  right: 0px;
+  bottom: 0px;
+  border: 1px solid rgb(204, 204, 204);
+  background: #d8d8d8;
+  overflow: auto;
+  border-radius: 4px;
+  outline: none;
+  padding: 20px;
+  transform: translate(-50%, -1%);
+} */
+
+/*********  COMMUNITY PAGE  *********/
+
+#community-main .list-group-item {
+  display: block;
+}
 /*********  LOGIN PAGE  *********/
 
 .login-form {
   padding-bottom: 1em;
   border-bottom: var(--blue-dark) solid 1px;
 }
+
 .login-input {
   width: 25rem;
   margin-bottom: 2em;
@@ -176,6 +233,7 @@ input::placeholder {
   border-radius: 10px;
 }
 
+/********************************************************************/
 /*********  MEDIA QUERIES  *********/
 
 @media (min-width: 1200px) {
