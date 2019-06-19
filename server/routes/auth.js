@@ -11,8 +11,14 @@ router.put('/login', (req, res, next) => {
     },
   })
     .then(user => {
-      req.session.user = user;
-      res.send(user);
+      if (user) {
+        req.session.user = user;
+        res.send(user);
+      } else {
+        const err = new Error('Incorrect');
+        err.status = 401;
+        next(err);
+      }
     })
     .catch(next);
 });
