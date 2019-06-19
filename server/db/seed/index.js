@@ -45,7 +45,7 @@ const syncAndSeed = () => {
               console.log(sol.get());
               const data = await utils.seedImage(sol.html, sol.css, 'seed', sol.challengeId);
               console.log('generated data');
-              await Image.create({ challengeId: sol.challengeId, width: 600, height: 337, data });
+              await Image.create({ challengeId: sol.challengeId, width: 540, height: 304, data });
             }
           })();
         })
