@@ -39,46 +39,6 @@ const _Login = ({ history, getUser, user }) => {
   };
 
   return (
-    // <div>
-    //   <h1>Login</h1>
-    //   <div className="row justify-content-center">
-    //     <form id="login-form" className="form-inline" onSubmit={saveHandler}>
-    //       <div className="form-group">
-    //         <label htmlFor="email">Email</label>
-    //         <input
-    //           id="email"
-    //           className="form-control"
-    //           name="email"
-    //           value={email}
-    //           onChange={e => setEmail(e.target.value)}
-    //         />
-    //       </div>
-    //       <div className="form-group">
-    //         <label htmlFor="password">Password</label>
-    //         <input
-    //           className="form-control"
-    //           type="password"
-    //           name="password"
-    //           value={password}
-    //           onChange={e => setPassword(e.target.value)}
-    //         />
-    //       </div>
-    //       <div className="form-group">
-    //         <button type="submit" className="btn btn-raised btn-primary">
-    //           Login
-    //         </button>
-    //       </div>
-    //     </form>
-    //   </div>
-    //   <div className="text-center">
-    //     <button type="button" className="btn btn-raised btn-secondary mr-2" onClick={userSignUp}>
-    //       Sign Up!
-    //     </button>
-    //     <button type="button" className="btn btn-raised btn-primary" onClick={githubOauth}>
-    //       Login With Github
-    //     </button>
-    //   </div>
-
     <div className="d-flex justify-content-center flex-column">
       <form
         onSubmit={saveHandler}

@@ -192,6 +192,7 @@ input::placeholder {
   color: #a0a0a0;
 }
 
+/* TODO decide if need these original settings */
 /* .ReactModal__Content .ReactModal__Content--after-open {
   position: absolute;
   top: 18%;
