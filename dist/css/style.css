@@ -205,7 +205,27 @@ input::placeholder {
 #community-main .list-group-item {
   display: block;
 }
+/*********  LOGIN PAGE  *********/
 
+.login-form {
+  padding-bottom: 1em;
+  border-bottom: var(--blue-dark) solid 1px;
+}
+
+.login-input {
+  width: 25rem;
+  margin-bottom: 2em;
+  background-color: orange;
+}
+
+.login-button {
+  background: orange;
+  width: 180px;
+  padding: 4px 0;
+  border-radius: 10px;
+}
+
+/********************************************************************/
 /*********  MEDIA QUERIES  *********/
 
 @media (min-width: 1200px) {

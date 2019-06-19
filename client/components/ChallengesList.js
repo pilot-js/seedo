@@ -67,7 +67,9 @@ const component = ({
 
   const solutionByChallengeId = challengeId => {
     if (userchallenge instanceof Array) {
-      const solutions = userchallenge.filter(solution => solution.challengeId === challengeId);
+      const solutions = userchallenge.filter(
+        solution => solution.challengeId === challengeId && solution.submitted,
+      );
       return solutions;
     }
   };
