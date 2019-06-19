@@ -49,8 +49,7 @@ const solutionsSeed = [
         height: 100px;
         background-color: yellow;
       }`,
-    js: '',
-    submitted: false,
+    js: ''
   },
   {
     html: `<div class="clock">
@@ -143,8 +142,7 @@ const solutionsSeed = [
       margin: auto;
       z-index: 1;
     }`,
-    js: '',
-    submitted: false,
+    js: ''
   },
   {
     html: `
