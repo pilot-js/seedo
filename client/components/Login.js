@@ -8,7 +8,7 @@ const mapDispatchToProps = dispatch => ({
   getUser: user => dispatch(getUser(user)),
 });
 
-const _Login = ({ history, getUser }) => {
+const _Login = ({ history, getUser, user }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -19,7 +19,13 @@ const _Login = ({ history, getUser }) => {
   const saveHandler = ev => {
     ev.preventDefault();
     getUser({ email, password })
-      .then(() => history.push('/challenges'))
+      .then(() => {
+        if (user.id) {
+          history.push('/challenges');
+        } else {
+          window.alert('Incorrect username/password.');
+        }
+      })
       .catch(error => console.log(error));
   };
 
@@ -32,30 +38,37 @@ const _Login = ({ history, getUser }) => {
   };
 
   return (
-    <div>
-      <form onSubmit={saveHandler}>
-        <label htmlFor="email">Email</label>
+    <div className="d-flex justify-content-center flex-column">
+      <form
+        onSubmit={saveHandler}
+        className="d-flex justify-content-center flex-column align-items-center login-form"
+      >
+        <label htmlFor="email" className="login-text">
+          Email
+        </label>
         <input
           id="email"
-          className="form-control"
+          className="form-control login-input"
           name="email"
           value={email}
           onChange={e => setEmail(e.target.value)}
         />
         <label htmlFor="password">Password</label>
         <input
-          className="form-control"
+          className="form-control login-input"
           type="password"
           name="password"
           value={password}
           onChange={e => setPassword(e.target.value)}
         />
-        <button type="submit">Login</button>
+        <button type="submit" className="login-button">
+          Login
+        </button>
       </form>
-      <button type="button" onClick={userSignUp}>
+      <button type="button" onClick={userSignUp} className="btn btn-success">
         Sign Up!
       </button>
-      <button type="button" onClick={githubOauth}>
+      <button type="button" onClick={githubOauth} className="btn btn-info">
         Login With Github
       </button>
     </div>
