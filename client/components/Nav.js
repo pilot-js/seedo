@@ -57,9 +57,6 @@ const _Nav = props => {
       <Link className="navbar-brand" to="/">
         <img id="logo" src="/images/logo.png" alt="logo" className="logo-img" />
       </Link>
-      <div id="site-name" className="flex-container">
-        MASK OFF
-      </div>
       <div className="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
         <ul className="navbar-nav">
           {navLinks.map(link => (
@@ -91,8 +88,8 @@ const _Nav = props => {
               </div>
             </li>
           ) : (
-            ''
-          )}
+              ''
+            )}
         </ul>
       </div>
     </nav>
