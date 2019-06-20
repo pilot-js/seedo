@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchChallenges, fetchAllUserchallenges } from '../store';
 
-// should we creat two thunks for fetching solutions and comments by challengeId
+// TODO should we create two thunks for fetching solutions and comments by challengeId
 const mapDispatchToProps = dispatch => ({
   fetchChallenges: () => dispatch(fetchChallenges()),
   fetchAllUserchallenges: () => dispatch(fetchAllUserchallenges()),
@@ -16,7 +16,7 @@ const mapStateToProps = ({ user, challenges, userchallenge }) => ({
   userchallenge,
 });
 
-const checkSumbitted = (challenge, userchallenge) => {
+const checkSubmitted = (challenge, userchallenge) => {
   const matchedUserChallenge = userchallenge.find(
     userChal => userChal.challengeId === challenge.id,
   );
@@ -39,7 +39,10 @@ const _communitySolutionComments = ({
   }, []);
   return (
     <div>
-      <h1 className="text-center">Solution and Comments</h1>
+      <h1>Solution and Comments</h1>
+      <p className="text-center text-muted">
+        You can only access a challenge if you have already taken it.
+      </p>
       <ul className="list-group">
         {challenges.map(challenge => {
           let image;
@@ -49,18 +52,16 @@ const _communitySolutionComments = ({
           return (
             <li key={challenge.id} className="d-flex list-group-item">
               <div className="col d-flex flex-column align-items-center justify-content-around">
-                <Link
-                  to={`/community/challenge/${challenge.id}`}
-                  className="d-flex justify-content-center"
-                  onClick={e => {
-                    if (checkSumbitted(challenge, userchallenge)) {
-                      return null;
-                    }
-                    e.preventDefault();
-                  }}
-                >
+                {checkSubmitted(challenge, userchallenge) ? (
+                  <Link
+                    to={`/community/challenge/${challenge.id}`}
+                    className="d-flex justify-content-center"
+                  >
+                    <h2>{challenge.name}</h2>
+                  </Link>
+                ) : (
                   <h2>{challenge.name}</h2>
-                </Link>
+                )}
                 <p>{challenge.description}</p>
                 <br />
                 <p>Difficulty: {challenge.difficulty} / 5</p>
