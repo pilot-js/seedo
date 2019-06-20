@@ -1,17 +1,22 @@
 const challengesSeed = [
   {
+    name: 'Sun Rising From The Sea',
+    description: 'Make an orange circle (width: 200px) over a blue rectangle',
+    difficulty: 2,
+  },
+  {
     name: 'Four Squares',
     description: 'Make a row of four squares, each is 40px by 40px',
     difficulty: 3,
   },
   {
-    name: 'Orange Sun',
-    description: 'Make an orange circle with radius 250px',
+    name: 'Square',
+    description: 'Make a blue square that is 200px wide and high',
     difficulty: 1,
   },
   {
-    name: 'Square',
-    description: 'Make a blue square that is 200px wide and high',
+    name: 'Circle With Border',
+    description: 'Make a yellow circle with radius 250px, surrounded by a 5px blue border',
     difficulty: 1,
   },
   {

@@ -1,5 +1,37 @@
 const solutionsSeed = [
   {
+    html: `<!DOCTYPE html>
+      <html>
+        <head>
+          <title>Sun Rising From The Sea</title>
+        </head>
+        <body>
+          <div id='sun'></div>
+          <div id='sea'></div>
+        </body>
+      </html>`,
+    css: `#sun {
+          width: 200px;
+          height: 200px;
+          background-color: orange;
+          border-radius: 50%;
+          margin: 20px auto;
+        }
+        
+        #sea {
+          width: 100%;
+          height: 50px;
+          position: absolute;
+          bottom: 0px;
+          background-color: blue;
+        }
+        
+        body {
+          margin: 0;
+      }`,
+    js: '',
+  },
+  {
     html: `<table>
       <tr>
           <td class="red"></td>
@@ -33,26 +65,6 @@ const solutionsSeed = [
     html: `<!DOCTYPE html>
       <html>
         <head>
-          <title>Circle</title>
-        </head>
-        <body>
-          <div id='circle'></div>
-        </body>
-      </html>`,
-    css: `#circle {
-        width: 250px;
-        height: 250px;
-        background-color: orange;
-        border-radius: 50%;
-        margin-right: auto;
-        margin-left:auto
-      }`,
-    js: '',
-  },
-  {
-    html: `<!DOCTYPE html>
-      <html>
-        <head>
           <title>Square</title>
         </head>
         <body>
@@ -63,6 +75,27 @@ const solutionsSeed = [
         width: 200px;
         height: 200px;
         background-color: blue;
+      }`,
+    js: '',
+  },
+  {
+    html: `<!DOCTYPE html>
+      <html>
+        <head>
+          <title>Circle With Border</title>
+        </head>
+        <body>
+          <div id='circle'></div>
+        </body>
+      </html>`,
+    css: `#circle {
+        width: 250px;
+        height: 250px;
+        background-color: yellow;
+        border: 5px solid blue;
+        border-radius: 50%;
+        margin-right: auto;
+        margin-left:auto
       }`,
     js: '',
   },
