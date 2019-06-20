@@ -9,11 +9,12 @@ const UserCompletedChallenges = ({
   firstName,
 }) => {
   const nameText = isAdminUser ? `${firstName}'s` : 'My';
+  
   return (
     <div className="d-flex flex-column align-items-center">
       <h1>{nameText} Completed Challenges</h1>
       <ul className="list-group">
-        {userChallenges.map(challenge => {
+        {userChallenges.filter(chal=>chal.userchallenges[0].submitted).map(challenge => {
           return (
             <li key={challenge.id} className="list-group-item">
               {challenge.name}
