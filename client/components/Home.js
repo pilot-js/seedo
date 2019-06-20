@@ -1,16 +1,36 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import { Carousel } from 'react-responsive-carousel';
+import { fetchImages } from '../store';
 
-export const Home = () => {
-  const callPuppy = () => {
-    axios.get('/puppy');
-  };
+const mapStateToProps = ({ images }) => ({ images });
+
+const mapDispatchToProps = dispatch => ({ fetchImages: () => dispatch(fetchImages()) });
+
+const _Home = ({ images, fetchImages }) => {
+  useEffect(() => {
+    fetchImages().catch(e => console.error(e));
+  }, []);
+
+  let imageList = [];
+
+  if (images instanceof Array) {
+    imageList = images;
+  }
+
   return (
     <div className="d-flex flex-column align-items-center">
       <h1>Welcome to [insert name here]!</h1>
       <div className="d-flex justify-content-evenly">
         <div className="col">
-          <div>need a image here</div>
+          <Carousel>
+            {imageList.map(image => (
+              <div key={image.id}>
+                <img src={image.data} alt={image.challenge.name} />
+              </div>
+            ))}
+          </Carousel>
         </div>
         <div className="col">
           <p>
@@ -29,3 +49,8 @@ export const Home = () => {
     </div>
   );
 };
+
+export const Home = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(_Home);
