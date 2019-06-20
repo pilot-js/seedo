@@ -1,15 +1,12 @@
 const challengesSeed = [
   {
     name: 'Make circle',
-    description: 'Make a red circle with radius 100px',
+    description: 'Make an orange circle with radius 100px',
     difficulty: 1,
-    html: 'dummy data',
-    css: 'dummy data',
-    js: 'dummy data',
   },
   {
     name: 'Make square',
-    description: 'Make a blue square that is 100px wide and high',
+    description: 'Make a blue square that is 200px wide and high',
     difficulty: 1,
   },
   {
@@ -28,7 +25,7 @@ const challengesSeed = [
     difficulty: 3,
   },
   {
-    name: 'four squares',
+    name: 'Four squares',
     description: 'Make a row of four squares, each of them is 40px by 40px',
     difficulty: 3,
   },

@@ -12,7 +12,7 @@ const solutionsSeed = [
     css: `#circle {
         width: 100px;
         height: 100px;
-        background-color: red;
+        background-color: orange;
         border-radius: 50%;
       }`,
     js: '',
@@ -28,8 +28,8 @@ const solutionsSeed = [
         </body>
       </html>`,
     css: `#square {
-        width: 100px;
-        height: 100px;
+        width: 200px;
+        height: 200px;
         background-color: blue;
       }`,
     js: '',
