@@ -1,33 +1,40 @@
 const challengesSeed = [
   {
-    name: 'Make circle',
-    description: 'Make an orange circle with radius 100px',
+    name: 'Four Squares',
+    description: 'Make a row of four squares, each is 40px by 40px',
+    difficulty: 3,
+  },
+  {
+    name: 'Orange Sun',
+    description: 'Make an orange circle with radius 250px',
     difficulty: 1,
   },
   {
-    name: 'Make square',
+    name: 'Square',
     description: 'Make a blue square that is 200px wide and high',
     difficulty: 1,
   },
   {
-    name: 'Make rectangle',
-    description: 'Make a yellow rectangle that is 200px wide and 100px high',
+    name: 'Circle and 2 Rectangles',
+    description:
+      'Make a blue circle (100px), purple rectangle (w:200px, h:100px), green square (w:150px, h:150px)',
     difficulty: 2,
   },
   {
-    name: 'Make a clock',
+    name: 'Center Me!',
+    description:
+      'Center a yellow box, with 2px wide blue border, containing the words "I\'m centered"',
+    difficulty: 3,
+  },
+  {
+    name: "Tick Tock O'Clock",
     description: 'Make a clock with hour, minute, and second hands',
     difficulty: 5,
   },
   {
-    name: 'My home page',
+    name: 'My Home Page',
     description: 'Make an home page that is 540px wide and 304px high',
-    difficulty: 3,
-  },
-  {
-    name: 'Four squares',
-    description: 'Make a row of four squares, each of them is 40px by 40px',
-    difficulty: 3,
+    difficulty: 4,
   },
 ];
 

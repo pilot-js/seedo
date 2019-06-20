@@ -1,5 +1,35 @@
 const solutionsSeed = [
   {
+    html: `<table>
+      <tr>
+          <td class="red"></td>
+          <td class="yellow"></td>
+          <td class="orange"></td>
+          <td class="blue"></td>
+      <tr>
+      </table>`,
+    css: `table{
+        border-collapse: collapse;
+        }
+        td{    
+            padding:40px;
+            border:10px solid black;
+        }
+        .red{
+            background-color:#F15E66;
+        }
+        .yellow{
+            background-color:#FFDB64;
+        }
+        .orange{
+            background-color:#F58326;
+        }
+        .blue{
+            background-color:#85B1DE;
+        }`,
+    js: '',
+  },
+  {
     html: `<!DOCTYPE html>
       <html>
         <head>
@@ -10,10 +40,12 @@ const solutionsSeed = [
         </body>
       </html>`,
     css: `#circle {
-        width: 100px;
-        height: 100px;
+        width: 250px;
+        height: 250px;
         background-color: orange;
         border-radius: 50%;
+        margin-right: auto;
+        margin-left:auto
       }`,
     js: '',
   },
@@ -38,16 +70,62 @@ const solutionsSeed = [
     html: `<!DOCTYPE html>
       <html>
         <head>
-          <title>Rectangle</title>
+          <title>Circle and Two Rectangles</title>
         </head>
         <body>
+          <div id='circle'></div>
           <div id='rectangle'></div>
+          <div id='square'></div>
         </body>
       </html>`,
-    css: `#rectangle {
-        width: 200px;
-        height: 100px;
-        background-color: yellow;
+    css: `#circle {
+          width: 100px;
+          height: 100px;
+          background-color: blue;
+          border-radius: 50%;
+        }
+        
+        #rectangle {
+          width: 200px;
+          height: 100px;
+          background-color: purple;
+          margin-right: auto;
+          margin-left:auto
+        }
+        
+        #square {
+          width: 150px;
+          height: 150px;
+          background-color: green;
+          position: absolute;
+          bottom: 20px;
+          right: 30px;
+        }
+      }`,
+    js: '',
+  },
+  {
+    html: `
+      <div class="centered">
+        <p>I'm centered</p>
+      </div>`,
+    css: `body {
+        margin: 0;
+      }
+      
+      p {
+        font-size: 30px;
+        border: 2px solid blue;
+        padding: 20px;
+        background: yellow;
+      }
+      
+      .centered {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      
+        height: 100vh;
       }`,
     js: '',
   },
@@ -171,7 +249,7 @@ const solutionsSeed = [
         font-family: Georgia, "Times New Roman",
               Times, serif;
         color: purple;
-        background-color: #d8da3d }
+        background-color: yellow }
         ul.navbar {
         position: absolute;
         top: 2em;
@@ -180,36 +258,6 @@ const solutionsSeed = [
         h1 {
           font-family: Helvetica, Geneva, Arial,
               SunSans-Regular, sans-serif }`,
-    js: '',
-  },
-  {
-    html: `<table>
-      <tr>
-          <td class="red"></td>
-          <td class="yellow"></td>
-          <td class="orange"></td>
-          <td class="blue"></td>
-      <tr>
-      </table>`,
-    css: `table{
-        border-collapse: collapse;
-        }
-        td{    
-            padding:40px;
-            border:10px solid black;
-        }
-        .red{
-            background-color:#F15E66;
-        }
-        .yellow{
-            background-color:#FFDB64;
-        }
-        .orange{
-            background-color:#F58326;
-        }
-        .blue{
-            background-color:#85B1DE;
-        }`,
     js: '',
   },
 ];
