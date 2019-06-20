@@ -1,15 +1,40 @@
 /* eslint indent: 0 */
-import React, { useEffect } from 'react';
+import React, { useEffect, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-import { fetchChallenges } from '../store';
+import { fetchChallenges, fetchAllUserchallenges } from '../store';
+import { attemptedTimes, attemptedByUsers, avgScore, solutionCompleted } from '../utils';
 
 const _AdminChallenges = props => {
+  const {
+    fetchChallenges,
+    fetchChallengesWithFilterAndSearch,
+    fetchAllUserchallenges,
+    userchallenge,
+    match,
+    history,
+    user,
+  } = props;
+
+  console.log('props:', props);
   useEffect(() => {
-    props.fetchChallenges();
+    fetchChallenges();
+    props.fetchAllUserchallenges();
   }, []);
+
+  // for stats
+  const solutionByChallengeId = challengeId => {
+    console.log('userchallenge: ', userchallenge);
+    if (userchallenge instanceof Array) {
+      console.log('here: ', challengeId);
+      const solutions = userchallenge.filter(
+        solution => solution.challengeId === challengeId && solution.submitted,
+      );
+      return solutions;
+    }
+  };
 
   const deleteChallenge = challengeId => {
     axios
@@ -20,7 +45,7 @@ const _AdminChallenges = props => {
           window.alert(resp.data);
         }
       })
-      .then(() => props.fetchChallenges())
+      .then(() => fetchChallenges())
       .catch(error => {
         // TODO display error msg in browser
         console.log('error:', error);
@@ -40,9 +65,12 @@ const _AdminChallenges = props => {
         <thead>
           <tr>
             <th scope="col">Edit | Delete</th>
-            <th scope="col">ID</th>
+            {/* <th scope="col">ID</th> */}
+            <th scope="col">Difficulty</th>
             <th scope="col">Name</th>
             <th scope="col">Description</th>
+            <th scope="col"># Users Attempted</th>
+            <th scope="col">Avg Score</th>
             {/* TODO set up link to popup to see image */}
             {/* <th scope="col">Image</th> */}
           </tr>
@@ -50,7 +78,7 @@ const _AdminChallenges = props => {
         <tbody>
           {challenges
             ? challenges.map(chall => {
-                const { id, name, description, image } = chall;
+                const { id, name, description, difficulty, image } = chall;
                 return (
                   <tr key={id}>
                     <td key={`td-${id}`}>
@@ -78,9 +106,28 @@ const _AdminChallenges = props => {
                         </button>
                       </div>
                     </td>
-                    <td>{id}</td>
+                    {/* <td>{id}</td> */}
+                    <td className="text-center">{difficulty}</td>
                     <td>{name}</td>
                     <td>{description}</td>
+
+                    {solutionByChallengeId(id) ? (
+                      // <div>
+                      <Fragment>
+                        <td className="text-center">
+                          {/* # Users Attempted:{' '} */}
+                          {attemptedByUsers(solutionByChallengeId(id))}
+                        </td>
+                        <td className="text-center">
+                          {/* Average Score:  */}
+                          {avgScore(solutionByChallengeId(id))}
+                        </td>
+                      </Fragment>
+                    ) : (
+                      //
+                      // </div>
+                      ''
+                    )}
                     {/* TODO link to popup image goes here */}
                     {/* <td>link to popup image goes here</td> */}
                   </tr>
@@ -93,13 +140,16 @@ const _AdminChallenges = props => {
   );
 };
 
-const mapStateToProps = ({ challenges }) => {
-  return { challenges };
-};
+const mapStateToProps = ({ challenges, userchallenge, user }) => ({
+  challenges,
+  userchallenge,
+  user,
+});
 
 const mapDispatchToProps = dispatch => {
   return {
     fetchChallenges: () => dispatch(fetchChallenges()),
+    fetchAllUserchallenges: () => dispatch(fetchAllUserchallenges()),
   };
 };
 
