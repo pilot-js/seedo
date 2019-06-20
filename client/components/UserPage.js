@@ -7,6 +7,7 @@ import { UserCompletedChallenges } from './UserCompletedChallenges';
 const _UserPage = ({
   user,
   adminUserId,
+  adminUser,
   userChallenges,
   challengeId,
   individualChallenge,
@@ -64,9 +65,10 @@ const _UserPage = ({
   );
 };
 
-const mapStateToProps = ({ user, userChallenges, individualChallenge }) => {
+const mapStateToProps = ({ user, adminUser, userChallenges, individualChallenge }) => {
   return {
     user,
+    adminUser,
     individualChallenge,
     userChallenges,
   };
