@@ -2,22 +2,40 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchChallenges } from '../store';
+import { fetchChallenges, fetchAllUserchallenges } from '../store';
 
 // should we creat two thunks for fetching solutions and comments by challengeId
 const mapDispatchToProps = dispatch => ({
   fetchChallenges: () => dispatch(fetchChallenges()),
+  fetchAllUserchallenges: () => dispatch(fetchAllUserchallenges()),
 });
 
-const mapStateToProps = ({ user, challenges, individualChallenge }) => ({
+const mapStateToProps = ({ user, challenges, userchallenge }) => ({
   user,
   challenges,
-  individualChallenge,
+  userchallenge,
 });
 
-const _communitySolutionComments = ({ challenges, fetchChallenges }) => {
+const checkSumbitted = (challenge, userchallenge) => {
+  const matchedUserChallenge = userchallenge.find(
+    userChal => userChal.challengeId === challenge.id,
+  );
+  if (matchedUserChallenge && matchedUserChallenge.submitted) {
+    return true;
+  }
+  return false;
+};
+
+const _communitySolutionComments = ({
+  challenges,
+  fetchChallenges,
+  fetchAllUserchallenges,
+  userchallenge,
+  user,
+}) => {
   useEffect(() => {
     fetchChallenges();
+    fetchAllUserchallenges();
   }, []);
   return (
     <div>
@@ -34,6 +52,12 @@ const _communitySolutionComments = ({ challenges, fetchChallenges }) => {
                 <Link
                   to={`/community/challenge/${challenge.id}`}
                   className="d-flex justify-content-center"
+                  onClick={e => {
+                    if (checkSumbitted(challenge, userchallenge)) {
+                      return null;
+                    }
+                    e.preventDefault();
+                  }}
                 >
                   <h2>{challenge.name}</h2>
                 </Link>
