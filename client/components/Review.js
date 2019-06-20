@@ -17,9 +17,8 @@ const _Review = ({ userId, challengeId, addCommentToOneChallenge }) => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="reviewContent">Add Review Here</label>
+    <div className="d-flex justify-content-center">
+      <form onSubmit={handleSubmit} className="d-flex flex-column">
         <br />
         <textarea
           name="content"
@@ -29,7 +28,9 @@ const _Review = ({ userId, challengeId, addCommentToOneChallenge }) => {
           cols="50"
         />
         <br />
-        <button type="submit">Submit</button>
+        <button className="btn btn-raised btn-success" type="submit">
+          Submit
+        </button>
       </form>
     </div>
   );

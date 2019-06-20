@@ -5,7 +5,7 @@ import { fetchOneChallenge, fetchUsers } from '../store';
 import { Review } from './Review';
 
 const _CommunityChallenge = props => {
-  const { individualChallenge, challengeId, user, fetchOneChallenge } = props;
+  const { individualChallenge, challengeId, user, fetchOneChallenge, users, fetchUsers } = props;
   useEffect(() => {
     fetchOneChallenge(challengeId);
     fetchUsers();
@@ -19,9 +19,13 @@ const _CommunityChallenge = props => {
           <div className="container">
             <ul>
               {individualChallenge.userchallenges.map(userchal => {
+                const user = users.find(user => user.id === userchal.userId) || { email: '' };
+
                 return (
-                  <li key={userchal.id}>
-                    <p>Submitted by: </p>
+                  <div key={userchal.id}>
+                    <p className="mb-0 mt-2">
+                      Submitted by: <b className="mr-0">{user.email}</b>
+                    </p>
                     <div className="row">
                       <div className="col-sm-6 code-display border">
                         <h3 className="text-primary text-center">HTML</h3>
@@ -37,15 +41,20 @@ const _CommunityChallenge = props => {
                       </div>
                       <hr />
                     </div>
-                  </li>
+                  </div>
                 );
               })}
             </ul>
           </div>
           <h2>All user comments</h2>
-          <ul>
+          <ul className="list-group">
             {individualChallenge.comments.map(comment => {
-              return <li key={comment.id}>{comment.text}</li>;
+              const user = users.find(user => user.id === comment.userId) || { email: '' };
+              return (
+                <li className="list-group-item" key={comment.id}>
+                  <strong className="mr-0">{user.email}</strong>: {comment.text}
+                </li>
+              );
             })}
           </ul>
         </div>
