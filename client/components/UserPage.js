@@ -50,13 +50,19 @@ const _UserPage = ({
   }
   return (
     <div>
-      <p> User ID: {userToShow.id}</p>
-      <p> User githubId: {userToShow.githubId}</p>
+      <p>
+        {' '}
+        <strong>User ID:</strong> <span className="text-info">{userToShow.id}</span>
+      </p>
+      <p>
+        {' '}
+        <strong>User githubId:</strong> <span className="text-info">{userToShow.githubId}</span>
+      </p>
       <div>
         {hasGithubId(userToShow) ? (
           <p>Already linked to github</p>
         ) : (
-          <button type="button" onClick={linkGithub}>
+          <button type="button" className="btn btn-raised btn-info" onClick={linkGithub}>
             Link my github
           </button>
         )}

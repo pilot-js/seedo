@@ -22,7 +22,7 @@ export const Results = ({
         <img className="border" src={solutionImage} alt="Solution" />
       </div>
       <div className="col-sm-4">
-        <h3>Difference</h3>
+        <h3 className="text-danger">Difference</h3>
         <img className="border" src={diffImage} alt="Diff" />
         <p id="difference-comment">difference shown in red</p>
       </div>

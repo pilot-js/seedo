@@ -258,6 +258,47 @@ input::placeholder {
   display: block;
 }
 
+#user-completed-challenges ul,
+#user-completed-challenges li {
+  list-style-type: none;
+}
+
+#user-completed-challenges ul,
+#user-completed-challenges li ul,
+#user-completed-challenges ul li {
+  margin-top: 10px;
+}
+
+#user-completed-challenges .challenge-name {
+  font-size: 1.5rem;
+}
+
+#user-completed-challenges .challenge-name ul li {
+  font-size: 1rem;
+}
+
+/*********  COMMUNITY CHALLENGES PAGE  *********/
+#community-challenge .row {
+  margin-bottom: 20px;
+}
+
+#community-challange h3 {
+  text-align: center;
+}
+
+.code-display {
+  background-color: black;
+  padding: 20px;
+}
+
+.code-display pre {
+  color: white;
+}
+
+.code-display hr {
+  height: 3px;
+}
+
 /*********  LOGIN PAGE  *********/
 #login .btn {
   width: 180px;
