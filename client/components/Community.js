@@ -52,7 +52,7 @@ const _communitySolutionComments = ({
           return (
             <li key={challenge.id} className="d-flex list-group-item">
               <div className="col d-flex flex-column align-items-center justify-content-around">
-                {checkSubmitted(challenge, userchallenge) ? (
+                {userchallenge instanceof Array && checkSubmitted(challenge, userchallenge) ? (
                   <Link
                     to={`/community/challenge/${challenge.id}`}
                     className="d-flex justify-content-center"
