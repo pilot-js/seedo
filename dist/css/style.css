@@ -109,6 +109,11 @@ nav {
   margin-right: 10px;
 }
 
+/*********  HOME PAGE  *********/
+#home p {
+  font-size: 1.2rem;
+}
+
 /*********  INDIVIDUAL CHALLENGE PAGE  *********/
 #individual-challenge h1 {
   margin-bottom: 10px;
@@ -249,11 +254,16 @@ input::placeholder {
 } */
 
 /*********  COMMUNITY PAGE  *********/
-
 #community-main .list-group-item {
   display: block;
 }
+
 /*********  LOGIN PAGE  *********/
+#login .btn {
+  width: 180px;
+  margin: 10px auto;
+  padding: 4px 0;
+}
 
 .login-form {
   padding-bottom: 1em;
@@ -270,7 +280,8 @@ input::placeholder {
   background: orange;
   width: 180px;
   padding: 4px 0;
-  border-radius: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
 }
 
 /********************************************************************/

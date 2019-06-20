@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { Carousel } from 'react-responsive-carousel';
 import { fetchImages } from '../store';
 
@@ -20,8 +21,8 @@ const _Home = ({ images, fetchImages }) => {
   }
 
   return (
-    <div className="d-flex flex-column align-items-center">
-      <h1>Welcome to [insert name here]!</h1>
+    <div id="home" className="d-flex flex-column align-items-center">
+      <h1>Visual Design Challenges for Developers</h1>
       <div className="d-flex justify-content-evenly">
         <div className="col">
           <Carousel>
@@ -34,16 +35,21 @@ const _Home = ({ images, fetchImages }) => {
         </div>
         <div className="col">
           <p>
-            Website description: Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec
-            odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna
-            nibh, viverra non, semper suscipit, posuere a, pede. Donec nec justo eget felis
-            facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim
-            pellentesque felis.
+            We built a platform designed to help developers{' '}
+            <strong>practice and learn HTML and CSS</strong> by reproducing images.
           </p>
-          <div>Better divractice</div>
-          <div>Video Solution</div>
-          <div>Image Front-End Test</div>
-          <div>Ace Coding Interview</div>
+          <p>Are you a visual learner?</p>
+          <p>Want to get better at visual design?</p>
+          <p>Great! Then you are at the right place.</p>
+          <p>We provide you with an image, and your task is to recreate it using HTML and CSS.</p>
+          <div className="text-center">
+            <h3>Ready for a challenge?</h3>
+            <Link to="/login">
+              <button type="button" className="btn btn-primary btn-raised mt-4">
+                Challenge Me!
+              </button>
+            </Link>
+          </div>
         </div>
       </div>
     </div>
