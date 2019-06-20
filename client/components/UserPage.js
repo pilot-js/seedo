@@ -7,6 +7,7 @@ import { UserCompletedChallenges } from './UserCompletedChallenges';
 const _UserPage = ({
   user,
   adminUserId,
+  adminUser,
   userChallenges,
   challengeId,
   individualChallenge,
@@ -28,7 +29,7 @@ const _UserPage = ({
       );
     }
     fetchOneChallenge(challengeId);
-  }, [user.id]);
+  }, [user.id, adminUser]);
 
   const linkGithub = () => {
     window.location.href = `${window.location.origin}/github/login`;
@@ -41,12 +42,18 @@ const _UserPage = ({
     return false;
   };
 
+  let userToShow;
+  if (Object.keys(adminUser).length) {
+    userToShow = { ...adminUser };
+  } else {
+    userToShow = { ...user };
+  }
   return (
     <div>
-      <p> User ID: {user.id}</p>
-      <p> User githubId: {user.githubId}</p>
+      <p> User ID: {userToShow.id}</p>
+      <p> User githubId: {userToShow.githubId}</p>
       <div>
-        {hasGithubId(user) ? (
+        {hasGithubId(userToShow) ? (
           <p>Already linked to github</p>
         ) : (
           <button type="button" onClick={linkGithub}>
@@ -58,15 +65,16 @@ const _UserPage = ({
         userChallenges={userChallenges}
         individualChallenge={individualChallenge}
         isAdminUser={isAdminUser}
-        firstName={user.firstName}
+        firstName={userToShow.firstName}
       />
     </div>
   );
 };
 
-const mapStateToProps = ({ user, userChallenges, individualChallenge }) => {
+const mapStateToProps = ({ user, adminUser, userChallenges, individualChallenge }) => {
   return {
     user,
+    adminUser,
     individualChallenge,
     userChallenges,
   };
