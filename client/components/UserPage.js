@@ -29,7 +29,7 @@ const _UserPage = ({
       );
     }
     fetchOneChallenge(challengeId);
-  }, [user.id, adminUser]);
+  }, [user.id]);
 
   const linkGithub = () => {
     window.location.href = `${window.location.origin}/github/login`;
