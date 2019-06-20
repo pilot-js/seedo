@@ -92,12 +92,12 @@ const _IndividualChallenge = ({
       backgroundColor: 'rgba(189, 195, 199, .8)',
     },
     content: {
-      top: '9%',
+      top: '13%',
       left: '50%',
       marginRight: '-45%',
       transform: 'translate(-50%, 4%)',
       backgroundColor: 'rgba(230, 230, 230, 1)',
-      bottom: '260px',
+      bottom: '180px',
     },
   };
   const solutionImage = images[0].data;
@@ -108,7 +108,7 @@ const _IndividualChallenge = ({
           <h1>{name}</h1>
           <p className="text-center">{description}</p>
         </div>
-        <div className="col-6 offset-2">
+        <div className="col-6 mr-2">
           <div className="row btn-group" role="group">
             <button
               className="btn btn-info btn-raised mr-2"

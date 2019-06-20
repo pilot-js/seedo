@@ -120,8 +120,6 @@ const component = ({
     });
   };
 
-  console.log('challenges: ', challenges);
-
   return (
     <div>
       <h1>Challenges</h1>

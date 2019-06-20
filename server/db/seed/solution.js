@@ -112,28 +112,27 @@ const solutionsSeed = [
         </body>
       </html>`,
     css: `#circle {
-          width: 100px;
-          height: 100px;
-          background-color: blue;
-          border-radius: 50%;
-        }
-        
-        #rectangle {
-          width: 200px;
-          height: 100px;
-          background-color: purple;
-          margin-right: auto;
-          margin-left:auto
-        }
-        
-        #square {
-          width: 150px;
-          height: 150px;
-          background-color: green;
-          position: absolute;
-          bottom: 20px;
-          right: 30px;
-        }
+        width: 100px;
+        height: 100px;
+        background-color: blue;
+        border-radius: 50%;
+      }
+      
+      #rectangle {
+        width: 200px;
+        height: 100px;
+        background-color: purple;
+        margin-right: auto;
+        margin-left:auto
+      }
+      
+      #square {
+        width: 150px;
+        height: 150px;
+        background-color: green;
+        position: absolute;
+        bottom: 20px;
+        right: 30px;
       }`,
     js: '',
   },
