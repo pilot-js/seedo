@@ -9,6 +9,7 @@ import {
   fetchAllUserchallenges,
 } from '../store';
 import { Search } from './Search';
+import { attemptedTimes, attemptedByUsers, avgScore, solutionCompleted } from '../utils';
 
 const mapDispatchToProps = dispatch => ({
   fetchChallenges: () => dispatch(fetchChallenges()),
@@ -74,45 +75,45 @@ const component = ({
     }
   };
 
-  const attemptedTimes = arr => {
-    if (arr instanceof Array) {
-      return arr.length;
-    }
-  };
+  // const attemptedTimes = arr => {
+  //   if (arr instanceof Array) {
+  //     return arr.length;
+  //   }
+  // };
 
-  const attemptedByUsers = arr => {
-    if (arr instanceof Array) {
-      const userIds = arr.reduce((acc, solution) => {
-        if (!acc.includes(solution.userId)) {
-          acc.push(solution.userId);
-        }
-        return acc;
-      }, []);
-      return userIds.length;
-    }
-  };
+  // const attemptedByUsers = arr => {
+  //   if (arr instanceof Array) {
+  //     const userIds = arr.reduce((acc, solution) => {
+  //       if (!acc.includes(solution.userId)) {
+  //         acc.push(solution.userId);
+  //       }
+  //       return acc;
+  //     }, []);
+  //     return userIds.length;
+  //   }
+  // };
 
-  const avgScore = arr => {
-    if (arr instanceof Array) {
-      const totalScore = arr.reduce((acc, solution) => {
-        acc += solution.grade;
-        return acc;
-      }, 0);
-      const avgScore = totalScore / arr.length ? Math.round(totalScore / arr.length) : 0;
-      return avgScore;
-    }
-  };
+  // const avgScore = arr => {
+  //   if (arr instanceof Array) {
+  //     const totalScore = arr.reduce((acc, solution) => {
+  //       acc += solution.grade;
+  //       return acc;
+  //     }, 0);
+  //     const avgScore = totalScore / arr.length ? Math.round(totalScore / arr.length) : 0;
+  //     return avgScore;
+  //   }
+  // };
 
-  const solutionCompleted = (arr, userId) => {
-    if (arr instanceof Array) {
-      return arr.reduce((acc, solution) => {
-        if (solution.userId === userId) {
-          acc = true;
-        }
-        return acc;
-      }, false);
-    }
-  };
+  // const solutionCompleted = (arr, userId) => {
+  //   if (arr instanceof Array) {
+  //     return arr.reduce((acc, solution) => {
+  //       if (solution.userId === userId) {
+  //         acc = true;
+  //       }
+  //       return acc;
+  //     }, false);
+  //   }
+  // };
 
   const collapseController = id => {
     setCollapseStatus(prevState => {
