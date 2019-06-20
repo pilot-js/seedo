@@ -19,9 +19,6 @@ const _CommunityChallenge = props => {
           <div className="container">
             <ul>
               {individualChallenge.userchallenges.map(userchal => {
-                console.log('userchal: ', userchal);
-                console.log('users: ', users);
-
                 const user = users.find(user => user.id === userchal.userId) || { email: '' };
 
                 return (
