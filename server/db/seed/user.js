@@ -2,26 +2,26 @@ const usersSeed = [
   {
     firstName: 'Grant',
     lastName: 'H',
-    email: 'grant@geezemail.com',
-    password: '1234',
+    email: 'grant@email.com',
+    password: '1',
     type: 'user',
   },
   {
     firstName: 'Kristy',
     lastName: 'C',
-    email: 'kristy@geezemail.com',
-    password: '1234',
+    email: 'kristy@email.com',
+    password: '1',
     type: 'user',
   },
   {
     firstName: 'Haoyu',
     lastName: 'Y',
-    email: 'haoyu@geezemail.com',
-    password: '1234',
+    email: 'haoyu@email.com',
+    password: '1',
     type: 'user',
   },
-  { firstName: 'Theo', lastName: 'M', email: 'thee@geezemail.com', password: '1234', type: 'user' },
-  { firstName: 'Admin', lastName: 'Admin', email: 'a@a.com', password: 'a', type: 'admin' },
+  { firstName: 'Theo', lastName: 'M', email: 'theo@email.com', password: '1', type: 'admin' },
+  { firstName: 'Admin', lastName: 'User', email: 'a@a.com', password: 'a', type: 'admin' },
 ];
 
 module.exports = {

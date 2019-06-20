@@ -29,19 +29,22 @@ const _AdminChallenges = props => {
 
   const { challenges } = props;
   return (
-    <div>
+    <div id="admin-challenge">
       <h1 className="text-center">Challenges</h1>
       <Link to="/admin/challenge">
-        <button type="submit">Add Challenge</button>
+        <button type="submit" className="btn btn-primary btn-raised">
+          Add Challenge
+        </button>
       </Link>
       <table className="table table-striped table-hover">
         <thead>
           <tr>
-            <th scope="col">Edit | Archive | Delete</th>
+            <th scope="col">Edit | Delete</th>
             <th scope="col">ID</th>
             <th scope="col">Name</th>
             <th scope="col">Description</th>
-            <th scope="col">Image</th>
+            {/* TODO set up link to popup to see image */}
+            {/* <th scope="col">Image</th> */}
           </tr>
         </thead>
         <tbody>
@@ -50,25 +53,22 @@ const _AdminChallenges = props => {
                 const { id, name, description, image } = chall;
                 return (
                   <tr key={id}>
-                    <td>
+                    <td key={`td-${id}`}>
                       <div className="btn-group" role="group" aria-label="edit actions">
                         <Link to={`/admin/challenge/${id}`}>
-                          <button
-                            type="button"
-                            className="btn btn-secondary item-edit"
-                            // style={{ marginRight: '1rem' }}
-                          >
+                          <button type="button" className="btn btn-secondary item-edit">
                             Edit
                           </button>
                         </Link>
-                        <Link
+                        {/* TODO add archive link */}
+                        {/* <Link
                           to="/"
                           // to={`/admin/challenge/${id}`}
                         >
                           <button type="button" className="btn btn-secondary item-archive" disabled>
                             Archive
                           </button>
-                        </Link>
+                        </Link> */}
                         <button
                           type="button"
                           className="btn btn-secondary item-delete"
@@ -82,7 +82,7 @@ const _AdminChallenges = props => {
                     <td>{name}</td>
                     <td>{description}</td>
                     {/* TODO link to popup image goes here */}
-                    <td>link to popup image goes here</td>
+                    {/* <td>link to popup image goes here</td> */}
                   </tr>
                 );
               })

@@ -26,12 +26,14 @@ const _AdminUsers = props => {
     <div>
       <h1>Users</h1>
       <Link to="/admin/users/create">
-        <button type="submit">Add User</button>
+        <button type="submit" className="btn btn-primary btn-raised">
+          Add User
+        </button>
       </Link>
       <table className="table table-striped table-hover">
         <thead>
           <tr>
-            <th scope="col">Edit | Archive | Delete</th>
+            <th scope="col">Edit | Delete</th>
             <th scope="col">First Name</th>
             <th scope="col">Last Name</th>
             <th scope="col">Email</th>
@@ -52,13 +54,14 @@ const _AdminUsers = props => {
                             Edit
                           </button>
                         </Link>
+                        {/* TODO add archive link */}
                         {/* <Link
                         to="/"
-                      > */}
+                      >
                         <button type="button" className="btn btn-secondary item-archive" disabled>
                           Archive
                         </button>
-                        {/* </Link> */}
+                        </Link> */}
                         <button
                           type="button"
                           className="btn btn-secondary item-delete"
