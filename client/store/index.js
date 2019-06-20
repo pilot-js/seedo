@@ -6,3 +6,4 @@ export * from './users';
 export * from './admin-user';
 export * from './userchallenge';
 export * from './userchallenge-list';
+export * from './images';
