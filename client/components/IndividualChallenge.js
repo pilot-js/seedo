@@ -11,6 +11,11 @@ import {
   fetchUserchallengeById,
 } from '../store';
 
+require('../../node_modules/codemirror/mode/javascript/javascript');
+require('../../node_modules/codemirror/mode/xml/xml');
+require('../../node_modules/codemirror/mode/css/css');
+require('../../node_modules/codemirror/mode/markdown/markdown');
+
 const _IndividualChallenge = ({
   individualChallenge,
   userchallenge,
@@ -61,9 +66,15 @@ const _IndividualChallenge = ({
     setShowCodeMirror(true);
   };
 
-  const options = {
+  const options1 = {
     lineNumbers: true,
-    mode: 'javascript',
+    mode: 'xml',
+    theme: 'monokai',
+  };
+
+  const options2 = {
+    lineNumbers: true,
+    mode: 'css',
     theme: 'monokai',
   };
 
@@ -148,7 +159,7 @@ const _IndividualChallenge = ({
           <CodeMirror
             value={html}
             onChange={(value, eventData) => setHTML(value)}
-            options={options}
+            options={options1}
           />
           <Modal
             isOpen={showModal}
@@ -173,7 +184,7 @@ const _IndividualChallenge = ({
           <CodeMirror
             value={css}
             onChange={(value, eventData) => setCSS(value)}
-            options={options}
+            options={options2}
           />
         </div>
       </div>
