@@ -46,6 +46,7 @@
     "react-modal": "^3.8.1",
     "react-motion": "^0.5.2",
     "react-redux": "^7.0.3",
+    "react-responsive-carousel": "^3.1.49",
     "react-router-dom": "^5.0.0",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",

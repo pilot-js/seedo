@@ -8,6 +8,7 @@ import { users } from './users';
 import { adminUser } from './admin-user';
 import { userchallenge } from './userchallenge';
 import { userChallenges } from './userchallenge-list';
+import { images } from './images';
 
 export const store = createStore(
   combineReducers({
@@ -18,6 +19,7 @@ export const store = createStore(
     adminUser,
     userchallenge,
     userChallenges,
+    images,
   }),
   applyMiddleware(thunkMiddleware),
 );

@@ -50,7 +50,6 @@ const solutionsSeed = [
         background-color: yellow;
       }`,
     js: '',
-    submitted: false,
   },
   {
     html: `<div class="clock">
@@ -144,7 +143,6 @@ const solutionsSeed = [
       z-index: 1;
     }`,
     js: '',
-    submitted: false,
   },
   {
     html: `

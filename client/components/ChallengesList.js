@@ -128,7 +128,7 @@ const component = ({
         {challenges.map(challenge => {
           const imageSrc = challenge.images[0] ? challenge.images[0].data : null;
           return (
-            <div className="col-sm-4">
+            <div className="col-sm-4" key={challenge.id}>
               <div className="card d-inline-flex" key={challenge.id}>
                 <img src={imageSrc} alt="" className="card-image-top card-image" />
                 <div className="card-body">
