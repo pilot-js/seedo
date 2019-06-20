@@ -110,7 +110,7 @@ const _AdminChallengeEdit = props => {
   const actionTextBtn = isUpdate ? 'Update' : 'Save';
 
   return (
-    <div>
+    <div id="admin-challenge-edit">
       <h1>{actionText} Challenge</h1>
       <div className="row">
         <div className="col-6">

@@ -120,6 +120,8 @@ const component = ({
     });
   };
 
+  console.log('challenges: ', challenges);
+
   return (
     <div>
       <h1>Challenges</h1>
@@ -132,32 +134,45 @@ const component = ({
               <div className="card d-inline-flex" key={challenge.id}>
                 <img src={imageSrc} alt="" className="card-image-top card-image" />
                 <div className="card-body">
-                  <div className="float-right">
+                  <div className="float-left">
                     {solutionCompleted(solutionByChallengeId(challenge.id), user.id) ? (
                       <MdCheckmarkCircle fontSize="25px" color="#43853d" />
                     ) : null}
                   </div>
+                  <div className="float-right">
+                    <span className="badge badge-custom">{challenge.difficulty}</span>
+                  </div>
                   <h3 className="card-title text-center">{challenge.name}</h3>
-                  <p className="card-text text-center">{challenge.description}</p>
-                  <Link to={`/challenges/${challenge.id}`}>
-                    <button type="button" className="btn btn-raised btn-primary mr-2">
-                      Go to Challenge
+                  <div className="clearfix" />
+                  <div className="d-flex justify-content-center">
+                    <Link to={`/challenges/${challenge.id}`}>
+                      <button type="button" className="btn btn-raised btn-primary btn-sm mr-2">
+                        Go to Challenge
+                      </button>
+                    </Link>
+                    <button
+                      className="btn btn-raised btn-secondary more-info btn-sm"
+                      type="button"
+                      onClick={() => collapseController(challenge.id)}
+                    >
+                      {collapseStatus[challenge.id] || false ? 'Less info' : 'More info'}
                     </button>
-                  </Link>
-                  <button
-                    className="btn btn-raised btn-secondary more-info"
-                    type="button"
-                    onClick={() => collapseController(challenge.id)}
-                  >
-                    {collapseStatus[challenge.id] || false ? 'Less info' : 'More info'}
-                  </button>
+                  </div>
                   <Collapse
                     isOpened={collapseStatus[challenge.id] ? collapseStatus[challenge.id] : false}
                   >
-                    <div>
+                    <hr />
+                    <div id="challenge-info">
+                      <h4 className="text-center">Challenge Info</h4>
+                      <p className="card-text text-center">{challenge.description}</p>
+                      <p className="text-center text-uppercase mr-3 mt-3">
+                        <strong>Difficulty:</strong>{' '}
+                        <span className="badge badge-custom">{challenge.difficulty}</span>
+                      </p>
+                      <hr />
                       {solutionByChallengeId(challenge.id) ? (
                         <div>
-                          <p>Challenge Statistics</p>
+                          <h4 className="text-center">Challenge Stats</h4>
                           <p>
                             # My Attempts: {attemptedTimes(solutionByChallengeId(challenge.id))}
                           </p>

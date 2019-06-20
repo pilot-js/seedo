@@ -12,10 +12,11 @@ const _Nav = props => {
       label: 'Challenges List',
       to: '/challenges',
     },
-    {
-      label: 'Team',
-      to: '/team',
-    },
+    // TODO add team page later
+    // {
+    //   label: 'Team',
+    //   to: '/team',
+    // },
   ];
   if (props.user.id) {
     navLinks.push(
