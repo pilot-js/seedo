@@ -45,7 +45,7 @@ const App = ({ getGithubUser }) => {
       <section id="content" className="container-fluid">
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route exact path="/team" component={MeetTheTeam} />
+          {/* <Route exact path="/team" component={MeetTheTeam} /> */}
           <Route exact path="/challenges" component={ChallengesList} />
           <Route
             exact
