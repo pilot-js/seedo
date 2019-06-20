@@ -21,11 +21,11 @@ export const Results = ({
         <h3>Solution</h3>
         <img className="border" src={solutionImage} alt="Solution" />
       </div>
-    </div>
-    <div className="col-sm-4">
-      <h3>Difference</h3>
-      <p id="difference-comment">difference shown in red</p>
-      <img className="border" src={diffImage} alt="Diff" />
+      <div className="col-sm-4">
+        <h3>Difference</h3>
+        <img className="border" src={diffImage} alt="Diff" />
+        <p id="difference-comment">difference shown in red</p>
+      </div>
     </div>
     <hr />
     {/* <div className="d-flex row">

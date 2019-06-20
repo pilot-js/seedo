@@ -90,7 +90,6 @@ const _IndividualChallenge = ({
   const customStyles = {
     overlay: {
       backgroundColor: 'rgba(189, 195, 199, .8)',
-      // backgroundColor: 'rgba(230, 230, 230, 1)',
     },
     content: {
       top: '9%',
@@ -98,27 +97,49 @@ const _IndividualChallenge = ({
       marginRight: '-45%',
       transform: 'translate(-50%, 4%)',
       backgroundColor: 'rgba(230, 230, 230, 1)',
+      bottom: '260px',
     },
-    // content: {
-    //   top: '50%',
-    //   left: '50%',
-    //   marginRight: '-25%',
-    //   transform: 'translate(-50%, -50%)',
-    // },
   };
   const solutionImage = images[0].data;
   return (
     <div id="individual-challenge" className="d-flex flex-column align-items-center">
-      <h1>{name}</h1>
-      <p>{description}</p>
-      <div className="d-flex row">
-        <div className="col-sm-6">
+      <div className="d-flex flex-row">
+        <div className="col-8 offset-2">
+          <h1>{name}</h1>
+          <p className="text-center">{description}</p>
+        </div>
+        <div className="col-6 offset-2">
+          <div className="row btn-group" role="group">
+            <button
+              className="btn btn-info btn-raised mr-2"
+              type="button"
+              onClick={() => updateValue(false)}
+            >
+              Run
+            </button>
+            <button
+              className="btn btn-success btn-raised mr-2"
+              type="button"
+              onClick={() => updateValue(true)}
+            >
+              {loading ? 'Loading...' : 'Submit'}
+            </button>
+          </div>
+          <Link to={`/solutions/${userchallenge.id}/challenges/${individualChallenge.id}`}>
+            <button type="button" className="btn btn-danger btn-raised">
+              Solution
+            </button>
+          </Link>
+        </div>
+      </div>
+      <div id="indiv-chall-top-row" className="d-flex row col-sm-12 justify-content-center">
+        <div className="col-sm-6 text-center">
           <h2>My Image</h2>
-          <img src={userImage} alt="" className="card-image-top card-image" />
+          <img src={userImage} alt="" className="card-image mx-auto d-block" />
         </div>
         <div className="col-sm-6">
           <h2>Image to Match</h2>
-          <img src={solutionImage} alt="" className="card-image-top card-image" />
+          <img src={solutionImage} alt="" className="card-image mx-auto d-block" />
         </div>
       </div>
       <div className="d-flex justify-content-between row" style={codeMirrorStyle}>
@@ -146,14 +167,6 @@ const _IndividualChallenge = ({
               userchallengeId={userchallenge.id}
             />
           </Modal>
-          {/* <button
-            name="codeHTML"
-            type="button"
-            className="btn btn-success btn-outline btn-sm"
-            onClick={changeValue}
-          >
-            save
-          </button> */}
         </div>
         <div className="col">
           <h2>CSS</h2>
@@ -162,37 +175,8 @@ const _IndividualChallenge = ({
             onChange={(value, eventData) => setCSS(value)}
             options={options}
           />
-          {/* <button
-            name="codeCSS"
-            type="button"
-            className="btn btn-success btn-outline btn-sm"
-            onClick={changeValue}
-          >
-            save
-          </button> */}
         </div>
       </div>
-      <div className="row btn-group" role="group">
-        <button
-          className="btn btn-info btn-raised"
-          type="button"
-          onClick={() => updateValue(false)}
-        >
-          Run
-        </button>
-        <button
-          className="btn btn-success btn-raised"
-          type="button"
-          onClick={() => updateValue(true)}
-        >
-          {loading ? 'Loading...' : 'Submit'}
-        </button>
-      </div>
-      <Link to={`/solutions/${userchallenge.id}/challenges/${individualChallenge.id}`}>
-        <button type="button" className="btn btn-danger">
-          Go to Solution
-        </button>
-      </Link>
     </div>
   );
 };
