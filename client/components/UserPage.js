@@ -66,11 +66,9 @@ const _UserPage = ({
 };
 
 const mapStateToProps = ({ user, adminUser, userChallenges, individualChallenge }) => {
-  if (user.type === 'admin') {
-    user = adminUser;
-  }
   return {
     user,
+    adminUser,
     individualChallenge,
     userChallenges,
   };
