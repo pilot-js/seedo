@@ -48,7 +48,7 @@ class _Solution extends Component {
             Back to User Page
           </button>
         </Link>
-        <h2>Our Solution</h2>
+        <h2>Solution</h2>
         <div className="d-flex justify-content-around row">
           <div className="col">
             {individualChallenge ? (

@@ -84,6 +84,10 @@ h2 {
   text-align: center;
 }
 
+.btn {
+  border-radius: 0.25rem;
+}
+
 .btn-tertiary {
   background-color: darkgrey;
 }
@@ -96,10 +100,6 @@ h2 {
 nav {
   background-color: var(--blue-light);
 }
-.navbar {
-  /* background-color: var(--secondary);  */
-  color: red;
-}
 
 #login-form .form-group {
   margin-right: 30px;
@@ -107,6 +107,21 @@ nav {
 
 #login-form .form-group label {
   margin-right: 10px;
+}
+
+/*********  INDIVIDUAL CHALLENGE PAGE  *********/
+#individual-challenge h1 {
+  margin-bottom: 10px;
+}
+
+#indiv-chall-top-row h2 {
+  margin: 0 0 10px;
+  font-size: 24px;
+}
+
+#individual-challenge .card-image {
+  max-width: 380px;
+  padding: 1px;
 }
 
 /*********  CHALLENGES PAGE  *********/
@@ -117,7 +132,7 @@ nav {
 }
 
 .card-image {
-  width: 100%;
+  max-width: 100%;
   padding: 1px;
 }
 
@@ -129,6 +144,20 @@ nav {
 .card h3.card-title {
   font-size: 1.5rem;
   font-weight: 400;
+  margin-bottom: 1.2rem;
+}
+
+.badge-custom {
+  padding: 0.25em 0.8em;
+  /* padding-right: 0.8em;
+  padding-left: 0.8em; */
+  border-radius: 0.6rem;
+  color: #000;
+  font-size: 100%;
+  border: 1px solid #6c757d;
+  background-color: transparent;
+  line-height: 1.2;
+  padding: 0.25em 1em;
 }
 
 .ReactCollapse--collapse p:last-of-type {
@@ -148,6 +177,16 @@ nav {
   border-right: 0.3em solid transparent;
   border-bottom: 0;
   border-left: 0.3em solid transparent;
+}
+
+#challenge-info h4 {
+  font-size: 1.3rem;
+  margin-top: 0.5rem;
+  font-weight: 500;
+}
+
+#admin-challenge-edit img {
+  max-width: 540px;
 }
 
 /*********  SEARCH  *********/
@@ -182,6 +221,10 @@ input::placeholder {
 /*********  RESULTS MODAL  *********/
 #results-modal h3 {
   text-align: center;
+}
+
+#results-modal img {
+  max-width: 400px;
 }
 
 #difference-comment {
