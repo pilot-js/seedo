@@ -28,7 +28,9 @@ const _Review = ({ userId, challengeId, addCommentToOneChallenge }) => {
           cols="50"
         />
         <br />
-        <button className="btn btn-raised btn-success" type="submit">Submit</button>
+        <button className="btn btn-raised btn-success" type="submit">
+          Submit
+        </button>
       </form>
     </div>
   );

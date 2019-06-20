@@ -19,14 +19,16 @@ const _CommunityChallenge = props => {
           <div className="container">
             <ul>
               {individualChallenge.userchallenges.map(userchal => {
-                console.log('userchal: ', userchal)
-                console.log('users: ', users)
+                console.log('userchal: ', userchal);
+                console.log('users: ', users);
 
-                const user = users.find(user=>user.id === userchal.userId) || { email: '' };
-                
+                const user = users.find(user => user.id === userchal.userId) || { email: '' };
+
                 return (
                   <div key={userchal.id}>
-                    <p className="mb-0 mt-2">Submitted by:{' '}<b className="mr-0">{user.email}</b></p>
+                    <p className="mb-0 mt-2">
+                      Submitted by: <b className="mr-0">{user.email}</b>
+                    </p>
                     <div className="row">
                       <div className="col-sm-6 code-display border">
                         <h3 className="text-primary text-center">HTML</h3>
@@ -50,8 +52,12 @@ const _CommunityChallenge = props => {
           <h2>All user comments</h2>
           <ul className="list-group">
             {individualChallenge.comments.map(comment => {
-                const user = users.find(user=>user.id === comment.userId) || { email: '' };
-                return <li className="list-group-item" key={comment.id}><strong className="mr-0">{user.email}</strong>: {comment.text}</li>;
+              const user = users.find(user => user.id === comment.userId) || { email: '' };
+              return (
+                <li className="list-group-item" key={comment.id}>
+                  <strong className="mr-0">{user.email}</strong>: {comment.text}
+                </li>
+              );
             })}
           </ul>
         </div>
