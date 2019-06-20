@@ -93,10 +93,10 @@ const _IndividualChallenge = ({
       // backgroundColor: 'rgba(230, 230, 230, 1)',
     },
     content: {
-      top: '8%',
+      top: '9%',
       left: '50%',
       marginRight: '-45%',
-      transform: 'translate(-50%, 0%)',
+      transform: 'translate(-50%, 4%)',
       backgroundColor: 'rgba(230, 230, 230, 1)',
     },
     // content: {
@@ -113,9 +113,11 @@ const _IndividualChallenge = ({
       <p>{description}</p>
       <div className="d-flex row">
         <div className="col-sm-6">
+          <h2>My Image</h2>
           <img src={userImage} alt="" className="card-image-top card-image" />
         </div>
         <div className="col-sm-6">
+          <h2>Image to Match</h2>
           <img src={solutionImage} alt="" className="card-image-top card-image" />
         </div>
       </div>
@@ -144,14 +146,14 @@ const _IndividualChallenge = ({
               userchallengeId={userchallenge.id}
             />
           </Modal>
-          <button
+          {/* <button
             name="codeHTML"
             type="button"
             className="btn btn-success btn-outline btn-sm"
             onClick={changeValue}
           >
             save
-          </button>
+          </button> */}
         </div>
         <div className="col">
           <h2>CSS</h2>
@@ -160,14 +162,14 @@ const _IndividualChallenge = ({
             onChange={(value, eventData) => setCSS(value)}
             options={options}
           />
-          <button
+          {/* <button
             name="codeCSS"
             type="button"
             className="btn btn-success btn-outline btn-sm"
             onClick={changeValue}
           >
             save
-          </button>
+          </button> */}
         </div>
       </div>
       <div className="row btn-group" role="group">

@@ -106,6 +106,10 @@ nav {
 }
 
 /*********  INDIVIDUAL CHALLENGE PAGE  *********/
+#individual-challenge h1 {
+  margin-bottom: 10px;
+}
+
 #individual-challenge .card-image {
   max-width: 540px;
   padding: 1px;
@@ -152,6 +156,10 @@ nav {
   border-left: 0.3em solid transparent;
 }
 
+#admin-challenge-edit img {
+  max-width: 540px;
+}
+
 /*********  SEARCH  *********/
 
 .search-form {
@@ -184,6 +192,10 @@ input::placeholder {
 /*********  RESULTS MODAL  *********/
 #results-modal h3 {
   text-align: center;
+}
+
+#results-modal img {
+  max-width: 400px;
 }
 
 #difference-comment {
