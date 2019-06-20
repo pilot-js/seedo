@@ -96,10 +96,6 @@ h2 {
 nav {
   background-color: var(--blue-light);
 }
-.navbar {
-  /* background-color: var(--secondary);  */
-  color: red;
-}
 
 #login-form .form-group {
   margin-right: 30px;
@@ -107,6 +103,12 @@ nav {
 
 #login-form .form-group label {
   margin-right: 10px;
+}
+
+/*********  INDIVIDUAL CHALLENGE PAGE  *********/
+#individual-challenge .card-image {
+  max-width: 540px;
+  padding: 1px;
 }
 
 /*********  CHALLENGES PAGE  *********/
@@ -117,7 +119,7 @@ nav {
 }
 
 .card-image {
-  width: 100%;
+  max-width: 100%;
   padding: 1px;
 }
 

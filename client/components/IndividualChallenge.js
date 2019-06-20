@@ -108,7 +108,7 @@ const _IndividualChallenge = ({
   };
   const solutionImage = images[0].data;
   return (
-    <div className="d-flex flex-column align-items-center">
+    <div id="individual-challenge" className="d-flex flex-column align-items-center">
       <h1>{name}</h1>
       <p>{description}</p>
       <div className="d-flex row">
