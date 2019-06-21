@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import MdSync from 'react-ionicons/lib/MdSync';
+import MdClose from 'react-ionicons/lib/MdClose';
+import MdUndo from 'react-ionicons/lib/MdUndo';
 
 import { fetchAdminUser } from '../store';
 
@@ -89,12 +92,12 @@ const _AdminUserEdit = props => {
     <div>
       <h1>{actionText} User</h1>
       <div className="row">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="ml-4">
           <div className="form-group row">
-            <label htmlFor="firstName" className="col-sm-4 col-form-label">
+            <label htmlFor="firstName" className="col-sm-5 col-form-label">
               First Name
             </label>
-            <div className="col-sm-8">
+            <div className="col-sm-7">
               <input
                 id="firstName"
                 className="form-control"
@@ -106,10 +109,10 @@ const _AdminUserEdit = props => {
             </div>
           </div>
           <div className="form-group row">
-            <label htmlFor="lastName" className="col-sm-4 col-form-label">
+            <label htmlFor="lastName" className="col-sm-5 col-form-label">
               Last Name
             </label>
-            <div className="col-sm-8">
+            <div className="col-sm-7">
               <input
                 className="form-control"
                 type="text"
@@ -120,10 +123,10 @@ const _AdminUserEdit = props => {
             </div>
           </div>
           <div className="form-group row">
-            <label htmlFor="email" className="col-sm-4 col-form-label">
+            <label htmlFor="email" className="col-sm-5 col-form-label">
               Email
             </label>
-            <div className="col-sm-8">
+            <div className="col-sm-7">
               <input
                 className="form-control"
                 type="email"
@@ -134,10 +137,10 @@ const _AdminUserEdit = props => {
             </div>
           </div>
           <div className="form-group row">
-            <label htmlFor="type" className="col-sm-4 col-form-label">
+            <label htmlFor="type" className="col-sm-5 col-form-label">
               Type
             </label>
-            <div className="col-sm-8">
+            <div className="col-sm-7">
               <select
                 className="custom-select"
                 name="type"
@@ -150,10 +153,10 @@ const _AdminUserEdit = props => {
             </div>
           </div>
           <div className="form-group row">
-            <label htmlFor="password" className="col-sm-4 col-form-label">
+            <label htmlFor="password" className="col-sm-5 col-form-label">
               Password
             </label>
-            <div className="col-sm-8">
+            <div className="col-sm-7">
               <input
                 className="form-control"
                 type="password"
@@ -163,13 +166,26 @@ const _AdminUserEdit = props => {
               />
             </div>
           </div>
-          <button type="submit">{actionTextBtn} User</button>
-          <button type="button" onClick={clearState}>
-            Clear
-          </button>
-          <button type="button" onClick={cancel}>
-            Cancel
-          </button>
+          <div className="text-center">
+            <button className="btn btn-raised btn-sm mr-3 btn-primary" type="submit">
+              <MdSync fontSize="2em" color="#fff" />
+              {/* {actionTextBtn} User */}
+            </button>
+            <button
+              type="button"
+              className="btn btn-raised btn-sm mr-3 btn-info"
+              onClick={clearState}
+            >
+              <MdUndo fontSize="2em" color="#fff" />
+            </button>
+            <button
+              className="btn btn-raised btn-sm mr-3 btn-warning"
+              type="button"
+              onClick={cancel}
+            >
+              <MdClose fontSize="2em" color="#fff" />
+            </button>
+          </div>
         </form>
       </div>
     </div>

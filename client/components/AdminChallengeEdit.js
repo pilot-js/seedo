@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
+import MdEye from 'react-ionicons/lib/MdEye';
+import MdSync from 'react-ionicons/lib/MdSync';
+import MdClose from 'react-ionicons/lib/MdClose';
 
 import { convertBufferToImgSrc } from '../utils';
 import { fetchOneChallenge } from '../store';
@@ -219,13 +222,28 @@ const _AdminChallengeEdit = props => {
                 />
               </div>
             </div>
-            <button type="button" onClick={preview}>
-              Preview
-            </button>
-            <button type="submit">{actionTextBtn} Challenge</button>
-            <button type="button" onClick={cancel}>
-              Cancel
-            </button>
+            <div className="text-center">
+              {/* Preview  */}
+              <button
+                className="btn btn-raised btn-sm mr-3 btn-info"
+                type="button"
+                onClick={preview}
+              >
+                <MdEye fontSize="2em" color="#fff" />
+              </button>
+              {/* Challenge */}
+              <button className="btn btn-raised btn-sm mr-3 btn-primary" type="submit">
+                <MdSync fontSize="2em" color="#fff" />
+              </button>
+              {/* Cancel  */}
+              <button
+                className="btn btn-raised btn-sm mr-3 btn-warning"
+                type="button"
+                onClick={cancel}
+              >
+                <MdClose fontSize="2em" color="#fff" />
+              </button>
+            </div>
           </form>
         </div>
         <div className="col-6">
