@@ -107,6 +107,10 @@ nav {
   margin-right: 10px;
 }
 
+.home-mt-1 {
+  margin-top: -0.25em;
+}
+
 /*********  HOME PAGE  *********/
 #home p {
   font-size: 1.2rem;
