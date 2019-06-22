@@ -98,6 +98,7 @@ const _IndividualChallenge = ({
     width: '100%',
     visibility: showCodeMirror ? 'visible' : 'hidden',
   };
+
   const customStyles = {
     overlay: {
       backgroundColor: 'rgba(189, 195, 199, .8)',

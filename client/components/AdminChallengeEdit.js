@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
+import CodeMirror from 'react-codemirror';
 import MdEye from 'react-ionicons/lib/MdEye';
 import MdSync from 'react-ionicons/lib/MdSync';
 import MdClose from 'react-ionicons/lib/MdClose';
@@ -8,18 +9,24 @@ import MdClose from 'react-ionicons/lib/MdClose';
 import { convertBufferToImgSrc } from '../utils';
 import { fetchOneChallenge } from '../store';
 
+// CodeMirror formating & highlighting
+require('../../node_modules/codemirror/mode/javascript/javascript');
+require('../../node_modules/codemirror/mode/xml/xml');
+require('../../node_modules/codemirror/mode/css/css');
+require('../../node_modules/codemirror/mode/markdown/markdown');
+
 const _AdminChallengeEdit = props => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [difficulty, setDifficulty] = useState(1);
-  const [html, setHtml] = useState('');
-  const [css, setCss] = useState('');
-  const [imageWidth, setImageWidth] = useState('');
-  const [imageHeight, setImageHeight] = useState('');
+  const [html, setHTML] = useState('');
+  const [css, setCSS] = useState('');
+  const [imageWidth, setImageWidth] = useState('540');
+  const [imageHeight, setImageHeight] = useState('304');
   const [image, setImage] = useState({ data: '' });
   const [errors, setErrors] = useState([]);
 
-  // true - update existing challenge
+  // true = update existing challenge
   const isUpdate = props.challengeId ? true : false;
 
   const isIndividualChallenge = Object.keys(props.individualChallenge).length ? true : false;
@@ -40,10 +47,10 @@ const _AdminChallengeEdit = props => {
       setDifficulty(individualChallenge.difficulty);
 
       const { solutions, images } = props.individualChallenge;
-      setHtml(solutions[0].html);
-      setCss(solutions[0].css);
-      setImageWidth(images[0].width);
-      setImageHeight(images[0].height);
+      setHTML(solutions[0].html);
+      setCSS(solutions[0].css);
+      setImageWidth(images[0].width || 540);
+      setImageHeight(images[0].height || 304);
     }
   }, [props.individualChallenge]);
 
@@ -107,6 +114,25 @@ const _AdminChallengeEdit = props => {
     props.history.push('/admin/challenges');
   };
 
+  // CodeMirror settings (begin)
+  const optionsHtml = {
+    lineNumbers: true,
+    mode: 'xml',
+    theme: 'monokai',
+  };
+
+  const optionsCss = {
+    lineNumbers: true,
+    mode: 'css',
+    theme: 'monokai',
+  };
+
+  const codeMirrorStyle = {
+    width: '100%',
+    // visibility: showCodeMirror ? 'visible' : 'hidden',
+  };
+  // CodeMirror settings (end)
+
   const imageSrc = image.length > 0 ? image : null;
 
   const actionText = isUpdate ? 'Edit' : 'Create';
@@ -166,32 +192,47 @@ const _AdminChallengeEdit = props => {
                 </select>
               </div>
             </div>
-            <div className="form-group row">
+            <div
+              className="form-group row"
+              // style={codeMirrorStyle}
+            >
               <label htmlFor="html" className="col-sm-2 col-form-label">
                 HTML
               </label>
               <div className="col-sm-9">
-                <textarea
+                <CodeMirror
+                  value={html}
+                  options={optionsHtml}
+                  onChange={(value, eventData) => setHTML(value)}
+                  // onChange={e => setHTML(e.target.value)}
+                />
+                {/* <textarea
                   className="form-control"
                   rows="10"
                   name="html"
                   value={html}
-                  onChange={e => setHtml(e.target.value)}
-                />
+                  onChange={e => setHTML(e.target.value)}
+                /> */}
               </div>
             </div>
-            <div className="form-group row">
+            <div className="form-group row" style={codeMirrorStyle}>
               <label htmlFor="css" className="col-sm-2 col-form-label">
                 CSS
               </label>
               <div className="col-sm-9">
-                <textarea
+                <CodeMirror
+                  value={css}
+                  options={optionsCss}
+                  onChange={(value, eventData) => setCSS(value)}
+                  // onChange={e => setCSS(e.target.value)}
+                />
+                {/* <textarea
                   className="form-control"
                   rows="10"
                   name="css"
                   value={css}
-                  onChange={e => setCss(e.target.value)}
-                />
+                  onChange={e => setCSS(e.target.value)}
+                /> */}
               </div>
             </div>
             <div className="form-group row">
@@ -248,7 +289,7 @@ const _AdminChallengeEdit = props => {
         </div>
         <div className="col-6">
           <h2>Image Preview</h2>
-          <img src={imageSrc} alt="" />
+          <img src={imageSrc} alt="" width="540" height="304" className="border" />
         </div>
       </div>
     </div>
