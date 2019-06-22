@@ -40,11 +40,13 @@ class _Solution extends Component {
       lineNumbers: true,
       mode: 'xml',
       theme: 'monokai',
+      readOnly: true,
     };
     const options2 = {
       lineNumbers: true,
       mode: 'css',
       theme: 'monokai',
+      readOnly: true,
     };
     if (!individualChallenge.solutions) {
       return null;
