@@ -196,6 +196,12 @@ nav {
   max-width: 540px;
 }
 
+.editor-type-label {
+  font-size: 1.3rem;
+  font-weight: 600;
+  padding-left: 2rem;
+}
+
 /*********  SEARCH  *********/
 
 .search-form {

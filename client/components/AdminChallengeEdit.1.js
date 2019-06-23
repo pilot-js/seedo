@@ -133,72 +133,22 @@ const _AdminChallengeEdit = props => {
   };
   // CodeMirror settings (end)
 
-  const imageSrc = image.length > 0 ? image : './images/img-preview.png';
+  const imageSrc = image.length > 0 ? image : null;
 
   const actionText = isUpdate ? 'Edit' : 'Create';
   const actionTextBtn = isUpdate ? 'Update' : 'Save';
 
   return (
     <div id="admin-challenge-edit">
-      {/* <div className="row"> */}
-      {/* <div className="col-6">
-          <h1 className="text-center mb-3">{actionText} Challenge</h1>
-
-        </div>
-        <div className="col-6"> */}
-      {/* <div className="text-center">
-            <button
-              className="btn btn-raised btn-sm mr-3 btn-info"
-              type="button"
-              onClick={preview}
-            >
-              <MdEye fontSize="2em" color="#fff" />
-            </button>
-            <button className="btn btn-raised btn-sm mr-3 btn-primary" type="submit">
-              <MdSync fontSize="2em" color="#fff" />
-            </button>
-            <button
-              className="btn btn-raised btn-sm mr-3 btn-warning"
-              type="button"
-              onClick={cancel}
-            >
-              <MdClose fontSize="2em" color="#fff" />
-            </button>
-          </div> */}
-
-      {/* </div>
-      </div> */}
-
-      <form onSubmit={handleSubmit}>
-        <div className="row">
-          <div className="col-6">
-            <h1 className="text-center mb-3">{actionText} Challenge</h1>
-            <div className="text-center mb-4">
-              <button
-                className="btn btn-raised btn-sm mr-3 btn-info"
-                type="button"
-                onClick={preview}
-              >
-                <MdEye fontSize="2em" color="#fff" />
-              </button>
-              <button className="btn btn-raised btn-sm mr-3 btn-primary" type="submit">
-                <MdSync fontSize="2em" color="#fff" />
-              </button>
-              <button
-                className="btn btn-raised btn-sm mr-3 btn-warning"
-                type="button"
-                onClick={cancel}
-              >
-                <MdClose fontSize="2em" color="#fff" />
-              </button>
-            </div>
-
-            {/* form info */}
+      <h1>{actionText} Challenge</h1>
+      <div className="row">
+        <div className="col-6">
+          <form onSubmit={handleSubmit}>
             <div className="form-group row">
               <label htmlFor="name" className="col-sm-2 col-form-label">
                 Name
               </label>
-              <div className="col-sm-10">
+              <div className="col-sm-9">
                 <input
                   id="name"
                   className="form-control"
@@ -213,7 +163,7 @@ const _AdminChallengeEdit = props => {
               <label htmlFor="description" className="col-sm-2 col-form-label">
                 Description
               </label>
-              <div className="col-sm-10">
+              <div className="col-sm-9">
                 <textarea
                   className="form-control"
                   rows="3"
@@ -241,78 +191,108 @@ const _AdminChallengeEdit = props => {
                   <option>5</option>
                 </select>
               </div>
-              {/* </div>
-
-            <div className="form-group row"> */}
-              <label htmlFor="imageWidth" className="col-sm-2 col-form-label">
-                Width
+            </div>
+            <div
+              className="form-group row"
+              // style={codeMirrorStyle}
+            >
+              <label htmlFor="html" className="col-sm-2 col-form-label">
+                HTML
               </label>
-              <div className="col-sm-2">
-                <input
-                  className="form-control"
-                  type="text"
-                  name="imageWidth"
-                  placeholder="width"
-                  value={imageWidth}
-                  onChange={e => setImageWidth(e.target.value)}
+              <div className="col-sm-9">
+                <CodeMirror
+                  value={html}
+                  options={optionsHtml}
+                  onChange={(value, eventData) => setHTML(value)}
+                  // onChange={e => setHTML(e.target.value)}
                 />
-              </div>
-              {/* </div>
-            <div className="form-group row"> */}
-              <label htmlFor="imageHeight" className="col-sm-2 col-form-label">
-                Height
-              </label>
-              <div className="col-sm-2">
-                <input
+                {/* <textarea
                   className="form-control"
-                  type="text"
-                  name="imageHeight"
-                  placeholder="height"
-                  value={imageHeight}
-                  onChange={e => setImageHeight(e.target.value)}
-                />
+                  rows="10"
+                  name="html"
+                  value={html}
+                  onChange={e => setHTML(e.target.value)}
+                /> */}
               </div>
             </div>
-          </div>
-
-          <div className="col-6">
-            <img src={imageSrc} alt="" width="540" height="304" />
-          </div>
-
-          <div className="form-group row" style={codeMirrorStyle}>
-            <label htmlFor="html" className="col-sm-1 col-form-label editor-type-label">
-              HTML
-            </label>
-            <div className="col-sm-5">
-              <CodeMirror
-                value={html}
-                options={optionsHtml}
-                onChange={(value, eventData) => setHTML(value)}
-              />
-            </div>
-            {/* </div>
-            <div className="form-group row" style={codeMirrorStyle}> */}
-            <label htmlFor="css" className="col-sm-1 col-form-label editor-type-label">
-              CSS
-            </label>
-            <div className="col-sm-5">
-              <CodeMirror
-                value={css}
-                options={optionsCss}
-                onChange={(value, eventData) => setCSS(value)}
-                // onChange={e => setCSS(e.target.value)}
-              />
-              {/* <textarea
+            <div className="form-group row" style={codeMirrorStyle}>
+              <label htmlFor="css" className="col-sm-2 col-form-label">
+                CSS
+              </label>
+              <div className="col-sm-9">
+                <CodeMirror
+                  value={css}
+                  options={optionsCss}
+                  onChange={(value, eventData) => setCSS(value)}
+                  // onChange={e => setCSS(e.target.value)}
+                />
+                {/* <textarea
                   className="form-control"
                   rows="10"
                   name="css"
                   value={css}
                   onChange={e => setCSS(e.target.value)}
                 /> */}
+              </div>
             </div>
-          </div>
+            <div className="form-group row">
+              <label htmlFor="imageWidth" className="col-sm-2 col-form-label">
+                Image Width
+              </label>
+              <div className="col-sm-9">
+                <input
+                  className="form-control"
+                  type="text"
+                  name="imageWidth"
+                  value={imageWidth}
+                  onChange={e => setImageWidth(e.target.value)}
+                />
+              </div>
+            </div>
+            <div className="form-group row">
+              <label htmlFor="imageHeight" className="col-sm-2 col-form-label">
+                Image Height
+              </label>
+              <div className="col-sm-9">
+                <input
+                  className="form-control"
+                  type="text"
+                  name="imageHeight"
+                  value={imageHeight}
+                  onChange={e => setImageHeight(e.target.value)}
+                />
+              </div>
+            </div>
+            <div className="text-center">
+              {/* Preview  */}
+              <button
+                className="btn btn-raised btn-sm mr-3 btn-info"
+                type="button"
+                onClick={preview}
+              >
+                <MdEye fontSize="2em" color="#fff" />
+              </button>
+              {/* Challenge */}
+              <button className="btn btn-raised btn-sm mr-3 btn-primary" type="submit">
+                <MdSync fontSize="2em" color="#fff" />
+              </button>
+              {/* Cancel  */}
+              <button
+                className="btn btn-raised btn-sm mr-3 btn-warning"
+                type="button"
+                onClick={cancel}
+              >
+                <MdClose fontSize="2em" color="#fff" />
+              </button>
+            </div>
+          </form>
         </div>
-      </form>
+        <div className="col-6">
+          <h2>Image Preview</h2>
+          <img src={imageSrc} alt="" width="540" height="304" className="border" />
+          {/* <img src="./images/img-preview.png" alt="" width="540" height="304" className="border" /> */}
+        </div>
+      </div>
     </div>
   );
 };
