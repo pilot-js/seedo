@@ -1,15 +1,8 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import CodeMirror from 'react-codemirror';
 
 import { fetchOneChallenge, fetchUsers } from '../store';
 import { Review } from './Review';
-
-// CodeMirror formating & highlighting
-require('../../node_modules/codemirror/mode/javascript/javascript');
-require('../../node_modules/codemirror/mode/xml/xml');
-require('../../node_modules/codemirror/mode/css/css');
-require('../../node_modules/codemirror/mode/markdown/markdown');
 
 const _CommunityChallenge = props => {
   const { individualChallenge, challengeId, user, fetchOneChallenge, users, fetchUsers } = props;
@@ -17,22 +10,6 @@ const _CommunityChallenge = props => {
     fetchOneChallenge(challengeId);
     fetchUsers();
   }, []);
-
-  const optionsHTML = {
-    lineNumbers: true,
-    mode: 'xml',
-    theme: 'monokai',
-    readOnly: true,
-  };
-  const optionsCSS = {
-    lineNumbers: true,
-    mode: 'css',
-    theme: 'monokai',
-    readOnly: true,
-  };
-
-  console.log('userId: ', user);
-
   return (
     <div id="community-challenge">
       <h1>{individualChallenge.name}</h1>
@@ -43,10 +20,7 @@ const _CommunityChallenge = props => {
             <ul>
               {individualChallenge.userchallenges.map(userchal => {
                 const user = users.find(user => user.id === userchal.userId) || { email: '' };
-                // TODO should not display if html and css are both empty
-                // {
-                //   userchal.html & userchal.css
-                //     ? (
+
                 return (
                   <div key={userchal.id}>
                     <p className="mb-0 mt-2">
@@ -55,19 +29,19 @@ const _CommunityChallenge = props => {
                     <div className="row">
                       <div className="col-sm-6 code-display border">
                         <h3 className="text-primary text-center">HTML</h3>
-                        <CodeMirror defaultValue={userchal.html} options={optionsHTML} />
+                        <pre className="line-numbers">
+                          <code className="language-html">{userchal.html}</code>
+                        </pre>
                       </div>
                       <div className="col-sm-6 code-display border">
                         <h3 className="text-primary text-center">CSS</h3>
-                        <CodeMirror defaultValue={userchal.css} options={optionsCSS} />
+                        <pre className="line-numbers">
+                          <code className="language-css">{userchal.css}</code>
+                        </pre>
                       </div>
                       <hr />
                     </div>
                   </div>
-                  // ) : (
-                  //   ''
-                  // )
-                  // }
                 );
               })}
             </ul>

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchOneChallenge, fetchUserchallengeById } from '../store';
 
+// CodeMirror formating & highlighting
 require('../../node_modules/codemirror/mode/javascript/javascript');
 require('../../node_modules/codemirror/mode/xml/xml');
 require('../../node_modules/codemirror/mode/css/css');
