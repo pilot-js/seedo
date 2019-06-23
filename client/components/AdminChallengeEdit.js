@@ -6,7 +6,6 @@ import MdEye from 'react-ionicons/lib/MdEye';
 import MdSync from 'react-ionicons/lib/MdSync';
 import MdClose from 'react-ionicons/lib/MdClose';
 
-import { convertBufferToImgSrc } from '../utils';
 import { fetchOneChallenge } from '../store';
 
 // CodeMirror formating & highlighting
@@ -70,7 +69,6 @@ const _AdminChallengeEdit = props => {
       const { id } = props.individualChallenge;
       axios
         .put(`/api/challenges/${id}`, challenge)
-        // .then(resp => console.log(resp.data))
         .then(() => {
           props.history.push('/admin/challenges');
         })
@@ -133,6 +131,14 @@ const _AdminChallengeEdit = props => {
   };
   // CodeMirror settings (end)
 
+  const { solutions } = props.individualChallenge;
+  let solutionHTML = '';
+  let solutionCSS = '';
+  if (isUpdate && isIndividualChallenge) {
+    solutionHTML = solutions[0].html;
+    solutionCSS = solutions[0].css;
+  }
+
   const imageSrc = image.length > 0 ? image : './images/img-preview.png';
 
   const actionText = isUpdate ? 'Edit' : 'Create';
@@ -140,35 +146,6 @@ const _AdminChallengeEdit = props => {
 
   return (
     <div id="admin-challenge-edit">
-      {/* <div className="row"> */}
-      {/* <div className="col-6">
-          <h1 className="text-center mb-3">{actionText} Challenge</h1>
-
-        </div>
-        <div className="col-6"> */}
-      {/* <div className="text-center">
-            <button
-              className="btn btn-raised btn-sm mr-3 btn-info"
-              type="button"
-              onClick={preview}
-            >
-              <MdEye fontSize="2em" color="#fff" />
-            </button>
-            <button className="btn btn-raised btn-sm mr-3 btn-primary" type="submit">
-              <MdSync fontSize="2em" color="#fff" />
-            </button>
-            <button
-              className="btn btn-raised btn-sm mr-3 btn-warning"
-              type="button"
-              onClick={cancel}
-            >
-              <MdClose fontSize="2em" color="#fff" />
-            </button>
-          </div> */}
-
-      {/* </div>
-      </div> */}
-
       <form onSubmit={handleSubmit}>
         <div className="row">
           <div className="col-6">
@@ -241,9 +218,6 @@ const _AdminChallengeEdit = props => {
                   <option>5</option>
                 </select>
               </div>
-              {/* </div>
-
-            <div className="form-group row"> */}
               <label htmlFor="imageWidth" className="col-sm-2 col-form-label">
                 Width
               </label>
@@ -257,8 +231,6 @@ const _AdminChallengeEdit = props => {
                   onChange={e => setImageWidth(e.target.value)}
                 />
               </div>
-              {/* </div>
-            <div className="form-group row"> */}
               <label htmlFor="imageHeight" className="col-sm-2 col-form-label">
                 Height
               </label>
@@ -287,11 +259,10 @@ const _AdminChallengeEdit = props => {
               <CodeMirror
                 value={html}
                 options={optionsHtml}
+                defaultValue={solutionHTML}
                 onChange={(value, eventData) => setHTML(value)}
               />
             </div>
-            {/* </div>
-            <div className="form-group row" style={codeMirrorStyle}> */}
             <label htmlFor="css" className="col-sm-1 col-form-label editor-type-label">
               CSS
             </label>
@@ -299,16 +270,9 @@ const _AdminChallengeEdit = props => {
               <CodeMirror
                 value={css}
                 options={optionsCss}
+                defaultValue={solutionCSS}
                 onChange={(value, eventData) => setCSS(value)}
-                // onChange={e => setCSS(e.target.value)}
               />
-              {/* <textarea
-                  className="form-control"
-                  rows="10"
-                  name="css"
-                  value={css}
-                  onChange={e => setCSS(e.target.value)}
-                /> */}
             </div>
           </div>
         </div>
