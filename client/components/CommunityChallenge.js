@@ -49,20 +49,20 @@ const _CommunityChallenge = props => {
                 //     ? (
                 return (
                   <div key={userchal.id}>
-                    <p className="mb-0 mt-2">
+                    <p className="mb-0 mt-4 mb-4">
                       Submitted by: <b className="mr-0">{user.email}</b>
                     </p>
                     <div className="row">
-                      <div className="col-sm-6 code-display border">
+                      <div className="col-sm-6 code-display">
                         <h3 className="text-primary text-center">HTML</h3>
                         <CodeMirror defaultValue={userchal.html} options={optionsHTML} />
                       </div>
-                      <div className="col-sm-6 code-display border">
+                      <div className="col-sm-6 code-display">
                         <h3 className="text-primary text-center">CSS</h3>
                         <CodeMirror defaultValue={userchal.css} options={optionsCSS} />
                       </div>
-                      <hr />
                     </div>
+                    <hr />
                   </div>
                   // ) : (
                   //   ''

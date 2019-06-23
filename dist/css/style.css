@@ -266,6 +266,11 @@ input::placeholder {
   display: block;
 }
 
+/*********  COMMUNITY CHALLENGE PAGE  *********/
+#community-challenge hr {
+  border-top: 2px solid rgba(0, 0, 0, 0.2);
+}
+
 /*********  LOGIN PAGE  *********/
 #login .btn {
   width: 180px;
