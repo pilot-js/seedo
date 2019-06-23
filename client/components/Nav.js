@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import MdHome from 'react-ionicons/lib/MdHome';
 
 const _Nav = props => {
   const navLinks = [
@@ -58,12 +59,15 @@ const _Nav = props => {
       <Link className="navbar-brand" to="/">
         <img id="logo" src="/images/logo.png" alt="logo" className="logo-img" />
       </Link>
-      <div className="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+      <div
+        className="collapse navbar-collapse justify-content-end align-items-baseline"
+        id="navbarSupportedContent"
+      >
         <ul className="navbar-nav">
           {navLinks.map(link => (
-            <li key={link.label} className="nav-item">
+            <li key={link.label} className={`nav-item${link.label !== 'Home' ? '' : ' home-mt-1'}`}>
               <NavLink exact key={link.to} to={link.to} className="nav-link">
-                {link.label}
+                {link.label !== 'Home' ? link.label : <MdHome fontSize="2em" color="#C7CCD1" />}
               </NavLink>
             </li>
           ))}

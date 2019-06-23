@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchOneChallenge, fetchUserchallengeById } from '../store';
 
+// CodeMirror formating & highlighting
 require('../../node_modules/codemirror/mode/javascript/javascript');
 require('../../node_modules/codemirror/mode/xml/xml');
 require('../../node_modules/codemirror/mode/css/css');
@@ -40,11 +41,13 @@ class _Solution extends Component {
       lineNumbers: true,
       mode: 'xml',
       theme: 'monokai',
+      readOnly: true,
     };
     const options2 = {
       lineNumbers: true,
       mode: 'css',
       theme: 'monokai',
+      readOnly: true,
     };
     if (!individualChallenge.solutions) {
       return null;

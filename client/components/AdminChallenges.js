@@ -3,6 +3,9 @@ import React, { useEffect, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import MdCreate from 'react-ionicons/lib/MdCreate';
+import MdRemoveCircle from 'react-ionicons/lib/MdRemoveCircle';
+import MdAdd from 'react-ionicons/lib/MdAdd';
 
 import { fetchChallenges, fetchAllUserchallenges } from '../store';
 import { attemptedTimes, attemptedByUsers, avgScore, solutionCompleted } from '../utils';
@@ -18,7 +21,6 @@ const _AdminChallenges = props => {
     user,
   } = props;
 
-  console.log('props:', props);
   useEffect(() => {
     fetchChallenges();
     props.fetchAllUserchallenges();
@@ -26,9 +28,7 @@ const _AdminChallenges = props => {
 
   // for stats
   const solutionByChallengeId = challengeId => {
-    console.log('userchallenge: ', userchallenge);
     if (userchallenge instanceof Array) {
-      console.log('here: ', challengeId);
       const solutions = userchallenge.filter(
         solution => solution.challengeId === challengeId && solution.submitted,
       );
@@ -57,15 +57,14 @@ const _AdminChallenges = props => {
     <div id="admin-challenge">
       <h1 className="text-center">Challenges</h1>
       <Link to="/admin/challenge">
-        <button type="submit" className="btn btn-primary btn-raised">
-          Add Challenge
+        <button type="submit" className="btn btn-sm btn-primary btn-raised">
+          <MdAdd fontSize="2em" color="#fff" />
         </button>
       </Link>
       <table className="table table-striped table-hover">
         <thead>
           <tr>
             <th scope="col">Edit | Delete</th>
-            {/* <th scope="col">ID</th> */}
             <th scope="col">Difficulty</th>
             <th scope="col">Name</th>
             <th scope="col">Description</th>
@@ -85,7 +84,7 @@ const _AdminChallenges = props => {
                       <div className="btn-group" role="group" aria-label="edit actions">
                         <Link to={`/admin/challenge/${id}`}>
                           <button type="button" className="btn btn-secondary item-edit">
-                            Edit
+                            <MdCreate fontSize="2em" color="#009688" />
                           </button>
                         </Link>
                         {/* TODO add archive link */}
@@ -102,7 +101,7 @@ const _AdminChallenges = props => {
                           className="btn btn-secondary item-delete"
                           onClick={() => deleteChallenge(id)}
                         >
-                          Del
+                          <MdRemoveCircle fontSize="2em" color="#dc3545" />
                         </button>
                       </div>
                     </td>
@@ -115,17 +114,11 @@ const _AdminChallenges = props => {
                       // <div>
                       <Fragment>
                         <td className="text-center">
-                          {/* # Users Attempted:{' '} */}
                           {attemptedByUsers(solutionByChallengeId(id))}
                         </td>
-                        <td className="text-center">
-                          {/* Average Score:  */}
-                          {avgScore(solutionByChallengeId(id))}
-                        </td>
+                        <td className="text-center">{avgScore(solutionByChallengeId(id))}</td>
                       </Fragment>
                     ) : (
-                      //
-                      // </div>
                       ''
                     )}
                     {/* TODO link to popup image goes here */}

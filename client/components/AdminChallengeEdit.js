@@ -1,22 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
+import CodeMirror from 'react-codemirror';
+import MdEye from 'react-ionicons/lib/MdEye';
+import MdSync from 'react-ionicons/lib/MdSync';
+import MdClose from 'react-ionicons/lib/MdClose';
 
-import { convertBufferToImgSrc } from '../utils';
 import { fetchOneChallenge } from '../store';
+
+// CodeMirror formating & highlighting
+require('../../node_modules/codemirror/mode/javascript/javascript');
+require('../../node_modules/codemirror/mode/xml/xml');
+require('../../node_modules/codemirror/mode/css/css');
+require('../../node_modules/codemirror/mode/markdown/markdown');
 
 const _AdminChallengeEdit = props => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [difficulty, setDifficulty] = useState(1);
-  const [html, setHtml] = useState('');
-  const [css, setCss] = useState('');
-  const [imageWidth, setImageWidth] = useState('');
-  const [imageHeight, setImageHeight] = useState('');
+  const [html, setHTML] = useState('');
+  const [css, setCSS] = useState('');
+  const [imageWidth, setImageWidth] = useState('540');
+  const [imageHeight, setImageHeight] = useState('304');
   const [image, setImage] = useState({ data: '' });
   const [errors, setErrors] = useState([]);
 
-  // true - update existing challenge
+  // true = update existing challenge
   const isUpdate = props.challengeId ? true : false;
 
   const isIndividualChallenge = Object.keys(props.individualChallenge).length ? true : false;
@@ -37,10 +46,10 @@ const _AdminChallengeEdit = props => {
       setDifficulty(individualChallenge.difficulty);
 
       const { solutions, images } = props.individualChallenge;
-      setHtml(solutions[0].html);
-      setCss(solutions[0].css);
-      setImageWidth(images[0].width);
-      setImageHeight(images[0].height);
+      setHTML(solutions[0].html);
+      setCSS(solutions[0].css);
+      setImageWidth(images[0].width || 540);
+      setImageHeight(images[0].height || 304);
     }
   }, [props.individualChallenge]);
 
@@ -60,7 +69,6 @@ const _AdminChallengeEdit = props => {
       const { id } = props.individualChallenge;
       axios
         .put(`/api/challenges/${id}`, challenge)
-        // .then(resp => console.log(resp.data))
         .then(() => {
           props.history.push('/admin/challenges');
         })
@@ -92,6 +100,7 @@ const _AdminChallengeEdit = props => {
     axios
       .put('/api/challenges/preview', challenge)
       .then(resp => {
+        console.log('resp.data: ', resp.data);
         setImage(resp.data);
       })
       .catch(error => {
@@ -104,22 +113,69 @@ const _AdminChallengeEdit = props => {
     props.history.push('/admin/challenges');
   };
 
-  const imageSrc = image.length > 0 ? image : null;
+  // CodeMirror settings (begin)
+  const optionsHtml = {
+    lineNumbers: true,
+    mode: 'xml',
+    theme: 'monokai',
+  };
+
+  const optionsCss = {
+    lineNumbers: true,
+    mode: 'css',
+    theme: 'monokai',
+  };
+
+  const codeMirrorStyle = {
+    width: '100%',
+  };
+  // CodeMirror settings (end)
+
+  const { solutions } = props.individualChallenge;
+  let solutionHTML = '';
+  let solutionCSS = '';
+  if (isUpdate && isIndividualChallenge) {
+    solutionHTML = solutions[0].html;
+    solutionCSS = solutions[0].css;
+  }
+
+  const imageSrc = image.length > 0 ? image : './images/img-preview.png';
 
   const actionText = isUpdate ? 'Edit' : 'Create';
   const actionTextBtn = isUpdate ? 'Update' : 'Save';
 
   return (
     <div id="admin-challenge-edit">
-      <h1>{actionText} Challenge</h1>
-      <div className="row">
-        <div className="col-6">
-          <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
+        <div className="row">
+          <div className="col-6">
+            <h1 className="text-center mb-3">{actionText} Challenge</h1>
+            <div className="text-center mb-4">
+              <button
+                className="btn btn-raised btn-sm mr-3 btn-info"
+                type="button"
+                onClick={preview}
+              >
+                <MdEye fontSize="2em" color="#fff" />
+              </button>
+              <button className="btn btn-raised btn-sm mr-3 btn-primary" type="submit">
+                <MdSync fontSize="2em" color="#fff" />
+              </button>
+              <button
+                className="btn btn-raised btn-sm mr-3 btn-warning"
+                type="button"
+                onClick={cancel}
+              >
+                <MdClose fontSize="2em" color="#fff" />
+              </button>
+            </div>
+
+            {/* form info */}
             <div className="form-group row">
               <label htmlFor="name" className="col-sm-2 col-form-label">
                 Name
               </label>
-              <div className="col-sm-9">
+              <div className="col-sm-10">
                 <input
                   id="name"
                   className="form-control"
@@ -134,7 +190,7 @@ const _AdminChallengeEdit = props => {
               <label htmlFor="description" className="col-sm-2 col-form-label">
                 Description
               </label>
-              <div className="col-sm-9">
+              <div className="col-sm-10">
                 <textarea
                   className="form-control"
                   rows="3"
@@ -162,77 +218,65 @@ const _AdminChallengeEdit = props => {
                   <option>5</option>
                 </select>
               </div>
-            </div>
-            <div className="form-group row">
-              <label htmlFor="html" className="col-sm-2 col-form-label">
-                HTML
-              </label>
-              <div className="col-sm-9">
-                <textarea
-                  className="form-control"
-                  rows="10"
-                  name="html"
-                  value={html}
-                  onChange={e => setHtml(e.target.value)}
-                />
-              </div>
-            </div>
-            <div className="form-group row">
-              <label htmlFor="css" className="col-sm-2 col-form-label">
-                CSS
-              </label>
-              <div className="col-sm-9">
-                <textarea
-                  className="form-control"
-                  rows="10"
-                  name="css"
-                  value={css}
-                  onChange={e => setCss(e.target.value)}
-                />
-              </div>
-            </div>
-            <div className="form-group row">
               <label htmlFor="imageWidth" className="col-sm-2 col-form-label">
-                Image Width
+                Width
               </label>
-              <div className="col-sm-9">
+              <div className="col-sm-2">
                 <input
                   className="form-control"
                   type="text"
                   name="imageWidth"
+                  placeholder="width"
                   value={imageWidth}
                   onChange={e => setImageWidth(e.target.value)}
                 />
               </div>
-            </div>
-            <div className="form-group row">
               <label htmlFor="imageHeight" className="col-sm-2 col-form-label">
-                Image Height
+                Height
               </label>
-              <div className="col-sm-9">
+              <div className="col-sm-2">
                 <input
                   className="form-control"
                   type="text"
                   name="imageHeight"
+                  placeholder="height"
                   value={imageHeight}
                   onChange={e => setImageHeight(e.target.value)}
                 />
               </div>
             </div>
-            <button type="button" onClick={preview}>
-              Preview
-            </button>
-            <button type="submit">{actionTextBtn} Challenge</button>
-            <button type="button" onClick={cancel}>
-              Cancel
-            </button>
-          </form>
+          </div>
+
+          <div className="col-6">
+            <img src={imageSrc} alt="" width="540" height="304" />
+          </div>
+
+          <div className="form-group row" style={codeMirrorStyle}>
+            <label htmlFor="html" className="col-sm-1 col-form-label editor-type-label">
+              HTML
+            </label>
+            <div className="col-sm-5">
+              <CodeMirror
+                value={html}
+                options={optionsHtml}
+                defaultValue={solutionHTML}
+                onChange={(value, eventData) => setHTML(value)}
+              />
+            </div>
+            <label htmlFor="css" className="col-sm-1 col-form-label editor-type-label">
+              CSS
+            </label>
+            <div className="col-sm-5">
+              <CodeMirror
+                value={css}
+                options={optionsCss}
+                defaultValue={solutionCSS}
+                onChange={(value, eventData) => setCSS(value)}
+              />
+            </div>
+          </div>
         </div>
-        <div className="col-6">
-          <h2>Image Preview</h2>
-          <img src={imageSrc} alt="" />
-        </div>
-      </div>
+      </form>
     </div>
   );
 };

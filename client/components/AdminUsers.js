@@ -3,6 +3,9 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import MdCreate from 'react-ionicons/lib/MdCreate';
+import MdRemoveCircle from 'react-ionicons/lib/MdRemoveCircle';
+import MdAdd from 'react-ionicons/lib/MdAdd';
 
 import { fetchUsers } from '../store';
 
@@ -26,8 +29,8 @@ const _AdminUsers = props => {
     <div>
       <h1>Users</h1>
       <Link to="/admin/users/create">
-        <button type="submit" className="btn btn-primary btn-raised">
-          Add User
+        <button type="submit" className="btn btn-sm btn-primary btn-raised">
+          <MdAdd fontSize="2em" color="#fff" />
         </button>
       </Link>
       <table className="table table-striped table-hover">
@@ -51,7 +54,7 @@ const _AdminUsers = props => {
                       <div className="btn-group" role="group" aria-label="edit actions">
                         <Link to={`/admin/users/${id}`}>
                           <button type="button" className="btn btn-secondary item-edit">
-                            Edit
+                            <MdCreate fontSize="2em" color="#009688" />
                           </button>
                         </Link>
                         {/* TODO add archive link */}
@@ -67,7 +70,7 @@ const _AdminUsers = props => {
                           className="btn btn-secondary item-delete"
                           onClick={() => deleteUser(id)}
                         >
-                          Del
+                          <MdRemoveCircle fontSize="2em" color="#dc3545" />
                         </button>
                       </div>
                     </td>

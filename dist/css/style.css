@@ -107,6 +107,10 @@ nav {
   margin-right: 10px;
 }
 
+.home-mt-1 {
+  margin-top: -0.25em;
+}
+
 /*********  HOME PAGE  *********/
 #home p {
   font-size: 1.2rem;
@@ -192,6 +196,12 @@ nav {
   max-width: 540px;
 }
 
+.editor-type-label {
+  font-size: 1.3rem;
+  font-weight: 600;
+  padding-left: 2rem;
+}
+
 /*********  SEARCH  *********/
 
 .search-form {
@@ -254,6 +264,11 @@ input::placeholder {
 /*********  COMMUNITY PAGE  *********/
 #community-main .list-group-item {
   display: block;
+}
+
+/*********  COMMUNITY CHALLENGE PAGE  *********/
+#community-challenge hr {
+  border-top: 2px solid rgba(0, 0, 0, 0.2);
 }
 
 /*********  LOGIN PAGE  *********/
