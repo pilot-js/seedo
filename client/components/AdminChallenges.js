@@ -57,8 +57,9 @@ const _AdminChallenges = props => {
     <div id="admin-challenge">
       <h1 className="text-center">Challenges</h1>
       <Link to="/admin/challenge">
-        <button type="submit" className="btn btn-sm btn-primary btn-raised">
-          <MdAdd fontSize="2em" color="#fff" />
+        <button type="submit" className="btn btn-sm-custom btn-primary btn-raised">
+          <MdAdd fontSize="1.5rem" color="#fff" />
+          Add
         </button>
       </Link>
       <table className="table table-striped table-hover">
@@ -83,8 +84,12 @@ const _AdminChallenges = props => {
                     <td key={`td-${id}`}>
                       <div className="btn-group" role="group" aria-label="edit actions">
                         <Link to={`/admin/challenge/${id}`}>
-                          <button type="button" className="btn btn-secondary item-edit">
-                            <MdCreate fontSize="2em" color="#009688" />
+                          <button
+                            type="button"
+                            className="btn btn-sm-custom btn-secondary item-edit"
+                          >
+                            <MdCreate fontSize="1.7rem" color="#009688" />
+                            Edit
                           </button>
                         </Link>
                         {/* TODO add archive link */}
@@ -98,10 +103,11 @@ const _AdminChallenges = props => {
                         </Link> */}
                         <button
                           type="button"
-                          className="btn btn-secondary item-delete"
+                          className="btn btn-sm-custom btn-secondary item-delete"
                           onClick={() => deleteChallenge(id)}
                         >
-                          <MdTrash fontSize="2em" color="#dc3545" />
+                          <MdTrash fontSize="1.7rem" color="#dc3545" />
+                          Delete
                         </button>
                       </div>
                     </td>

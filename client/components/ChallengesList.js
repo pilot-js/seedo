@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import MdCheckmarkCircle from 'react-ionicons/lib/MdCheckmarkCircle';
 import { Collapse } from 'react-collapse';
+
 import {
   fetchChallenges,
   fetchChallengesWithFilterAndSearch,

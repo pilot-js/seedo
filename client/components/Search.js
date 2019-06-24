@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import MdWine from 'react-ionicons/lib/MdWine';
 
 export const Search = ({ searchTerm, history }) => {
   const [term, setTerm] = useState(searchTerm ? searchTerm : '');
@@ -59,6 +60,7 @@ export const Search = ({ searchTerm, history }) => {
             <option value={5}>5</option>
           </select>
           <button type="submit" disabled={filterIsAll(Object.values(filter))} className="btn">
+            {/* <MdWine fontSize="1.3rem" color="rgba(0,0,0,.87" /> */}
             Filter
           </button>
           <button type="button" onClick={onClear} className="btn">

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import CodeMirror from 'react-codemirror';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import MdArrowBack from 'react-ionicons/lib/MdArrowBack';
+
 import { fetchOneChallenge, fetchUserchallengeById } from '../store';
 
 // CodeMirror formating & highlighting
@@ -58,7 +60,8 @@ class _Solution extends Component {
     return (
       <div>
         <Link to="/userpage">
-          <button type="button" className="btn">
+          <button type="button" className="btn btn-sm-custom">
+            <MdArrowBack fontSize="2em" color="#000" />
             Back to User Page
           </button>
         </Link>

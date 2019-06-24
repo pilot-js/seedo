@@ -3,6 +3,10 @@ import CodeMirror from 'react-codemirror';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Modal from 'react-modal';
+import MdRefresh from 'react-ionicons/lib/MdRefresh';
+import MdCodeWorking from 'react-ionicons/lib/MdCodeWorking';
+import MdCode from 'react-ionicons/lib/MdCode';
+
 import { Results } from './Results';
 import {
   updateUserchallenge,
@@ -116,29 +120,32 @@ const _IndividualChallenge = ({
   return (
     <div id="individual-challenge" className="d-flex flex-column align-items-center">
       <div className="d-flex flex-row">
-        <div className="col-8 offset-2">
+        <div className="col-8">
           <h1>{name}</h1>
           <p className="text-center">{description}</p>
         </div>
-        <div className="col-6 mr-2">
+        <div className="col-7 pl-0">
           <div className="row btn-group" role="group">
             <button
-              className="btn btn-info btn-raised mr-2"
+              className="btn btn-sm-custom btn-info btn-raised mr-2"
               type="button"
               onClick={() => updateValue(false)}
             >
-              Run
+              <MdRefresh fontSize="1.7em" color="#fff" />
+              Preview
             </button>
             <button
-              className="btn btn-success btn-raised mr-2"
+              className="btn btn-sm-custom btn-success btn-raised mr-2"
               type="button"
               onClick={() => updateValue(true)}
             >
-              {loading ? 'Loading...' : 'Submit'}
+              <MdCodeWorking fontSize="1.7em" color="#fff" />
+              {loading ? 'Loading...' : 'Compare'}
             </button>
           </div>
           <Link to={`/solutions/${userchallenge.id}/challenges/${individualChallenge.id}`}>
-            <button type="button" className="btn btn-danger btn-raised">
+            <button type="button" className="btn btn-sm-custom btn-danger btn-raised">
+              <MdCode fontSize="1.7em" color="#fff" />
               Solution
             </button>
           </Link>
