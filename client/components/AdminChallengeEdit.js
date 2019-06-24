@@ -3,7 +3,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import CodeMirror from 'react-codemirror';
 import MdEye from 'react-ionicons/lib/MdEye';
-import MdSync from 'react-ionicons/lib/MdSync';
+import IosCreate from 'react-ionicons/lib/IosCreate';
 import MdClose from 'react-ionicons/lib/MdClose';
 
 import { fetchOneChallenge } from '../store';
@@ -28,7 +28,15 @@ const _AdminChallengeEdit = props => {
   // true = update existing challenge
   const isUpdate = props.challengeId ? true : false;
 
-  const isIndividualChallenge = Object.keys(props.individualChallenge).length ? true : false;
+  const isIndividualChallenge =
+    Object.keys(props.individualChallenge).length &&
+    props.individualChallenge.id === Number(props.challengeId)
+      ? true
+      : false;
+
+  const { solutions } = props.individualChallenge;
+  let solutionHTML = '';
+  let solutionCSS = '';
 
   useEffect(() => {
     document.getElementById('name').focus();
@@ -48,6 +56,8 @@ const _AdminChallengeEdit = props => {
       const { solutions, images } = props.individualChallenge;
       setHTML(solutions[0].html);
       setCSS(solutions[0].css);
+      solutionHTML = solutions[0].html;
+      solutionCSS = solutions[0].css;
       setImageWidth(images[0].width || 540);
       setImageHeight(images[0].height || 304);
     }
@@ -131,14 +141,6 @@ const _AdminChallengeEdit = props => {
   };
   // CodeMirror settings (end)
 
-  const { solutions } = props.individualChallenge;
-  let solutionHTML = '';
-  let solutionCSS = '';
-  if (isUpdate && isIndividualChallenge) {
-    solutionHTML = solutions[0].html;
-    solutionCSS = solutions[0].css;
-  }
-
   const imageSrc = image.length > 0 ? image : './images/img-preview.png';
 
   const actionText = isUpdate ? 'Edit' : 'Create';
@@ -154,16 +156,18 @@ const _AdminChallengeEdit = props => {
               <button
                 className="btn btn-raised btn-sm mr-3 btn-info"
                 type="button"
+                title="Preview"
                 onClick={preview}
               >
                 <MdEye fontSize="2em" color="#fff" />
               </button>
-              <button className="btn btn-raised btn-sm mr-3 btn-primary" type="submit">
-                <MdSync fontSize="2em" color="#fff" />
+              <button className="btn btn-raised btn-sm mr-3 btn-primary" type="submit" title="Save">
+                <IosCreate fontSize="2em" color="#fff" />
               </button>
               <button
                 className="btn btn-raised btn-sm mr-3 btn-warning"
                 type="button"
+                title="Cancel"
                 onClick={cancel}
               >
                 <MdClose fontSize="2em" color="#fff" />
@@ -256,23 +260,27 @@ const _AdminChallengeEdit = props => {
               HTML
             </label>
             <div className="col-sm-5">
-              <CodeMirror
-                value={html}
-                options={optionsHtml}
-                defaultValue={solutionHTML}
-                onChange={(value, eventData) => setHTML(value)}
-              />
+              {html.length || !props.challengeId ? (
+                <CodeMirror
+                  value={html}
+                  options={optionsHtml}
+                  // defaultValue={html}
+                  onChange={(value, eventData) => setHTML(value)}
+                />
+              ) : null}
             </div>
             <label htmlFor="css" className="col-sm-1 col-form-label editor-type-label">
               CSS
             </label>
             <div className="col-sm-5">
-              <CodeMirror
-                value={css}
-                options={optionsCss}
-                defaultValue={solutionCSS}
-                onChange={(value, eventData) => setCSS(value)}
-              />
+              {css.length || !props.challengeId ? (
+                <CodeMirror
+                  value={css}
+                  options={optionsCss}
+                  // defaultValue={css}
+                  onChange={(value, eventData) => setCSS(value)}
+                />
+              ) : null}
             </div>
           </div>
         </div>
