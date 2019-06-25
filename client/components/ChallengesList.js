@@ -122,7 +122,7 @@ const component = ({
   };
 
   return (
-    <div>
+    <div id="challenges-list">
       <h1>Challenges</h1>
       <Search history={history} searchTerm={searchTerm} />
       <div className="row">

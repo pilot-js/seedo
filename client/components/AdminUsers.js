@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import MdCreate from 'react-ionicons/lib/MdCreate';
-import MdRemoveCircle from 'react-ionicons/lib/MdRemoveCircle';
+import MdTrash from 'react-ionicons/lib/MdTrash';
 import MdAdd from 'react-ionicons/lib/MdAdd';
 
 import { fetchUsers } from '../store';
@@ -29,8 +29,8 @@ const _AdminUsers = props => {
     <div>
       <h1>Users</h1>
       <Link to="/admin/users/create">
-        <button type="submit" className="btn btn-sm btn-primary btn-raised">
-          <MdAdd fontSize="2em" color="#fff" />
+        <button type="submit" className="btn btn-sm btn-primary btn-raised" title="Create New User">
+          <MdAdd fontSize="2rem" color="#fff" />
         </button>
       </Link>
       <table className="table table-striped table-hover">
@@ -53,7 +53,11 @@ const _AdminUsers = props => {
                     <td>
                       <div className="btn-group" role="group" aria-label="edit actions">
                         <Link to={`/admin/users/${id}`}>
-                          <button type="button" className="btn btn-secondary item-edit">
+                          <button
+                            type="button"
+                            className="btn btn-secondary item-edit"
+                            title="Edit User"
+                          >
                             <MdCreate fontSize="2em" color="#009688" />
                           </button>
                         </Link>
@@ -68,9 +72,10 @@ const _AdminUsers = props => {
                         <button
                           type="button"
                           className="btn btn-secondary item-delete"
+                          title="Delete User"
                           onClick={() => deleteUser(id)}
                         >
-                          <MdRemoveCircle fontSize="2em" color="#dc3545" />
+                          <MdTrash fontSize="2em" color="#dc3545" />
                         </button>
                       </div>
                     </td>

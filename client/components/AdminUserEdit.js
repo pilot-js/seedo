@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
-import MdSync from 'react-ionicons/lib/MdSync';
+import IosCreate from 'react-ionicons/lib/IosCreate';
 import MdClose from 'react-ionicons/lib/MdClose';
 import MdUndo from 'react-ionicons/lib/MdUndo';
 
@@ -167,20 +167,14 @@ const _AdminUserEdit = props => {
             </div>
           </div>
           <div className="text-center">
-            <button className="btn btn-raised btn-sm mr-3 btn-primary" type="submit">
-              <MdSync fontSize="2em" color="#fff" />
+            <button className="btn btn-raised btn-sm mr-3 btn-primary" type="submit" title="Save">
+              <IosCreate fontSize="2em" color="#fff" />
               {/* {actionTextBtn} User */}
-            </button>
-            <button
-              type="button"
-              className="btn btn-raised btn-sm mr-3 btn-info"
-              onClick={clearState}
-            >
-              <MdUndo fontSize="2em" color="#fff" />
             </button>
             <button
               className="btn btn-raised btn-sm mr-3 btn-warning"
               type="button"
+              title="Cancel"
               onClick={cancel}
             >
               <MdClose fontSize="2em" color="#fff" />

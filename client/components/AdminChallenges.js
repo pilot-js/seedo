@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import MdCreate from 'react-ionicons/lib/MdCreate';
-import MdRemoveCircle from 'react-ionicons/lib/MdRemoveCircle';
+import MdTrash from 'react-ionicons/lib/MdTrash';
 import MdAdd from 'react-ionicons/lib/MdAdd';
 
 import { fetchChallenges, fetchAllUserchallenges } from '../store';
@@ -101,7 +101,7 @@ const _AdminChallenges = props => {
                           className="btn btn-secondary item-delete"
                           onClick={() => deleteChallenge(id)}
                         >
-                          <MdRemoveCircle fontSize="2em" color="#dc3545" />
+                          <MdTrash fontSize="2em" color="#dc3545" />
                         </button>
                       </div>
                     </td>
