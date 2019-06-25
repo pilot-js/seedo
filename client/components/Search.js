@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import MdWine from 'react-ionicons/lib/MdWine';
+import MdVolumeMute from 'react-ionicons/lib/MdVolumeMute';
+import MdSearch from 'react-ionicons/lib/MdSearch';
+import MdRefresh from 'react-ionicons/lib/MdRefresh';
 
 export const Search = ({ searchTerm, history }) => {
   const [term, setTerm] = useState(searchTerm ? searchTerm : '');
@@ -37,7 +39,7 @@ export const Search = ({ searchTerm, history }) => {
   };
 
   return (
-    <div className="search-form row align-items-center justify-content-start mt-2">
+    <div id="search" className="search-form row align-items-center justify-content-start mt-2">
       <div className="col-sm-6 d-flex align-items-center">
         <form onSubmit={submitHandler} className="form-inline align-middle">
           <label className="mr-2">Filter difficulty:</label>
@@ -60,11 +62,12 @@ export const Search = ({ searchTerm, history }) => {
             <option value={5}>5</option>
           </select>
           <button
+            id="btn-filter"
             type="submit"
             disabled={filterIsAll(Object.values(filter))}
             className="btn btn-raised ml-2 mr-2"
           >
-            {/* <MdWine fontSize="1.3rem" color="rgba(0,0,0,.87" /> */}
+            <MdVolumeMute fontSize="1.5rem" color="rgba(0,0,0,.87" />
             Filter
           </button>
           <button
@@ -73,12 +76,13 @@ export const Search = ({ searchTerm, history }) => {
             onClick={onClear}
             className="btn btn-raised"
           >
+            <MdRefresh fontSize="1.3rem" color="rgba(0,0,0,.87" />
             Clear
           </button>
         </form>
       </div>
-      <div className="d-flex col-sm-6 align-items-center mb-3">
-        <form className="form-inline m-2" onSubmit={onSearch}>
+      <div className="d-flex col-sm-6 align-items-center">
+        <form className="form-inline" onSubmit={onSearch}>
           <input
             type="search"
             className="form-control"
@@ -87,9 +91,11 @@ export const Search = ({ searchTerm, history }) => {
             onChange={e => setTerm(e.target.value)}
           />
           <button type="submit" className="btn btn-raised mx-2" disabled={!term}>
+            <MdSearch fontSize="1.3rem" color="rgba(0,0,0,.87" />
             Search
           </button>
           <button type="button" className="btn btn-raised" disabled={!term} onClick={onClear}>
+            <MdRefresh fontSize="1.3rem" color="rgba(0,0,0,.87" />
             Clear
           </button>
         </form>
