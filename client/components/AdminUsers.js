@@ -29,8 +29,13 @@ const _AdminUsers = props => {
     <div>
       <h1>Users</h1>
       <Link to="/admin/users/create">
-        <button type="submit" className="btn btn-sm btn-primary btn-raised" title="Create New User">
-          <MdAdd fontSize="2rem" color="#fff" />
+        <button
+          type="submit"
+          className="btn btn-sm-custom btn-primary btn-raised"
+          title="Create New User"
+        >
+          <MdAdd fontSize="1.5rem" color="#fff" />
+          Add
         </button>
       </Link>
       <table className="table table-striped table-hover">
@@ -55,10 +60,11 @@ const _AdminUsers = props => {
                         <Link to={`/admin/users/${id}`}>
                           <button
                             type="button"
-                            className="btn btn-secondary item-edit"
+                            className="btn btn-sm-custom btn-secondary item-edit"
                             title="Edit User"
                           >
-                            <MdCreate fontSize="2em" color="#009688" />
+                            <MdCreate fontSize="1.7rem" color="#009688" />
+                            Edit
                           </button>
                         </Link>
                         {/* TODO add archive link */}
@@ -71,11 +77,12 @@ const _AdminUsers = props => {
                         </Link> */}
                         <button
                           type="button"
-                          className="btn btn-secondary item-delete"
+                          className="btn btn-sm-custom btn-secondary item-delete"
                           title="Delete User"
                           onClick={() => deleteUser(id)}
                         >
-                          <MdTrash fontSize="2em" color="#dc3545" />
+                          <MdTrash fontSize="1.7rem" color="#dc3545" />
+                          Delete
                         </button>
                       </div>
                     </td>

@@ -154,23 +154,30 @@ const _AdminChallengeEdit = props => {
             <h1 className="text-center mb-3">{actionText} Challenge</h1>
             <div className="text-center mb-4">
               <button
-                className="btn btn-raised btn-sm mr-3 btn-info"
+                className="btn btn-raised btn-sm-custom mr-3 btn-info"
                 type="button"
                 title="Preview"
                 onClick={preview}
               >
                 <MdEye fontSize="2em" color="#fff" />
-              </button>
-              <button className="btn btn-raised btn-sm mr-3 btn-primary" type="submit" title="Save">
-                <IosCreate fontSize="2em" color="#fff" />
+                Preview
               </button>
               <button
-                className="btn btn-raised btn-sm mr-3 btn-warning"
+                className="btn btn-raised btn-sm-custom mr-3 btn-primary"
+                type="submit"
+                title="Save"
+              >
+                <IosCreate fontSize="2em" color="#fff" />
+                Save
+              </button>
+              <button
+                className="btn btn-raised btn-sm-custom mr-3 btn-warning"
                 type="button"
                 title="Cancel"
                 onClick={cancel}
               >
                 <MdClose fontSize="2em" color="#fff" />
+                Cancel
               </button>
             </div>
 

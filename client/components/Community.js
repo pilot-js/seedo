@@ -39,7 +39,7 @@ const _communitySolutionComments = ({
   }, []);
   return (
     <div>
-      <h1>Solution and Comments</h1>
+      <h1>Solutions and Comments</h1>
       <p className="text-center text-muted">
         You can only access a challenge if you have already taken it.
       </p>

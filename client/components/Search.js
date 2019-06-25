@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import MdWine from 'react-ionicons/lib/MdWine';
 
 export const Search = ({ searchTerm, history }) => {
   const [term, setTerm] = useState(searchTerm ? searchTerm : '');
@@ -36,7 +37,7 @@ export const Search = ({ searchTerm, history }) => {
   };
 
   return (
-    <div className="search-form row align-items-center justify-content-start">
+    <div className="search-form row align-items-center justify-content-start mt-2">
       <div className="col-sm-6 d-flex align-items-center">
         <form onSubmit={submitHandler} className="form-inline align-middle">
           <label className="mr-2">Filter difficulty:</label>
@@ -58,15 +59,25 @@ export const Search = ({ searchTerm, history }) => {
             <option value={4}>4</option>
             <option value={5}>5</option>
           </select>
-          <button type="submit" disabled={filterIsAll(Object.values(filter))} className="btn">
+          <button
+            type="submit"
+            disabled={filterIsAll(Object.values(filter))}
+            className="btn btn-raised ml-2 mr-2"
+          >
+            {/* <MdWine fontSize="1.3rem" color="rgba(0,0,0,.87" /> */}
             Filter
           </button>
-          <button type="button" onClick={onClear} className="btn">
+          <button
+            type="button"
+            disabled={filterIsAll(Object.values(filter))}
+            onClick={onClear}
+            className="btn btn-raised"
+          >
             Clear
           </button>
         </form>
       </div>
-      <div className="d-flex col-sm-6 align-items-center">
+      <div className="d-flex col-sm-6 align-items-center mb-3">
         <form className="form-inline m-2" onSubmit={onSearch}>
           <input
             type="search"

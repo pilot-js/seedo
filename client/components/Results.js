@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import IosCreate from 'react-ionicons/lib/IosCreate';
+import MdRefresh from 'react-ionicons/lib/MdRefresh';
 
 export const Results = ({
   userImage,
@@ -28,45 +30,29 @@ export const Results = ({
       </div>
     </div>
     <hr />
-    {/* <div className="d-flex row">
-        <div className="col-sm-6">
-          <h3>My Submission</h3>
-          <img className="border" src={userImage} alt="Yours" />
-        </div>
-        <div className="col-sm-6">
-          <h3>Solution</h3>
-          <img className="border" src={solutionImage} alt="Solution" />
-        </div>
-      </div>
-      <hr />
-      <div className="d-flex justify-content-center row">
-        <div className="col-sm-6">
-          <h3>Difference</h3>
-          <p id="difference-comment">difference shown in red</p>
-          <img className="border" src={diffImage} alt="Diff" />
-        </div>
-      </div> */}
-    {/* <div
-    className="d-flex flex-column justify-content-around"
-    style={{ width: '100%', height: '100%' }}
-  >
     <div className="d-flex justify-content-around row">
-      <img src={userImage} alt="Yours" className="card-image col" />
-      <img src={solutionImage} alt="Solution" className="card-image col" />
-      <img src={diffImage} alt="Diff" className="card-image col" /> */}
-    <div className="d-flex justify-content-around row">
-      <h4 className="d-flex align-items-center">Pixels Match: {grade}%</h4>
+      {grade === 100 ? (
+        <h4 className="d-flex text-success align-items-center">Congrats, Perfect Match!</h4>
+      ) : (
+        <h4 className="d-flex align-items-center">Pixels Match: {grade}%</h4>
+      )}
       <div className="d-flex align-items-center btn-group" role="group">
         <Link to={`/solutions/${userchallengeId}/challenges/${challengeId}`}>
           <button
-            className="btn btn-sm btn-success btn-raised"
+            className="btn btn-sm-custom btn-success btn-raised mr-2"
             type="button"
             onClick={() => submit()}
           >
+            <IosCreate fontSize="2em" color="#fff" />
             Submit answer!
           </button>
         </Link>
-        <button className="btn btn-sm btn-info btn-raised" onClick={closeModal} type="button">
+        <button
+          className="btn btn-sm-custom btn-info btn-raised mr-2"
+          onClick={closeModal}
+          type="button"
+        >
+          <MdRefresh fontSize="2em" color="#fff" />
           Continue designing...
         </button>
       </div>

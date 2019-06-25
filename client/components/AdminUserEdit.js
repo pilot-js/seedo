@@ -167,17 +167,23 @@ const _AdminUserEdit = props => {
             </div>
           </div>
           <div className="text-center">
-            <button className="btn btn-raised btn-sm mr-3 btn-primary" type="submit" title="Save">
+            <button
+              className="btn btn-raised  btn-sm-custom mr-3 btn-primary"
+              type="submit"
+              title="Save"
+            >
               <IosCreate fontSize="2em" color="#fff" />
+              Save
               {/* {actionTextBtn} User */}
             </button>
             <button
-              className="btn btn-raised btn-sm mr-3 btn-warning"
+              className="btn btn-raised btn-sm-custom mr-3 btn-warning"
               type="button"
               title="Cancel"
               onClick={cancel}
             >
               <MdClose fontSize="2em" color="#fff" />
+              Cancel
             </button>
           </div>
         </form>

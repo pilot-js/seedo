@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import MdCheckmarkCircle from 'react-ionicons/lib/MdCheckmarkCircle';
 import { Collapse } from 'react-collapse';
+
 import {
   fetchChallenges,
   fetchChallengesWithFilterAndSearch,
@@ -123,7 +124,7 @@ const component = ({
 
   return (
     <div id="challenges-list">
-      <h1>Challenges</h1>
+      <h1 className="mb-0">Challenges</h1>
       <Search history={history} searchTerm={searchTerm} />
       <div className="row">
         {challenges.map(challenge => {
@@ -170,16 +171,20 @@ const component = ({
                       </p>
                       <hr />
                       {solutionByChallengeId(challenge.id) ? (
-                        <div>
+                        <div id="challenge-stats">
                           <h4 className="text-center">Challenge Stats</h4>
                           <p>
-                            # My Attempts: {attemptedTimes(solutionByChallengeId(challenge.id))}
+                            # My Attempts:{' '}
+                            <strong>{attemptedTimes(solutionByChallengeId(challenge.id))}</strong>
                           </p>
                           <p>
-                            # Users Attempted:{' '}
-                            {attemptedByUsers(solutionByChallengeId(challenge.id))}
+                            # Users Attempted:
+                            <strong>{attemptedByUsers(solutionByChallengeId(challenge.id))}</strong>
                           </p>
-                          <p>Average Score: {avgScore(solutionByChallengeId(challenge.id))}</p>
+                          <p>
+                            Average Score:{' '}
+                            <strong>{avgScore(solutionByChallengeId(challenge.id))}</strong>
+                          </p>
                         </div>
                       ) : (
                         ''

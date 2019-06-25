@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { fetchUserChallenges, fetchOneChallenge, fetchAdminUser } from '../store';
+import LogoGithub from 'react-ionicons/lib/LogoGithub';
 
+import { fetchUserChallenges, fetchOneChallenge, fetchAdminUser } from '../store';
 import { UserCompletedChallenges } from './UserCompletedChallenges';
 
 const _UserPage = ({
@@ -63,7 +64,7 @@ const _UserPage = ({
           <p>Already linked to github</p>
         ) : (
           <button type="button" className="btn btn-raised btn-info" onClick={linkGithub}>
-            Link my github
+            <LogoGithub fontSize="1.3rem" color="#fff" /> Link my github
           </button>
         )}
       </div>
