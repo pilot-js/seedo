@@ -144,7 +144,7 @@ const _IndividualChallenge = ({
             </button>
           </div>
           <Link to={`/solutions/${userchallenge.id}/challenges/${individualChallenge.id}`}>
-            <button type="button" className="btn btn-sm-custom btn-danger btn-raised">
+            <button type="button" className="btn btn-sm-custom btn-solution btn-raised">
               <MdCode fontSize="1.7em" color="#fff" />
               Solution
             </button>

@@ -98,6 +98,11 @@ h2 {
   margin-right: 5px;
 }
 
+.btn-solution {
+  background-color: #ffa564;
+  color: white;
+}
+
 .btn-tertiary {
   background-color: darkgrey;
 }
@@ -176,6 +181,10 @@ nav {
   line-height: 1.2;
   padding: 0.25em 1em;
   margin-right: -14px;
+}
+
+#challenge-stats p {
+  font-size: 1rem;
 }
 
 #challenges-list hr {

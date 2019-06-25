@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import IosCreate from 'react-ionicons/lib/IosCreate';
-import MdArrowBack from 'react-ionicons/lib/MdArrowBack';
+import MdRefresh from 'react-ionicons/lib/MdRefresh';
 
 export const Results = ({
   userImage,
@@ -37,14 +37,6 @@ export const Results = ({
         <h4 className="d-flex align-items-center">Pixels Match: {grade}%</h4>
       )}
       <div className="d-flex align-items-center btn-group" role="group">
-        <button
-          className="btn btn-sm-custom btn-info btn-raised mr-2"
-          onClick={closeModal}
-          type="button"
-        >
-          <MdArrowBack fontSize="2em" color="#fff" />
-          Continue designing...
-        </button>
         <Link to={`/solutions/${userchallengeId}/challenges/${challengeId}`}>
           <button
             className="btn btn-sm-custom btn-success btn-raised mr-2"
@@ -55,6 +47,14 @@ export const Results = ({
             Submit answer!
           </button>
         </Link>
+        <button
+          className="btn btn-sm-custom btn-info btn-raised mr-2"
+          onClick={closeModal}
+          type="button"
+        >
+          <MdRefresh fontSize="2em" color="#fff" />
+          Continue designing...
+        </button>
       </div>
     </div>
   </div>
