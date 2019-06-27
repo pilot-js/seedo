@@ -1,9 +1,12 @@
 import axios from 'axios';
 
+// action types
 export const GET_CHALLENGES = Symbol('get challenges');
 
+// action creators
 export const getChallenges = challenges => ({ type: GET_CHALLENGES, challenges });
 
+// reducer
 export const challenges = (state = [], action) => {
   switch (action.type) {
     case GET_CHALLENGES:
@@ -13,6 +16,7 @@ export const challenges = (state = [], action) => {
   }
 };
 
+// thunks
 export const fetchChallenges = () => {
   return dispatch => {
     return axios
@@ -21,13 +25,6 @@ export const fetchChallenges = () => {
       .then(challenges => dispatch(getChallenges(challenges)));
   };
 };
-
-// // Return search challenges with a search term
-// export const fetchFilterChallenges = difficulty => dispatch => {
-//   return axios
-//     .get(`api/challenges/filter/${difficulty}`)
-//     .then(res => dispatch(getChallenges(res.data)));
-// };
 
 export const fetchChallengesWithFilterAndSearch = (filter, search) => dispatch => {
   if (!search) {

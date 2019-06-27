@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import IosCreate from 'react-ionicons/lib/IosCreate';
 import MdClose from 'react-ionicons/lib/MdClose';
-import MdUndo from 'react-ionicons/lib/MdUndo';
 
 import { fetchAdminUser } from '../store';
 
@@ -17,14 +16,6 @@ const _AdminUserEdit = props => {
 
   const isUpdate = props.userId ? true : false;
   const hasAdminUser = Object.keys(props.adminUser).length ? true : false;
-
-  const clearState = () => {
-    setFirstName('');
-    setLastName('');
-    setEmail('');
-    setType('');
-    setPassword('');
-  };
 
   useEffect(() => {
     document.getElementById('firstName').focus();
@@ -67,7 +58,7 @@ const _AdminUserEdit = props => {
           props.history.push('/admin/users');
         })
         .catch(error => {
-          console.log('updating error: ', error);
+          console.log('updating error: ', error); // eslint-disable-line no-console
           setErrors(prevState => {
             return [...prevState, error];
           });
@@ -77,7 +68,7 @@ const _AdminUserEdit = props => {
         .post('/api/users', user)
         .then(() => props.history.push('/admin/users'))
         .catch(error => {
-          console.log('updating error: ', error);
+          console.log('updating error: ', error); // eslint-disable-line no-console
           setErrors(prevState => {
             return [...prevState, error];
           });
@@ -86,7 +77,6 @@ const _AdminUserEdit = props => {
   };
 
   const actionText = isUpdate ? 'Edit' : 'Create';
-  const actionTextBtn = isUpdate ? 'Update' : 'Create';
 
   return (
     <div>

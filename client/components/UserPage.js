@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import LogoGithub from 'react-ionicons/lib/LogoGithub';
 
@@ -21,12 +21,12 @@ const _UserPage = ({
     let userId = user.id;
     if (isAdminUser) {
       userId = adminUserId;
-      fetchAdminUser(userId).catch(err => console.log('err fetching adminUser:', err));
+      fetchAdminUser(userId).catch(err => console.log('err fetching adminUser:', err)); // eslint-disable-line no-console
     }
 
     if (userId) {
-      fetchUserChallenges(userId).catch(e =>
-        console.error(`Failed to get userChallenges. Here's why:\n${e}`),
+      fetchUserChallenges(userId).catch(
+        e => console.error(`Failed to get userChallenges. Here's why:\n${e}`), // eslint-disable-line no-console
       );
     }
     fetchOneChallenge(challengeId);

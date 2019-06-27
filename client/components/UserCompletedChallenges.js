@@ -1,13 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { userchallenge } from '../store';
 
-const UserCompletedChallenges = ({
-  userChallenges,
-  individualChallenge,
-  isAdminUser,
-  firstName,
-}) => {
+const UserCompletedChallenges = ({ userChallenges, isAdminUser, firstName }) => {
   const nameText = isAdminUser ? `${firstName}'s` : 'My';
 
   return (

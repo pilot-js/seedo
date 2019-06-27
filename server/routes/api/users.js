@@ -1,6 +1,4 @@
 const router = require('express').Router();
-const qs = require('querystring');
-const axios = require('axios');
 const { User, Userchallenge, Challenge } = require('../../db');
 
 /**     /api/users     **/

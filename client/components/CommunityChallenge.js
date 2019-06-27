@@ -31,8 +31,6 @@ const _CommunityChallenge = props => {
     readOnly: true,
   };
 
-  console.log('userId: ', user);
-
   return (
     <div id="community-challenge">
       <h1>{individualChallenge.name}</h1>

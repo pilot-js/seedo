@@ -8,22 +8,14 @@ import MdTrash from 'react-ionicons/lib/MdTrash';
 import MdAdd from 'react-ionicons/lib/MdAdd';
 
 import { fetchChallenges, fetchAllUserchallenges } from '../store';
-import { attemptedTimes, attemptedByUsers, avgScore, solutionCompleted } from '../utils';
+import { attemptedByUsers, avgScore } from '../utils';
 
 const _AdminChallenges = props => {
-  const {
-    fetchChallenges,
-    fetchChallengesWithFilterAndSearch,
-    fetchAllUserchallenges,
-    userchallenge,
-    match,
-    history,
-    user,
-  } = props;
+  const { fetchChallenges, fetchAllUserchallenges, userchallenge } = props;
 
   useEffect(() => {
     fetchChallenges();
-    props.fetchAllUserchallenges();
+    fetchAllUserchallenges();
   }, []);
 
   // for stats
@@ -42,13 +34,13 @@ const _AdminChallenges = props => {
       .then(resp => {
         // TODO give ability to click Archive link or Cancel
         if (resp.data) {
-          window.alert(resp.data);
+          window.alert(resp.data); // eslint-disable-line no-alert
         }
       })
       .then(() => fetchChallenges())
       .catch(error => {
         // TODO display error msg in browser
-        console.log('error:', error);
+        console.log('error:', error); // eslint-disable-line no-console
       });
   };
 
@@ -111,13 +103,11 @@ const _AdminChallenges = props => {
                         </button>
                       </div>
                     </td>
-                    {/* <td>{id}</td> */}
                     <td className="text-center">{difficulty}</td>
                     <td>{name}</td>
                     <td>{description}</td>
 
                     {solutionByChallengeId(id) ? (
-                      // <div>
                       <Fragment>
                         <td className="text-center">
                           {attemptedByUsers(solutionByChallengeId(id))}

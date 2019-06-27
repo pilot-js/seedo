@@ -1,9 +1,8 @@
+/*eslint-disable no-console*/
 const fs = require('fs');
-//const puppeteer = require('puppeteer');
-const path = require('path');
 const axios = require('axios');
 try {
-  Object.assign(process.env, require('./.env'));
+  Object.assign(process.env, require('./.env')); // eslint-disable-line global-require
 } catch (error) {
   console.log('Could not find .env file.');
 }

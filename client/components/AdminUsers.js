@@ -20,7 +20,7 @@ const _AdminUsers = props => {
       .then(() => props.fetchUsers())
       .catch(error => {
         // TODO display error msg in browser
-        console.log('error:', error);
+        console.log('error:', error); // eslint-disable-line no-console
       });
   };
 
@@ -30,7 +30,7 @@ const _AdminUsers = props => {
       <h1>Users</h1>
       <Link to="/admin/users/create">
         <button
-          type="submit"
+          type="button"
           className="btn btn-sm-custom btn-primary btn-raised"
           title="Create New User"
         >
@@ -57,7 +57,7 @@ const _AdminUsers = props => {
                   <tr key={id}>
                     <td>
                       <div className="btn-group" role="group" aria-label="edit actions">
-                        <Link to={`/admin/users/${id}`}>
+                        <Link to={`/admin/users/edit/${id}`}>
                           <button
                             type="button"
                             className="btn btn-sm-custom btn-secondary item-edit"

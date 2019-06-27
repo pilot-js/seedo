@@ -34,10 +34,6 @@ const _AdminChallengeEdit = props => {
       ? true
       : false;
 
-  const { solutions } = props.individualChallenge;
-  let solutionHTML = '';
-  let solutionCSS = '';
-
   useEffect(() => {
     document.getElementById('name').focus();
 
@@ -56,8 +52,6 @@ const _AdminChallengeEdit = props => {
       const { solutions, images } = props.individualChallenge;
       setHTML(solutions[0].html);
       setCSS(solutions[0].css);
-      solutionHTML = solutions[0].html;
-      solutionCSS = solutions[0].css;
       setImageWidth(images[0].width || 540);
       setImageHeight(images[0].height || 304);
     }
@@ -83,7 +77,7 @@ const _AdminChallengeEdit = props => {
           props.history.push('/admin/challenges');
         })
         .catch(error => {
-          console.log(error);
+          console.log(error); // eslint-disable-line no-console
           setErrors([...errors, error]);
         });
     } else {
@@ -93,7 +87,7 @@ const _AdminChallengeEdit = props => {
           props.history.push('/admin/challenges');
         })
         .catch(error => {
-          console.log(error);
+          console.log(error); // eslint-disable-line no-console
           setErrors([...errors, error]);
         });
     }
@@ -110,11 +104,10 @@ const _AdminChallengeEdit = props => {
     axios
       .put('/api/challenges/preview', challenge)
       .then(resp => {
-        console.log('resp.data: ', resp.data);
         setImage(resp.data);
       })
       .catch(error => {
-        console.log(error);
+        console.log(error); // eslint-disable-line no-console
         setErrors([...errors, error]);
       });
   };
@@ -123,7 +116,7 @@ const _AdminChallengeEdit = props => {
     props.history.push('/admin/challenges');
   };
 
-  // CodeMirror settings (begin)
+  /* CodeMirror settings (begin) */
   const optionsHtml = {
     lineNumbers: true,
     mode: 'xml',
@@ -139,12 +132,11 @@ const _AdminChallengeEdit = props => {
   const codeMirrorStyle = {
     width: '100%',
   };
-  // CodeMirror settings (end)
+  /* CodeMirror settings (end) */
 
   const imageSrc = image.length > 0 ? image : './images/img-preview.png';
 
   const actionText = isUpdate ? 'Edit' : 'Create';
-  const actionTextBtn = isUpdate ? 'Update' : 'Save';
 
   return (
     <div id="admin-challenge-edit">
@@ -271,7 +263,6 @@ const _AdminChallengeEdit = props => {
                 <CodeMirror
                   value={html}
                   options={optionsHtml}
-                  // defaultValue={html}
                   onChange={(value, eventData) => setHTML(value)}
                 />
               ) : null}
@@ -284,7 +275,6 @@ const _AdminChallengeEdit = props => {
                 <CodeMirror
                   value={css}
                   options={optionsCss}
-                  // defaultValue={css}
                   onChange={(value, eventData) => setCSS(value)}
                 />
               ) : null}

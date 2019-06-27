@@ -20,9 +20,9 @@ const _Signup = ({ createUser, history }) => {
   const signup = ev => {
     ev.preventDefault();
     createUser({ firstName, lastName, email, password, type })
-      .then(() => window.alert('You have successfully sign up, check out some challenges now.'))
+      .then(() => window.alert('You have successfully sign up, check out some challenges now.')) // eslint-disable-line no-alert
       .then(() => history.push('/challenges'))
-      .catch(error => console.log(error));
+      .catch(error => console.log(error)); // eslint-disable-line no-console
   };
 
   return (

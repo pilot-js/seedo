@@ -8,9 +8,9 @@ const auth = require('./routes/auth');
 const { puppy } = require('./puppeteer-utils');
 
 try {
-  Object.assign(process.env, require('./.env'));
+  Object.assign(process.env, require('./.env')); // eslint-disable-line global-require
 } catch (error) {
-  console.log('Could not find .env file.');
+  console.log('Could not find .env file.'); // eslint-disable-line no-console
 }
 
 app.use(

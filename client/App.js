@@ -33,9 +33,9 @@ const mapDispatchToProps = dispatch => {
 
 const App = ({ getGithubUser, getUser, user }) => {
   useEffect(() => {
-    getGithubUser().catch(error => console.log(error));
+    getGithubUser().catch(error => console.log(error)); // eslint-disable-line no-console
     if (Object.keys(user).length) {
-      getUser(user).catch(error => console.log(error));
+      getUser(user).catch(error => console.log(error)); // eslint-disable-line no-console
     }
   }, []);
 
@@ -81,6 +81,11 @@ const App = ({ getGithubUser, getUser, user }) => {
               <IndividualChallenge challengeId={match.params.id} history={history} />
             )}
           />
+          <Route
+            exact
+            path="/userpage/usercompletedchallenge"
+            component={UserCompletedChallenges}
+          />
           {/* NOTE only allow access if admin */}
           {user.type === 'admin' ? (
             <Fragment>
@@ -102,12 +107,7 @@ const App = ({ getGithubUser, getUser, user }) => {
               <Route exact path="/admin/users/create" component={AdminUserEdit} />
               <Route
                 exact
-                path="/userpage/usercompletedchallenge"
-                component={UserCompletedChallenges}
-              />
-              <Route
-                exact
-                path="/admin/users/:id"
+                path="/admin/users/edit/:id"
                 render={({ match, history }) => (
                   <AdminUserEdit userId={match.params.id} history={history} />
                 )}
