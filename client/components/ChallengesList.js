@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import MdCheckmarkCircle from 'react-ionicons/lib/MdCheckmarkCircle';
+import MdArrowDropdown from 'react-ionicons/lib/MdArrowDropdown';
+import MdArrowDropup from 'react-ionicons/lib/MdArrowDropup';
 import { Collapse } from 'react-collapse';
 
 import {
@@ -151,11 +153,22 @@ const component = ({
                       </button>
                     </Link>
                     <button
+                      id="btn-less-more"
                       className="btn btn-raised btn-secondary more-info btn-sm"
                       type="button"
                       onClick={() => collapseController(challenge.id)}
                     >
-                      {collapseStatus[challenge.id] || false ? 'Less info' : 'More info'}
+                      {collapseStatus[challenge.id] || false ? (
+                        <span>
+                          Less info
+                          <MdArrowDropup fontSize="20px" color="#fff" />
+                        </span>
+                      ) : (
+                        <span>
+                          More info
+                          <MdArrowDropdown fontSize="20px" color="#fff" />
+                        </span>
+                      )}
                     </button>
                   </div>
                   <Collapse
@@ -173,7 +186,23 @@ const component = ({
                       {solutionByChallengeId(challenge.id) ? (
                         <div id="challenge-stats">
                           <h4 className="text-center">Challenge Stats</h4>
-                          <p>
+                          <table>
+                            <tbody>
+                              <tr>
+                                <td># My Attempts:</td>
+                                <td>{attemptedTimes(solutionByChallengeId(challenge.id))}</td>
+                              </tr>
+                              <tr>
+                                <td># Users Attempted:</td>
+                                <td>{attemptedByUsers(solutionByChallengeId(challenge.id))}</td>
+                              </tr>
+                              <tr>
+                                <td>Average Score:</td>
+                                <td>{avgScore(solutionByChallengeId(challenge.id))}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          {/* <p>
                             # My Attempts:{' '}
                             <strong>{attemptedTimes(solutionByChallengeId(challenge.id))}</strong>
                           </p>
@@ -184,7 +213,7 @@ const component = ({
                           <p>
                             Average Score:{' '}
                             <strong>{avgScore(solutionByChallengeId(challenge.id))}</strong>
-                          </p>
+                          </p> */}
                         </div>
                       ) : (
                         ''
