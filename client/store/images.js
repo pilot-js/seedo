@@ -1,9 +1,12 @@
 import axios from 'axios';
 
+// action types
 export const SET_IMAGES = Symbol('set images');
 
+// action creators
 export const setImages = images => ({ type: SET_IMAGES, images });
 
+// reducer
 export const images = (state = [], action) => {
   switch (action.type) {
     case SET_IMAGES:
@@ -13,6 +16,7 @@ export const images = (state = [], action) => {
   }
 };
 
+// thunks
 export const fetchImages = () => dispatch => {
   return axios
     .get('/api/images')

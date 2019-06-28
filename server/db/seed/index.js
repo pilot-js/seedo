@@ -1,4 +1,3 @@
-const fs = require('fs');
 const { Challenge, Image, Solution, User, Comment } = require('../models');
 
 const conn = require('../conn');
@@ -42,14 +41,14 @@ const syncAndSeed = () => {
           await (async function loop() {
             for (let i = 0; i < solutions.length; i++) {
               const sol = solutions[i];
-              console.log(sol.get());
+              console.log(sol.get()); // eslint-disable-line no-console
               const data = await utils.seedImage(sol.html, sol.css, 'seed', sol.challengeId);
-              console.log('generated data');
+              console.log('generated data'); // eslint-disable-line no-console
               await Image.create({ challengeId: sol.challengeId, width: 540, height: 304, data });
             }
           })();
         })
-        .catch(err => console.log(err));
+        .catch(err => console.log(err)); // eslint-disable-line no-console
     });
 };
 

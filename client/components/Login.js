@@ -1,4 +1,4 @@
-/* eslint indent: 1 */
+/* eslint indent: 0 */
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { getUser } from '../store';
@@ -9,7 +9,7 @@ const mapDispatchToProps = dispatch => ({
   getUser: user => dispatch(getUser(user)),
 });
 
-const _Login = ({ history, getUser, user }) => {
+const _Login = ({ history, getUser }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -23,7 +23,7 @@ const _Login = ({ history, getUser, user }) => {
       .then(() => {
         history.push('/challenges');
       })
-      .catch(() => window.alert('Incorrect username/password.'));
+      .catch(() => window.alert('Incorrect username/password.')); // eslint-disable-line no-alert
   };
 
   const githubOauth = () => {

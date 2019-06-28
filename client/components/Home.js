@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import axios from 'axios';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Carousel } from 'react-responsive-carousel';
@@ -11,7 +10,7 @@ const mapDispatchToProps = dispatch => ({ fetchImages: () => dispatch(fetchImage
 
 const _Home = ({ images, fetchImages }) => {
   useEffect(() => {
-    fetchImages().catch(e => console.error(e));
+    fetchImages().catch(e => console.error(e)); // eslint-disable-line no-console
   }, []);
 
   let imageList = [];

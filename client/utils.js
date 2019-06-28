@@ -5,15 +5,6 @@ export const convertBufferToImgSrc = imageBuffer => {
 
 /******** CHALLENGES LIST ******/
 
-// export const solutionByChallengeId = challengeId => {
-//   if (userchallenge instanceof Array) {
-//     const solutions = userchallenge.filter(
-//       solution => solution.challengeId === challengeId && solution.submitted,
-//     );
-//     return solutions;
-//   }
-// };
-
 export const attemptedTimes = arr => {
   if (arr instanceof Array) {
     return arr.length;
@@ -35,7 +26,7 @@ export const attemptedByUsers = arr => {
 export const avgScore = arr => {
   if (arr instanceof Array) {
     const totalScore = arr.reduce((acc, solution) => {
-      acc += solution.grade;
+      acc += solution.grade; // eslint-disable-line no-param-reassign
       return acc;
     }, 0);
     const avgScore = totalScore / arr.length ? Math.round(totalScore / arr.length) : 0;
@@ -47,7 +38,7 @@ export const solutionCompleted = (arr, userId) => {
   if (arr instanceof Array) {
     return arr.reduce((acc, solution) => {
       if (solution.userId === userId) {
-        acc = true;
+        acc = true; // eslint-disable-line no-param-reassign
       }
       return acc;
     }, false);

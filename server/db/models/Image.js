@@ -29,6 +29,7 @@ Image.saveImage = (pathToImage, id, isUserchallenge, width, height) => {
         height,
       });
     } else {
+      // eslint-disable-next-line no-param-reassign
       maybeImage = isUserchallenge
         ? await Image.create({ userchallengeId: id, data: imageData })
         : await Image.create({

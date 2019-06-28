@@ -7,7 +7,7 @@ const _Logout = props => {
     props
       .logoutUser()
       .then(() => props.history.push('/'))
-      .catch(error => console.log(error));
+      .catch(error => console.log(error)); // eslint-disable-line no-console
   };
 
   const cancel = () => {

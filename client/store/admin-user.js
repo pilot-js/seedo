@@ -1,4 +1,5 @@
 // admin: edit users
+
 import axios from 'axios';
 
 // action types
@@ -23,11 +24,5 @@ export const fetchAdminUser = userId => {
     return axios.get(`/api/users/${userId}`).then(resp => {
       dispatch(setUpdateUser(resp.data));
     });
-  };
-};
-
-export const updateAdminUser = userId => {
-  return dispatch => {
-    axios.put(`/api/users/${userId}`).then(resp => dispatch());
   };
 };

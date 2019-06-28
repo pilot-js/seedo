@@ -1,10 +1,9 @@
 /* eslint indent: 0 */
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchChallenges, fetchAllUserchallenges } from '../store';
 
-// TODO should we create two thunks for fetching solutions and comments by challengeId
 const mapDispatchToProps = dispatch => ({
   fetchChallenges: () => dispatch(fetchChallenges()),
   fetchAllUserchallenges: () => dispatch(fetchAllUserchallenges()),
@@ -31,7 +30,6 @@ const _communitySolutionComments = ({
   fetchChallenges,
   fetchAllUserchallenges,
   userchallenge,
-  user,
 }) => {
   useEffect(() => {
     fetchChallenges();

@@ -1,14 +1,10 @@
 const router = require('express').Router();
-const fs = require('fs');
-const path = require('path');
 
 const { Userchallenge, Challenge, Solution, Image } = require('../../db');
-const { createFiles, createImage } = require('../../puppeteer-utils');
+const { createImage } = require('../../puppeteer-utils');
 const { compareImages } = require('../../compare-images');
 
 /**     /api/userchallenges     **/
-
-// TODO what happens if there is more than one answer ?
 
 //get all userchallenges for statistic analysis
 router.get('/', (req, res, next) => {
@@ -39,7 +35,7 @@ router.get('/:userchallengeId', (req, res, next) => {
 router.put('/:userchallengeId', (req, res, next) => {
   const { userchallengeId } = req.params;
   try {
-    const { isSubmit, userAnswer, createDiff } = req.body;
+    const { userAnswer, createDiff } = req.body;
     Userchallenge.findByPk(userchallengeId)
       .then(userchall => userchall.update(userAnswer))
       .then(async userchall => {
@@ -68,12 +64,9 @@ router.put('/:userchallengeId', (req, res, next) => {
         const userchallengeObject = userchallenge.get();
         if (createDiff) {
           // need the html, css and ids for userchallenge and challenge
-          console.log('Creating diff');
           const challenge = await Challenge.findByPk(userchall.challengeId, {
             include: [Solution],
           });
-          console.log('Challenge: ', challenge.get());
-          console.log('Userchallenge: ', userchallenge.get());
           const { percentMatch, src } = await compareImages(
             userchallenge,
             challenge,

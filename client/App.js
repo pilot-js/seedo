@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Fragment } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {
@@ -6,7 +6,6 @@ import {
   Nav,
   Footer,
   Home,
-  MeetTheTeam,
   ChallengesList,
   Login,
   Logout,
@@ -21,20 +20,23 @@ import {
   UserCompletedChallenges,
   Signup,
 } from './components';
-import { getGithubUser } from './store';
+import { getGithubUser, getUser } from './store';
 
 const mapStateToProps = ({ user }) => ({ user });
 
 const mapDispatchToProps = dispatch => {
   return {
     getGithubUser: () => dispatch(getGithubUser()),
+    getUser: user => dispatch(getUser(user)),
   };
 };
 
-const App = ({ getGithubUser }) => {
+const App = ({ getGithubUser, getUser, user }) => {
   useEffect(() => {
-    getGithubUser().catch(error => console.log(error));
-    // TODO getUser (if type = admin, allow access to admin components)
+    getGithubUser().catch(error => console.log(error)); // eslint-disable-line no-console
+    if (Object.keys(user).length) {
+      getUser(user).catch(error => console.log(error)); // eslint-disable-line no-console
+    }
   }, []);
 
   return (
@@ -45,7 +47,6 @@ const App = ({ getGithubUser }) => {
       <section id="content" className="container-fluid">
         <Switch>
           <Route exact path="/" component={Home} />
-          {/* <Route exact path="/team" component={MeetTheTeam} /> */}
           <Route exact path="/challenges" component={ChallengesList} />
           <Route
             exact
@@ -80,36 +81,41 @@ const App = ({ getGithubUser }) => {
               <IndividualChallenge challengeId={match.params.id} history={history} />
             )}
           />
-          {/* TODO admin components */}
-          {/* TODO if user.type = admin, allow access to routes */}
-          <Route
-            exact
-            path="/admin/userpage/:adminUserId"
-            render={({ match }) => <UserPage adminUserId={match.params.adminUserId} />}
-          />
-          <Route exact path="/admin/challenge" component={AdminChallengeEdit} />
-          <Route
-            exact
-            path="/admin/challenge/:id"
-            render={({ match, history }) => (
-              <AdminChallengeEdit challengeId={match.params.id} history={history} />
-            )}
-          />
-          <Route exact path="/admin/challenges" component={AdminChallenges} />
-          <Route exact path="/admin/users" component={AdminUsers} />
-          <Route exact path="/admin/users/create" component={AdminUserEdit} />
           <Route
             exact
             path="/userpage/usercompletedchallenge"
             component={UserCompletedChallenges}
           />
-          <Route
-            exact
-            path="/admin/users/:id"
-            render={({ match, history }) => (
-              <AdminUserEdit userId={match.params.id} history={history} />
-            )}
-          />
+          {/* NOTE only allow access if admin */}
+          {user.type === 'admin' ? (
+            <Fragment>
+              <Route
+                exact
+                path="/admin/userpage/:adminUserId"
+                render={({ match }) => <UserPage adminUserId={match.params.adminUserId} />}
+              />
+              <Route exact path="/admin/challenge" component={AdminChallengeEdit} />
+              <Route
+                exact
+                path="/admin/challenge/:id"
+                render={({ match, history }) => (
+                  <AdminChallengeEdit challengeId={match.params.id} history={history} />
+                )}
+              />
+              <Route exact path="/admin/challenges" component={AdminChallenges} />
+              <Route exact path="/admin/users" component={AdminUsers} />
+              <Route exact path="/admin/users/create" component={AdminUserEdit} />
+              <Route
+                exact
+                path="/admin/users/edit/:id"
+                render={({ match, history }) => (
+                  <AdminUserEdit userId={match.params.id} history={history} />
+                )}
+              />
+            </Fragment>
+          ) : (
+            ''
+          )}
         </Switch>
       </section>
       <Footer />

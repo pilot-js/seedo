@@ -1,9 +1,8 @@
 const router = require('express').Router();
-const fs = require('fs');
 const Op = require('../../db/conn').Sequelize.Op;
 
 const { Challenge, Image, Comment, Solution, Userchallenge } = require('../../db');
-const { createFiles, createImage } = require('../../puppeteer-utils');
+const { createImage } = require('../../puppeteer-utils');
 
 /**  /api/challenges **/
 
@@ -169,7 +168,7 @@ router.delete('/:id', async (req, res, next) => {
       res.status(204).send(msg);
     } else {
       const msg =
-        'Challenge has been taken already, so are not able to Delete.  Click Archive to make it inactive.';
+        'Challenge has been taken already, so are not able to Delete.  Click Archive to make it inactive.'; // eslint-disable-line max-len
       res.send(msg);
     }
   } catch (err) {

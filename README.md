@@ -7,20 +7,22 @@ http://design-wars.herokuapp.com/#/
 ### Project Details
 
 - Assigned: 5/19/19
-- Presentaton: 6/25/19   (link here)
+- Presentaton: 6/25/19 https://youtu.be/b-0oE0HBIRc
 - Description: A platform designed to help developers practice and learn HTML and CSS by reproducing images.
-We provide you with an image, and your task is to recreate it using HTML and CSS.
+  We provide you with an image, and your task is to recreate it using HTML and CSS.
 
-### Team Members 
+### Team Members
+
 - Kristy Cheung (links to our github accts?)
 - Grant H. Horner
 - Theo Manton
 - Haoyu Yu
 
 ### How We Built It
+
 - Node Express backend with Sequelize
 - React frontend
-- Puppeteer-Pixelmatch microservice 
+- Puppeteer-Pixelmatch microservice
   - https://github.com/pilot-js/puppeteer-api
   - (link to Puppeteer)
   - (link to Pixel Match)
@@ -28,9 +30,10 @@ We provide you with an image, and your task is to recreate it using HTML and CSS
 - ESLint and Prettier to keep clean code practices
 - Continuous Integration using Circle CI with unit tests
 - Deployed on Heroku
-- _________ (other?)
+- ****\_**** (other?)
 
 ### Workflow
+
 - Image generation and comparison
   - HTML and CSS sent to server from front end
   - Server updates userchallenge with html and css
@@ -44,6 +47,7 @@ We provide you with an image, and your task is to recreate it using HTML and CSS
 - (diagram)
 
 ### Challenges
+
 - Puppeteer —> Image Comparison —> Database —>front end pipeline
 - Heroku Puppeteer configuration
 - Converting from monolith architecture to microservice

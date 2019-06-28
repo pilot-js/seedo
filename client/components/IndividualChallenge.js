@@ -8,12 +8,7 @@ import MdCodeWorking from 'react-ionicons/lib/MdCodeWorking';
 import MdCode from 'react-ionicons/lib/MdCode';
 
 import { Results } from './Results';
-import {
-  updateUserchallenge,
-  fetchOneChallenge,
-  fetchUserchallenge,
-  fetchUserchallengeById,
-} from '../store';
+import { updateUserchallenge, fetchOneChallenge, fetchUserchallenge } from '../store';
 
 require('../../node_modules/codemirror/mode/javascript/javascript');
 require('../../node_modules/codemirror/mode/xml/xml');
@@ -26,7 +21,6 @@ const _IndividualChallenge = ({
   updateUserchallenge,
   user,
   fetchOneChallenge,
-  fetchUserchallengeById,
   fetchUserchallenge,
   challengeId,
 }) => {
@@ -44,10 +38,6 @@ const _IndividualChallenge = ({
   const [css, setCSS] = useState('');
   const [js, setJS] = useState('');
 
-  const changeValue = () => {
-    // TODO: axios post call to the backend
-  };
-
   const updateValue = (createDiff, isSubmit = false) => {
     setLoading(true);
     const userAnswer = { html, css, js, challengeId };
@@ -58,10 +48,10 @@ const _IndividualChallenge = ({
           setShowCodeMirror(!createDiff);
           setLoading(false);
         })
-        .catch(ex => console.log(ex));
+        .catch(ex => console.log(ex)); // eslint-disable-line no-console
     } else {
       setLoading(false);
-      window.alert('Please login for submitting solution.');
+      window.alert('Please login for submitting solution.'); // eslint-disable-line no-alert
     }
   };
 
@@ -96,7 +86,7 @@ const _IndividualChallenge = ({
   if (userchallenge.diffImage) {
     diffImage = userchallenge.diffImage;
   }
-  const { name, description, images, comments } = individualChallenge;
+  const { name, description, images } = individualChallenge;
 
   const codeMirrorStyle = {
     width: '100%',
@@ -211,7 +201,6 @@ const mapDispatchToProps = dispatch => ({
     dispatch(updateUserchallenge(userAnswer, userchallengeId, createDiff, isSubmit)),
   fetchOneChallenge: challengeId => dispatch(fetchOneChallenge(challengeId)),
   fetchUserchallenge: (userId, challengeId) => dispatch(fetchUserchallenge(userId, challengeId)),
-  fetchUserchallengeById: id => dispatch(fetchUserchallengeById(id)),
 });
 
 export const IndividualChallenge = connect(

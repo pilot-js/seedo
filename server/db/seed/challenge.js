@@ -22,7 +22,7 @@ const challengesSeed = [
   {
     name: 'Circle and 2 Rectangles',
     description:
-      'Make a blue circle (100px), purple rectangle (w:200px, h:100px), green square (w:150px, h:150px)',
+      'Make a blue circle (100px), purple rectangle (w:200px, h:100px), green square (w:150px, h:150px)', // eslint-disable-line max-len
     difficulty: 2,
   },
   {
@@ -32,7 +32,7 @@ const challengesSeed = [
     difficulty: 3,
   },
   {
-    name: "Tick Tock O'Clock",
+    name: "Tick Tock O'Clock", // eslint-disable-line quotes
     description: 'Make a clock with hour, minute, and second hands',
     difficulty: 5,
   },
