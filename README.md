@@ -22,6 +22,7 @@ http://design-wars.herokuapp.com/#/
 
 - Node Express backend with Sequelize
 - React frontend
+- Codemirror - JS based text editor in the browser
 - Puppeteer-Pixelmatch microservice
   - https://github.com/pilot-js/puppeteer-api
   - (link to Puppeteer)
