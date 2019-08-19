@@ -31,7 +31,7 @@ http://design-wars.herokuapp.com/#/
   - [Pixel Match](https://github.com/mapbox/pixelmatch)
 - Database model and api route unit tests
 - ESLint and Prettier to keep clean code practices
-- Testing using Jest and Supertest
+- Unit test routes and db models using Jest and Supertest
 - Continuous Integration using Circle CI with unit tests
 - Deployed on Heroku
 
