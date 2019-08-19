@@ -7,7 +7,7 @@ http://design-wars.herokuapp.com/#/
 ### Project Details
 
 - Assigned: 5/19/19
-- Presentaton: 6/25/19 https://youtu.be/b-0oE0HBIRc
+- *Presentaton: 6/25/19 https://youtu.be/b-0oE0HBIRc*
 - Description: A platform designed to help developers practice and learn HTML and CSS by reproducing images.
   We provide you with an image, and your task is to recreate it using HTML and CSS.
 
