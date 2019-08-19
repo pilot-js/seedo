@@ -13,7 +13,7 @@ http://design-wars.herokuapp.com/#/
 
 ### Team Members
 
-- Kristy Cheung (links to our github accts?)
+- Kristy Cheung
 - Grant H. Horner
 - Theo Manton
 - Haoyu Yu
@@ -24,9 +24,9 @@ http://design-wars.herokuapp.com/#/
 - React frontend
 - Codemirror - JS based text editor in the browser
 - Puppeteer-Pixelmatch microservice
-  - Puppeteer microservice we built [https://github.com/pilot-js/puppeteer-api]
-  - Puppeteer [https://github.com/GoogleChrome/puppeteer]
-  - Pixel Match [https://github.com/mapbox/pixelmatch]
+  - [Puppeteer microservice we built] (https://github.com/pilot-js/puppeteer-api)
+  - [Puppeteer] (https://github.com/GoogleChrome/puppeteer)
+  - [Pixel Match] (https://github.com/mapbox/pixelmatch)
 - Database model and api route unit tests
 - ESLint and Prettier to keep clean code practices
 - Continuous Integration using Circle CI with unit tests
